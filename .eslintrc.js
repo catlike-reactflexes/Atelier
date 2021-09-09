@@ -14,6 +14,7 @@
     }
   },
   rules: {
+    'sourceType': 'module',
     /* Indentation */
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
