@@ -5,10 +5,10 @@ console.log('Github-->', Github_Token);
 const configHeader = {headers: {"Authorization": Github_Token}};
 const urlGet = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products';
 // const urlGet = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/396941/answers';
+//test
 
 
 
-  
   axios.get(urlGet,configHeader)
   .then(response => {
     console.log('Axios success',response.data);
