@@ -2,14 +2,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
-// const api = require('./qa/api-qa');
-
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
+app.use('/', express.static(path.join(__dirname, '/client/dist')));
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`Example app listening at http://localhost:${port}`);
 });
