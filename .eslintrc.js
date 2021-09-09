@@ -4,11 +4,12 @@
  *   https://github.com/reactorcore/eslint-config-hackreactor
  */
 
- module.exports = {
+module.exports = {
   env: {
     'es6': true
   },
   parserOptions: {
+    "sourceType": "module",
     ecmaFeatures: {
       'jsx': true
     }
@@ -41,6 +42,7 @@
     'one-var': [1, { 'uninitialized': 'always', 'initialized': 'never' }],
     /* Minuta */
     'comma-style': [2, 'last'],
+    "sourceType": "module",
     'quotes': [1, 'single']
   }
 };

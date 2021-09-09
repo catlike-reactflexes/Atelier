@@ -13,7 +13,9 @@ class App extends React.Component {
       <div>
         <div>Header Placeholder</div>
         <Overview />
+        <QaMain/>
       </div>
+
     );
   }
 
