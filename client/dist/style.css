@@ -1,0 +1,6 @@
+.qa {
+  border: 5px;
+  grid: flex;
+  border-color: rgba(182, 230, 214, 0.603);
+  border-style: dotted;
+}
