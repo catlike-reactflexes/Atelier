@@ -1,3 +1,60 @@
+/*
+  ----------------------------
+  |    Full Page Styling     |
+  ----------------------------
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  padding: 4px;
+}
+
+/*
+  ----------------------------
+  | Product Overview Styling |
+  ----------------------------
+*/
+
+#overview {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 60%;
+  border: 2px solid darkslategray;
+  box-sizing: border-box;
+}
+
+#mainProductImageContainer {
+  width: 65%;
+  border: 1px solid dimgray;
+  position: relative;
+}
+
+#styleThumbnailList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 15%;
+}
+
+#styleThumbnailList .column-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+  ----------------------------
+  | Question/Answer Styling  |
+  ----------------------------
+*/
+
 .qa {
   border: 5px;
   grid: flex;

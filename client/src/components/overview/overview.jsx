@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductImage from './productImage.jsx';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Overview extends React.Component {
   render() {
     return (
       <div id="overview">
-        <h1>This is the product overview component</h1>
+        <ProductImage />
       </div>
     );
   }
