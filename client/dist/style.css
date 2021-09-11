@@ -44,7 +44,7 @@ body {
   width: 15%;
 }
 
-#styleThumbnailList .column-flex {
+.column-flex {
   display: flex;
   flex-direction: column;
 }
