@@ -32,6 +32,7 @@ body {
 
 #mainProductImageContainer {
   width: 65%;
+  min-height: 80%;
   border: 1px solid dimgray;
   position: relative;
 }
@@ -43,6 +44,42 @@ body {
   display: inline-block;
   width: 15%;
 }
+
+.sidebar {
+  margin-left: 2%;
+  width: 32%;
+}
+
+#detailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid dimgray;
+}
+
+#stylesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid dimgray;
+}
+
+#stylesContainer .styleBtn {
+  width: 20%;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid dimgray;
+}
+
+#styleButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid dimgray;
+}
+
+
 
 .column-flex {
   display: flex;

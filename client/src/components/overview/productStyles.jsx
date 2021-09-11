@@ -2,17 +2,17 @@ import React from 'react';
 
 const ProductSyles = (props) => {
   return (
-    <div id="styleContainer">
+    <div id="stylesContainer">
       <span><em>STYLE ></em> SELECTED STYLE</span>
       <div id="styleButtons">
-        <span>Style</span>
-        <span>Style</span>
-        <span>Style</span>
-        <span>Style</span>
-        <span>Style</span>
-        <span>Style</span>
-        <span>Style</span>
-        <span>Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
+        <span className="styleBtn">Style</span>
       </div>
     </div>
   )

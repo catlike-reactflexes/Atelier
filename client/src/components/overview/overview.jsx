@@ -17,11 +17,12 @@ class Overview extends React.Component {
     return (
       <div id="overview">
         <ProductImage />
-        <div className="column-flex">
+        <div className="sidebar column-flex">
           <ProductDetails />
           <ProductSyles />
           <ProductButtons />
         </div>
+        <ProductDescription />
       </div>
     );
   }
