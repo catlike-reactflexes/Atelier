@@ -1,9 +1,25 @@
-// const axios = require ('axios');
-// const Github_Token = require ('./config');
-// console.log('Github-->', Github_Token);
+const axios = require ('axios');
+const Github_Token = require ('./config');
+console.log('Github-->', Github_Token);
 
-// const configHeader = {headers: {"Authorization": Github_Token}};
-// const urlGet = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products';
+const configHeader = {headers: {"Authorization": Github_Token}};
+
+const getQuesAns = (productId, callback) => {
+  const urlGet = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}`
+
+  axios.get(urlGet,configHeader)
+    .then(response => {
+      console.log('Axios success',response.data.results);
+      callback(null, response.data.results);
+    })
+    .catch(error => {
+      console.log('Axios failed',error);
+      callback(error, null);
+    })
+
+}
+//'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products';
+//
 // // const urlGet = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/396941/answers';
 // //test
 
@@ -143,4 +159,6 @@
 // }
 
 
-// module.exports.getQa = getQa;
+module.exports={
+  getQuesAns
+};

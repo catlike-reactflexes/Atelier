@@ -103,4 +103,4 @@ typings/
 .tern-port
 
 #github token
-/server/qa/config.js
+/server/questionAnswer/config.js
