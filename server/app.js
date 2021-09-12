@@ -17,7 +17,11 @@ app.get('/api/qa', (req, res) => {
       res.status(400).send(err);
     }else {
       console.log('Before send', data)
-      res.send(data);
+      const twoData=[];
+      for(let i =0; i< 2; i++){
+        twoData.push(data[i])
+      }
+      res.send(twoData);
     }
   })
 });

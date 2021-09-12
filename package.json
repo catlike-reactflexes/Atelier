@@ -6,7 +6,7 @@
   "scripts": {
     "server-dev": "nodemon server/app.js",
     "react-dev": "webpack --watch --config webpack.config.js",
-    "test": "jest"
+    "test": "jest --verbose --coverage"
   },
   "repository": {
     "type": "git",

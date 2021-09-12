@@ -24,6 +24,7 @@ class SearchQa extends React.Component {
             <textarea
               type="text"
               name='searchBar'
+              className='search'
               onChange={this.handleSearchChange}
               placeholder = 'HAVE A QUESTION? SEARCH FOR ANSWERS...'
               rows="3"

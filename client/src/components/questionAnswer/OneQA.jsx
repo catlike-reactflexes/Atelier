@@ -17,37 +17,46 @@ class OneQA extends React.Component{
   render(){
     // console.log('OneQA -->', this.props.one);
     const {one} = this.props;
-    const answer=one.answers[3715621];
-    console.log('Answer-->', answer)
-    
+    //need to revisit this key
+    const answerId = [];
+    for(let key in one.answers){
+      // console.log('Key-->', key)
+      answerId.push(key);
+    }
+    const answerBody = one.answers[answerId[0]].body;
+    const answererName = one.answers[answerId[0]].answerer_name;
+
 
     return (
-      <div>
-        <div className="question">
-          <p>Question:</p>
-          {one.question_body}
-          <div>helpful</div>
+      <div className="oneQA">
+        <div className="oneQuestion">
+          <div className="qBody ">
+            <div className="bigQ">Q:</div>
+            <div>{one.question_body}</div>
+          </div>
+          <div className="helpful">Helpful?
+          <div className="yes">Yes</div>
+          </div>
+          <div className="AddAns">
+            <div onClick={() => this.setOpen(true)}>Add Answer</div>
+              {
+                this.state.isOpen ?
+                <AddAnswer
+                  open ={this.state.isOpen}
+                  onClose={() => this.setOpen(false)}/>
+                : null
+              }
+          </div>
         </div>
-        <div className="answer">
-          {/* <p>Answer:</p>
-          {(answerBody)? {answerBody}: undefined}
-
-
-          <div>
-            <p>by:</p>
-            {(answererName)? {answererName}: undefined}
-          </div> */}
-        </div>
-
-
-        <div>
-          <button onClick={() => this.setOpen(true)}>Add Answer</button>
-
-          {this.state.isOpen ?
-            <AddAnswer
-              open ={this.state.isOpen}
-              onClose={() => this.setOpen(false)}/> : null}
-
+        <div className="oneAnswer">
+          <div className="ans1">
+            <div className='bigA'>A:</div>
+            <div className="ansBody">{answerBody}</div>
+          </div>
+          <div className='ans2'>
+            <div className="by">by:</div>
+            <div className="ansName">{answererName}</div>
+          </div>
         </div>
       </div>
     );
