@@ -1,4 +1,5 @@
 import React from 'react';
+import YourOutfitCard from './YourOutfitCard.jsx';
 
 class YourOutfitList extends React.Component {
   constructor(props) {
@@ -6,10 +7,13 @@ class YourOutfitList extends React.Component {
   }
 
   render() {
+    let outfitItems = this.props.dummyData.map((item, index) => {
+      return <YourOutfitCard index={index} name={item.name} />
+    })
     return (
-      <div>
-        <h6>your outfit cards</h6>
-      </div>
+      <ul id="relatedProductCards">
+        {outfitItems}
+      </ul>
     )
   }
 }

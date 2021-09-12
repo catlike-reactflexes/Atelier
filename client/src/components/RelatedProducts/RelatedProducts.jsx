@@ -24,6 +24,22 @@ class RelatedProducts extends React.Component {
           "default_price": "69"
         },
         {
+          "id": 1,
+          "name": "Camo Onesie",
+          "slogan": "Blend in to your crowd",
+          "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+          "category": "Jackets",
+          "default_price": "140"
+        },
+        {
+          "id": 2,
+          "name": "Bright Future Sunglasses",
+          "slogan": "You've got to wear shades",
+          "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
+          "category": "Accessories",
+          "default_price": "69"
+        },
+        {
           "id": 3,
           "name": "Morning Joggers",
           "slogan": "Make yourself a morning person",
@@ -59,9 +75,10 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <div>
-        <h1>Related Products</h1>
+        <h3>Related Products</h3>
         <RelatedProductsList dummyData={this.state.relatedProductsData} />
-        <YourOutfitList />
+        <h3>Your Outfit</h3>
+        <YourOutfitList dummyData={this.state.relatedProductsData} />
       </div>
     )
   }
