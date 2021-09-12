@@ -9,7 +9,7 @@ class RelatedProductsList extends React.Component {
 
   render() {
     let productItems = this.props.dummyData.map((item, index) => {
-      return <RelatedProductsCard index={index} name={item.name} />
+      return <RelatedProductsCard index={index} name={item.name} price={item.default_price} category={item.category} />
     })
     return (
       <ul id="relatedProductCards">
