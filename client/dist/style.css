@@ -21,13 +21,15 @@ body {
 */
 
 #overview {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: darkslategray;
+  /*font selected for testing purposes*/
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  min-height: 60%;
+  height: 60vw;
   border: 2px solid darkslategray;
-  box-sizing: border-box;
 }
 
 #mainProductImageContainer {
@@ -65,8 +67,9 @@ body {
 }
 
 #stylesContainer .styleBtn {
-  width: 20%;
-  height: 40px;
+  width: 7vw;
+  height: 7vw;
+  margin-top: 1vw;
   border-radius: 50%;
   border: 1px solid dimgray;
 }
@@ -79,7 +82,37 @@ body {
   border: 1px solid dimgray;
 }
 
+#productButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
 
+#sizeSelect {
+  margin-top: 1vw;
+  width: 70%;
+  height: 4vw;
+}
+
+#qtySelect {
+  margin-top: 1vw;
+  width: 25%;
+  height: 4vw;
+}
+
+#bagBtn {
+  margin-top: 1vw;
+  width: 82%;
+  height: 4vw;
+}
+
+#favBtn {
+  margin-top: 1vw;
+  width: 12.5%;
+  height: 4vw;
+}
 
 .column-flex {
   display: flex;

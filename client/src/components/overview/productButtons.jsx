@@ -3,16 +3,14 @@ import React from 'react';
 const ProductButtons = (props) => {
   return (
     <div id="productButtons">
-      <div>
-        <select>
-          <option>SELECT SIZE</option>
-        </select>
-        <select>
-          <option>1</option>
-        </select>
-        <button>ADD TO BAG</button>
-        <button>*</button>
-      </div>
+      <select id="sizeSelect">
+        <option>SELECT SIZE</option>
+      </select>
+      <select id="qtySelect">
+        <option>1</option>
+      </select>
+      <button id="bagBtn">ADD TO BAG</button>
+      <button id="favBtn">*</button>
     </div>
   )
 }

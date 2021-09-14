@@ -7,16 +7,18 @@ import QaMain from './components/qa/QaMain.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      productId: null
+    }
   }
 
   render() {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview />
-        <QaMain/>
+        <Overview id={this.state.productId} />
+        <QaMain />
       </div>
-
     );
   }
 
