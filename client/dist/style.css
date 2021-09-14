@@ -58,7 +58,6 @@ body {
 .qa {
   border: 2px;
   grid: flex;
-<<<<<<< HEAD
   flex-direction: row;
   border-style: solid;
   background-color: rgba(255, 235, 205, 0.322);
@@ -74,17 +73,16 @@ body {
   border: 2px;
   grid: flex;
   flex-direction: column;
-  background-color: rgba(235, 248, 199, 0.733);
+
   margin-bottom: 1rem;
 }
 .oneQuestion {
-  border: 1px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
+  background-color: rgba(121, 121, 118, 0.698);
 }
-.qBody {
-  border: 1px;
+.qBody{
   display: flex;
   justify-content: left;
   width:70%;
@@ -99,16 +97,16 @@ body {
   color:mediumblue
 }
 .oneAnswer {
-  border: 1px;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  background-color: rgba(228, 228, 227, 0.698);
+  margin-top: 5px;
 
 }
 .ans1, .ans2 {
   display: flex;
   flex-direction: row;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 .search {
   width: 100%;
@@ -126,10 +124,6 @@ body {
   font-size: 1.2rem;
   width:5%;
   padding:2px;
-}
-=======
-  border-color: rgba(182, 230, 214, 0.603);
-  border-style: dotted;
 }
 
 /*
@@ -167,4 +161,3 @@ justify-content: center;
   font-size: 12px;
   float: left;
 }
->>>>>>> 5382425661b5b452343a88d19c2aac533b75fb04

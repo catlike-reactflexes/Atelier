@@ -1,15 +1,13 @@
 {
   "name": "atelier",
   "version": "1.0.0",
-  "jest": {
-    "setupTestFrameworkScriptFile": "tests/setup.js"
-  },
   "description": "Amazon clone",
   "main": "app.js",
   "scripts": {
     "server-dev": "nodemon server/app.js",
     "react-dev": "webpack --watch --config webpack.config.js",
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose --coverage",
+    "testqa": "jest spec/components/questionAnswer --watch --verbose --coverage"
   },
   "repository": {
     "type": "git",

@@ -30,9 +30,9 @@ class OneQA extends React.Component{
     return (
       <div className="oneQA">
         <div className="oneQuestion">
-          <div className="qBody ">
+          <div className="qBody">
             <div className="bigQ">Q:</div>
-            <div>{one.question_body}</div>
+            <div className="qBody1">{one.question_body}</div>
           </div>
           <div className="helpful">Helpful?
           <div className="yes">Yes</div>
@@ -54,6 +54,7 @@ class OneQA extends React.Component{
             <div className="ansBody">{answerBody}</div>
           </div>
           <div className='ans2'>
+            <div className='bigA'></div>
             <div className="by">by:</div>
             <div className="ansName">{answererName}</div>
           </div>
