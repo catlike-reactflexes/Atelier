@@ -8,6 +8,9 @@ import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      productId: null
+    }
   }
 
   render() {
@@ -18,7 +21,6 @@ class App extends React.Component {
         <RelatedProducts />
         <QaMain />
       </div>
-
     );
   }
 

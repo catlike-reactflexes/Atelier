@@ -23,4 +23,3 @@ class RelatedProductsCard extends React.Component {
 }
 
 export default RelatedProductsCard;
-

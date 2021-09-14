@@ -1,7 +1,7 @@
 import React from 'react';
-import RelatedProductsList from './components/RelatedProductsList.jsx';
-import YourOutfitList from './components/YourOutfitList.jsx';
-import RelatedProductsCard from './components/RelatedProductsCard.jsx';
+import RelatedProductsList from './RelatedProductsList.jsx';
+import YourOutfitList from './YourOutfitList.jsx';
+import RelatedProductsCard from './RelatedProductsCard.jsx';
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);

@@ -38,6 +38,7 @@ module.exports = {
     'space-before-blocks': 1,
     'keyword-spacing': [1, { 'before': true, 'after': true }],
     'space-infix-ops': 1,
+    'eol-last': 'always',
     /* Variable declaration */
     'one-var': [1, { 'uninitialized': 'always', 'initialized': 'never' }],
     /* Minuta */
