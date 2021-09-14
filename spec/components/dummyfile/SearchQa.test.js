@@ -9,7 +9,13 @@
  import SearchQa from ' ../../../client/src/components/questionAnswer/SearchQa.jsx';
 
 
+ describe('Search for related Question', function () {
+  test('Should render Search Question component', function () {
 
- describe('some test', function () {
-   test.todo('todo');
+    const {container} = render(<SearchQa/>)
+    // console.log('Test Add Answer->')
+
+  });
+
+
  })

@@ -23,6 +23,7 @@ class AddQuestion extends React.Component {
   }
 
   render(){
+    console.log('Hello from Add question-->');
     if(!this.props.open) return null;
     console.log(`open ${this.props.open}, onClose-> ${this.props.onClose}`);
 
@@ -33,10 +34,12 @@ class AddQuestion extends React.Component {
         <h3> Ask Your Question</h3>
         <h3> About the *Product Name*</h3>
         <div>
-          <label>
-            Your Question (mandatory):
+          {console.log('Inside div--->')}
+          <label htmlFor="question-input">
+            question
           </label>
           <textarea
+              id="question-input"
               name='question'
               onChange={this.handleQuestionChange}
               row={5}/>
@@ -44,9 +47,10 @@ class AddQuestion extends React.Component {
 
         <p>For privacy reasons, do not use your full name or email address</p>
         <div>
-          <label>
+          <label htmlFor="nickname">
             nickname (mandatory):
             <input
+              id="nickname"
               type="text"
               name='nickname'
               onChange={this.handleQuestionChange}
@@ -70,7 +74,7 @@ class AddQuestion extends React.Component {
 
       </div>
       </>,
-      document.getElementById('portalQ')
+      document.getElementById('portalQ') || document.createElement('div') //for testing purpose
     )
   }
 

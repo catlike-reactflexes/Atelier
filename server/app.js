@@ -14,13 +14,14 @@ app.get('/', (req, res) => {
 app.get('/api/qa', (req, res) => {
   QuestionAnswer_API.getQuesAns(47421,(err, data)=> {
     if(err){
-      res.status(400).send(err);
+      res.status(500).send(err);
     }else {
       console.log('Before send', data)
       const twoData=[];
       for(let i =0; i< 2; i++){
         twoData.push(data[i])
       }
+      console.log('Data before send to client->', twoData)
       res.send(twoData);
     }
   })

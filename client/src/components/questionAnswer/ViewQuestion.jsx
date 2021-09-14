@@ -11,7 +11,7 @@ class ViewQuestion extends React.Component{
     console.log('ViewQuestions-->', quesAnsLists)
     return (
       <div className='viewQuesAns'>
-        {quesAnsLists.map((quesAns, index) => (
+        {quesAnsLists && quesAnsLists.map((quesAns, index) => (
           <OneQA key={index} one={quesAns}/>
         ))}
 

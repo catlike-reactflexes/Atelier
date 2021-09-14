@@ -9,7 +9,13 @@
  import AddAnswer from ' ../../../client/src/components/questionAnswer/AddAnswer.jsx';
 
 
+ describe('Add Answer modal popup', function () {
+  test('Should render Add Answer component', function () {
 
- describe('some test', function () {
-   test.todo('todo');
+    const {container} = render(<AddAnswer/>)
+    // console.log('Test Add Answer->')
+
+  });
+
+
  })

@@ -15,7 +15,7 @@ class OneQA extends React.Component{
     })
   }
   render(){
-    // console.log('OneQA -->', this.props.one);
+    console.log('OneQA -->', this.props.one);
     const {one} = this.props;
     //need to revisit this key
     const answerId = [];
