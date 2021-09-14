@@ -58,6 +58,7 @@ body {
 .qa {
   border: 2px;
   grid: flex;
+<<<<<<< HEAD
   flex-direction: row;
   border-style: solid;
   background-color: rgba(255, 235, 205, 0.322);
@@ -126,3 +127,44 @@ body {
   width:5%;
   padding:2px;
 }
+=======
+  border-color: rgba(182, 230, 214, 0.603);
+  border-style: dotted;
+}
+
+/*
+  ----------------------------
+  | RelatedProducts Card Styling  |
+  ----------------------------
+*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  height: 300px;
+  width: 150px;
+  margin: 20px;
+  text-align: center;
+  font-size: 15px;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 16px;
+}
+
+.relatedProductsItems{
+  list-style: none;
+}
+
+#relatedProductCards{
+display:flex;
+flex-direction: row;
+justify-content: center;
+}
+
+.category{
+  color: grey;
+  font-size: 12px;
+  float: left;
+}
+>>>>>>> 5382425661b5b452343a88d19c2aac533b75fb04

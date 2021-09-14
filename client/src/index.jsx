@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Overview from './components/overview/overview.jsx';
 import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
+import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends React.Component {
       <div>
         <div>Header Placeholder</div>
         <Overview />
+        <RelatedProducts />
         <QuesAnsMain quesAns={this.state.quesAns}/>
       </div>
 
@@ -37,4 +39,4 @@ class App extends React.Component {
 
 }
 
-ReactDOM.render( <App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
