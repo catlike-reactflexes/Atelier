@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: null
+      productId: 47421
     }
   }
 
@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview />
+        <Overview id={this.state.productId}/>
         <RelatedProducts />
         <QaMain />
       </div>
