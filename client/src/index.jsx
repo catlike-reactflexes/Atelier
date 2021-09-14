@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quesAns:[]
+      quesAns:[],
+      productId: null
     }
   }
 
@@ -22,6 +23,8 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchQuestionAnswer();
+
+    }
   }
 
   render() {
@@ -33,10 +36,8 @@ class App extends React.Component {
         <RelatedProducts />
         <QuesAnsMain quesAns={this.state.quesAns}/>
       </div>
-
     );
   }
 
-}
 
 ReactDOM.render(<App />, document.getElementById('app'));
