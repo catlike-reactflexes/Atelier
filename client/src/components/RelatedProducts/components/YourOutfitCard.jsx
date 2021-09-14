@@ -9,7 +9,7 @@ class YourOutfitCard extends React.Component {
   render() {
     return (
       <div>
-        <li className="relatedProductsItems" key={this.props.index} >
+        <li className="relatedProductsItems" >
           <div className="card">
             <img src="https://via.placeholder.com/150"></img>
             <h4>{this.props.name}</h4>

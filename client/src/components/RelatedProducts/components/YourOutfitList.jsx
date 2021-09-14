@@ -8,7 +8,7 @@ class YourOutfitList extends React.Component {
 
   render() {
     let outfitItems = this.props.dummyData.map((item, index) => {
-      return <YourOutfitCard index={index} name={item.name} />
+      return <YourOutfitCard key={index} name={item.name} />
     })
     return (
       <ul id="relatedProductCards">
