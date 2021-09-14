@@ -9,7 +9,7 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import RelatedProducts from ' ../../../client/src/components/relatedProducts/RelatedProducts.jsx';
 
-//this sets up the fake server at the route that you are testing
+// this sets up the fake server at the route that you are testing
 // const server = setupServer(
 //   rest.get('/relatedProductsEventually', (req, res, ctx) => {
 //     //returns json like you would get from an api request
