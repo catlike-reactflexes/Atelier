@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Overview from './components/overview/overview.jsx';
 import QaMain from './components/qa/QaMain.jsx';
+import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class App extends React.Component {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview id={this.state.productId} />
+        <Overview />
+        <RelatedProducts />
         <QaMain />
       </div>
     );
@@ -24,4 +26,4 @@ class App extends React.Component {
 
 }
 
-ReactDOM.render( <App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
