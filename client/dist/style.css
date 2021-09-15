@@ -179,18 +179,22 @@ body {
   padding-bottom: 5px;
 }
 .search {
+  display: flex;
   width: 100%;
   border: 1px #000 solid;
   margin-bottom: 1rem;
 }
 .yes, .addAns {
+  display: flex;
   text-decoration: underline;
   cursor:pointer;
 }
 .by, .helpful, .AddAns, .yes, .ansName {
+  display: flex;
   font-size: 0.8rem;
 }
 .bigQ, .bigA {
+  display: flex;
   font-size: 1.2rem;
   width:5%;
   padding:2px;

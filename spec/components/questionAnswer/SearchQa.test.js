@@ -10,10 +10,13 @@
 
 
  describe('Search for related Question', function () {
-  test('Should render Search Question component', function () {
 
-    const {container} = render(<SearchQa/>)
-    // console.log('Test Add Answer->')
+  test('Should render Search Question component', function () {
+    const {getByTestId} = render(<SearchQa/>);
+
+    const searchQuestion = getByTestId("searchQues");
+
+    expect(searchQuestion).toBeInTheDocument();
 
   });
 

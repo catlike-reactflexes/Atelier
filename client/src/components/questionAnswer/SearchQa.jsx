@@ -20,14 +20,15 @@ class SearchQa extends React.Component {
   render() {
     return (
       <div className='searchBar'>
-        <div>
+
+        <div data-testid="searchQues">
             <textarea
               type="text"
               name='searchBar'
               className='search'
               onChange={this.handleSearchChange}
               placeholder = 'HAVE A QUESTION? SEARCH FOR ANSWERS...'
-              rows="3"
+              rows="5"
               cols="30"
               />
         </div>

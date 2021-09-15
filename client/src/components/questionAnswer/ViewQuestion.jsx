@@ -8,7 +8,7 @@ class ViewQuestion extends React.Component{
   render(){
 
     const {quesAnsLists} = this.props;
-    console.log('ViewQuestions-->', quesAnsLists)
+    // console.log('ViewQuestions-->', quesAnsLists)
     return (
       <div className='viewQuesAns'>
         {quesAnsLists && quesAnsLists.map((quesAns, index) => (

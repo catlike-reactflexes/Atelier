@@ -28,7 +28,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log('What state->', this.state.quesAns);
+    
     return (
       <div>
         <div>Header Placeholder</div>

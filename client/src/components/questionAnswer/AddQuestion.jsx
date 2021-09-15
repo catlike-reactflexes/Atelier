@@ -14,7 +14,7 @@ class AddQuestion extends React.Component {
   }
   handleQuestionChange = (e) =>{
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.id]: e.target.value
     })
   }
   submitQuestion = () => {
@@ -23,62 +23,63 @@ class AddQuestion extends React.Component {
   }
 
   render(){
-    console.log('Hello from Add question-->');
+    // console.log('Hello from Add question-->');
     if(!this.props.open) return null;
-    console.log(`open ${this.props.open}, onClose-> ${this.props.onClose}`);
+    // console.log(`open ${this.props.open}, onClose-> ${this.props.onClose}`);
 
     return ReactDom.createPortal(
-      <>
+      <div id="add-question">
       <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_Q_STYLES}>
         <h3> Ask Your Question</h3>
         <h3> About the *Product Name*</h3>
+
         <div>
-          {console.log('Inside div--->')}
-          <label htmlFor="question-input">
-            question
-          </label>
+          
+          <label htmlFor="question">Question</label>
           <textarea
-              id="question-input"
-              name='question'
+              data-testid="question"
+              id="question"
               onChange={this.handleQuestionChange}
               row={5}/>
         </div>
 
         <p>For privacy reasons, do not use your full name or email address</p>
         <div>
-          <label htmlFor="nickname">
-            nickname (mandatory):
+          <label htmlFor="nickname">nickname (mandatory): </label>
             <input
-              id="nickname"
+              data-testid="nickname"
               type="text"
-              name='nickname'
+              id="nickname"
               onChange={this.handleQuestionChange}
               placeholder='Example: jackson11!'/>
-          </label>
+
         </div>
 
         <div>
-          <label>
+          <label htmlFor="email">
             email (mandatory):
             <input
+              data-testid="email"
               type="text"
-              name='email'
+              id="email"
+
               onChange={this.handleQuestionChange}
               placeholder = 'Why did you like the product or not?'/>
           </label>
         </div>
 
 
-        <button onClick={this.submitQuestion}>Submit Question</button>
+        <button type="submit" onClick={this.submitQuestion}>Submit Question</button>
 
       </div>
-      </>,
+      </div>,
       document.getElementById('portalQ') || document.createElement('div') //for testing purpose
     )
   }
 
 }
+
 const MODAL_Q_STYLES = {
   position: 'fixed',
   top: '50%',

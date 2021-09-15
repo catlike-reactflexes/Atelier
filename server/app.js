@@ -16,12 +16,12 @@ app.get('/api/qa', (req, res) => {
     if(err){
       res.status(500).send(err);
     }else {
-      console.log('Before send', data)
+      // console.log('Before send', data)
       const twoData=[];
       for(let i =0; i< 2; i++){
         twoData.push(data[i])
       }
-      console.log('Data before send to client->', twoData)
+      // console.log('Data before send to client->', twoData)
       res.send(twoData);
     }
   })
