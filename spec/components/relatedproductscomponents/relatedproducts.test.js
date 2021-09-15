@@ -26,9 +26,9 @@ import RelatedProducts from ' ../../../client/src/components/relatedProducts/Rel
 
 //these test the components and how they are rendering
 describe('Related Products Component', function () {
-  test('Should render related products parent component', function (done) {
+  test('Should render related products parent component', function () {
     const app = render(<RelatedProducts />)
-    done();
+
 
   });
 });

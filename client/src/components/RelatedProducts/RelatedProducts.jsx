@@ -2,6 +2,9 @@ import React from 'react';
 import RelatedProductsList from './components/RelatedProductsList.jsx';
 import YourOutfitList from './components/YourOutfitList.jsx';
 import RelatedProductsCard from './components/RelatedProductsCard.jsx';
+import axios from 'axios';
+
+
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +51,8 @@ class RelatedProducts extends React.Component {
           "default_price": "40"
         }
       ],
-      yourOutfitData: []
+      yourOutfitData: [],
+      defaultProductId: 47421
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
@@ -56,7 +60,17 @@ class RelatedProducts extends React.Component {
 
 
   getRelatedProductsData() {
-
+    axios.get('/relatedProducts', {
+      params: {
+        defaultProductId: this.state.defaultProductId
+      }
+    })
+      .then((relatedProductsData) => {
+        console.log('success getting related products data in related products client index: ', relatedProductsData.data);
+      })
+      .catch((error) => {
+        console.log('error getting related products data in related products client index: ', error);
+      })
   }
 
   getYourOutfitData() {
@@ -65,7 +79,7 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-
+    this.getRelatedProductsData();
 
   }
 
