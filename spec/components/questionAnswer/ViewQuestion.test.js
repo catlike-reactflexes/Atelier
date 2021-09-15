@@ -5,11 +5,16 @@
  import React from 'react';
  import '@testing-library/jest-dom';
  import { render, screen } from '@testing-library/react';
-
  import ViewQuestion from '../../../client/src/components/questionAnswer/ViewQuestion.jsx';
 
 
 
- describe('some test', function () {
-   test.todo('todo');
+describe('View Question', function () {
+  test('Should render View Question component', function () {
+
+    const {container} = render(<ViewQuestion open='true'/>)
+    const inputNode1 = container.querySelector('#nickname')
+
+  });
+
  })

@@ -25,7 +25,7 @@ class App extends React.Component {
     this.fetchQuestionAnswer();
 
     }
-  
+
 
   render() {
     console.log('What state->', this.state.quesAns);
@@ -41,4 +41,4 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app') || document.createElement('div'));

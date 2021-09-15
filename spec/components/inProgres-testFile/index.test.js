@@ -8,7 +8,7 @@
  import { rest } from 'msw'
  import { setupServer } from 'msw/node'
  import App from ' ../../../client/src/index.jsx';
-
+ const fetch = require('node-fetch');
 //  [
 //   {
 //     question_id: 396911,
@@ -47,16 +47,16 @@
  //clean up once the tests are done
  afterAll(() => server.close())
 
-//  test('loads and displays greeting', async () => {
-//   render(<App url="/api/qa" />)
+ test('loads and displays greeting', async () => {
+  render(<App url="/api/qa" />)
 
-//   fireEvent.click(screen.getByText('Load Greeting'))
+  fireEvent.click(screen.getByText('Load Greeting'))
 
-//   await waitFor(() => screen.getByRole('heading'))
+  await waitFor(() => screen.getByRole('heading'))
 
-//   expect(screen.getByRole('heading')).toHaveTextContent('hello there')
-//   expect(screen.getByRole('button')).toBeDisabled()
-// })
+  expect(screen.getByRole('heading')).toHaveTextContent('hello there')
+  expect(screen.getByRole('button')).toBeDisabled()
+})
 
 //  test('handlers server error', async () => {
 //    server.use(
