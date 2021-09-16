@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const ANNA_API_TOKEN = require('./relatedProducts/config.js');
 const axios = require('axios');
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
@@ -25,7 +25,7 @@ let retrieveRelatedProductsStyles = (relatedProductIds) => {
     let currentProduct = relatedProductIds[i];
     let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
       headers: {
-        'Authorization': ANNA_API_TOKEN,
+        'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
@@ -36,14 +36,13 @@ let retrieveRelatedProductsStyles = (relatedProductIds) => {
   return productStylesInfo;
 }
 
-
 let retrieveRelatedProducts = (relatedProductIds) => {
   let promisesArray = [];
   for (var i = 0; i < relatedProductIds.length; i++) {
     let currentProduct = relatedProductIds[i];
     let APIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}`, {
       headers: {
-        'Authorization': ANNA_API_TOKEN,
+        'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
@@ -55,13 +54,13 @@ let retrieveRelatedProducts = (relatedProductIds) => {
 
 }
 
-
+//get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
   console.log('this is the req coming in from the client with product id: ', req.query.defaultProductId);
   let parentProductId = Number(req.query.defaultProductId);
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/related', {
     headers: {
-      'Authorization': ANNA_API_TOKEN,
+      'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
@@ -81,6 +80,12 @@ app.get('/relatedProducts', (req, res) => {
       res.sendStatus(500);
     })
 });
+
+
+//get related product styles and images
+app.get('/relatedProductImages', (req, res) => {
+  axios.get()
+})
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
 
