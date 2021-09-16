@@ -104,3 +104,6 @@ typings/
 
 #github token
 /server/qa/config.js
+/server/relatedProducts/config.js
+/server/questionAnswer/config.js
+.env
