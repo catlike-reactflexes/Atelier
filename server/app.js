@@ -9,7 +9,10 @@ const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
 const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
 
+const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -26,6 +29,21 @@ app.get('/reviews', (req, res) => {
     }
   })
 })
+app.get('/product', (req, res) => {
+  let id = req.query.id;
+  console.log()
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/${id}`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+  }).then(function (response) {
+    console.log('api response: ', response);
+  }).catch(function (error) {
+    console.log('api request error: ', error);
+  })
+});
 /*
   ----------------------------
   | RelatedProducts Routes |
