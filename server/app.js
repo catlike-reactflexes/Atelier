@@ -3,7 +3,6 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const QuestionAnswer_API = require('./questionAnswer');
-
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
 app.get('/', (req, res) => {
