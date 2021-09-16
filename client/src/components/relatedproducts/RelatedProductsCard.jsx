@@ -13,8 +13,8 @@ class RelatedProductsCard extends React.Component {
           <img src="https://via.placeholder.com/150"></img>
           <p className="category">{this.props.category}</p>
           <h4>{this.props.name}</h4>
-          <p className="price">${this.props.price}</p>
-          <p>{this.props.description}</p>
+          <p className="price">${this.props.price}.00</p>
+          <p>Some text about the product...</p>
         </div>
       </li>
     )
