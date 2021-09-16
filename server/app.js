@@ -1,9 +1,13 @@
+require('dotenv').config();
+//process.env.API_TOKEN
 const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
+const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
-const ANNA_API_TOKEN = require('./relatedProducts/config.js');
+const ANNA_API_TOKEN = require('./questionAnswer/config.js');
+// const ANNA_API_TOKEN = require('./relatedProducts/config.js');
 const axios = require('axios');
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
@@ -84,7 +88,23 @@ app.get('/relatedProducts', (req, res) => {
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
 
-
+//CS- Questions & Answer START------------------------------------------------------------
+app.get('/api/qa', (req, res) => {
+  QuestionAnswer_API.getQuesAns(47421,(err, data)=> {
+    if(err){
+      res.status(500).send(err);
+    }else {
+      // console.log('Before send', data)
+      const twoData=[];
+      for(let i =0; i< 2; i++){
+        twoData.push(data[i])
+      }
+      // console.log('Data before send to client->', twoData)
+      res.send(twoData);
+    }
+  })
+});
+//CS- Question & Answer END----------------------------------------------------------------------
 
 
 
