@@ -11,12 +11,14 @@ class RelatedProducts extends React.Component {
     this.state = {
       relatedProductsData: [],
       relatedProductsStyles: [],
+      defaultImages: [],
       yourOutfitData: [],
       defaultProductId: 47421
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
+    // this.grabImageURLs = this.grabImageURLs.bind(this);
   }
 
 
@@ -45,14 +47,37 @@ class RelatedProducts extends React.Component {
     })
       .then((relatedProductsStyles) => {
         console.log('success getting related products styles in related products client index: ', relatedProductsStyles.data);
+        let imagesArray = [];
+        let defaultImagesArray = [];
+        let styleData = relatedProductsStyles.data
+        for (var i = 0; i < styleData.length; i++) {
+          let stylesDataItem = relatedProductsStyles.data[i].results[0].photos;
+          imagesArray.push(stylesDataItem);
+        }
+        for (var i = 0; i < imagesArray.length; i++) {
+          defaultImagesArray.push(imagesArray[i][0].thumbnail_url);
+        }
         this.setState({
-          relatedProductsStyles: relatedProductsData.data
+          defaultImages: defaultImagesArray
         })
       })
       .catch((error) => {
         console.log('error getting related products styles in related products client index: ', error);
       })
   }
+  // grabImageURLs() {
+  //   let imagesArray = [];
+  //   let defaultImagesArray = [];
+  //   for (var i = 0; i < this.state.relatedProductsStyles; i++) {
+  //     let stylesDataItem = this.state.relatedProductsStyles[i].results[0].photos;
+  //     imagesArray.push(stylesDataItem);
+  //   }
+  //   for (var i = 0; i < imagesArray.length; i++) {
+  //     defaultImagesArray.push(imagesArray[i][0].thumbnail_url);
+  //   }
+  //   console.log('finished default images array: ', defaultImagesArray);
+
+  // }
 
   getYourOutfitData() {
   }
@@ -66,10 +91,11 @@ class RelatedProducts extends React.Component {
 
 
   render() {
+    // this.grabImageURLs();
     return (
       <div>
         <h3>Related Products</h3>
-        <RelatedProductsList dummyData={this.state.relatedProductsData} />
+        <RelatedProductsList dummyData={this.state.relatedProductsData} imagesData={this.state.defaultImages} />
         <h3>Your Outfit</h3>
         <YourOutfitList dummyData={this.state.relatedProductsData} />
       </div>

@@ -49,8 +49,20 @@ app.get('/product', (req, res) => {
   | RelatedProducts Routes |
   ----------------------------
 */
-//some comment to test if this worked
 let retrieveRelatedProductStyles = (relatedProductIds) => {
+  let stylesPromises = [];
+  for (var i = 0; i < relatedProductIds.length; i++) {
+    let currentProduct = relatedProductIds[i];
+    let APIStylesRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
+      headers: {
+        'Authorization': process.env.API_TOKEN,
+        'product_id': currentProduct
+      }
+    });
+    stylesPromises.push(APIStylesRequest);
+  }
+  let stylesInfo = Promise.all(stylesPromises);
+  return stylesInfo;
 
 }
 
@@ -66,8 +78,7 @@ let retrieveRelatedProducts = (relatedProductIds) => {
     });
     promisesArray.push(APIRequest);
   }
-  console.log('the array of many promises: ', promisesArray);
-  let productInfo = Promise.all(promisesArray)
+  let productInfo = Promise.all(promisesArray);
   return productInfo;
 
 }
@@ -75,21 +86,19 @@ let retrieveRelatedProducts = (relatedProductIds) => {
 //get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/related', {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
     headers: {
       'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
     .then((relatedProducts) => {
-      console.log('success getting related products array on server from API: ', relatedProducts.data);
       return retrieveRelatedProducts(relatedProducts.data)
     })
     .then((arrayOfResponses) => {
       let data = arrayOfResponses.map(res => {
         return res.data
       })
-      console.log('success getting related products info from helper fn: ', data);
       res.json(data);
     })
     .catch((error) => {
@@ -101,23 +110,20 @@ app.get('/relatedProducts', (req, res) => {
 
 //get related product styles and images
 app.get('/relatedProductStyles', (req, res) => {
-  console.log('this is the req coming in from the client with product id for styles: ', req.query.defaultProductId);
   let parentProductId = Number(req.query.defaultProductId);
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/styles', {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
     headers: {
       'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
     .then((relatedProducts) => {
-      console.log('success getting related products array to give to styles helper on server from API: ', relatedProducts.data);
       return retrieveRelatedProductStyles(relatedProducts.data)
     })
     .then((arrayOfStyleResponses) => {
       let styleData = arrayOfStyleResponses.map(res => {
         return res.data
       })
-      console.log('success getting styles info from helper fn: ', styleData);
       res.json(styleData);
     })
     .catch((error) => {
