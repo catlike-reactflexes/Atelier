@@ -21,17 +21,20 @@ body {
 */
 
 #overview {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: darkslategray;
+  /*font selected for testing purposes*/
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  min-height: 60%;
+  height: 60vw;
   border: 2px solid darkslategray;
-  box-sizing: border-box;
 }
 
 #mainProductImageContainer {
   width: 65%;
+  min-height: 80%;
   border: 1px solid dimgray;
   position: relative;
 }
@@ -44,7 +47,74 @@ body {
   width: 15%;
 }
 
-#styleThumbnailList .column-flex {
+.sidebar {
+  margin-left: 2%;
+  width: 32%;
+}
+
+#detailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid dimgray;
+}
+
+#stylesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid dimgray;
+}
+
+#stylesContainer .styleBtn {
+  width: 7vw;
+  height: 7vw;
+  margin-top: 1vw;
+  border-radius: 50%;
+  border: 1px solid dimgray;
+}
+
+#styleButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid dimgray;
+}
+
+#productButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#sizeSelect {
+  margin-top: 1vw;
+  width: 70%;
+  height: 4vw;
+}
+
+#qtySelect {
+  margin-top: 1vw;
+  width: 25%;
+  height: 4vw;
+}
+
+#bagBtn {
+  margin-top: 1vw;
+  width: 82%;
+  height: 4vw;
+}
+
+#favBtn {
+  margin-top: 1vw;
+  width: 12.5%;
+  height: 4vw;
+}
+
+.column-flex {
   display: flex;
   flex-direction: column;
 }
@@ -56,10 +126,78 @@ body {
 */
 
 .qa {
-  border: 5px;
+  border: 2px;
   grid: flex;
-  border-color: rgba(182, 230, 214, 0.603);
-  border-style: dotted;
+  flex-direction: row;
+  border-style: solid;
+  background-color: rgba(255, 235, 205, 0.322);
+}
+
+.viewQuesAns {
+  border: 1px;
+  grid: flex;
+  border-color: black;
+  border-style:solid;
+}
+.oneQA {
+  border: 2px;
+  grid: flex;
+  flex-direction: column;
+
+  margin-bottom: 1rem;
+}
+.oneQuestion {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: rgba(121, 121, 118, 0.698);
+}
+.qBody{
+  display: flex;
+  justify-content: left;
+  width:70%;
+  order: 1;
+}
+.helpful, .AddAns, .yes{
+  width:20%;
+  border: 1px;
+  display: flex;
+  order: 2;
+  justify-content: flex-end;
+  color:mediumblue
+}
+.oneAnswer {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(228, 228, 227, 0.698);
+  margin-top: 5px;
+
+}
+.ans1, .ans2 {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+.search {
+  display: flex;
+  width: 100%;
+  border: 1px #000 solid;
+  margin-bottom: 1rem;
+}
+.yes, .addAns {
+  display: flex;
+  text-decoration: underline;
+  cursor:pointer;
+}
+.by, .helpful, .AddAns, .yes, .ansName {
+  display: flex;
+  font-size: 0.8rem;
+}
+.bigQ, .bigA {
+  display: flex;
+  font-size: 1.2rem;
+  width:5%;
+  padding:2px;
 }
 
 /*

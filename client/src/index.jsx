@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Overview from './components/overview/overview.jsx';
-import QaMain from './components/qa/QaMain.jsx';
+import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 
 class App extends React.Component {
@@ -20,18 +20,31 @@ class App extends React.Component {
     })
   }
 
+  fetchQuestionAnswer() {
+    fetch('/api/qa')
+      .then(response => response.json())
+      .then(res => this.setState({ quesAns: res }));
+
+  }
+
+  componentDidMount() {
+    this.fetchQuestionAnswer();
+
+  }
+
+
   render() {
+
     return (
       <div>
         <div>Header Placeholder</div>
         <Overview />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QaMain />
-      </div>
-
+      </div >
     );
   }
-
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+
+ReactDOM.render(<App />, document.getElementById('app') || document.createElement('div'));
