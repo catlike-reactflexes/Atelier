@@ -8,6 +8,16 @@ import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      productId: 47421
+    }
+    this.handleProductUpdate = this.handleProductUpdate.bind(this);
+  }
+
+  handleProductUpdate(id) {
+    this.setState({
+      productId: id
+    })
   }
 
   render() {
@@ -15,7 +25,7 @@ class App extends React.Component {
       <div>
         <div>Header Placeholder</div>
         <Overview />
-        <RelatedProducts />
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QaMain />
       </div>
 

@@ -19,6 +19,23 @@ app.get('/', (req, res) => {
   | RelatedProducts Routes |
   ----------------------------
 */
+let retrieveRelatedProductsStyles = (relatedProductIds) => {
+  let stylesPromisesContainer = [];
+  for (var i = 0; i < relatedProductIds.length; i++) {
+    let currentProduct = relatedProductIds[i];
+    let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
+      headers: {
+        'Authorization': ANNA_API_TOKEN,
+        'product_id': currentProduct
+      }
+    });
+    stylesPromisesContainer.push(stylesAPIRequest);
+  }
+  console.log('the array of styles promises: ', stylesPromisesContainer);
+  let productStylesInfo = Promise.all(promisesArray)
+  return productStylesInfo;
+}
+
 
 let retrieveRelatedProducts = (relatedProductIds) => {
   let promisesArray = [];
@@ -64,7 +81,7 @@ app.get('/relatedProducts', (req, res) => {
       res.sendStatus(500);
     })
 });
-
+//----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
 
 
