@@ -15,5 +15,5 @@ Deliver a fully functional web application that meets the specifications and req
 
 ## API
 - GitHub token is located within the .env file. The variable is `API_TOKEN = FILL_ME_IN`.
-- npm install of <dotenv> is required.
+- npm install of `dotenv` is required.
 
