@@ -97,3 +97,21 @@ justify-content: center;
   font-size: 12px;
   float: left;
 }
+
+/*
+  ----------------------------
+  | Reviews Styling  |
+  ----------------------------
+*/
+
+.reviews {
+  /* display: flex; */
+  margin: 20px;
+  border: solid
+}
+
+.review {
+  display: flex;
+  margin: 20px;
+  border: solid
+}

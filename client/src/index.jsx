@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Overview from './components/overview/overview.jsx';
 import QaMain from './components/qa/QaMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
+import Reviews from './components/reviews/ReviewApp.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends React.Component {
         <Overview />
         <RelatedProducts />
         <QaMain />
+        <Reviews />
       </div>
 
     );
