@@ -6,7 +6,8 @@
   "scripts": {
     "server-dev": "nodemon server/app.js",
     "react-dev": "webpack --watch --config webpack.config.js",
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose --coverage",
+    "testqa": "jest spec/components/questionAnswer --watch --verbose --coverage"
   },
   "repository": {
     "type": "git",
@@ -32,8 +33,10 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.4",
     "@babel/preset-react": "^7.14.5",
+    "@testing-library/dom": "^8.5.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
+    "@testing-library/user-event": "^13.2.1",
     "babel-jest": "^27.1.1",
     "babel-loader": "^8.2.2",
     "jest": "^27.1.1",
