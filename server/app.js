@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
   | RelatedProducts Routes |
   ----------------------------
 */
+//some comment to test if this worked
 let retrieveRelatedProductsStyles = (relatedProductIds) => {
   let stylesPromisesContainer = [];
   for (var i = 0; i < relatedProductIds.length; i++) {
