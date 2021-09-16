@@ -2,6 +2,7 @@ import React from 'react';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
+import ImagesList from './ImagesList.jsx';
 import axios from 'axios';
 
 
@@ -18,7 +19,6 @@ class RelatedProducts extends React.Component {
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
-    // this.grabImageURLs = this.grabImageURLs.bind(this);
   }
 
 
@@ -79,6 +79,7 @@ class RelatedProducts extends React.Component {
 
   // }
 
+
   getYourOutfitData() {
   }
 
@@ -91,11 +92,10 @@ class RelatedProducts extends React.Component {
 
 
   render() {
-    // this.grabImageURLs();
     return (
       <div>
         <h3>Related Products</h3>
-        <RelatedProductsList dummyData={this.state.relatedProductsData} imagesData={this.state.defaultImages} />
+        <RelatedProductsList productData={this.state.relatedProductsData} imageData={this.state.defaultImages} />
         <h3>Your Outfit</h3>
         <YourOutfitList dummyData={this.state.relatedProductsData} />
       </div>
