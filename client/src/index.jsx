@@ -11,13 +11,18 @@ class App extends React.Component {
     this.state = {
       productId: 47421
     }
+    this.handleProductUpdate = this.handleProductUpdate.bind(this)
+  }
+
+  handleProductUpdate(id) {
+    this.setState({ productId: id});
   }
 
   render() {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview id={this.state.productId}/>
+        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId}/>
         <RelatedProducts />
         <QaMain />
       </div>

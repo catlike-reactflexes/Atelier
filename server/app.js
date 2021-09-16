@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
+const axios = require('axios');
+
+const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -13,10 +16,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/product', (req, res) => {
-  let data = req.body;
-  console.log('req.body: ', req.body);
-  console.log('req.data: ', req.data);
-  console.log('req.query.id: ', req.query.id);
+  let id = req.query.id;
+  console.log()
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/${id}`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+  }).then(function (response) {
+    console.log('api response: ', response);
+  }).catch(function (error) {
+    console.log('api request error: ', error);
+  })
 });
 
 app.listen(port, () => {
