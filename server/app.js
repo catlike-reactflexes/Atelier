@@ -115,8 +115,11 @@ app.get('/relatedProducts', (req, res) => {
 
 
 //CS- Questions & Answer START------------------------------------------------------------
-app.get('/api/qa', (req, res) => {
-  QuestionAnswer_API.getQuesAns(47421,(err, data)=> {
+app.get('/api/qa/id=*', (req, res) => {
+  // console.log('request-->', req.path) ;
+  const findId= req.path.split("=");
+  const productId = findId[1];
+  QuestionAnswer_API.getQuesAns(productId,(err, data)=> {
     if(err){
       res.status(500).send(err);
     }else {

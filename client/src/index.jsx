@@ -27,7 +27,8 @@ class App extends React.Component {
   }
 
   fetchQuestionAnswer() {
-    fetch('/api/qa')
+    const {productId} = this.state;
+    fetch(`/api/qa/id=${productId}`)
       .then(response => response.json())
       .then(res => this.setState({ quesAns: res }));
 
