@@ -6,8 +6,6 @@ const port = 3000;
 const path = require('path');
 const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
-// const ANNA_API_TOKEN = require('./questionAnswer/config.js');
-const ANNA_API_TOKEN = require('./relatedProducts/config.js');
 const axios = require('axios');
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
@@ -29,7 +27,7 @@ let retrieveRelatedProductsStyles = (relatedProductIds) => {
     let currentProduct = relatedProductIds[i];
     let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
       headers: {
-        'Authorization': ANNA_API_TOKEN,
+        'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
