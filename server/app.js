@@ -37,7 +37,7 @@ let retrieveRelatedProductsStyles = (relatedProductIds) => {
     let currentProduct = relatedProductIds[i];
     let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
       headers: {
-        'Authorization': ANNA_API_TOKEN,
+        'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
@@ -55,7 +55,7 @@ let retrieveRelatedProducts = (relatedProductIds) => {
     let currentProduct = relatedProductIds[i];
     let APIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}`, {
       headers: {
-        'Authorization': ANNA_API_TOKEN,
+        'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
@@ -73,7 +73,7 @@ app.get('/relatedProducts', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/related', {
     headers: {
-      'Authorization': ANNA_API_TOKEN,
+      'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })

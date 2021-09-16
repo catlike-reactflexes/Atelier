@@ -1,8 +1,8 @@
 const axios = require ('axios');
-const Github_Token = require ('./config');
+// const Github_Token = require ('./config');
 // console.log('Github-->', Github_Token);
 
-const configHeader = {headers: {"Authorization": Github_Token}};
+const configHeader = {headers: {"Authorization": process.env.API_TOKEN}};
 
 const getQuesAns = (productId, callback) => {
   const urlGet = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}`
