@@ -4,11 +4,15 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
+const axios = require('axios')
+const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
 const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
-// const ANNA_API_TOKEN = require('./relatedProducts/config.js');
-const axios = require('axios');
 
+const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -17,6 +21,29 @@ app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
+app.get('/reviews', (req, res) => {
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', {
+    headers: {
+      'Authorization': process.env.API_TOKEN,
+      'product_id': 47421
+    }
+  })
+})
+app.get('/product', (req, res) => {
+  let id = req.query.id;
+  console.log()
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/${id}`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+  }).then(function (response) {
+    console.log('api response: ', response);
+  }).catch(function (error) {
+    console.log('api request error: ', error);
+  })
+});
 /*
   ----------------------------
   | RelatedProducts Routes |
