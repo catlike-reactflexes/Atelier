@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 47421,
-      quesAns:[]
+      quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this);
   }
@@ -41,7 +41,7 @@ class App extends React.Component {
         <div>Header Placeholder</div>
         <Overview />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        <QuesAnsMain quesAns={this.state.quesAns}/>
+        <QuesAnsMain quesAns={this.state.quesAns} />
       </div >
     );
   }
