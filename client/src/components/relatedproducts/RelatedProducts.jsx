@@ -10,10 +10,12 @@ class RelatedProducts extends React.Component {
     super(props);
     this.state = {
       relatedProductsData: [],
+      relatedProductsStyles: [],
       yourOutfitData: [],
       defaultProductId: 47421
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
+    this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
   }
 
@@ -35,14 +37,29 @@ class RelatedProducts extends React.Component {
       })
   }
 
+  getRelatedProductsStyles() {
+    axios.get('/relatedProductStyles', {
+      params: {
+        defaultProductId: this.state.defaultProductId
+      }
+    })
+      .then((relatedProductsStyles) => {
+        console.log('success getting related products styles in related products client index: ', relatedProductsStyles.data);
+        this.setState({
+          relatedProductsStyles: relatedProductsData.data
+        })
+      })
+      .catch((error) => {
+        console.log('error getting related products styles in related products client index: ', error);
+      })
+  }
+
   getYourOutfitData() {
-
-
   }
 
   componentDidMount() {
     this.getRelatedProductsData();
-
+    this.getRelatedProductsStyles();
   }
 
 

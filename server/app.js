@@ -50,21 +50,8 @@ app.get('/product', (req, res) => {
   ----------------------------
 */
 //some comment to test if this worked
-let retrieveRelatedProductsStyles = (relatedProductIds) => {
-  let stylesPromisesContainer = [];
-  for (var i = 0; i < relatedProductIds.length; i++) {
-    let currentProduct = relatedProductIds[i];
-    let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
-      headers: {
-        'Authorization': process.env.API_TOKEN,
-        'product_id': currentProduct
-      }
-    });
-    stylesPromisesContainer.push(stylesAPIRequest);
-  }
-  console.log('the array of styles promises: ', stylesPromisesContainer);
-  let productStylesInfo = Promise.all(promisesArray)
-  return productStylesInfo;
+let retrieveRelatedProductStyles = (relatedProductIds) => {
+
 }
 
 let retrieveRelatedProducts = (relatedProductIds) => {
@@ -87,7 +74,6 @@ let retrieveRelatedProducts = (relatedProductIds) => {
 
 //get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
-  console.log('this is the req coming in from the client with product id: ', req.query.defaultProductId);
   let parentProductId = Number(req.query.defaultProductId);
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/related', {
     headers: {
@@ -114,8 +100,30 @@ app.get('/relatedProducts', (req, res) => {
 
 
 //get related product styles and images
-app.get('/relatedProductImages', (req, res) => {
-  axios.get()
+app.get('/relatedProductStyles', (req, res) => {
+  console.log('this is the req coming in from the client with product id for styles: ', req.query.defaultProductId);
+  let parentProductId = Number(req.query.defaultProductId);
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/styles', {
+    headers: {
+      'Authorization': process.env.API_TOKEN,
+      'product_id': parentProductId
+    }
+  })
+    .then((relatedProducts) => {
+      console.log('success getting related products array to give to styles helper on server from API: ', relatedProducts.data);
+      return retrieveRelatedProductStyles(relatedProducts.data)
+    })
+    .then((arrayOfStyleResponses) => {
+      let styleData = arrayOfStyleResponses.map(res => {
+        return res.data
+      })
+      console.log('success getting styles info from helper fn: ', styleData);
+      res.json(styleData);
+    })
+    .catch((error) => {
+      console.log('error getting styles info on server from API: ', error);
+      res.sendStatus(500);
+    })
 })
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
