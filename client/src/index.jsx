@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Overview from './components/overview/overview.jsx';
 import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
+import Reviews from './components/reviews/ReviewApp.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class App extends React.Component {
         <Overview productUpdate={this.handleProductUpdate} id={this.state.productId}/>
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QuesAnsMain quesAns={this.state.quesAns}/>
+        <Reviews />
       </div >
     );
   }
