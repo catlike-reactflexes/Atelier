@@ -9,33 +9,40 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quesAns:[],
-      productId: null
+      productId: 47421,
+      quesAns:[]
     }
+    this.handleProductUpdate = this.handleProductUpdate.bind(this);
+  }
+
+  handleProductUpdate(id) {
+    this.setState({
+      productId: id
+    })
   }
 
   fetchQuestionAnswer() {
     fetch('/api/qa')
       .then(response => response.json())
-      .then(res => this.setState({quesAns: res}));
+      .then(res => this.setState({ quesAns: res }));
 
   }
 
   componentDidMount() {
     this.fetchQuestionAnswer();
 
-    }
+  }
 
 
   render() {
-    
+
     return (
       <div>
         <div>Header Placeholder</div>
         <Overview />
-        <RelatedProducts />
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QuesAnsMain quesAns={this.state.quesAns}/>
-      </div>
+      </div >
     );
   }
 }
