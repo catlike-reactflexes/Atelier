@@ -2,7 +2,6 @@ import React from 'react';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
-import ImagesList from './ImagesList.jsx';
 import axios from 'axios';
 
 
@@ -65,20 +64,6 @@ class RelatedProducts extends React.Component {
         console.log('error getting related products styles in related products client index: ', error);
       })
   }
-  // grabImageURLs() {
-  //   let imagesArray = [];
-  //   let defaultImagesArray = [];
-  //   for (var i = 0; i < this.state.relatedProductsStyles; i++) {
-  //     let stylesDataItem = this.state.relatedProductsStyles[i].results[0].photos;
-  //     imagesArray.push(stylesDataItem);
-  //   }
-  //   for (var i = 0; i < imagesArray.length; i++) {
-  //     defaultImagesArray.push(imagesArray[i][0].thumbnail_url);
-  //   }
-  //   console.log('finished default images array: ', defaultImagesArray);
-
-  // }
-
 
   getYourOutfitData() {
   }
