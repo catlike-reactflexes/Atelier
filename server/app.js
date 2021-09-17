@@ -28,7 +28,8 @@ app.get('/reviews', (req, res) => {
       'product_id': 47421
     }
   })
-})
+});
+
 app.get('/product', (req, res) => {
   let id = req.query.id;
   console.log()
@@ -39,11 +40,14 @@ app.get('/product', (req, res) => {
       Authorization: process.env.API_TOKEN
     }
   }).then(function (response) {
-    console.log('api response: ', response);
+    dataStr = JSON.stringify(response.data);
+    res.json({ data: dataStr });
+    res.end();
   }).catch(function (error) {
     console.log('api request error: ', error);
   })
 });
+
 /*
   ----------------------------
   | RelatedProducts Routes |

@@ -19,11 +19,13 @@ class Overview extends React.Component {
     axios({
       method: 'get',
       url: '/product',
-      params: { id: id },
-      success: function(result) {
-        console.log('API product id result: ', result);
-      }
-    });
+      params: { id: id }
+    }).then((response) => {
+      console.log('Product API get response: ', response);
+      data = response.data;
+    }).catch((error) => {
+      console.log('Error calling procut API: ', error);
+    })
   }
 
   render() {
