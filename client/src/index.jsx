@@ -47,7 +47,7 @@ class App extends React.Component {
         <Overview productUpdate={this.handleProductUpdate} id={this.state.productId}/>
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QuesAnsMain quesAns={this.state.quesAns}/>
-        <Reviews />
+        <Reviews id={this.state.productId}/>
       </div >
     );
   }

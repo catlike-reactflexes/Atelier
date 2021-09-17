@@ -253,3 +253,8 @@ justify-content: center;
   margin: 20px;
   border: solid
 }
+
+.RnR {
+  grid: flex;
+  flex-direction: row;
+}

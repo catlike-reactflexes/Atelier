@@ -8,11 +8,11 @@ const getQuesAns = (productId, callback) => {
 
   axios.get(urlGet,configHeader)
     .then(response => {
-      console.log('Axios success',response.data.results);
+      // console.log('Axios success',response.data.results);
       callback(null, response.data.results);
     })
     .catch(error => {
-      console.log('Axios failed',error);
+      // console.log('Axios failed',error);
       callback(error, null);
     })
 
