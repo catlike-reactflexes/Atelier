@@ -29,7 +29,7 @@ app.get('/reviews', (req, res) => {
   }
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
     .then(data => {
-      console.log('api response: ', data.data.results);
+      // console.log('api response: ', data.data.results);
       res.json(data.data)
     })
     .catch(err => {

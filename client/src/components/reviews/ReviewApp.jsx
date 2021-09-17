@@ -55,7 +55,7 @@ class ReviewApp extends React.Component {
       }
     })
       .then(arrayOfReviews => {
-        console.log('this is reviews from api call:', arrayOfReviews.data.results)
+        // console.log('this is reviews from api call:', arrayOfReviews.data.results)
         this.setState({reviews:arrayOfReviews.data.results})
       })
   }
