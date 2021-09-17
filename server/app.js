@@ -6,7 +6,7 @@ const port = 3000;
 const path = require('path');
 const axios = require('axios')
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
-const QuestionAnswer_API = require('./questionAnswer');
+// const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -29,26 +29,26 @@ app.get('/reviews', (req, res) => {
     }
   })
 })
-app.get('/product', (req, res) => {
-  let id = req.query.id;
-  console.log()
-  axios({
-    method: 'get',
-    url: `${API_URL}/products/${id}`,
-    headers: {
-      Authorization: process.env.API_TOKEN
-    }
-  }).then(function (response) {
-    console.log('api response: ', response);
-  }).catch(function (error) {
-    console.log('api request error: ', error);
-  })
-});
+// app.get('/product', (req, res) => {
+//   let id = req.query.id;
+//   console.log()
+//   axios({
+//     method: 'get',
+//     url: `${API_URL}/products/${id}`,
+//     headers: {
+//       Authorization: process.env.API_TOKEN
+//     }
+//   }).then(function (response) {
+//     console.log('api response: ', response);
+//   }).catch(function (error) {
+//     console.log('api request error: ', error);
+//   })
+// });
 /*
   ----------------------------
   | RelatedProducts Routes |
   ----------------------------
-*/
+
 let retrieveRelatedProductsStyles = (relatedProductIds) => {
   let stylesPromisesContainer = [];
   for (var i = 0; i < relatedProductIds.length; i++) {
@@ -112,26 +112,36 @@ app.get('/relatedProducts', (req, res) => {
     })
 });
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
-
+*/
 
 //CS- Questions & Answer START------------------------------------------------------------
 app.get('/api/qa/id=*', (req, res) => {
+  // console.log('request-->', req.query) ;
   // console.log('request-->', req.path) ;
-  const findId= req.path.split("=");
-  const productId = findId[1];
-  QuestionAnswer_API.getQuesAns(productId,(err, data)=> {
-    if(err){
-      res.status(500).send(err);
-    }else {
-      // console.log('Before send', data)
-      const twoData=[];
-      for(let i =0; i< 2; i++){
-        twoData.push(data[i])
-      }
-      // console.log('Data before send to client->', twoData)
-      res.send(twoData);
-    }
-  })
+
+  axios({
+        method: 'get',
+        url: `${API_URL}/qa/questions`,
+        headers: {
+          Authorization: process.env.API_TOKEN
+        },
+        params: {
+          product_id: req.query.product_id
+        }
+      }).then(function (response) {
+        console.log('api response: ', response.data);
+        const twoData=[];
+
+        for(let i =0; i< 2; i++){
+          twoData.push(response.data.results[i])
+        }
+        console.log('Data before send to client->', twoData)
+        res.status(200).send(twoData);
+      }).catch(function (err) {
+        console.log('api request error: ', error);
+        res.status(500).send(err);
+      })
+
 });
 //CS- Question & Answer END----------------------------------------------------------------------
 

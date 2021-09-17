@@ -20,8 +20,9 @@ class QuesAnsMain extends React.Component {
     })
   }
   render() {
-    // console.log('What is props-->', this.props);
+
     const {quesAns} = this.props;
+    console.log('What is props-->', quesAns);
     return (
       <div className="qa">
         <p>Questions and Answers</p>

@@ -8,15 +8,21 @@ class OneQA extends React.Component{
       isOpen:false
     }
     this.setOpen = this.setOpen.bind(this);
+    this.addUpdateHelpfulness = this.addUpdateHelpfulness.bind(this);
   }
   setOpen = (option) => {
     this.setState({
       isOpen: option
     })
   }
+  addUpdateHelpfulness = (questionId) => {
+    console.log('Hello-->', questionId)
+  }
+
   render(){
     // console.log('OneQA -->', this.props.one);
     const {one} = this.props;
+    console.log('OneQA -->', one);
     //need to revisit this key
     const answerId = [];
     for(let key in one.answers){
@@ -34,9 +40,9 @@ class OneQA extends React.Component{
             <div className="bigQ">Q:</div>
             <div className="qBody1">{one.question_body}</div>
           </div>
-          <div className="helpful">Helpful?
-          <div className="yes">Yes</div>
-          </div>
+          <div className="helpful">Helpful?</div>
+          <div className="yes" onClick={() => this.addUpdateHelpfulness(one.question_id)} >Yes ({one.question_helpfulness})</div>
+
           <div className="AddAns">
             <div onClick={() => this.setOpen(true)}>Add Answer</div>
               {

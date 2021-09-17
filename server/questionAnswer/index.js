@@ -2,17 +2,18 @@ const axios = require ('axios');
 const Github_Token = require ('./config');
 const configHeader = {headers: {"Authorization": process.env.API_TOKEN}};
 const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa';
-
+// const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const getQuesAns = (productId, callback) => {
   const urlGet = `${baseUrl}/questions?product_id=${productId}`;
-  
+  // const urlGet = `${baseUrl}/product_id=${productId}`;
+  console.log('url-->', urlGet)
   axios.get(urlGet,configHeader)
     .then(response => {
-      // console.log('Axios success',response.data.results);
+      console.log('Axios success',response.data.results);
       callback(null, response.data.results);
     })
     .catch(error => {
-      // console.log('Axios failed',error);
+      console.log('Axios failed',error);
       callback(error, null);
     })
 
