@@ -1,6 +1,6 @@
 const React = require('react');
 import axios from 'axios';
-import ViewQuestion from './ViewQuestion.jsx';
+import QuesAnsMain from './1QuesAnsMain.jsx';
 
 class MoreQuestion extends React.Component{
   constructor(props){
@@ -20,9 +20,7 @@ class MoreQuestion extends React.Component{
         }
       })
         .then(data => {
-          this.setState({
-            quesAns : data.data
-          })
+          this.props.updateQA(data)
         })
         .catch(error => {
           console.error(error)
@@ -31,12 +29,12 @@ class MoreQuestion extends React.Component{
   }
   render(){
       console.log('More Questions--->', this.props)
-      if(this.state.quesAns.length > 0) {
-        console.log('Testing---------')
-        return (
-          <ViewQuestion quesAnsLists={this.state.quesAns}/>
-        )
-      }
+      // if(this.state.quesAns.length > 0) {
+      //   console.log('Testing---------')
+      //   return (
+      //     <ViewQuestion quesAnsLists={this.state.quesAns}/>
+      //   )
+      // }
     return (
 
       <div className='moreQuestion'>

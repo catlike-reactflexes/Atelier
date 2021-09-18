@@ -11,9 +11,33 @@ class QuesAnsMain extends React.Component {
 
     super(props);
     this.state = {
+      quesAns: this.props.quesAns,
+      productId: this.props.id,
+      moreQA: true,
       isOpen: false
     }
     this.setOpen = this.setOpen.bind(this);
+    this.updateQuesAns = this.updateQuesAns.bind(this);
+  }
+
+  updateQuesAns = (data) => {
+    // console.log('test updateQuesAns---1', data.data)
+    let incomingQA = data.data;
+    let addQA= this.props.quesAns;
+    for(let i =0; i < 2; i++){
+      if(incomingQA[i]){
+        addQA.push(incomingQA[i])
+      } else {
+        //if no more QA , set state
+        this.setState({
+          moreQA: false
+        })
+      }
+    }
+    this.setState({
+      quesAns : addQA
+    })
+    // console.log('Latest update-3-->', this.state.quesAns)
   }
   setOpen = (option) =>{
     this.setState({
@@ -21,7 +45,7 @@ class QuesAnsMain extends React.Component {
     })
   }
   render() {
-
+    console.log('This props--->', this.props)
     const {quesAns, id} = this.props;
     let questionId = [];
     // console.log('What is props-->', quesAns[0]);
@@ -38,7 +62,7 @@ class QuesAnsMain extends React.Component {
         <SearchQa/>
         <ViewQuestion quesAnsLists={quesAns}/>
         <div className="twoButton">
-          <div><MoreQuestion quesId={questionId} productId={id}/></div>
+          {this.state.moreQA && <div><MoreQuestion quesId={questionId} productId={this.state.productId} updateQA={this.updateQuesAns}/></div>}
           <div style = {BUTTON_STYLES}>
             <button className="addQues" onClick={() => this.setOpen(true)}>ADD A QUESTION +</button>
 
