@@ -208,16 +208,32 @@ body {
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   height: 300px;
-  width: 150px;
-  margin: 20px;
-  text-align: center;
+  width: 200px;
+  margin: 10px;
+  text-align: left;
   font-size: 15px;
   font-family: arial;
+  display:flex;
+  flex-direction: column;
+  align-content: flex-start;
 }
+
+.category{
+  color: grey;
+  font-size: 12px;
+  float: left;
+  margin: 2px;
+}
+
+.productName {
+  font-size: 12px;
+  margin: 2px;
+  }
 
 .price {
   color: grey;
-  font-size: 16px;
+  font-size: 10px;
+  margin: 2px;
 }
 
 .relatedProductsItems{
@@ -230,10 +246,16 @@ flex-direction: row;
 justify-content: center;
 }
 
-.category{
-  color: grey;
-  font-size: 12px;
-  float: left;
+
+
+.imageContainer {
+height:65%;
+width: 100%;
+}
+.relatedProductImg {
+height: 100%;
+width: 100%;
+object-fit: fill;
 }
 
 /*
@@ -252,4 +274,9 @@ justify-content: center;
   display: flex;
   margin: 20px;
   border: solid
+}
+
+.RnR {
+  grid: flex;
+  flex-direction: row;
 }

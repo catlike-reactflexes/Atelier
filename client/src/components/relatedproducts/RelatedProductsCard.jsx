@@ -4,19 +4,23 @@ import React from 'react';
 class RelatedProductsCard extends React.Component {
   constructor(props) {
     super(props);
+
   }
+
+
 
   render() {
     return (
       <li className="relatedProductsItems" >
         <div className="card">
-          <img src="https://via.placeholder.com/150"></img>
+          <div className="imageContainer">
+            <img className="relatedProductImg" src={this.props.image}></img>
+          </div>
           <p className="category">{this.props.category}</p>
-          <h4>{this.props.name}</h4>
+          <p className="productName">{this.props.name}</p>
           <p className="price">${this.props.price}</p>
-          <p>{this.props.description}</p>
         </div>
-      </li>
+      </li >
     )
   }
 
