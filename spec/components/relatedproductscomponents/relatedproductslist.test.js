@@ -6,7 +6,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
-import RelatedProductsList from ' ../../../client/src/components/relatedProducts/components/RelatedProductsList.jsx';
+import RelatedProductsList from ' ../../../client/src/components/relatedProducts/RelatedProductsList.jsx';
 
 describe('Related Products List Component', function () {
   test('Should render a new product card', function () {
@@ -37,7 +37,23 @@ describe('Related Products List Component', function () {
       }
     ]
 
-    const app = render(<RelatedProductsList dummyData={items} />)
+    const imageItems = {
+      "product_id": "47423",
+      "results": [{
+        "default?": true,
+        "name": "Black",
+        "original_price": "40.00",
+        "photos": [{
+          "thumbnail_url": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        }
+        ]
+      }
+      ]
+    }
+
+
+    const app = render(<RelatedProductsList productData={items} imageData={imageItems} />)
 
     expect(app.getByText("Camo Onesie")).toBeInTheDocument();
 
