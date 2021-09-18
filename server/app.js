@@ -5,7 +5,6 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const axios = require('axios')
-const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
 const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
 
@@ -22,17 +21,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', {
-    headers: {
-      'Authorization': process.env.API_TOKEN,
-      'product_id': 47421
-    }
-  })
-});
+  let product_id = Number(req.query.productID)
+  // console.log(typeof product_id)
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN},
+    params: {'product_id': product_id}
+  }
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
+    .then(data => {
+      // console.log('api response: ', data.data.results);
+      res.json(data.data)
+    })
+    .catch(err => {
+      console.log('review get error: ', err)
+      throw err
+    })
+})
 
 app.get('/product', (req, res) => {
   let id = req.query.id;
-  console.log()
+  // console.log()
   axios({
     method: 'get',
     url: `${API_URL}/products/${id}`,
@@ -106,7 +114,7 @@ app.get('/relatedProducts', (req, res) => {
       res.json(data);
     })
     .catch((error) => {
-      console.log('error getting related products array on server from API: ', error);
+      // console.log('error getting related products array on server from API: ', error);
       res.sendStatus(500);
     })
 });
