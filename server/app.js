@@ -58,23 +58,22 @@ app.get('/product', (req, res) => {
   | RelatedProducts Routes |
   ----------------------------
 */
-let retrieveRelatedProductsStyles = (relatedProductIds) => {
-  let stylesPromisesContainer = [];
+let retrieveRelatedProductStyles = (relatedProductIds) => {
+  let stylesPromises = [];
   for (var i = 0; i < relatedProductIds.length; i++) {
     let currentProduct = relatedProductIds[i];
-    let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
+    let APIStylesRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
       headers: {
         'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
-    stylesPromisesContainer.push(stylesAPIRequest);
+    stylesPromises.push(APIStylesRequest);
   }
-  // console.log('the array of styles promises: ', stylesPromisesContainer);
-  let productStylesInfo = Promise.all(promisesArray)
-  return productStylesInfo;
-}
+  let stylesInfo = Promise.all(stylesPromises);
+  return stylesInfo;
 
+}
 
 let retrieveRelatedProducts = (relatedProductIds) => {
   let promisesArray = [];
@@ -88,31 +87,27 @@ let retrieveRelatedProducts = (relatedProductIds) => {
     });
     promisesArray.push(APIRequest);
   }
-  // console.log('the array of many promises: ', promisesArray);
-  let productInfo = Promise.all(promisesArray)
+  let productInfo = Promise.all(promisesArray);
   return productInfo;
 
 }
 
-
+//get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
-  // console.log('this is the req coming in from the client with product id: ', req.query.defaultProductId);
   let parentProductId = Number(req.query.defaultProductId);
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/related', {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
     headers: {
       'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
     .then((relatedProducts) => {
-      // console.log('success getting related products array on server from API: ', relatedProducts.data);
       return retrieveRelatedProducts(relatedProducts.data)
     })
     .then((arrayOfResponses) => {
       let data = arrayOfResponses.map(res => {
         return res.data
       })
-      // console.log('success getting related products info from helper fn: ', data);
       res.json(data);
     })
     .catch((error) => {
@@ -120,18 +115,43 @@ app.get('/relatedProducts', (req, res) => {
       res.sendStatus(500);
     })
 });
+
+
+//get related product styles and images
+app.get('/relatedProductStyles', (req, res) => {
+  let parentProductId = Number(req.query.defaultProductId);
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
+    headers: {
+      'Authorization': process.env.API_TOKEN,
+      'product_id': parentProductId
+    }
+  })
+    .then((relatedProducts) => {
+      return retrieveRelatedProductStyles(relatedProducts.data)
+    })
+    .then((arrayOfStyleResponses) => {
+      let styleData = arrayOfStyleResponses.map(res => {
+        return res.data
+      })
+      res.json(styleData);
+    })
+    .catch((error) => {
+      console.log('error getting styles info on server from API: ', error);
+      res.sendStatus(500);
+    })
+})
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
 
 //CS- Questions & Answer START------------------------------------------------------------
 app.get('/api/qa', (req, res) => {
-  QuestionAnswer_API.getQuesAns(47421,(err, data)=> {
-    if(err){
+  QuestionAnswer_API.getQuesAns(47421, (err, data) => {
+    if (err) {
       res.status(500).send(err);
-    }else {
+    } else {
       // console.log('Before send', data)
-      const twoData=[];
-      for(let i =0; i< 2; i++){
+      const twoData = [];
+      for (let i = 0; i < 2; i++) {
         twoData.push(data[i])
       }
       // console.log('Data before send to client->', twoData)

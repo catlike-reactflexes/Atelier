@@ -11,13 +11,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 47421,
-      quesAns:[]
+      quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
   }
 
   handleProductUpdate(id) {
-    this.setState({ productId: id});
+    this.setState({ productId: id });
   }
 
   handleProductUpdate(id) {
@@ -44,7 +44,7 @@ class App extends React.Component {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId}/>
+        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QuesAnsMain quesAns={this.state.quesAns}/>
         <Reviews id={this.state.productId}/>
