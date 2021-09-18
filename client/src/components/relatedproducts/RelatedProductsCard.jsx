@@ -8,7 +8,7 @@ class RelatedProductsCard extends React.Component {
   }
 
 
-
+  //set star to absolute position within the card element
   render() {
     return (
       <li className="relatedProductsItems" >
