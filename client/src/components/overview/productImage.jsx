@@ -1,11 +1,11 @@
 import React from 'react';
-import StyleThumbnailList from './styleThumbnailList.jsx';
+import StyleThumbnails from './styleThumbnails.jsx';
 
 const ProductImage = (props) => {
   return (
-    <div id="mainProductImageContainer">
+    <div id="mainProductImageContainer" data-testid="overview-image">
       <img alt="Product Image" />
-      <StyleThumbnailList />
+      <StyleThumbnails />
     </div>
   )
 }

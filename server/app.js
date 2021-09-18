@@ -48,11 +48,14 @@ app.get('/product', (req, res) => {
       Authorization: process.env.API_TOKEN
     }
   }).then(function (response) {
-    // console.log('api response: ', response);
+    dataStr = JSON.stringify(response.data);
+    res.send(dataStr);
+    res.end();
   }).catch(function (error) {
-    // console.log('api request error: ', error);
+    console.log('/products api request error: ', error);
   })
 });
+
 /*
   ----------------------------
   | RelatedProducts Routes |
