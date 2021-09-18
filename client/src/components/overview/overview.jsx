@@ -10,7 +10,9 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: props.id
+      productId: props.id,
+      productData: {},
+      loaded: false
     };
   }
 
@@ -21,19 +23,19 @@ class Overview extends React.Component {
       url: '/product',
       params: { id: id }
     }).then((response) => {
-      console.log('Product API get response: ', response);
-      data = response.data;
+      let data = response.data;
+      this.setState({ productData: data, loaded: true });
     }).catch((error) => {
-      console.log('Error calling procut API: ', error);
+      console.log('Error calling product API: ', error);
     })
   }
 
   render() {
     return (
-      <div id="overview">
+      <div id="overview" data-testid="overview-element">
         <ProductImage />
         <div className="sidebar column-flex">
-          <ProductDetails />
+          <ProductDetails name={this.state.productData.name} category={this.state.productData.category} price={this.state.productData.default_price} loaded={this.state.loaded}/>
           <ProductSyles />
           <ProductButtons />
         </div>

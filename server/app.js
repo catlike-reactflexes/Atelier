@@ -41,10 +41,10 @@ app.get('/product', (req, res) => {
     }
   }).then(function (response) {
     dataStr = JSON.stringify(response.data);
-    res.json({ data: dataStr });
+    res.send(dataStr);
     res.end();
   }).catch(function (error) {
-    console.log('api request error: ', error);
+    console.log('/products api request error: ', error);
   })
 });
 
