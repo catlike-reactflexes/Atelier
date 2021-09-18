@@ -1,21 +1,73 @@
 import React from 'react';
-import Reviewlist from 'Reviewlist';
-import Search from 'Search';
-import NewReview from 'NewReview';
+import axios from 'axios';
+import ReviewList from './ReviewList.jsx';
+import NewReview from './NewReview.jsx';
 
 class ReviewApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewList: []
+      reviews: [
+        {
+          "review_id": 5,
+          "rating": 3,
+          "summary": "I'm enjoying wearing these shades",
+          "recommend": false,
+          "response": null,
+          "body": "Comfortable and practical.",
+          "date": "2019-04-14T00:00:00.000Z",
+          "reviewer_name": "shortandsweeet",
+          "helpfulness": 5,
+          "photos": [{
+              "id": 1,
+              "url": "urlplaceholder/review_5_photo_number_1.jpg"
+            },
+            {
+              "id": 2,
+              "url": "urlplaceholder/review_5_photo_number_2.jpg"
+            },
+            // ...
+          ]
+        },
+        {
+          "review_id": 3,
+          "rating": 4,
+          "summary": "I am liking these glasses",
+          "recommend": false,
+          "response": "Glad you're enjoying the product!",
+          "body": "They are very dark. But that's good because I'm in very sunny spots",
+          "date": "2019-06-23T00:00:00.000Z",
+          "reviewer_name": "bigbrotherbenjamin",
+          "helpfulness": 5,
+          "photos": [],
+        },
+      ],
+
+      defaultProductID: 47421
     };
+  }
+
+  componentDidMount() {
+
+  }
+
+  getReviews() {
+    axios.get('/reviews', {
+      params: {
+        productID: this.state.defaultProductID
+      }
+    })
+      .then(arrayOfReviews => {
+        console.log('this is reviews from api call:', arrayOfReviews)
+        this.setState({reviews:arrayOfReviews})
+      })
   }
 
   render() {
     return (
-      <div>
-        <Search />
-        <Reviewlist reviews = {this.state.reviewList}/>
+      <div className='reviews'>
+        {/* <Search /> */}
+        <ReviewList reviews = {this.state.reviews}/>
         <NewReview />
       </div>
     );

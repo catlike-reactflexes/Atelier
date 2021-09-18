@@ -1,8 +1,8 @@
 import React from 'react';
 
-const StyleThumbnailList = (props) => {
+const StyleThumbnails = (props) => {
   return (
-    <div id="styleThumbnailList">
+    <div id="styleThumbnails" data-testid="overview-stylethumbs">
       <div className="column-flex">
         <span>Img</span><br />
         <span>Img</span>
@@ -11,4 +11,4 @@ const StyleThumbnailList = (props) => {
   )
 }
 
-export default StyleThumbnailList;
+export default StyleThumbnails;

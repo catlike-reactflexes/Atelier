@@ -39,7 +39,7 @@ body {
   position: relative;
 }
 
-#styleThumbnailList {
+#styleThumbnails {
   position: absolute;
   top: 0;
   left: 0;
@@ -234,4 +234,22 @@ justify-content: center;
   color: grey;
   font-size: 12px;
   float: left;
+}
+
+/*
+  ----------------------------
+  | Reviews Styling  |
+  ----------------------------
+*/
+
+.reviews {
+  /* display: flex; */
+  margin: 20px;
+  border: solid
+}
+
+.review {
+  display: flex;
+  margin: 20px;
+  border: solid
 }

@@ -76,7 +76,6 @@ describe('Tests for Product Description component', function () {
   });
 });
 
-
 describe('Tests for Product Buttons component', function () {
   test('Product Buttons component renders to page', () => {
     const app = render(<ProductButtons />);
