@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import NewReview from './NewReview.jsx';
+import ReviewBreakdown from './ReviewBreakdown.jsx'
 
 class ReviewApp extends React.Component {
   constructor(props) {
@@ -42,13 +43,9 @@ class ReviewApp extends React.Component {
           "photos": [],
         },
       ],
-
-      defaultProductID: 47421
+      defaultProductID: props.id
     };
-  }
-
-  componentDidMount() {
-
+    this.getReviews = this.getReviews.bind(this)
   }
 
   getReviews() {
@@ -58,16 +55,25 @@ class ReviewApp extends React.Component {
       }
     })
       .then(arrayOfReviews => {
-        console.log('this is reviews from api call:', arrayOfReviews)
-        this.setState({reviews:arrayOfReviews})
+        // console.log('this is reviews from api call:', arrayOfReviews.data.results)
+        this.setState({reviews:arrayOfReviews.data.results})
       })
   }
+
+  componentDidMount() {
+    this.getReviews()
+  }
+
+
 
   render() {
     return (
       <div className='reviews'>
         {/* <Search /> */}
+        <div className='RnR'>
         <ReviewList reviews = {this.state.reviews}/>
+        <ReviewBreakdown />
+        </div>
         <NewReview />
       </div>
     );
