@@ -186,10 +186,14 @@ body {
 }
 .yes, .addAns {
   display: flex;
+  margin-left: 5px;
+  width: fit-content;
   text-decoration: underline;
   cursor:pointer;
 }
 .by, .helpful, .AddAns, .yes, .ansName {
+  margin-left: 5px;
+  width: fit-content;
   display: flex;
   font-size: 0.8rem;
 }
