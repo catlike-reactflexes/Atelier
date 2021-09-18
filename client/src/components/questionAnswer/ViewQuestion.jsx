@@ -11,9 +11,26 @@ class ViewQuestion extends React.Component{
     // console.log('ViewQuestions-->', quesAnsLists)
     return (
       <div className='viewQuesAns'>
-        {quesAnsLists && quesAnsLists.map((quesAns, index) => (
-          <OneQA key={index} one={quesAns}/>
-        ))}
+        {quesAnsLists && quesAnsLists.map((quesAns, index) => {
+          console.log('viewQA-->', quesAns)
+          const ansList = quesAns.answers;
+          const ansKey = [];
+          for(let key in ansList){
+
+            ansKey.push(key);
+          }
+          // console.log('answerKey->', typeof(ansKey[0]))
+          // console.log('key-->', quesAns.answers[ansKey[0]])
+          return (
+            <OneQA  key = {index}
+                    oneQues = {quesAns}
+                    // quesId = {quesAns.question_id}
+                    oneAns = {quesAns.answers[ansKey[0]]}
+                    // ansId = {ansKey[0]}
+            />)
+        }
+
+        )}
 
       </div>
     );

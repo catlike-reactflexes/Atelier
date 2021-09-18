@@ -4,6 +4,7 @@ import SearchQa from './SearchQa.jsx';
 import ViewQuestion from './ViewQuestion.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import AddAnswer from './AddAnswer.jsx';
+import MoreQuestion from './MoreQuestion.jsx';
 
 class QuesAnsMain extends React.Component {
   constructor(props) {
@@ -28,16 +29,19 @@ class QuesAnsMain extends React.Component {
         <p>Questions and Answers</p>
         <SearchQa/>
         <ViewQuestion quesAnsLists={quesAns}/>
+        <div className="twoButton">
+          <div><MoreQuestion/></div>
+          <div style = {BUTTON_STYLES}>
+            <button className="addQues" onClick={() => this.setOpen(true)}>ADD A QUESTION +</button>
 
-        <div style = {BUTTON_STYLES}>
-          <button onClick={() => this.setOpen(true)}>ADD A QUESTION +</button>
+            {this.state.isOpen ?
+              <AddQuestion
+                open ={this.state.isOpen}
+                onClose={() => this.setOpen(false)}/> : null}
 
-          {this.state.isOpen ?
-            <AddQuestion
-              open ={this.state.isOpen}
-              onClose={() => this.setOpen(false)}/> : null}
-
+          </div>
         </div>
+
         <AddAnswer/>
       </div>
 

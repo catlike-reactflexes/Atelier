@@ -158,7 +158,7 @@ body {
   width:70%;
   order: 1;
 }
-.helpful, .AddAns, .yes{
+.helpful, .AddAns, .yes, .report, .loadAns{
   width:20%;
   border: 1px;
   display: flex;
@@ -184,14 +184,14 @@ body {
   border: 1px #000 solid;
   margin-bottom: 1rem;
 }
-.yes, .addAns {
+.yes, .addAns , .report, .loadAns{
   display: flex;
   margin-left: 5px;
   width: fit-content;
   text-decoration: underline;
   cursor:pointer;
 }
-.by, .helpful, .AddAns, .yes, .ansName {
+.by, .helpful, .AddAns, .yes, .ansName, .report{
   margin-left: 5px;
   width: fit-content;
   display: flex;
@@ -202,6 +202,21 @@ body {
   font-size: 1.2rem;
   width:5%;
   padding:2px;
+}
+.loadAns{
+  margin: 10px;
+  font-size: 0.6rem;
+}
+.twoButton{
+  width: 70%;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.moreQuestion, .addQues{
+  display: flex;
+  margin: 5px;
+  width: fit-content;
 }
 
 /*

@@ -8,18 +8,24 @@ class OneQA extends React.Component{
     super(props);
     this.state = {
       isOpen:false,
-      quetion_id: this.props.one.question_id,
-      questionHelpful:this.props.one.question_helpfulness,
-      answerHelpful: 0
+      // quetion_id: this.props.oneQues.question_id,
+      questionHelpful:this.props.oneQues.question_helpfulness,
+      // answer_id: this.props.OneAns.id,
+      answerHelpful: this.props.oneAns.helpfulness
     }
-    console.log('ONE QA--> ', this.state.quetion_id,this.state.questionHelpful )
+    console.log('Props________:', this.props)
+    // console.log('ONE QA--> ', this.state.quetion_id,this.state.questionHelpful )
     this.setOpen = this.setOpen.bind(this);
     this.questionUpdateHelpfulness = this.questionUpdateHelpfulness.bind(this);
     this.answerUpdateHelpfulness = this.answerUpdateHelpfulness.bind(this);
+    this.setAnswerState = this.setAnswerState.bind(this);
   }
 
-  setAnswerState = () => {
-
+  setAnswerState = (ansId, ansHelpful) => {
+    // console.log(ansId, ansHelpful)
+    // this.setState({
+    //   answerHelpful: ansHelpful
+    // })
   }
 
   setOpen = (option) => {
@@ -29,7 +35,7 @@ class OneQA extends React.Component{
   }
   questionUpdateHelpfulness = (questionId) => {
     //user only allowed to click one time
-    const helpfulCount = this.props.one.question_helpfulness + 1;
+    const helpfulCount = this.props.oneQues.question_helpfulness + 1;
 
     if(this.state.questionHelpful < helpfulCount) {
       // console.log('Hello-->', questionId)
@@ -60,30 +66,25 @@ class OneQA extends React.Component{
 
   render(){
     // console.log('OneQA -->', this.props.one);
-    const {one} = this.props;
-    console.log('OneQA -->', one);
+    const {oneAns, oneQues} = this.props;
+    // console.log('OneQA -->', one);
     //need to revisit this key
-    const answerId = [];
-    for(let key in one.answers){
-      // console.log('Key-->', key)
-      answerId.push(key);
-    }
-    const firstAnswerId = one.answers[answerId[0]].id;
-    console.log('firstAnswerId-->', firstAnswerId)
-    const answerBody = one.answers[answerId[0]].body;
-    const answererName = one.answers[answerId[0]].answerer_name;
-    const answerDate = one.answers[answerId[0]].date;
-    const answerHelpful = one.answers[answerId[0]].helpfulness;
+    const answerId = oneAns.id;
+    const answerBody = oneAns.body;
+    const answererName = oneAns.answerer_name;
+    const answerDate = oneAns.date;
+    const answerHelpful = oneAns.helpfulness;
+
 
     return (
       <div className="oneQA">
         <div className="oneQuestion">
           <div className="qBody">
             <div className="bigQ">Q:</div>
-            <div className="qBody1">{one.question_body}</div>
+            <div className="qBody1">{oneQues.question_body}</div>
           </div>
           <div className="helpful">Helpful?</div>
-          <div className="yes" onClick={() => this.questionUpdateHelpfulness(one.question_id)} >Yes ({this.state.questionHelpful})</div>
+          <div className="yes" onClick={() => this.questionUpdateHelpfulness(oneQues.question_id)} >Yes ({this.state.questionHelpful})</div>
 
           <div className="AddAns">
             <div onClick={() => this.setOpen(true)}>Add Answer</div>
@@ -104,13 +105,22 @@ class OneQA extends React.Component{
           <div className='ans2'>
             <div className='bigA'></div>
             <div className="by">by:</div>
-            <div className="ansName">{answererName}
-                <div className="date"> ,  <Moment format="MMM, DD, YYYY">{answerDate}</Moment></div>
-                <div className="helpful"> | Helpful?</div>
-                <div className="yes" onClick={() => this.answerUpdateHelpfulness(firstAnswerId,answerHelpful)} >Yes ({answerHelpful})</div>
+            <div>
+
+              </div>
+                <div className="ansName" style={{ fontWeight: 'bold' }}>{answererName}
+
+                      <div className="date" style={{ fontWeight: 'normal' }}> ,  <Moment format="MMM, DD, YYYY">{answerDate}</Moment></div>
+                      <div className="helpful" style={{ fontWeight: 'normal' }}> | Helpful?</div>
+                      <div className="yes" style={{ fontWeight: 'normal' }}
+                        onClick={() => this.answerUpdateHelpfulness(answerId,answerHelpful)} >
+                          Yes ({this.state.answerHelpful})</div>
+                      <div className="report" style={{ fontWeight: 'normal' }}> | Report</div>
+                </div>
             </div>
-          </div>
+            <div className="loadAns"> LOAD MORE ANSWERS... </div>
         </div>
+
       </div>
     );
   }
