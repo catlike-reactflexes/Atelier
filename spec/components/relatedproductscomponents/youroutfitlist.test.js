@@ -6,7 +6,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
-import YourOutfitList from ' ../../../client/src/components/relatedProducts/components/YourOutfitList.jsx';
+import YourOutfitList from ' ../../../client/src/components/relatedProducts/YourOutfitList.jsx';
 
 
 

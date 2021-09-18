@@ -10,10 +10,13 @@ class RelatedProducts extends React.Component {
     super(props);
     this.state = {
       relatedProductsData: [],
+      relatedProductsStyles: [],
+      defaultImages: [],
       yourOutfitData: [],
       defaultProductId: 47421
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
+    this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
   }
 
@@ -35,14 +38,39 @@ class RelatedProducts extends React.Component {
       })
   }
 
+  getRelatedProductsStyles() {
+    axios.get('/relatedProductStyles', {
+      params: {
+        defaultProductId: this.state.defaultProductId
+      }
+    })
+      .then((relatedProductsStyles) => {
+        console.log('success getting related products styles in related products client index: ', relatedProductsStyles.data);
+        let imagesArray = [];
+        let defaultImagesArray = [];
+        let styleData = relatedProductsStyles.data
+        for (var i = 0; i < styleData.length; i++) {
+          let stylesDataItem = relatedProductsStyles.data[i].results[0].photos;
+          imagesArray.push(stylesDataItem);
+        }
+        for (var i = 0; i < imagesArray.length; i++) {
+          defaultImagesArray.push(imagesArray[i][0].thumbnail_url);
+        }
+        this.setState({
+          defaultImages: defaultImagesArray
+        })
+      })
+      .catch((error) => {
+        console.log('error getting related products styles in related products client index: ', error);
+      })
+  }
+
   getYourOutfitData() {
-
-
   }
 
   componentDidMount() {
     this.getRelatedProductsData();
-
+    this.getRelatedProductsStyles();
   }
 
 
@@ -52,7 +80,7 @@ class RelatedProducts extends React.Component {
     return (
       <div>
         <h3>Related Products</h3>
-        <RelatedProductsList dummyData={this.state.relatedProductsData} />
+        <RelatedProductsList productData={this.state.relatedProductsData} imageData={this.state.defaultImages} />
         <h3>Your Outfit</h3>
         <YourOutfitList dummyData={this.state.relatedProductsData} />
       </div>
