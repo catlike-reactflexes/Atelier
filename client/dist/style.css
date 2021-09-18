@@ -34,9 +34,13 @@ body {
 
 #mainProductImageContainer {
   width: 65%;
-  min-height: 80%;
+  height: 100%;
   border: 1px solid dimgray;
   position: relative;
+}
+
+#mainProductImageContainer #mainImg {
+  max-height: 100%;
 }
 
 #styleThumbnails {

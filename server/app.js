@@ -38,6 +38,12 @@ app.get('/reviews', (req, res) => {
     })
 })
 
+/*
+ *  ---------------------------
+ *  | Product Overview Routes |
+ *  ---------------------------
+*/
+
 app.get('/product', (req, res) => {
   let id = req.query.id;
   // console.log()
@@ -55,6 +61,24 @@ app.get('/product', (req, res) => {
     console.log('/products api request error: ', error);
   })
 });
+
+app.get('/styles', (req, res) => {
+  let id = req.query.id;
+  // console.log()
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/${id}/styles`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+  }).then(function (response) {
+    dataStr = JSON.stringify(response.data);
+    res.send(dataStr);
+    res.end();
+  }).catch(function (error) {
+    console.log('/styles api request error: ', error);
+  })
+})
 
 /*
   ----------------------------

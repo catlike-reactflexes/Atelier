@@ -11,9 +11,13 @@ class Overview extends React.Component {
     super(props);
     this.state = {
       productId: props.id,
-      productData: {},
+      productDetails: {},
+      productStyles: [],
+      styleId: 0,
+      stylePhotos: null,
       loaded: false
     };
+    this.getProductStyles = this.getProductStyles.bind(this);
   }
 
   componentDidMount() {
@@ -24,18 +28,34 @@ class Overview extends React.Component {
       params: { id: id }
     }).then((response) => {
       let data = response.data;
-      this.setState({ productData: data, loaded: true });
+      this.setState({ productDetails: data, detailsLoaded: true });
     }).catch((error) => {
       console.log('Error calling product API: ', error);
+    }).then(() => {
+      this.getProductStyles(id);
+    })
+  }
+
+  getProductStyles(id) {
+    axios({
+      method: 'get',
+      url: '/styles',
+      params: { id: id }
+    }).then((response) => {
+      let data = response.data;
+      console.log('Style data.results: ', data.results);
+      this.setState({ productStyles: data.results, stylePhotos: data.results[0].photos, stylesLoaded: true });
+    }).catch((error) => {
+      console.log('Error getting styles: ', error);
     })
   }
 
   render() {
     return (
       <div id="overview" data-testid="overview-element">
-        <ProductImage />
+        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} />
         <div className="sidebar column-flex">
-          <ProductDetails name={this.state.productData.name} category={this.state.productData.category} price={this.state.productData.default_price} loaded={this.state.loaded}/>
+          <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded}/>
           <ProductSyles />
           <ProductButtons />
         </div>
