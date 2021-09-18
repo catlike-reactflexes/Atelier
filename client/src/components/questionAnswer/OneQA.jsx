@@ -2,25 +2,36 @@ const React = require('react');
 import AddAnswer from './AddAnswer.jsx';
 import axios from 'axios';
 import Moment from 'react-moment';
+import MoreAnswer from './MoreAnswer.jsx';
 
 class OneQA extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       isOpen:false,
+      moreAnsClick: true,
       // quetion_id: this.props.oneQues.question_id,
       questionHelpful:this.props.oneQues.question_helpfulness,
       // answer_id: this.props.OneAns.id,
-      answerHelpful: this.props.oneAns.helpfulness
+      ansCounter: 0,
+      answerHelpful: this.props.allAns[0].helpfulness,
+      moreAns:[]
     }
     console.log('Props________:', this.props)
-    // console.log('ONE QA--> ', this.state.quetion_id,this.state.questionHelpful )
+    console.log('ONE QA--> ', this.state.answerHelpful,this.state.questionHelpful )
     this.setOpen = this.setOpen.bind(this);
     this.questionUpdateHelpfulness = this.questionUpdateHelpfulness.bind(this);
     this.answerUpdateHelpfulness = this.answerUpdateHelpfulness.bind(this);
-    this.setAnswerState = this.setAnswerState.bind(this);
+    this.setAnswerState = this.setAnswerState.bind(this); //????? NEED TO REVISIT
+    this.loadMoreAns = this.loadMoreAns.bind(this);
   }
 
+  loadMoreAns = () => {
+    console.log('more answer************')
+    this.setState({
+      ansCounter: this.state.ansCounter + 1
+    })
+  }
   setAnswerState = (ansId, ansHelpful) => {
     // console.log(ansId, ansHelpful)
     // this.setState({
@@ -48,7 +59,7 @@ class OneQA extends React.Component{
     }
   }
   answerUpdateHelpfulness = (answerId, answerHelpful) => {
-    console.log('answerUpdateHelpfulness-->', answerId, answerHelpful);
+    // console.log('answerUpdateHelpfulness-->', answerId, answerHelpful);
     this.setState({answerHelpful: answerHelpful + 1})
     //user only allowed to click one time
     // const helpfulCount = this.props.one.question_helpfulness + 1;
@@ -66,14 +77,16 @@ class OneQA extends React.Component{
 
   render(){
     // console.log('OneQA -->', this.props.one);
-    const {oneAns, oneQues} = this.props;
+    const {allAns, oneQues} = this.props;
+    const {ansCounter} = this.state;
     // console.log('OneQA -->', one);
     //need to revisit this key
-    const answerId = oneAns.id;
-    const answerBody = oneAns.body;
-    const answererName = oneAns.answerer_name;
-    const answerDate = oneAns.date;
-    const answerHelpful = oneAns.helpfulness;
+
+    const answerId = allAns[ansCounter].id;
+    const answerBody = allAns[ansCounter].body;
+    const answererName = allAns[ansCounter].answerer_name;
+    const answerDate = allAns[ansCounter].date;
+    const answerHelpful = allAns[ansCounter].helpfulness;
 
 
     return (
@@ -123,7 +136,16 @@ class OneQA extends React.Component{
                       <div className="report" style={{ fontWeight: 'normal' }}> | Report</div>
                 </div>
             </div>
-            <div className="loadAns"> LOAD MORE ANSWERS... </div>
+
+        </div>
+        <div className='ans3'>
+            <div className='bigA'></div>
+            <div className="by">
+              {/* <div className="loadAns" onClick={()=> this.loadMoreAns()}> <MoreAnswer/> </div> */}
+              {this.props.allAns.length > 1? <div className="loadAns" onClick={()=> this.loadMoreAns()}> LOAD MORE ANSWER...</div>
+                : undefined}
+            </div>
+
         </div>
 
       </div>

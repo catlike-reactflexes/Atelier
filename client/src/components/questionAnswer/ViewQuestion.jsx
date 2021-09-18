@@ -13,7 +13,7 @@ class ViewQuestion extends React.Component{
   render(){
 
     const {quesAnsLists} = this.props;
-    
+
     return (
       <div className='viewQuesAns'>
         {quesAnsLists && quesAnsLists.map((quesAns, index) => {
@@ -21,15 +21,21 @@ class ViewQuestion extends React.Component{
           if(quesAns) {
             const ansList = quesAns.answers ;
             const ansKey = [];
+            const moreAnsList = [];
             for(let key in ansList){
               ansKey.push(key);
             }
-
+            console.log('AnswerKey--->',ansKey)
+            for(let i =0; i < ansKey.length; i++){
+              moreAnsList.push(quesAns.answers[ansKey[i]])
+            }
+            console.log('final--->',moreAnsList)
             return (
               <OneQA  key = {index}
                       oneQues = {quesAns}
                       // quesId = {quesAns.question_id}
-                      oneAns = {quesAns.answers[ansKey[0]]}
+                      // oneAns = {quesAns.answers[ansKey[0]]}
+                      allAns = {moreAnsList}
                       // ansId = {ansKey[0]}
               />)
           }
