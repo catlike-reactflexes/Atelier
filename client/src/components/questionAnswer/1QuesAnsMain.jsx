@@ -22,15 +22,23 @@ class QuesAnsMain extends React.Component {
   }
   render() {
 
-    const {quesAns} = this.props;
-    console.log('What is props-->', quesAns);
+    const {quesAns, id} = this.props;
+    let questionId = [];
+    // console.log('What is props-->', quesAns[0]);
+    Object.entries(quesAns).map(([key, value])=>{
+      // console.log('Key-->', key)
+      // console.log('value-->', value.question_id)
+      questionId.push(value.question_id)
+    })
+    // console.log('ANSWER-->',answerId );
+
     return (
       <div className="qa">
         <p>Questions and Answers</p>
         <SearchQa/>
         <ViewQuestion quesAnsLists={quesAns}/>
         <div className="twoButton">
-          <div><MoreQuestion/></div>
+          <div><MoreQuestion quesId={questionId} productId={id}/></div>
           <div style = {BUTTON_STYLES}>
             <button className="addQues" onClick={() => this.setOpen(true)}>ADD A QUESTION +</button>
 

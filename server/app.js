@@ -116,7 +116,7 @@ app.get('/relatedProducts', (req, res) => {
 
 //CS- Questions & Answer START------------------------------------------------------------
 app.get('/api/qa/id=*', (req, res) => {
-  // console.log('request-->', req.query) ;
+  console.log('request-->', req.query.product_id, req.query.previousQuesId) ;
   // console.log('request-->', req.path) ;
 
   axios({
@@ -131,14 +131,46 @@ app.get('/api/qa/id=*', (req, res) => {
       }).then(function (response) {
         console.log('api response: ', response.data);
         const twoData=[];
+        const pics=[];
+        let start = 0;
+        let end = 2;
+        if(req.query.previousQuesId){
+          start = start + 2;
+          end = end + 2;
 
-        for(let i =0; i< 2; i++){
-          twoData.push(response.data.results[i])
+          // let responseQuesId = response.data.results;
+          // let respIds = []
+          // let newData= [];
+          // let previousQuesId = req.query.previousQuesId;
+          // for(let i = 0; i < responseQuesId.length; i++){
+          //   respIds.push(responseQuesId[i].question_id)
+          // }
+          // console.log('data.length-->', respIds)
+          // console.log('data.length-->', previousQuesId)
+          // for(let x = 0; x < previousQuesId.length; x++){
+          //   const numId = Number(previousQuesId[x]);
+          //   console.log(numId)
+          //   if(respIds.indexOf(numId) !== -1){
+
+          //     newData.push(respIds[x])
+          //     console.log('hello', newData)
+          //   }
+
+          // }
+
+          // console.log('twoData--->',twoData)
         }
+          for(let i = start; i < end; i++){
+            console.log('Test--->', i, response.data.results[i])
+            twoData.push(response.data.results[i])
+            console.log('question_ID--->',twoData)
+          }
+
+
         console.log('Data before send to client->', twoData)
         res.status(200).send(twoData);
       }).catch(function (err) {
-        console.log('api request error: ', error);
+        console.log('api request error: ', err);
         res.status(500).send(err);
       })
 

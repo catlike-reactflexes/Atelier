@@ -53,7 +53,7 @@ class App extends React.Component {
         <div>Header Placeholder</div>
         <Overview productUpdate={this.handleProductUpdate} id={this.state.productId}/>
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        <QuesAnsMain productUpdate={this.handleProductUpdate} quesAns={this.state.quesAns}/>
+        <QuesAnsMain productUpdate={this.handleProductUpdate} quesAns={this.state.quesAns} id={this.state.productId}/>
         <Reviews />
       </div >
     );

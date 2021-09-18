@@ -101,6 +101,11 @@ class OneQA extends React.Component{
           <div className="ans1">
             <div className='bigA'>A:</div>
             <div className="ansBody">{answerBody}</div>
+
+
+            {/* {<img className='ansImg' src={}></img>} */}
+
+
           </div>
           <div className='ans2'>
             <div className='bigA'></div>

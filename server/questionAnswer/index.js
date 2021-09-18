@@ -159,6 +159,20 @@ const getQuesAns = (productId, callback) => {
 // }
 
 
+// Answerid: of productid: 47421
+// '3715562': {
+//   id: 3715562,
+//   body: "Something pretty soft but I can't be sure",
+//   date: '2018-01-04T00:00:00.000Z',
+//   answerer_name: 'metslover',
+//   helpfulness: 6,
+//   photos: [
+//     'https://images.unsplash.com/photo-1530519729491-aea5b51d1ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80',
+//     'https://images.unsplash.com/photo-1511127088257-53ccfcc769fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+//     'https://images.unsplash.com/photo-1500603720222-eb7a1f997356?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80'
+//   ]
+// }
+
 module.exports={
   getQuesAns
 };
