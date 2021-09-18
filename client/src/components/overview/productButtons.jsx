@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductButtons = (props) => {
   return (
-    <div id="productButtons">
+    <div id="productButtons" data-testid="overview-buttons">
       <select id="sizeSelect">
         <option>SELECT SIZE</option>
       </select>

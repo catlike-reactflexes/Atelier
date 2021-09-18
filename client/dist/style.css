@@ -39,7 +39,7 @@ body {
   position: relative;
 }
 
-#styleThumbnailList {
+#styleThumbnails {
   position: absolute;
   top: 0;
   left: 0;
@@ -274,4 +274,9 @@ object-fit: fill;
   display: flex;
   margin: 20px;
   border: solid
+}
+
+.RnR {
+  grid: flex;
+  flex-direction: row;
 }
