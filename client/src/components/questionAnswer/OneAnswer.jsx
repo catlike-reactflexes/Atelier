@@ -7,13 +7,14 @@ class OneAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-      answerHelpful: this.props.oneAnswer.helpfulness
+      answerHelpful: this.props.oneAnswer.helpfulness,
+      answerReport : false
     }
     this.answerUpdateHelpfulness = this.answerUpdateHelpfulness.bind(this);
     // console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
   }
   answerUpdateHelpfulness = (answerId,answerHelpful) => {
-    
+
     //send to API for update
 
     const maxHelpfulCount = this.props.oneAnswer.helpfulness + 1;
@@ -32,6 +33,22 @@ class OneAnswer extends React.Component {
     }
   }
 
+  answerReport = (answerId) => {
+    //user only allowed to click one time
+
+    if(!this.state.answerReport) {
+      // console.log('Hello-->', questionId)
+      axios.put('/report', {
+        data: {
+          answerid: answerId
+        }
+      })
+        .then(response => {
+          this.setState({
+            questionReport: true})
+          })
+    }
+  }
   render() {
 
     const {id, body, answerer_name, date, helpfulness, photos} = this.props.oneAnswer;
@@ -61,7 +78,11 @@ class OneAnswer extends React.Component {
                       <div className="yes" style={{ fontWeight: 'normal' }}
                         onClick={() => this.answerUpdateHelpfulness(id,helpfulness)} >
                           Yes ({this.state.answerHelpful})</div>
-                      <div className="report" style={{ fontWeight: 'normal' }}> | Report</div>
+                      <div  className="report"
+                            style={{ fontWeight: 'normal' }}
+                            onClick={() => this.answerReport(id)}>
+                               | Report
+                      </div>
                 </div>
             </div>
 

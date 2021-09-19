@@ -57,8 +57,12 @@ class ViewQuesAns extends React.Component {
         <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA}/>
         <div className="twoButton">
           {
-            this.state.moreQA &&
-            <div><MoreQuestion  restOfQuestions={restOfQuestions} moreQA={moreQA} updateQA={this.updateQuesAns}/></div>
+            restOfQuestions.length > 0 && moreQA ?
+            <div>
+              <MoreQuestion  restOfQuestions={restOfQuestions}
+                              moreQA={moreQA}
+                              updateQA={this.updateQuesAns}/>
+            </div> : undefined
           }
           <div style = {BUTTON_STYLES}>
 

@@ -170,19 +170,41 @@ app.put('/update', (req, res) => {
     console.log('api request error--> ', err);
     res.status(404).send(err);
   })
-//  const urlPut = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/3715584/helpful';
-//  const dataPut = {
-//   answer_id:3715584
-//  }
-//  axios.put(urlPut, dataPut,{headers:{"Authorization": Github_Token }})
-//   .then(response => {
-//     console.log('Axios success',response.status, response.statusText,response.data);
-//     // callback(null, response.data);
-//   })
-//   .catch(error => {
-//     console.log('Axios failed',error);
-//     // callback(error, null);
-//   })
+
+})
+
+app.put('/report', (req, res) => {
+  console.log('request-->', req.body.data)
+  const {questionid} = req.body.data;
+  const {answerid} = req.body.data;
+  let urlPut, report_id ;
+  if(questionid){
+    urlPut = `${API_URL}/qa/questions/${questionid}/report`;
+    report_id = {question_id : questionid};
+  } else {
+    urlPut = `${API_URL}/qa/answers/${answerid}/report`;
+    report_id = {answer_id : answerid}
+  }
+  // console.log('request-->',question_id)
+  axios({
+    method: 'put',
+    url: urlPut,
+    data: report_id,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+
+  })
+    .then(function (response) {
+    //looking for 204 to get update
+    console.log('api response--> ', response.status);
+    res.sendStatus(response.status);
+  })
+    .catch(function (err) {
+    console.log('api request error--> ', err);
+    res.status(404).send(err);
+  })
+
 })
 
 //CS- Question & Answer END----------------------------------------------------------------------

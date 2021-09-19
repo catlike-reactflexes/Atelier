@@ -8,11 +8,13 @@ class JustQuestion extends React.Component{
     this.state ={
       isOpen:false,
       questionHelpful:this.props.justOneQues.question_helpfulness,
+      questionReport: false
     }
 
     // console.log('Just Question-->', this.props)
     this.setOpen = this.setOpen.bind(this);
     this.questionUpdateHelpfulness = this.questionUpdateHelpfulness.bind(this);
+    this.questionReport = this.questionReport.bind(this);
   }
   setOpen = (option) => {
     this.setState({
@@ -38,6 +40,23 @@ class JustQuestion extends React.Component{
     }
   }
 
+  questionReport = (questionId) => {
+    //user only allowed to click one time
+
+    if(!this.state.questionReport) {
+      // console.log('Hello-->', questionId)
+      axios.put('/report', {
+        data: {
+          questionid: questionId
+        }
+      })
+        .then(response => {
+          this.setState({
+            questionReport: true})
+          })
+    }
+  }
+
   render(){
       // console.log('More answers--->', this.props)
     const {justOneQues} = this.props;
@@ -54,8 +73,9 @@ class JustQuestion extends React.Component{
               onClick={() => this.questionUpdateHelpfulness(justOneQues.question_id)} >
                 Yes ({this.state.questionHelpful})
             </div>
+            <div className="report" onClick={() => this.questionReport(justOneQues.question_id)}> | report  </div>
             <div className="AddAns">
-              <div onClick={() => this.setOpen(true)}>Add Answer</div>
+              <div onClick={() => this.setOpen(true)}> |  Add Answer</div>
                 {
                   this.state.isOpen ?
                   <AddAnswer
