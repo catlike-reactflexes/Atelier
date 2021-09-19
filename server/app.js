@@ -130,23 +130,24 @@ app.get('/api/qa/id=*', (req, res) => {
         }
       }).then(function (response) {
         console.log('api response: ', response.data);
-        const twoData=[];
-        const pics=[];
-        let start = 0;
-        let end = 2;
-        if(req.query.previousQuesId){
-          start = start + 2;
-          end = end + 2;
-        }
-        for(let i = start; i < end; i++){
-          console.log('Test--->', i, response.data.results[i])
-          twoData.push(response.data.results[i])
-          console.log('question_ID--->',twoData)
-        }
+        //first element is the number of answers
+        // const twoData=[response.data.results.length];
+        // const pics=[];
+        // let start = 0;
+        // let end = 2;
+        // if(req.query.previousQuesId){
+        //   start = start + 2;
+        //   end = end + 2;
+        // }
+        // for(let i = start; i < end; i++){
+        //   console.log('Test--->', i, response.data.results[i])
+        //   twoData.push(response.data.results[i])
+        //   console.log('question_ID--->',twoData)
+        // }
 
 
-        console.log('Data before send to client->', twoData)
-        res.status(200).send(twoData);
+        console.log('Data before send to client->', response.data.results)
+        res.status(200).send(response.data.results);
       }).catch(function (err) {
         console.log('api request error: ', err);
         res.status(500).send(err);

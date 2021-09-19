@@ -15,11 +15,11 @@ class PhotoAns extends React.Component {
     const {urlPhoto} = this.props;
     return (
       <>
-        <div>
-          {urlPhoto.map(oneUrl => (
-            <img className='ansImg' src={oneUrl}></img>
+
+          {urlPhoto.map((oneUrl, index) => (
+            <img className='ansImg' key={index}src={oneUrl}></img>
           ))}
-        </div>
+        
         {/* */}
       </>
     );

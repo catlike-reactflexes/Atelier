@@ -5,40 +5,48 @@ import OneAnswer from './OneAnswer.jsx';
 class MoreAnswer extends React.Component{
   constructor(props){
     super(props);
-    this.state ={
-      answersList : this.props.allAnswers[0],
-      showMore : false
+    this.state = {
+      twoAnswer : this.props.allAnswers.slice(0,2),
+      restOfAnswer : this.props.allAnswers.slice(2),
+      showMore : true
     }
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
-    console.log('More Answers-->', this.state.answersList)
+    console.log('More Answers-->', this.props)
   }
-  fetchMoreAns = (quesId) => {
-    // console.log('QuesID-->', quesId)
-
-      // axios.get(`/api/qa/id=${id}`, {
-      //   params: {
-      //     product_id: id,
-      //     previousQuesId: this.props.quesId
-      //   }
-      // })
-      //   .then(data => {
-      //     this.props.updateQA(data)
-      //   })
-      //   .catch(error => {
-      //     console.error(error)
-      //   })
+  fetchMoreAns = () => {
+    // console.log('Fetch More Answer, checking the length of rest of Answer-->', this.state.restOfAnswer)
+    if(this.state.restOfAnswer.length <= 2){
+      const addTwoAns = this.state.restOfAnswer;
+      this.setState({
+        twoAnswer : this.state.twoAnswer.concat(addTwoAns),
+        restOfAnswer : [],
+        showMore : false
+      })
+    } else {
+      const addTwoAns = this.state.restOfAnswer.slice(0,2);
+      this.setState({
+        twoAnswer : this.state.twoAnswer.concat(addTwoAns),
+        restOfAnswer : this.state.restOfAnswer.slice(2)
+      })
+    }
 
   }
   render(){
 
-    const {allAnswers} = this.props;
-
+    const {twoAnswer, showMore, restOfAnswer} = this.state;
 
     return (
       <div>
-        {allAnswers.map((oneAns)=> {
+        {
+          twoAnswer.map((oneAns)=> {
           return (<OneAnswer key={oneAns.id} oneAnswer={oneAns}/>)
-        })}
+          })
+        }
+
+        {
+          restOfAnswer.length > 0  && showMore ?
+          <div className="loadAns" onClick={()=>this.fetchMoreAns()}>Load more Answers...</div> : undefined
+        }
 
       </div>
     );

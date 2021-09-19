@@ -10,7 +10,7 @@ class OneAnswer extends React.Component {
       answerHelpful: this.props.oneAnswer.helpfulness
     }
     this.answerUpdateHelpfulness = this.answerUpdateHelpfulness.bind(this);
-    console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
+    // console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
   }
   answerUpdateHelpfulness = (answerId,answerHelpful) => {
     //change state of helpfulness counter
@@ -35,11 +35,11 @@ class OneAnswer extends React.Component {
           <div className="ans1">
             <div className='bigA'>A:</div>
             <div className="ansBody">{body}</div>
-
-
-            {photos.length > 0 ? <PhotoAns urlPhoto={photos}/> : null }
-
-
+          </div>
+          <div className="allPhotos">
+            <div className='bigA'></div>
+            <div className="by"></div>
+              {photos.length > 0 ? <PhotoAns urlPhoto={photos}/> : null }
           </div>
           <div className='ans2'>
             <div className='bigA'></div>

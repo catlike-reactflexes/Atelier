@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 47421,
+      productId: 47425,
       quesAns:[]
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)

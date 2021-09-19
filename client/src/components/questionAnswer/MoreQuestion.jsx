@@ -5,43 +5,29 @@ import axios from 'axios';
 class MoreQuestion extends React.Component{
   constructor(props){
     super(props);
-    this.state ={
-      quesAns : []
-    }
     this.fetchMoreQues = this.fetchMoreQues.bind(this);
-    console.log('More Questions--->', this.props)
+    // console.log('More Questions--->', this.props)
 
   }
-  fetchMoreQues = (id) => {
-    console.log('ID-->', id)
+  fetchMoreQues = () => {
+    // console.log('Fetch more--Have to revisit these again');
+    const {restOfQuestions} = this.props;
 
-      axios.get(`/api/qa/id=${id}`, {
-        params: {
-          product_id: id,
-          previousQuesId: this.props.quesId
-        }
-      })
-        .then(data => {
-          this.props.updateQA(data.data)
-        })
-        .catch(error => {
-          console.error(error)
-        })
+    if(restOfQuestions.length < 2){
+      this.props.updateQA(restOfQuestions, false)
+    } else {
+      this.props.updateQA(restOfQuestions.slice(0,2), true)
+    }
 
   }
   render(){
-      console.log('More Questions--->', this.props)
-      // if(this.state.quesAns.length > 0) {
-      //   console.log('Testing---------')
-      //   return (
-      //     <ViewQuestion quesAnsLists={this.state.quesAns}/>
-      //   )
-      // }
+
     return (
 
       <div className='moreQuestion'>
-        <button type="submit" onClick={()=>this.fetchMoreQues(this.props.productId)}>MORE ANSWERED QUESTIONS</button>
+        <button type="submit" onClick={()=>this.fetchMoreQues()}>MORE ANSWERED QUESTIONS</button>
       </div>
+
     );
   }
 }

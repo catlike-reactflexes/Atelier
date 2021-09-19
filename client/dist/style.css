@@ -182,12 +182,16 @@ body {
   width: 100%;
 
 }
-.ans1, .ans2 {
+.ans1, .allPhots, .ans2 {
   display: flex;
   flex-direction: row;
   margin: 5px;
   padding-bottom: 5px;
 
+}
+.allPhotos {
+  display: flex;
+  justify-content:center;
 }
 .search {
   display: flex;
@@ -215,8 +219,9 @@ body {
   margin: 5px;
 }
 .loadAns{
+  display: flex;
   margin: 10px;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 .twoButton{
   width: 70%;
@@ -233,7 +238,7 @@ body {
   border: 1px solid #ddd; /* Gray border */
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
-  width: 50px; /* Set a small width */
+  width: 30px; /* Set a small width */
   cursor:pointer;
 }
 
