@@ -137,34 +137,12 @@ app.get('/api/qa/id=*', (req, res) => {
         if(req.query.previousQuesId){
           start = start + 2;
           end = end + 2;
-
-          // let responseQuesId = response.data.results;
-          // let respIds = []
-          // let newData= [];
-          // let previousQuesId = req.query.previousQuesId;
-          // for(let i = 0; i < responseQuesId.length; i++){
-          //   respIds.push(responseQuesId[i].question_id)
-          // }
-          // console.log('data.length-->', respIds)
-          // console.log('data.length-->', previousQuesId)
-          // for(let x = 0; x < previousQuesId.length; x++){
-          //   const numId = Number(previousQuesId[x]);
-          //   console.log(numId)
-          //   if(respIds.indexOf(numId) !== -1){
-
-          //     newData.push(respIds[x])
-          //     console.log('hello', newData)
-          //   }
-
-          // }
-
-          // console.log('twoData--->',twoData)
         }
-          for(let i = start; i < end; i++){
-            console.log('Test--->', i, response.data.results[i])
-            twoData.push(response.data.results[i])
-            console.log('question_ID--->',twoData)
-          }
+        for(let i = start; i < end; i++){
+          console.log('Test--->', i, response.data.results[i])
+          twoData.push(response.data.results[i])
+          console.log('question_ID--->',twoData)
+        }
 
 
         console.log('Data before send to client->', twoData)

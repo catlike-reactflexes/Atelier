@@ -1,6 +1,6 @@
 const React = require('react');
 import axios from 'axios';
-import QuesAnsMain from './1QuesAnsMain.jsx';
+
 
 class MoreQuestion extends React.Component{
   constructor(props){
@@ -9,6 +9,8 @@ class MoreQuestion extends React.Component{
       quesAns : []
     }
     this.fetchMoreQues = this.fetchMoreQues.bind(this);
+    console.log('More Questions--->', this.props)
+
   }
   fetchMoreQues = (id) => {
     console.log('ID-->', id)
@@ -20,7 +22,7 @@ class MoreQuestion extends React.Component{
         }
       })
         .then(data => {
-          this.props.updateQA(data)
+          this.props.updateQA(data.data)
         })
         .catch(error => {
           console.error(error)

@@ -1,18 +1,19 @@
 const React = require('react');
 import OneQA from './OneQA.jsx';
 
-class ViewQuestion extends React.Component{
+class QuesAns extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      startCounter : 0,
-      endCounter : 2,
+      // startCounter : 0,
+      // endCounter : 2,
       twoQuesAns : []
     }
   }
   render(){
 
     const {quesAnsLists} = this.props;
+    console.log('QUES*ANS*START*******', quesAnsLists)
 
     return (
       <div className='viewQuesAns'>
@@ -29,9 +30,9 @@ class ViewQuestion extends React.Component{
             for(let i =0; i < ansKey.length; i++){
               moreAnsList.push(quesAns.answers[ansKey[i]])
             }
-            console.log('final--->',moreAnsList)
+            console.log('final answer array--->',moreAnsList)
             return (
-              <OneQA  key = {index}
+              <OneQA  key = {quesAns.question_id}
                       oneQues = {quesAns}
                       // quesId = {quesAns.question_id}
                       // oneAns = {quesAns.answers[ansKey[0]]}
@@ -49,4 +50,4 @@ class ViewQuestion extends React.Component{
   }
 }
 
-export default ViewQuestion;
+export default QuesAns;

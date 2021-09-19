@@ -146,17 +146,25 @@ body {
 
   margin-bottom: 1rem;
 }
-.oneQuestion {
+.justQues {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   background-color: rgba(121, 121, 118, 0.698);
 }
-.qBody{
+.ques2{
   display: flex;
   justify-content: left;
-  width:70%;
+  width:40%;
   order: 1;
+}
+.qBody{
+  display: flex;
+  margin: 5px;
+  width:70%;
+  /* justify-content: right; */
+  /* width:20%; */
+  /* order: 2; */
 }
 .helpful, .AddAns, .yes, .report, .loadAns{
   width:20%;
@@ -171,12 +179,15 @@ body {
   flex-direction: column;
   background-color: rgba(228, 228, 227, 0.698);
   margin-top: 5px;
+  width: 100%;
 
 }
 .ans1, .ans2 {
   display: flex;
   flex-direction: row;
+  margin: 5px;
   padding-bottom: 5px;
+
 }
 .search {
   display: flex;
@@ -201,7 +212,7 @@ body {
   display: flex;
   font-size: 1.2rem;
   width:5%;
-  padding:2px;
+  margin: 5px;
 }
 .loadAns{
   margin: 10px;
@@ -217,6 +228,13 @@ body {
   display: flex;
   margin: 5px;
   width: fit-content;
+}
+.ansImg {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 50px; /* Set a small width */
+  cursor:pointer;
 }
 
 /*
