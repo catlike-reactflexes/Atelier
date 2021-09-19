@@ -130,23 +130,7 @@ app.get('/api/qa/id=*', (req, res) => {
         }
       }).then(function (response) {
         console.log('api response: ', response.data);
-        //first element is the number of answers
-        // const twoData=[response.data.results.length];
-        // const pics=[];
-        // let start = 0;
-        // let end = 2;
-        // if(req.query.previousQuesId){
-        //   start = start + 2;
-        //   end = end + 2;
-        // }
-        // for(let i = start; i < end; i++){
-        //   console.log('Test--->', i, response.data.results[i])
-        //   twoData.push(response.data.results[i])
-        //   console.log('question_ID--->',twoData)
-        // }
 
-
-        console.log('Data before send to client->', response.data.results)
         res.status(200).send(response.data.results);
       }).catch(function (err) {
         console.log('api request error: ', err);
@@ -156,15 +140,22 @@ app.get('/api/qa/id=*', (req, res) => {
 });
 
 app.put('/update', (req, res) => {
-  // console.log('request-->', req.body.data.question_id)
-  const {question_id} = req.body.data
-  console.log('request-->',question_id)
+  console.log('request-->', req.body.data)
+  const {questionid} = req.body.data;
+  const {answerid} = req.body.data;
+  let urlPut, idHelpfulness ;
+  if(questionid){
+    urlPut = `${API_URL}/qa/questions/${questionid}/helpful`;
+    idHelpfulness = {question_id : questionid};
+  } else {
+    urlPut = `${API_URL}/qa/answers/${answerid}/helpful`;
+    idHelpfulness = {answer_id : answerid}
+  }
+  // console.log('request-->',question_id)
   axios({
     method: 'put',
-    url: `${API_URL}/qa/answers/${question_id}/helpful`,
-    data:{
-      question_id: req.body.data.question_id
-    },
+    url: urlPut,
+    data: idHelpfulness,
     headers: {
       Authorization: process.env.API_TOKEN
     }
@@ -172,11 +163,11 @@ app.put('/update', (req, res) => {
   })
     .then(function (response) {
     //looking for 204 to get update
-    console.log('api response: ', response.status);
+    console.log('api response--> ', response.status);
     res.sendStatus(response.status);
   })
     .catch(function (err) {
-    console.log('api request error: ', err);
+    console.log('api request error--> ', err);
     res.status(404).send(err);
   })
 //  const urlPut = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/3715584/helpful';

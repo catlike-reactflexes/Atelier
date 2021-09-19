@@ -13,16 +13,23 @@ class OneAnswer extends React.Component {
     // console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
   }
   answerUpdateHelpfulness = (answerId,answerHelpful) => {
-    //change state of helpfulness counter
-    let maxCounter = this.props.oneAnswer.helpfulness + 1;
-    if(answerHelpful < maxCounter) {
-      //update coounter
-      this.setState({
-        answerHelpful : maxCounter
-      })
-    }
-
+    
     //send to API for update
+
+    const maxHelpfulCount = this.props.oneAnswer.helpfulness + 1;
+
+    if(this.state.answerHelpful < maxHelpfulCount) {
+      // console.log('Hello-->', questionId)
+      axios.put('/update', {
+        data: {
+          answerid: answerId
+        }
+      })
+        .then(response => {
+          this.setState({
+            answerHelpful: this.state.answerHelpful + 1})
+          })
+    }
   }
 
   render() {

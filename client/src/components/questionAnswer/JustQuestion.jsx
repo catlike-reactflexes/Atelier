@@ -28,7 +28,7 @@ class JustQuestion extends React.Component{
       // console.log('Hello-->', questionId)
       axios.put('/update', {
         data: {
-          question_id: questionId
+          questionid: questionId
         }
       })
         .then(response => {
