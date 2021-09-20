@@ -38,8 +38,8 @@ class MoreAnswer extends React.Component{
     return (
       <div>
         {
-          twoAnswer.map((oneAns)=> {
-          return (<OneAnswer key={oneAns.id} oneAnswer={oneAns}/>)
+          twoAnswer.map((oneAns, index)=> {
+          return (<OneAnswer key={index} oneAnswer={oneAns}/>)
           })
         }
 

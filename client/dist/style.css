@@ -195,9 +195,10 @@ body {
 }
 .search {
   display: flex;
-  width: 100%;
+  width: 97%;
   border: 1px #000 solid;
-  margin-bottom: 1rem;
+  justify-content:center;
+  margin: 5px
 }
 .yes, .addAns , .report, .loadAns{
   display: flex;

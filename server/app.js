@@ -5,12 +5,8 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const axios = require('axios')
-<<<<<<< HEAD
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
 // const QuestionAnswer_API = require('./questionAnswer');
-=======
-const QuestionAnswer_API = require('./questionAnswer');
->>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
 const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -42,23 +38,6 @@ app.get('/reviews', (req, res) => {
       throw err
     })
 })
-<<<<<<< HEAD
-// app.get('/product', (req, res) => {
-//   let id = req.query.id;
-//   console.log()
-//   axios({
-//     method: 'get',
-//     url: `${API_URL}/products/${id}`,
-//     headers: {
-//       Authorization: process.env.API_TOKEN
-//     }
-//   }).then(function (response) {
-//     console.log('api response: ', response);
-//   }).catch(function (error) {
-//     console.log('api request error: ', error);
-//   })
-// });
-=======
 
 app.get('/product', (req, res) => {
   let id = req.query.id;
@@ -78,20 +57,13 @@ app.get('/product', (req, res) => {
   })
 });
 
->>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
 /*
   ----------------------------
   | RelatedProducts Routes |
   ----------------------------
-<<<<<<< HEAD
-
-let retrieveRelatedProductsStyles = (relatedProductIds) => {
-  let stylesPromisesContainer = [];
-=======
 */
 let retrieveRelatedProductStyles = (relatedProductIds) => {
   let stylesPromises = [];
->>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
   for (var i = 0; i < relatedProductIds.length; i++) {
     let currentProduct = relatedProductIds[i];
     let APIStylesRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
@@ -173,7 +145,7 @@ app.get('/relatedProductStyles', (req, res) => {
     })
 })
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
-*/
+
 
 //CS- Questions & Answer START------------------------------------------------------------
 app.get('/api/qa/id=*', (req, res) => {

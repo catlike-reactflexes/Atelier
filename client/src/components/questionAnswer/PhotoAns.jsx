@@ -16,10 +16,10 @@ class PhotoAns extends React.Component {
     return (
       <>
 
-          {urlPhoto.map((oneUrl, index) => (
+          {urlPhoto && urlPhoto.map((oneUrl, index) => (
             <img className='ansImg' key={index}src={oneUrl}></img>
           ))}
-        
+
         {/* */}
       </>
     );

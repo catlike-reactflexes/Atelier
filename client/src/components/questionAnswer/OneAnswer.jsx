@@ -11,7 +11,7 @@ class OneAnswer extends React.Component {
       answerReport : false
     }
     this.answerUpdateHelpfulness = this.answerUpdateHelpfulness.bind(this);
-    // console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
+    console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
   }
   answerUpdateHelpfulness = (answerId,answerHelpful) => {
 
@@ -52,7 +52,8 @@ class OneAnswer extends React.Component {
   render() {
 
     const {id, body, answerer_name, date, helpfulness, photos} = this.props.oneAnswer;
-    console.log('IS PHOTO URL-->', photos.length, id)
+    console.log('one answer->', this.props.photos)
+    // console.log('IS PHOTO URL-->', photos.length, id)
     return (
 
       <div className="oneAnswer">
@@ -63,7 +64,9 @@ class OneAnswer extends React.Component {
           <div className="allPhotos">
             <div className='bigA'></div>
             <div className="by"></div>
-              {photos.length > 0 ? <PhotoAns urlPhoto={photos}/> : null }
+
+              { (photos) && (photos.length > 0 ) ? <PhotoAns urlPhoto={photos}/> : null }
+
           </div>
           <div className='ans2'>
             <div className='bigA'></div>

@@ -13,11 +13,11 @@
   test('Should render Add Question component', function () {
 
     render(<AddQuestion open='true'/>)
-    screen.debug()
+    // screen.debug()
 
   });
   /*******
-   * 
+   *
    * The component is not showing up because it is part of the different div
    * need to research how to show the dvi with debug()
    *
