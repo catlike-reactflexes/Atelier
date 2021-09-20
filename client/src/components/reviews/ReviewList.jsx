@@ -4,12 +4,8 @@ import Review from './Review.jsx'
 const ReviewList = (props) => {
   return (
     <div className='reviewList'>
-      {props.reviews.map(review => {
-        return (
-          <div className='review'>
-            <div>{review.summary}</div>
-          </div>
-        )
+      {props.reviews.map((review, index)=> {
+          return <Review key = {index} review = {review}/>
       })}
     </div>
   )

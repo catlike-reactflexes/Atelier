@@ -10,21 +10,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 47425,
-      quesAns:[]
+      productId: 47421,
+      quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
   }
 
-  // handleProductUpdate(id) {
-  //   this.setState({ productId: id});
-  // }
-
   handleProductUpdate(id) {
-    this.setState({
-      productId: id
-    })
+    this.setState({ productId: id });
   }
+
 
   fetchQuestionAnswer() {
     const {productId} = this.state;
@@ -51,10 +46,10 @@ class App extends React.Component {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId}/>
+        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         <QuesAnsMain productUpdate={this.handleProductUpdate} quesAns={this.state.quesAns} id={this.state.productId}/>
-        <Reviews />
+        <Reviews id={this.state.productId}/>
       </div >
     );
   }

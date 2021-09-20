@@ -5,8 +5,12 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const axios = require('axios')
+<<<<<<< HEAD
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
 // const QuestionAnswer_API = require('./questionAnswer');
+=======
+const QuestionAnswer_API = require('./questionAnswer');
+>>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
 const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -22,13 +26,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', {
-    headers: {
-      'Authorization': process.env.API_TOKEN,
-      'product_id': 47421
-    }
-  })
+  let product_id = Number(req.query.productID)
+  // console.log(typeof product_id)
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN},
+    params: {'product_id': product_id}
+  }
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
+    .then(data => {
+      // console.log('api response: ', data.data.results);
+      res.json(data.data)
+    })
+    .catch(err => {
+      console.log('review get error: ', err)
+      throw err
+    })
 })
+<<<<<<< HEAD
 // app.get('/product', (req, res) => {
 //   let id = req.query.id;
 //   console.log()
@@ -44,28 +58,54 @@ app.get('/reviews', (req, res) => {
 //     console.log('api request error: ', error);
 //   })
 // });
+=======
+
+app.get('/product', (req, res) => {
+  let id = req.query.id;
+  // console.log()
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/${id}`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+  }).then(function (response) {
+    dataStr = JSON.stringify(response.data);
+    res.send(dataStr);
+    res.end();
+  }).catch(function (error) {
+    console.log('/products api request error: ', error);
+  })
+});
+
+>>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
 /*
   ----------------------------
   | RelatedProducts Routes |
   ----------------------------
+<<<<<<< HEAD
 
 let retrieveRelatedProductsStyles = (relatedProductIds) => {
   let stylesPromisesContainer = [];
+=======
+*/
+let retrieveRelatedProductStyles = (relatedProductIds) => {
+  let stylesPromises = [];
+>>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
   for (var i = 0; i < relatedProductIds.length; i++) {
     let currentProduct = relatedProductIds[i];
-    let stylesAPIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
+    let APIStylesRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
       headers: {
         'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
-    stylesPromisesContainer.push(stylesAPIRequest);
+    stylesPromises.push(APIStylesRequest);
   }
-  console.log('the array of styles promises: ', stylesPromisesContainer);
-  let productStylesInfo = Promise.all(promisesArray)
-  return productStylesInfo;
-}
+  let stylesInfo = Promise.all(stylesPromises);
+  return stylesInfo;
 
+}
 
 let retrieveRelatedProducts = (relatedProductIds) => {
   let promisesArray = [];
@@ -79,38 +119,59 @@ let retrieveRelatedProducts = (relatedProductIds) => {
     });
     promisesArray.push(APIRequest);
   }
-  console.log('the array of many promises: ', promisesArray);
-  let productInfo = Promise.all(promisesArray)
+  let productInfo = Promise.all(promisesArray);
   return productInfo;
 
 }
 
-
+//get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
-  console.log('this is the req coming in from the client with product id: ', req.query.defaultProductId);
   let parentProductId = Number(req.query.defaultProductId);
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/47421/related', {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
     headers: {
       'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
     .then((relatedProducts) => {
-      console.log('success getting related products array on server from API: ', relatedProducts.data);
       return retrieveRelatedProducts(relatedProducts.data)
     })
     .then((arrayOfResponses) => {
       let data = arrayOfResponses.map(res => {
         return res.data
       })
-      console.log('success getting related products info from helper fn: ', data);
       res.json(data);
     })
     .catch((error) => {
-      console.log('error getting related products array on server from API: ', error);
+      // console.log('error getting related products array on server from API: ', error);
       res.sendStatus(500);
     })
 });
+
+
+//get related product styles and images
+app.get('/relatedProductStyles', (req, res) => {
+  let parentProductId = Number(req.query.defaultProductId);
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
+    headers: {
+      'Authorization': process.env.API_TOKEN,
+      'product_id': parentProductId
+    }
+  })
+    .then((relatedProducts) => {
+      return retrieveRelatedProductStyles(relatedProducts.data)
+    })
+    .then((arrayOfStyleResponses) => {
+      let styleData = arrayOfStyleResponses.map(res => {
+        return res.data
+      })
+      res.json(styleData);
+    })
+    .catch((error) => {
+      console.log('error getting styles info on server from API: ', error);
+      res.sendStatus(500);
+    })
+})
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 */
 
