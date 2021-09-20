@@ -9,7 +9,7 @@ class JustQuestion extends React.Component{
     console.log('JUST QUESTION---->', props)
     this.state ={
       isOpen:false,
-      questionHelpful:this.props.justOneQues.question_helpfulness || 0,
+      questionHelpful:this.props.oneQues.question_helpfulness || 0,
       questionReport: false
     }
 
@@ -26,7 +26,7 @@ class JustQuestion extends React.Component{
 
   questionUpdateHelpfulness = (questionId) => {
     //user only allowed to click one time
-    const helpfulCount = this.props.justOneQues.question_helpfulness + 1;
+    const helpfulCount = this.props.oneQues.question_helpfulness + 1;
 
     if(this.state.questionHelpful < helpfulCount) {
       // console.log('Hello-->', questionId)
@@ -61,26 +61,28 @@ class JustQuestion extends React.Component{
 
   render(){
       // console.log('More answers--->', this.props)
-    const {justOneQues} = this.props;
+    const {oneQues} = this.props;
 
     return (
       <div className="justQues">
         <div className="qBody">
             <div className="bigQ">Q:</div>
-            <div className="qBody1">{justOneQues.question_body}</div>
+            <div className="qBody1">{oneQues.question_body}</div>
         </div>
         <div className="ques2">
           <div className="helpful">Helpful?</div>
             <div className="yes"
-              onClick={() => this.questionUpdateHelpfulness(justOneQues.question_id)} >
+              onClick={() => this.questionUpdateHelpfulness(oneQues.question_id)} >
                 Yes ({this.state.questionHelpful})
             </div>
-            <div className="report" onClick={() => this.questionReport(justOneQues.question_id)}> | report  </div>
+            <div className="report" onClick={() => this.questionReport(oneQues.question_id)}> | report  </div>
             <div className="AddAns">
               <div onClick={() => this.setOpen(true)}> |  Add Answer</div>
                 {
                   this.state.isOpen ?
                   <AddAnswer
+                    oneQues={oneQues}
+                    productName={this.props.productName}
                     open ={this.state.isOpen}
                     onClose={() => this.setOpen(false)}/>
                   : null

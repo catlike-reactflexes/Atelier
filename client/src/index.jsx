@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 47421,
+      productName:'Camo Onesie',
       quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
@@ -48,7 +49,12 @@ class App extends React.Component {
         <div>Header Placeholder</div>
         <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        <QuesAnsMain productUpdate={this.handleProductUpdate} quesAns={this.state.quesAns} id={this.state.productId}/>
+        <QuesAnsMain
+          productUpdate={this.handleProductUpdate}
+          quesAns={this.state.quesAns}
+          id={this.state.productId}
+          productName={this.state.productName}
+        />
         <Reviews id={this.state.productId}/>
       </div >
     );

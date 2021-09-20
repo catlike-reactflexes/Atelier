@@ -6,8 +6,8 @@ class MoreAnswer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      twoAnswer : this.props.allAnswers.slice(0,2),
-      restOfAnswer : this.props.allAnswers.slice(2),
+      twoAnswer : this.props.allAns.slice(0,2),
+      restOfAnswer : this.props.allAns.slice(2),
       showMore : true
     }
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
@@ -33,13 +33,13 @@ class MoreAnswer extends React.Component{
   }
   render(){
 
-    const {twoAnswer, showMore, restOfAnswer} = this.state;
+    const {oneQues, twoAnswer, showMore, restOfAnswer} = this.state;
 
     return (
       <div>
         {
           twoAnswer.map((oneAns, index)=> {
-          return (<OneAnswer key={index} oneAnswer={oneAns}/>)
+          return (<OneAnswer key={index} oneAnswer={oneAns} oneQues={oneQues}/>)
           })
         }
 

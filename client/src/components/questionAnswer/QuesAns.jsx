@@ -37,6 +37,7 @@ class QuesAns extends React.Component{
                 <OneQA  key = {quesAns.question_id}
                         oneQues = {quesAns}
                         allAns = {moreAnsList}
+                        productName={this.props.productName}
 
                 />
               )

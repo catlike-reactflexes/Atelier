@@ -12,15 +12,15 @@ class OneQA extends React.Component{
 
     const {allAns, oneQues} = this.props;
     console.log('ONE QA--->', allAns, oneQues);
-    
+
     return (
       <div className="oneQA">
 
         <div className="oneQuestion">
-          <JustQuestion justOneQues={oneQues}/>
+          <JustQuestion oneQues={oneQues} productName={this.props.productName}/>
         </div>
         <div className="oneAnswer1">
-            <MoreAnswer allAnswers={allAns}/>
+            <MoreAnswer allAns={allAns} oneQues={oneQues}/>
         </div>
 
       </div>

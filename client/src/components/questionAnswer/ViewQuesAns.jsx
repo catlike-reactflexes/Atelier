@@ -9,10 +9,9 @@ class ViewQuesAns extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // quesAns: this.props.quesAnsId,
-      // productId: this.props.productId,
-      twoQuestions: this.props.quesAnsId.slice(0,2),
-      restOfQuestions: this.props.quesAnsId.slice(2),
+
+      twoQuestions: this.props.quesAns.slice(0,2),
+      restOfQuestions: this.props.quesAns.slice(2),
       moreQA: true,
       isOpen: false
     }
@@ -54,7 +53,7 @@ class ViewQuesAns extends React.Component {
     return (
 
       <div>
-        <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA}/>
+        <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA} productName={this.props.productName}/>
         <div className="twoButton">
           {
             restOfQuestions.length > 0 && moreQA ?
@@ -70,6 +69,7 @@ class ViewQuesAns extends React.Component {
             {
               this.state.isOpen ?
               <AddQuestion
+              productId = {this.props.productId}
               open ={this.state.isOpen}
               onClose={() => this.setOpen(false)}/> : null
             }

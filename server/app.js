@@ -149,7 +149,7 @@ app.get('/relatedProductStyles', (req, res) => {
 
 //CS- Questions & Answer START------------------------------------------------------------
 app.get('/api/qa/id=*', (req, res) => {
-  console.log('request-->', req.query.product_id, req.query.previousQuesId) ;
+  console.log('QA**request-->', req.query.product_id) ;
   // console.log('request-->', req.path) ;
 
   axios({
@@ -162,7 +162,7 @@ app.get('/api/qa/id=*', (req, res) => {
           product_id: req.query.product_id
         }
       }).then(function (response) {
-        console.log('api response: ', response.data);
+        // console.log('api response: ', response.data);
 
         res.status(200).send(response.data.results);
       }).catch(function (err) {
@@ -171,7 +171,54 @@ app.get('/api/qa/id=*', (req, res) => {
       })
 
 });
+app.post('/addAnswer', (req, res)=> {
+  // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
+  axios({
+    method: 'POST',
+    url: `${API_URL}/qa/questions/${req.body.question_id}/answers`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    data: {
+      body: req.body.body,
+      name: req.body.name,
+      email: req.body.email,
+      photos: req.body.photos
+    }
+  }).then(function (response) {
+    // console.log('SUCCESS___>>>api response: ', response.data);
 
+    res.status(200).send(response.data);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(500).send(err);
+  })
+
+})
+app.post('/addQuestion', (req, res)=> {
+  console.log('QA**request AddAQuestion-->',req.body) ;
+  axios({
+    method: 'POST',
+    url: `${API_URL}/qa/questions/`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    data: {
+      body: req.body.body,
+      name: req.body.name,
+      email: req.body.email,
+      product_id: req.body.product_id
+    }
+  }).then(function (response) {
+    console.log('SUCCESS___>>>api response: ', response.data);
+
+    res.status(200).send(response.data);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(500).send(err);
+  })
+
+})
 app.put('/update', (req, res) => {
   console.log('request-->', req.body.data)
   const {questionid} = req.body.data;
@@ -196,11 +243,11 @@ app.put('/update', (req, res) => {
   })
     .then(function (response) {
     //looking for 204 to get update
-    console.log('api response--> ', response.status);
+    // console.log('api response--> ', response.status);
     res.sendStatus(response.status);
   })
     .catch(function (err) {
-    console.log('api request error--> ', err);
+    console.log('UPDATE ERROR ', err);
     res.status(404).send(err);
   })
 

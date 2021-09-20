@@ -3,6 +3,7 @@ import axios from 'axios';
 import Moment from 'react-moment';
 import PhotoAns from './PhotoAns.jsx';
 
+
 class OneAnswer extends React.Component {
   constructor(props) {
     super(props);
@@ -52,6 +53,8 @@ class OneAnswer extends React.Component {
   render() {
 
     const {id, body, answerer_name, date, helpfulness, photos} = this.props.oneAnswer;
+    const {oneQues} = this.props;
+
     console.log('one answer->', this.props.photos)
     // console.log('IS PHOTO URL-->', photos.length, id)
     return (
@@ -74,15 +77,14 @@ class OneAnswer extends React.Component {
             <div>
 
               </div>
-                <div className="ansName" style={{ fontWeight: 'bold' }}>{answerer_name}
-
-                      <div className="date" style={{ fontWeight: 'normal' }}> ,  <Moment format="MMM, DD, YYYY">{date}</Moment></div>
-                      <div className="helpful" style={{ fontWeight: 'normal' }}> | Helpful?</div>
-                      <div className="yes" style={{ fontWeight: 'normal' }}
+                <div className="ansName">
+                      <div  style={{ fontWeight: 'bold' }}>{answerer_name}</div>
+                      <div className="date"><Moment format="MMM, DD, YYYY">{date}</Moment></div>
+                      <div className="helpful" > | Helpful?</div>
+                      <div className="yes"
                         onClick={() => this.answerUpdateHelpfulness(id,helpfulness)} >
                           Yes ({this.state.answerHelpful})</div>
                       <div  className="report"
-                            style={{ fontWeight: 'normal' }}
                             onClick={() => this.answerReport(id)}>
                                | Report
                       </div>

@@ -7,24 +7,21 @@ class QuesAnsMain extends React.Component {
 
   //props-> {quesAns: Array(2), id: 47421, productUpdate: ƒ}
   constructor(props) {
-    super(props);
-    // this.state = {
-    //   quesAns: this.props.quesAns,
-    //   productId: this.props.id,
-    // }
+   super(props)
   }
 
   render() {
     console.log('QuestionAns MAIN props--->', this.props)
+    const {quesAns, id} = this.props;
 
     return (
       <div className="qa">
         <p>Questions and Answers</p>
-        <SearchQa/>
+        <SearchQa quesAns={quesAns} productId={id}/>
 
         {
           this.props.quesAns.length > 0 ?
-          <div><ViewQuesAns quesAnsId={this.props.quesAns} productId={this.props.id}/></div> : undefined
+          <div><ViewQuesAns quesAns={quesAns} productId={id} productName={this.props.productName}/></div> : undefined
         }
         {console.log('QuestionAns MAIN props-2-->', this.props)}
       </div>
