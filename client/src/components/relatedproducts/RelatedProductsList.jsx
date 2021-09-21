@@ -27,7 +27,8 @@ class RelatedProductsList extends React.Component {
     }
     let productItems = this.props.productData.map((item, index) => {
       return <RelatedProductsCard key={index} name={item.name} price={item.default_price} category={item.category} description={item.description}
-        image={item.image} />
+        image={item.image}
+        showComparisonModal={this.props.showComparisonModal} />
     })
     return (
       <ul id="relatedProductCards">

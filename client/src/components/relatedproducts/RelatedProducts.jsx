@@ -2,6 +2,7 @@ import React from 'react';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
+import ComparisonModalItem from './ComparisonModalItem.jsx';
 import axios from 'axios';
 
 
@@ -13,11 +14,13 @@ class RelatedProducts extends React.Component {
       relatedProductsStyles: [],
       defaultImages: [],
       yourOutfitData: [],
-      defaultProductId: 47421
+      defaultProductId: 47421,
+      modalIsVisible: false
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
+    this.showComparisonModal = this.showComparisonModal.bind(this);
   }
 
 
@@ -68,6 +71,10 @@ class RelatedProducts extends React.Component {
   getYourOutfitData() {
   }
 
+  showComparisonModal() {
+    console.log('related product card clicked');
+  }
+
   componentDidMount() {
     this.getRelatedProductsData();
     this.getRelatedProductsStyles();
@@ -80,7 +87,10 @@ class RelatedProducts extends React.Component {
     return (
       <div>
         <h3>Related Products</h3>
-        <RelatedProductsList productData={this.state.relatedProductsData} imageData={this.state.defaultImages} />
+        <RelatedProductsList
+          productData={this.state.relatedProductsData}
+          imageData={this.state.defaultImages}
+          showComparisonModal={this.showComparisonModal} />
         <h3>Your Outfit</h3>
         <YourOutfitList dummyData={this.state.relatedProductsData} />
       </div>
