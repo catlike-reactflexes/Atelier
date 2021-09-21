@@ -17,8 +17,17 @@ class App extends React.Component {
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
   }
 
-  handleProductUpdate(id) {
-    this.setState({ productId: id });
+  handleProductUpdate(data) {
+    let update = {}
+    if (data.id) {
+      if (data.name) {
+        this.setState({ productId: data.id, productName: data.name });
+      } else {
+        this.setState({ productId: data.id });
+      }
+    } else if (data.name) {
+      this.setState({ productName: data.name })
+    }
   }
 
 
