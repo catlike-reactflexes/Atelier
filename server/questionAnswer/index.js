@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const axios = require ('axios');
 const Github_Token = require ('./config');
 const configHeader = {headers: {"Authorization": process.env.API_TOKEN}};
@@ -9,7 +8,6 @@ const getQuesAns = (productId, callback) => {
   // const urlGet = `${baseUrl}/product_id=${productId}`;
   console.log('url-->', urlGet)
   axios.get(urlGet,configHeader)
-=======
 const axios = require('axios');
 // console.log('Github-->', Github_Token);
 
@@ -19,7 +17,6 @@ const getQuesAns = (productId, callback) => {
   const urlGet = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}`
 
   axios.get(urlGet, configHeader)
->>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
     .then(response => {
       console.log('Axios success', response.data.results);
       callback(null, response.data.results);
@@ -171,7 +168,6 @@ const getQuesAns = (productId, callback) => {
 // }
 
 
-<<<<<<< HEAD
 // Answerid: of productid: 47421
 // '3715562': {
 //   id: 3715562,
@@ -187,8 +183,5 @@ const getQuesAns = (productId, callback) => {
 // }
 
 module.exports={
-=======
-module.exports = {
->>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
   getQuesAns
 };
