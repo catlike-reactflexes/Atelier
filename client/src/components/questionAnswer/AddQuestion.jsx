@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import axios from 'axios';
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -9,6 +9,7 @@ class AddQuestion extends React.Component {
       nickname:'',
       email:''
     }
+    console.log('SubmitQuestion- props->',this.props);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
   }
@@ -18,7 +19,22 @@ class AddQuestion extends React.Component {
     })
   }
   submitQuestion = () => {
-    console.log(this.state);
+    console.log('SubmitQuestion- props->',this.props);
+    console.log('SubmitQuestion-->',this.props.productId, this.state);
+
+    axios.post('/addQuestion', {
+      product_id: this.props.productId,
+      body: this.state.question,
+      name: this.state.nickname,
+      email: this.state.email
+
+    })
+      .then(function(reponse){
+        console.log('Success Creating the Question-->',response);
+      })
+      .catch(function (error) {
+        console.log('Error sending to server with your Question->', error)
+      })
     this.props.onClose();
   }
 
@@ -27,7 +43,7 @@ class AddQuestion extends React.Component {
     if(!this.props.open) return null;
     // console.log(`open ${this.props.open}, onClose-> ${this.props.onClose}`);
 
-    return ReactDom.createPortal(
+    return (
       <div id="add-question">
       <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_Q_STYLES}>
@@ -35,7 +51,7 @@ class AddQuestion extends React.Component {
         <h3> About the *Product Name*</h3>
 
         <div>
-          
+
           <label htmlFor="question">Question</label>
           <textarea
               data-testid="question"
@@ -73,9 +89,8 @@ class AddQuestion extends React.Component {
         <button type="submit" onClick={this.submitQuestion}>Submit Question</button>
 
       </div>
-      </div>,
-      document.getElementById('portalQ') || document.createElement('div') //for testing purpose
-    )
+      </div>
+    );
   }
 
 }

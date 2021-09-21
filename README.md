@@ -9,9 +9,9 @@ Deliver a fully functional web application that meets the specifications and req
 ## Technology stack for this project
 
 - React
-- node
-- github
-- trello board
+- Node
+- Github
+- Trello board
 
 ## API
 - GitHub token is located within the .env file. The variable is `API_TOKEN = FILL_ME_IN`.
