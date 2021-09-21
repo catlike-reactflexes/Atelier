@@ -4,8 +4,8 @@ const Review = (props) => {
   // console.log(props.review)
   return (
     <div className='review'>
-      <div>{props.review.reviewer_name}</div>
-      <div>{props.review.summary}</div>
+      <div className='reviewer_name'>{props.review.reviewer_name}</div>
+      <div className='summary'>{props.review.summary}</div>
     </div>
   )
 }

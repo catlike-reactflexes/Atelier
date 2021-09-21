@@ -6,7 +6,7 @@
  import '@testing-library/jest-dom';
  import { render, screen } from '@testing-library/react';
 
- import YourOutfitList from ' ../../../client/src/components/reviews/ReviewBreakdown.jsx';
+ import ReviewBreakdown from ' ../../../client/src/components/reviews/ReviewBreakdown.jsx';
 
 
 

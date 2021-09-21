@@ -70,10 +70,8 @@ class ReviewApp extends React.Component {
     return (
       <div className='reviews'>
         {/* <Search /> */}
-        <div className='RnR'>
         <ReviewList reviews = {this.state.reviews}/>
         <ReviewBreakdown />
-        </div>
         <NewReview />
       </div>
     );

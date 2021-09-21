@@ -1,11 +1,21 @@
 import React from 'react';
 
-const ReviewBreakdown = (props) => {
-  return (
+class ReviewBreakdown extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      sizeValue: 0
+    };
+  }
+  render() {
+    return (
     <div className='reviewBreakdown'>
-      this is a placeholder
+      <div className='sliders'>
+        <input type="range" min="1" max="5" value={this.state.sizeValue} class="slider" id="size" />
+      </div>
     </div>
-  )
+    )
+  }
 };
 
 export default ReviewBreakdown
