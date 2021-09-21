@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import axios from 'axios';
 import Overview from './components/overview/overview.jsx';
 import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 47421,
+      productName:'Camo Onesie',
       quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
@@ -20,24 +21,26 @@ class App extends React.Component {
     this.setState({ productId: id });
   }
 
-  handleProductUpdate(id) {
-    this.setState({
-      productId: id
-    })
-  }
 
   fetchQuestionAnswer() {
-    fetch('/api/qa')
-      .then(response => response.json())
-      .then(res => this.setState({ quesAns: res }));
-
+    const {productId} = this.state;
+    axios.get(`/api/qa/id=${productId}`, {
+      params: {
+        product_id: productId
+      }
+    })
+      .then(data => {
+        this.setState({ quesAns: data.data })
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   componentDidMount() {
     this.fetchQuestionAnswer();
 
   }
-
 
   render() {
 
@@ -46,7 +49,12 @@ class App extends React.Component {
         <div>Header Placeholder</div>
         <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        <QuesAnsMain quesAns={this.state.quesAns}/>
+        <QuesAnsMain
+          productUpdate={this.handleProductUpdate}
+          quesAns={this.state.quesAns}
+          id={this.state.productId}
+          productName={this.state.productName}
+        />
         <Reviews id={this.state.productId}/>
       </div >
     );

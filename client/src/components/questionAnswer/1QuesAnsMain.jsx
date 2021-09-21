@@ -1,51 +1,36 @@
 //main entry point to Q & A
 import React from 'react';
 import SearchQa from './SearchQa.jsx';
-import ViewQuestion from './ViewQuestion.jsx';
-import AddQuestion from './AddQuestion.jsx';
-import AddAnswer from './AddAnswer.jsx';
+import ViewQuesAns from './ViewQuesAns.jsx';
 
 class QuesAnsMain extends React.Component {
-  constructor(props) {
 
-    super(props);
-    this.state = {
-      isOpen: false
-    }
-    this.setOpen = this.setOpen.bind(this);
+  //props-> {quesAns: Array(2), id: 47421, productUpdate: ƒ}
+  constructor(props) {
+   super(props)
   }
-  setOpen = (option) =>{
-    this.setState({
-      isOpen:option
-    })
-  }
+
   render() {
-    // console.log('What is props-->', this.props);
-    const {quesAns} = this.props;
+    console.log('QuestionAns MAIN props--->', this.props)
+    const {quesAns, id} = this.props;
+
     return (
       <div className="qa">
         <p>Questions and Answers</p>
-        <SearchQa/>
-        <ViewQuestion quesAnsLists={quesAns}/>
+        <SearchQa quesAns={quesAns} productId={id}/>
 
-        <div style = {BUTTON_STYLES}>
-          <button onClick={() => this.setOpen(true)}>ADD A QUESTION +</button>
-
-          {this.state.isOpen ?
-            <AddQuestion
-              open ={this.state.isOpen}
-              onClose={() => this.setOpen(false)}/> : null}
-
-        </div>
-        <AddAnswer/>
+        {
+          this.props.quesAns.length > 0 ?
+          <div><ViewQuesAns quesAns={quesAns} productId={id} productName={this.props.productName}/></div> : undefined
+        }
+        {console.log('QuestionAns MAIN props-2-->', this.props)}
       </div>
+
+
 
     );
   }
 
 }
-const BUTTON_STYLES = {
-  position: 'relative',
-  zIndex: 1
-}
+
 export default QuesAnsMain;
