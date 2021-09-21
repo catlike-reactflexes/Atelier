@@ -32,6 +32,7 @@ class Overview extends React.Component {
     }).catch((error) => {
       console.log('Error calling product API: ', error);
     }).then(() => {
+      this.props.productUpdate({ id: this.state.productId, name: this.state.productDetails.name});
       this.getProductStyles(id);
     })
   }
