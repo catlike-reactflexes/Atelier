@@ -146,19 +146,27 @@ body {
 
   margin-bottom: 1rem;
 }
-.oneQuestion {
+.justQues {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   background-color: rgba(121, 121, 118, 0.698);
 }
-.qBody{
+.ques2{
   display: flex;
   justify-content: left;
-  width:70%;
+  width:40%;
   order: 1;
 }
-.helpful, .AddAns, .yes{
+.qBody{
+  display: flex;
+  margin: 5px;
+  width:70%;
+  /* justify-content: right; */
+  /* width:20%; */
+  /* order: 2; */
+}
+.helpful, .AddAns, .yes, .report, .loadAns{
   width:20%;
   border: 1px;
   display: flex;
@@ -171,25 +179,37 @@ body {
   flex-direction: column;
   background-color: rgba(228, 228, 227, 0.698);
   margin-top: 5px;
+  width: 100%;
 
 }
-.ans1, .ans2 {
+.ans1, .allPhots, .ans2 {
   display: flex;
   flex-direction: row;
+  margin: 5px;
   padding-bottom: 5px;
+
+}
+.allPhotos {
+  display: flex;
+  justify-content:center;
 }
 .search {
   display: flex;
-  width: 100%;
+  width: 97%;
   border: 1px #000 solid;
-  margin-bottom: 1rem;
+  justify-content:center;
+  margin: 5px
 }
-.yes, .addAns {
+.yes, .addAns , .report, .loadAns{
   display: flex;
+  margin-left: 5px;
+  width: fit-content;
   text-decoration: underline;
   cursor:pointer;
 }
-.by, .helpful, .AddAns, .yes, .ansName {
+.by, .helpful, .AddAns, .yes, .ansName, .report{
+  margin-left: 5px;
+  width: fit-content;
   display: flex;
   font-size: 0.8rem;
 }
@@ -197,7 +217,30 @@ body {
   display: flex;
   font-size: 1.2rem;
   width:5%;
-  padding:2px;
+  margin: 5px;
+}
+.loadAns{
+  display: flex;
+  margin: 10px;
+  font-size: 0.7rem;
+}
+.twoButton{
+  width: 70%;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.moreQuestion, .addQues{
+  display: flex;
+  margin: 5px;
+  width: fit-content;
+}
+.ansImg {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 30px; /* Set a small width */
+  cursor:pointer;
 }
 
 /*

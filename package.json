@@ -7,7 +7,8 @@
     "server-dev": "nodemon server/app.js",
     "react-dev": "webpack --watch --config webpack.config.js",
     "test": "jest --verbose --coverage",
-    "testqa": "jest spec/components/questionAnswer --watch --verbose --coverage"
+    "testqa": "jest spec/components/questionAnswer --watch --verbose --coverage",
+    "testreviews": "jest spec/components/reviews --verbose --coverage"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,11 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-moment": "^1.1.1",
     "react-test-renderer": "^17.0.2"
   },
   "devDependencies": {

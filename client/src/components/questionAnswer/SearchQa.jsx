@@ -14,7 +14,7 @@ class SearchQa extends React.Component {
     this.setState({
       searchBar: e.target.value
     })
-    console.log(this.state);
+    console.log("Search",this.state);
   }
 
   render() {
