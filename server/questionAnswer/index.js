@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+const axios = require ('axios');
+const Github_Token = require ('./config');
+const configHeader = {headers: {"Authorization": process.env.API_TOKEN}};
+const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa';
+// const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
+const getQuesAns = (productId, callback) => {
+  const urlGet = `${baseUrl}/questions?product_id=${productId}`;
+  // const urlGet = `${baseUrl}/product_id=${productId}`;
+  console.log('url-->', urlGet)
+  axios.get(urlGet,configHeader)
+=======
 const axios = require('axios');
 // console.log('Github-->', Github_Token);
 
@@ -7,6 +19,7 @@ const getQuesAns = (productId, callback) => {
   const urlGet = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}`
 
   axios.get(urlGet, configHeader)
+>>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
     .then(response => {
       console.log('Axios success', response.data.results);
       callback(null, response.data.results);
@@ -158,6 +171,24 @@ const getQuesAns = (productId, callback) => {
 // }
 
 
+<<<<<<< HEAD
+// Answerid: of productid: 47421
+// '3715562': {
+//   id: 3715562,
+//   body: "Something pretty soft but I can't be sure",
+//   date: '2018-01-04T00:00:00.000Z',
+//   answerer_name: 'metslover',
+//   helpfulness: 6,
+//   photos: [
+//     'https://images.unsplash.com/photo-1530519729491-aea5b51d1ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80',
+//     'https://images.unsplash.com/photo-1511127088257-53ccfcc769fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+//     'https://images.unsplash.com/photo-1500603720222-eb7a1f997356?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80'
+//   ]
+// }
+
+module.exports={
+=======
 module.exports = {
+>>>>>>> 3977b3a9650436796cd5be24128071e354b0a679
   getQuesAns
 };

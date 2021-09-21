@@ -5,14 +5,9 @@
  import React from 'react';
  import '@testing-library/jest-dom';
  import { render, screen } from '@testing-library/react';
- import QuesAnsMain from ' ../../../client/src/components/questionAnswer/1QuesAnsMain.jsx';
+ import ViewQuesAns from '../../../client/src/components/questionAnswer/ViewQuesAns.jsx';
 
-  const test_id = 47421;
-  const test_productUpdate = function () {
-    //return different QA
-    return 47422;
-  }
-  const test_quesAns = [
+  const test_quesAnsId = [
     {
       question_id: 396911,
       question_body: 'Can I wash it?',
@@ -76,12 +71,13 @@
       }
     }
   ]
- //these test the components and how they are rendering
- describe('Question And Answer', function () {
-   test('Should render related products parent component', function () {
-     render(<QuesAnsMain quesAns={test_quesAns} id={test_id} productUpdate={test_productUpdate}/>)
 
+describe('View Question', function () {
+  test('Should render View Question component', function () {
 
+    const {container} = render(<ViewQuesAns quesAnsId={test_quesAnsId} open='true'/>)
+    const inputNode1 = container.querySelector('#nickname')
 
-   });
- });
+  });
+
+ })

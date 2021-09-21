@@ -5,7 +5,8 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const axios = require('axios')
-const QuestionAnswer_API = require('./questionAnswer');
+const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
+// const QuestionAnswer_API = require('./questionAnswer');
 const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -171,21 +172,145 @@ app.get('/relatedProductStyles', (req, res) => {
 
 
 //CS- Questions & Answer START------------------------------------------------------------
-app.get('/api/qa', (req, res) => {
-  QuestionAnswer_API.getQuesAns(47421, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      // console.log('Before send', data)
-      const twoData = [];
-      for (let i = 0; i < 2; i++) {
-        twoData.push(data[i])
-      }
-      // console.log('Data before send to client->', twoData)
-      res.send(twoData);
-    }
-  })
+app.get('/api/qa/id=*', (req, res) => {
+  console.log('QA**request-->', req.query.product_id) ;
+  // console.log('request-->', req.path) ;
+
+  axios({
+        method: 'get',
+        url: `${API_URL}/qa/questions`,
+        headers: {
+          Authorization: process.env.API_TOKEN
+        },
+        params: {
+          product_id: req.query.product_id
+        }
+      }).then(function (response) {
+        // console.log('api response: ', response.data);
+
+        res.status(200).send(response.data.results);
+      }).catch(function (err) {
+        console.log('api request error: ', err);
+        res.status(500).send(err);
+      })
+
 });
+app.post('/addAnswer', (req, res)=> {
+  // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
+  axios({
+    method: 'POST',
+    url: `${API_URL}/qa/questions/${req.body.question_id}/answers`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    data: {
+      body: req.body.body,
+      name: req.body.name,
+      email: req.body.email,
+      photos: req.body.photos
+    }
+  }).then(function (response) {
+    // console.log('SUCCESS___>>>api response: ', response.data);
+
+    res.status(200).send(response.data);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(500).send(err);
+  })
+
+})
+app.post('/addQuestion', (req, res)=> {
+  console.log('QA**request AddAQuestion-->',req.body) ;
+  axios({
+    method: 'POST',
+    url: `${API_URL}/qa/questions/`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    data: {
+      body: req.body.body,
+      name: req.body.name,
+      email: req.body.email,
+      product_id: req.body.product_id
+    }
+  }).then(function (response) {
+    console.log('SUCCESS___>>>api response: ', response.data);
+
+    res.status(200).send(response.data);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(500).send(err);
+  })
+
+})
+app.put('/update', (req, res) => {
+  console.log('request-->', req.body.data)
+  const {questionid} = req.body.data;
+  const {answerid} = req.body.data;
+  let urlPut, idHelpfulness ;
+  if(questionid){
+    urlPut = `${API_URL}/qa/questions/${questionid}/helpful`;
+    idHelpfulness = {question_id : questionid};
+  } else {
+    urlPut = `${API_URL}/qa/answers/${answerid}/helpful`;
+    idHelpfulness = {answer_id : answerid}
+  }
+  // console.log('request-->',question_id)
+  axios({
+    method: 'put',
+    url: urlPut,
+    data: idHelpfulness,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+
+  })
+    .then(function (response) {
+    //looking for 204 to get update
+    // console.log('api response--> ', response.status);
+    res.sendStatus(response.status);
+  })
+    .catch(function (err) {
+    console.log('UPDATE ERROR ', err);
+    res.status(404).send(err);
+  })
+
+})
+
+app.put('/report', (req, res) => {
+  console.log('request-->', req.body.data)
+  const {questionid} = req.body.data;
+  const {answerid} = req.body.data;
+  let urlPut, report_id ;
+  if(questionid){
+    urlPut = `${API_URL}/qa/questions/${questionid}/report`;
+    report_id = {question_id : questionid};
+  } else {
+    urlPut = `${API_URL}/qa/answers/${answerid}/report`;
+    report_id = {answer_id : answerid}
+  }
+  // console.log('request-->',question_id)
+  axios({
+    method: 'put',
+    url: urlPut,
+    data: report_id,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+
+  })
+    .then(function (response) {
+    //looking for 204 to get update
+    console.log('api response--> ', response.status);
+    res.sendStatus(response.status);
+  })
+    .catch(function (err) {
+    console.log('api request error--> ', err);
+    res.status(404).send(err);
+  })
+
+})
+
 //CS- Question & Answer END----------------------------------------------------------------------
 
 
