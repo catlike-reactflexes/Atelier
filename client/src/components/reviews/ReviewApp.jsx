@@ -43,9 +43,13 @@ class ReviewApp extends React.Component {
           "photos": [],
         },
       ],
-      defaultProductID: props.id
+      defaultProductID: props.id,
+      reviewCharacteristics: {},
+      reviewRating: {},
+      reviewRecommended: {}
     };
     this.getReviews = this.getReviews.bind(this)
+    this.getReviewMeta = this.getReviewMeta.bind(this)
   }
 
   getReviews() {
@@ -60,8 +64,25 @@ class ReviewApp extends React.Component {
       })
   }
 
+  getReviewMeta() {
+    axios.get('/reviewmeta', {
+      params: {
+        productID: this.state.defaultProductID
+      }
+    })
+      .then(reviewMetaData => {
+        console.log('this is review metaData:', reviewMetaData.data)
+        this.setState({
+          reviewCharacteristics: reviewMetaData.data.characteristics,
+          reviewRating: reviewMetaData.data.ratings,
+          reviewRecommended: reviewMetaData.data.recommended
+        })
+      })
+  }
+
   componentDidMount() {
     this.getReviews()
+    this.getReviewMeta()
   }
 
 
@@ -71,7 +92,7 @@ class ReviewApp extends React.Component {
       <div className='reviews'>
         {/* <Search /> */}
         <ReviewList reviews = {this.state.reviews}/>
-        <ReviewBreakdown />
+        <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
         <NewReview />
       </div>
     );

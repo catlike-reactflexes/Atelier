@@ -10,6 +10,6 @@
 
 
 
- describe('some test', function () {
+ describe('sliders have their apis value', function () {
    test.todo('todo');
  })

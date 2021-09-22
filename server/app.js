@@ -21,6 +21,12 @@ app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
+/*
+  ----------------------------
+  | Review Routes |
+  ----------------------------
+*/
+
 app.get('/reviews', (req, res) => {
   let product_id = Number(req.query.productID)
   // console.log(typeof product_id)
@@ -38,6 +44,29 @@ app.get('/reviews', (req, res) => {
       throw err
     })
 })
+
+app.get('/reviewmeta', (req, res) => {
+  let product_id = Number(req.query.productID)
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN},
+    params: {'product_id': product_id}
+  }
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', config)
+  .then(metadata => {
+    // console.log('meta api response: ', metadata.data);
+    res.json(metadata.data)
+  })
+  .catch(err => {
+    console.log('review get error: ', err)
+    throw err
+  })
+})
+
+/*
+  ----------------------------
+  | End of Review Routes |
+  ----------------------------
+*/
 
 app.get('/product', (req, res) => {
   let id = req.query.id;
