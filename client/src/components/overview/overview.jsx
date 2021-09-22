@@ -32,7 +32,7 @@ class Overview extends React.Component {
     }).catch((error) => {
       console.log('Error calling product API: ', error);
     }).then(() => {
-      this.props.productUpdate({ id: this.state.productId, name: this.state.productDetails.name});
+      this.props.productUpdate({ id: this.state.productId, name: this.state.productDetails.name, features: this.state.productDetails.features });
       this.getProductStyles(id);
     })
   }
@@ -44,7 +44,7 @@ class Overview extends React.Component {
       params: { id: id }
     }).then((response) => {
       let data = response.data;
-      console.log('Style data.results: ', data.results);
+      // console.log('Style data.results: ', data.results);
       this.setState({ productStyles: data.results, stylePhotos: data.results[0].photos, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
@@ -60,7 +60,7 @@ class Overview extends React.Component {
           <ProductSyles />
           <ProductButtons />
         </div>
-        <ProductDescription />
+        <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features}/>
       </div>
     );
   }
