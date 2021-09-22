@@ -20,6 +20,7 @@ class RelatedProductsCard extends React.Component {
 
   //set star to absolute position within the card element
   render() {
+    console.log('props in cards: ', this.props);
     return (
       <div>
         <li className="relatedProductsItems" >
@@ -33,7 +34,7 @@ class RelatedProductsCard extends React.Component {
           </div>
         </li >
         {this.state.comparisonModalVisible ?
-          <ComparisonModalList /> :
+          <ComparisonModalList productFeatures={this.props.productFeatures} name={this.props.name} overviewProduct={this.props.overviewProduct} /> :
           <div></div>}
       </div>
     )

@@ -15,12 +15,32 @@ class RelatedProducts extends React.Component {
       defaultImages: [],
       yourOutfitData: [],
       defaultProductId: 47421,
-      modalIsVisible: false
+      overviewProductData: {
+        "id": 47421,
+        "campus": "hr-rpp",
+        "name": "Camo Onesie",
+        "slogan": "Blend in to your crowd",
+        "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+        "category": "Jackets",
+        "default_price": "140.00",
+        "created_at": "2021-08-26T20:30:48.129Z",
+        "updated_at": "2021-08-26T20:30:48.129Z",
+        "features": [
+          {
+            "feature": "Fabric",
+            "value": "Canvas"
+          },
+          {
+            "feature": "Buttons",
+            "value": "Brass"
+          }
+        ]
+      }
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
-    this.showComparisonModal = this.showComparisonModal.bind(this);
+
   }
 
 
@@ -71,9 +91,7 @@ class RelatedProducts extends React.Component {
   getYourOutfitData() {
   }
 
-  showComparisonModal() {
-    console.log('related product card clicked');
-  }
+
 
   componentDidMount() {
     this.getRelatedProductsData();
@@ -90,9 +108,10 @@ class RelatedProducts extends React.Component {
         <RelatedProductsList
           productData={this.state.relatedProductsData}
           imageData={this.state.defaultImages}
-          showComparisonModal={this.showComparisonModal} />
+          overviewProduct={this.state.overviewProductData} />
         <h3>Your Outfit</h3>
-        <YourOutfitList dummyData={this.state.relatedProductsData} />
+        <YourOutfitList
+          dummyData={this.state.relatedProductsData} />
       </div>
     )
   }

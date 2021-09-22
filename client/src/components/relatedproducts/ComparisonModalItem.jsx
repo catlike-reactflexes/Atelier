@@ -4,23 +4,26 @@ import React from 'react';
 class ComparisonModalItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      productCardActionButtonClicked: false
-    }
-    this.showComparisonModal = this.showComparisonModal.bind(this);
+
   }
 
-  showComparisonModal() {
-    let modal = document.getElementById('myModal');
-    console.log('temp modal button clicked ------------------------');
-    this.setState({
-      productCardActionButtonClicked: true
-    });
-  }
+
 
   render() {
+    console.log('props in comparison modal item: ', this.props.overviewProduct.value);
     return (
-      <h1>The conditional worked</h1>
+      <tbody>
+        <tr>
+          <th>{this.props.name}</th>
+          <th></th>
+          <th>{this.props.overviewProduct.name}</th>
+        </tr>
+        <tr>
+          <td>{this.props.value}</td>
+          <td>{this.props.feature}</td>
+          <td>{this.props.overviewProduct.features.feature}</td>
+        </tr>
+      </tbody>
 
     )
   }

@@ -9,8 +9,15 @@ class ComparisonModalList extends React.Component {
 
 
   render() {
+    console.log('props in the modal list: ', this.props.overviewProductData);
+    let features = this.props.productFeatures.map((item, index) => {
+      return <ComparisonModalItem feature={item.feature} value={item.value} key={index} name={this.props.name}
+        overviewProduct={this.props.overviewProduct} />
+    });
     return (
-      <div>Compairson Modal List</div>
+      <table >
+        {features}
+      </table>
     )
   }
 }
