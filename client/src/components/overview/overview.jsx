@@ -44,11 +44,14 @@ class Overview extends React.Component {
       params: { id: id }
     }).then((response) => {
       let data = response.data;
-      // console.log('Style data.results: ', data.results);
       this.setState({ productStyles: data.results, stylePhotos: data.results[0].photos, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
     })
+  }
+
+  saveToOutfit(id) {
+    // TODO: implement using localStorage
   }
 
   render() {

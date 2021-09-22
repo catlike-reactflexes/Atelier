@@ -33,14 +33,29 @@ body {
 }
 
 #mainProductImageContainer {
+  display: flex;
   width: 65%;
   height: 80%;
-  border: 1px solid dimgray;
+  /* border: 1px solid dimgray; */
   position: relative;
+  overflow: hidden;
 }
 
-#mainProductImageContainer #mainImg {
+#mainImg {
   max-height: 100%;
+  background: center no-repeat;
+  filter: none;
+  z-index: 1;
+  position: relative;
+  margin: 0 auto;
+}
+
+.blurredImage {
+  background-size: cover;
+  filter: blur(8px);
+  width: 100%;
+  position: absolute;
+  z-index: 1;
 }
 
 #styleThumbnails {
