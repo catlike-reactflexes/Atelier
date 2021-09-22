@@ -45,6 +45,7 @@ app.get('/reviews', (req, res) => {
     })
 })
 
+<<<<<<< HEAD
 app.get('/reviewmeta', (req, res) => {
   let product_id = Number(req.query.productID)
   let config = {
@@ -66,6 +67,12 @@ app.get('/reviewmeta', (req, res) => {
   ----------------------------
   | End of Review Routes |
   ----------------------------
+=======
+/*
+ *  ---------------------------
+ *  | Product Overview Routes |
+ *  ---------------------------
+>>>>>>> 012d8d8a6ea12ae20611625227c0ef9e28e8eba8
 */
 
 app.get('/product', (req, res) => {
@@ -85,6 +92,24 @@ app.get('/product', (req, res) => {
     console.log('/products api request error: ', error);
   })
 });
+
+app.get('/styles', (req, res) => {
+  let id = req.query.id;
+  // console.log()
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/${id}/styles`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+  }).then(function (response) {
+    dataStr = JSON.stringify(response.data);
+    res.send(dataStr);
+    res.end();
+  }).catch(function (error) {
+    console.log('/styles api request error: ', error);
+  })
+})
 
 /*
   ----------------------------

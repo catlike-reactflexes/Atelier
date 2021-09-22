@@ -34,9 +34,13 @@ body {
 
 #mainProductImageContainer {
   width: 65%;
-  min-height: 80%;
+  height: 80%;
   border: 1px solid dimgray;
   position: relative;
+}
+
+#mainProductImageContainer #mainImg {
+  max-height: 100%;
 }
 
 #styleThumbnails {
@@ -112,6 +116,21 @@ body {
   margin-top: 1vw;
   width: 12.5%;
   height: 4vw;
+}
+
+#productDescription {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 2%;
+  margin-left: 2%;
+  height: 18%;
+  width: 100%;
+}
+
+.featureList, .featureList li {
+  align-self: flex-end;
+  width: 30%;
 }
 
 .column-flex {
