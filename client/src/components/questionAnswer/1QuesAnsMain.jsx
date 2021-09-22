@@ -34,7 +34,7 @@ class QuesAnsMain extends React.Component {
        this.setState({
         filteredQues: filteredQues,
         updated: true
-      },()=>{console.log('newlist---->', this.state.filteredQues, this.props.quesAns)})
+      },()=>{console.log('newlist---->', this.state.filteredQues)})
     } else {
       this.setState({
         filteredQues: this.props.quesAns,
@@ -42,7 +42,7 @@ class QuesAnsMain extends React.Component {
       })
     }
 
-    console.log('newlist---->', this.state.filteredQues, this.state.updated);
+
 
   }
 
@@ -54,6 +54,7 @@ class QuesAnsMain extends React.Component {
     console.log('QuestionAns filtered props--->', filteredQues)
     return (
       <div className="qa">
+        {/* {filteredQues.map(each)} */}
         <p>Questions and Answers</p>
         <SearchQa
           filteredQues={filteredQues}
@@ -61,7 +62,6 @@ class QuesAnsMain extends React.Component {
           // handleQAUpdate={this.props.handleQAUpdate}
         />
         {/* {this.renderQuesAns(filteredQues)} */}
-
         {updated? <div>
             <ViewQuesAns
               filteredQues={filteredQues}
@@ -73,7 +73,6 @@ class QuesAnsMain extends React.Component {
               productId={id}
               productName={productName}
             />}
-
 
 
       </div>
