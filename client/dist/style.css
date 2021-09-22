@@ -143,9 +143,24 @@ body {
   width: 100%;
 }
 
-.featureList, .featureList li {
+#productDescription p {
+  width: 65%;
+}
+
+.featureList {
+  margin-left: 0;
+  padding-left: 2em;
+  text-indent: -1em;
   align-self: flex-end;
   width: 30%;
+  list-style-type: none;
+  border-left: 2px solid darkslategray;
+}
+
+.featureList li:before {
+  font-size: 1.2em;
+  font-weight: bold;
+  content: "✓";
 }
 
 .column-flex {
