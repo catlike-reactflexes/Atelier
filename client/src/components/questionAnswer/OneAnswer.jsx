@@ -12,7 +12,7 @@ class OneAnswer extends React.Component {
       answerReport : false
     }
     this.answerUpdateHelpfulness = this.answerUpdateHelpfulness.bind(this);
-    console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
+    // console.log('!!!!ONE ANSWER!!!!!!-->', this.props)
   }
   answerUpdateHelpfulness = (answerId,answerHelpful) => {
 
@@ -55,7 +55,7 @@ class OneAnswer extends React.Component {
     const {id, body, answerer_name, date, helpfulness, photos} = this.props.oneAnswer;
     const {oneQues} = this.props;
 
-    console.log('one answer->', this.props.photos)
+    // console.log('one answer->', this.props.photos)
     // console.log('IS PHOTO URL-->', photos.length, id)
     return (
 
@@ -78,8 +78,8 @@ class OneAnswer extends React.Component {
 
               </div>
                 <div className="ansName">
-                      <div  style={{ fontWeight: 'bold' }}>{answerer_name}</div>
-                      <div className="date"><Moment format="MMM, DD, YYYY">{date}</Moment></div>
+                      <div  style={{ fontWeight: 'bold' }}>{answerer_name}   </div>
+                      <div className="date"> .    <Moment format="MMM, DD, YYYY">{date}</Moment></div>
                       <div className="helpful" > | Helpful?</div>
                       <div className="yes"
                         onClick={() => this.answerUpdateHelpfulness(id,helpfulness)} >

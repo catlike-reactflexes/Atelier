@@ -3,7 +3,7 @@ const React = require('react');
 class PhotoAns extends React.Component {
   constructor(props){
     super(props);
-    console.log('PhotoAns--->', this.props)
+    // console.log('PhotoAns--->', this.props)
   }
   // submitAnswer = ()=> {
   //   console.log('submit answer');

@@ -10,14 +10,14 @@ class ViewQuesAns extends React.Component {
     super(props);
     this.state = {
 
-      twoQuestions: this.props.quesAns.slice(0,2),
-      restOfQuestions: this.props.quesAns.slice(2),
+      twoQuestions: this.props.filteredQues.slice(0,2),
+      restOfQuestions: this.props.filteredQues.slice(2),
       moreQA: true,
       isOpen: false
     }
     this.setOpen = this.setOpen.bind(this);
     this.updateQuesAns = this.updateQuesAns.bind(this);
-    // console.log('ViewQuestion--->', this.state.twoQuestions, this.state.restOfQuestions)
+    console.log('ViewQuestion--->', this.state.twoQuestions, this.state.restOfQuestions)
   }
   setOpen = (option) =>{
     this.setState({

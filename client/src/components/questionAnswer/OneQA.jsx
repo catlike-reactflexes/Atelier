@@ -11,7 +11,7 @@ class OneQA extends React.Component{
   render(){
 
     const {allAns, oneQues} = this.props;
-    console.log('ONE QA--->', allAns, oneQues);
+    // console.log('ONE QA--->', allAns, oneQues);
 
     return (
       <div className="oneQA">

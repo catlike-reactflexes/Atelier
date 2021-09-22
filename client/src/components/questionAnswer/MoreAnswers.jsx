@@ -11,7 +11,7 @@ class MoreAnswer extends React.Component{
       showMore : true
     }
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
-    console.log('More Answers-->', this.props)
+    // console.log('More Answers-->', this.props)
   }
   fetchMoreAns = () => {
     // console.log('Fetch More Answer, checking the length of rest of Answer-->', this.state.restOfAnswer)

@@ -8,22 +8,74 @@ class QuesAnsMain extends React.Component {
   //props-> {quesAns: Array(2), id: 47421, productUpdate: ƒ}
   constructor(props) {
    super(props)
+   this.state = {
+     search: '',
+     filteredQues: this.props.quesAns,
+     updated: false
+
+    }
+    this.updateQuesAns = this.updateQuesAns.bind(this);
+    console.log('filteresQues-->', this.state, this.props)
+
+  }
+  updateQuesAns = (data) => {
+    console.log('Response->', data)
+    let search = '';
+    search += data;
+    console.log('Search--1->' , search);
+
+    if(search.length >=3 ){
+
+      const filteredQues = this.state.filteredQues.filter(question => {
+        return (question.question_body.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+      })
+      console.log('Search--->', filteredQues)
+
+       this.setState({
+        filteredQues: filteredQues,
+        updated: true
+      },()=>{console.log('newlist---->', this.state.filteredQues, this.props.quesAns)})
+    } else {
+      this.setState({
+        filteredQues: this.props.quesAns,
+        updated: false
+      })
+    }
+
+    console.log('newlist---->', this.state.filteredQues, this.state.updated);
+
   }
 
-  render() {
-    console.log('QuestionAns MAIN props--->', this.props)
-    const {quesAns, id} = this.props;
 
+  render() {
+
+    const {quesAns, id, productName} = this.props;
+    const {search, filteredQues,updated} = this.state;
+    console.log('QuestionAns filtered props--->', filteredQues)
     return (
       <div className="qa">
         <p>Questions and Answers</p>
-        <SearchQa quesAns={quesAns} productId={id}/>
+        <SearchQa
+          filteredQues={filteredQues}
+          updateQuesAns={this.updateQuesAns}
+          // handleQAUpdate={this.props.handleQAUpdate}
+        />
+        {/* {this.renderQuesAns(filteredQues)} */}
 
-        {
-          this.props.quesAns.length > 0 ?
-          <div><ViewQuesAns quesAns={quesAns} productId={id} productName={this.props.productName}/></div> : undefined
-        }
-        {console.log('QuestionAns MAIN props-2-->', this.props)}
+        {updated? <div>
+            <ViewQuesAns
+              filteredQues={filteredQues}
+              productId={id}
+              productName={productName}
+            />
+          </div>: <ViewQuesAns
+              filteredQues={quesAns}
+              productId={id}
+              productName={productName}
+            />}
+
+
+
       </div>
 
 

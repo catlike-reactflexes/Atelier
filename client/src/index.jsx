@@ -15,12 +15,17 @@ class App extends React.Component {
       quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
+    this.handleQAUpdate = this.handleQAUpdate.bind(this)
   }
 
   handleProductUpdate(id) {
     this.setState({ productId: id });
   }
+  handleQAUpdate(updateList) {
 
+    this.setState({quesAns: [{updateList}]})
+    console.log('UpdateLIST--->', updateList);
+  }
 
   fetchQuestionAnswer() {
     const {productId} = this.state;
@@ -43,19 +48,21 @@ class App extends React.Component {
   }
 
   render() {
+    const {quesAns} = this.state;
 
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
-        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        <QuesAnsMain
+        {/* <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} /> */}
+        {/* <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} /> */}
+        {quesAns.length > 0 &&  <QuesAnsMain
+          handleQAUpdate = {this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}
           quesAns={this.state.quesAns}
           id={this.state.productId}
           productName={this.state.productName}
-        />
-        <Reviews id={this.state.productId}/>
+        /> }
+        {/* <Reviews id={this.state.productId}/> */}
       </div >
     );
   }

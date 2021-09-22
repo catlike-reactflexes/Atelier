@@ -6,14 +6,14 @@ class JustQuestion extends React.Component{
   constructor(props){
 
     super(props);
-    console.log('JUST QUESTION---->', props)
+    // console.log('JUST QUESTION---->', props)
     this.state ={
       isOpen:false,
       questionHelpful:this.props.oneQues.question_helpfulness || 0,
       questionReport: false
     }
 
-    console.log('Just Question-->', this.props)
+    // console.log('Just Question-->', this.props)
     this.setOpen = this.setOpen.bind(this);
     this.questionUpdateHelpfulness = this.questionUpdateHelpfulness.bind(this);
     this.questionReport = this.questionReport.bind(this);
