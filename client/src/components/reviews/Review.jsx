@@ -5,7 +5,6 @@ const Review = (props) => {
   // console.log(props.review)
 
 let markReviewAsHelpful = (reviewID) => {
-  console.log('review id: ', reviewID)
   axios.put('/helpful', {
     params: {
       review_id: reviewID
