@@ -26,7 +26,6 @@ class App extends React.Component {
       } else {
         this.setState({ productId: data.id, productName: data.name });
       }
-      console.log('Successful update of app data: ', data);
     } else {
       console.error('Unhandled data in update: ', data);
     }

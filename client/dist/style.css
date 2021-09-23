@@ -33,14 +33,29 @@ body {
 }
 
 #mainProductImageContainer {
+  display: flex;
   width: 65%;
   height: 80%;
-  border: 1px solid dimgray;
+  /* border: 1px solid dimgray; */
   position: relative;
+  overflow: hidden;
 }
 
-#mainProductImageContainer #mainImg {
+#mainImg {
   max-height: 100%;
+  background: center no-repeat;
+  filter: none;
+  z-index: 1;
+  position: relative;
+  margin: 0 auto;
+}
+
+.blurredImage {
+  background-size: cover;
+  filter: blur(8px);
+  width: 100%;
+  position: absolute;
+  z-index: 1;
 }
 
 #styleThumbnails {
@@ -128,9 +143,24 @@ body {
   width: 100%;
 }
 
-.featureList, .featureList li {
+#productDescription p {
+  width: 65%;
+}
+
+.featureList {
+  margin-left: 0;
+  padding-left: 2em;
+  text-indent: -1em;
   align-self: flex-end;
   width: 30%;
+  list-style-type: none;
+  border-left: 2px solid darkslategray;
+}
+
+.featureList li:before {
+  font-size: 1.2em;
+  font-weight: bold;
+  content: "✓";
 }
 
 .column-flex {

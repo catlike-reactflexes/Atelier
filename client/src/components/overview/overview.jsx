@@ -18,6 +18,7 @@ class Overview extends React.Component {
       loaded: false
     };
     this.getProductStyles = this.getProductStyles.bind(this);
+    this.saveToOutfit = this.saveToOutfit.bind(this);
   }
 
   componentDidMount() {
@@ -44,11 +45,26 @@ class Overview extends React.Component {
       params: { id: id }
     }).then((response) => {
       let data = response.data;
-      // console.log('Style data.results: ', data.results);
       this.setState({ productStyles: data.results, stylePhotos: data.results[0].photos, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
     })
+  }
+
+  saveToOutfit() {
+    // TODO: implement using localStorage
+    // load outfit data on component mount
+    let id = this.state.productId;
+    let outfitData;
+    if (localStorage.getItem('myOutfit') === null) {
+      outfitData = [];
+    } else {
+      outfitData = localStorage.getItem('myOutfit');
+    }
+    if (!outfitData.includes(id)) {
+      outfitData.push(id);
+    }
+    localStorage.setItem('myOutfit', outfitData);
   }
 
   render() {
@@ -56,11 +72,11 @@ class Overview extends React.Component {
       <div id="overview" data-testid="overview-element">
         <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} />
         <div className="sidebar column-flex">
-          <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded}/>
+          <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
           <ProductSyles />
-          <ProductButtons />
+          <ProductButtons favoriteItem={this.saveToOutfit} />
         </div>
-        <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features}/>
+        <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features} loaded={this.state.detailsLoaded} />
       </div>
     );
   }
