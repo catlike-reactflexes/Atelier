@@ -27,7 +27,7 @@ class App extends React.Component {
       } else {
         this.setState({ productId: data.id, productName: data.name });
       }
-      window.history.replaceState(null, '', `/product?id=${data.id}`);
+      // window.history.replaceState(null, '', `/product?id=${data.id}`);
     } else {
       console.error('Unhandled data in update: ', data);
     }
