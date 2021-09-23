@@ -7,16 +7,26 @@ class ComparisonModalList extends React.Component {
     super(props)
   }
 
-
   render() {
-    let features = this.props.productFeatures.map((item, index) => {
-      return <ComparisonModalItem feature={item.feature} value={item.value} key={index} name={this.props.name}
-        overviewProduct={this.props.overviewProduct} />
+    const totalFeatures = [...this.props.productFeatures, ...this.props.overviewProduct.features];
+    const uniqueFeatures = Array.from(new Set([...totalFeatures]));
+    let features = uniqueFeatures.map((item, index) => {
+      return <ComparisonModalItem feature={item.feature} value={item.value} key={index}
+        productFeatures={this.props.productFeatures}
+        overviewProductFeatures={this.props.overviewProduct.features} />
     });
     return (
       <div style={RPOVERLAY_STYLES}>
         <table style={MODAL_STYLES}>
-          {features}
+          Comparing
+          <tbody>
+            <tr>
+              <th>{this.props.overviewProduct.name}</th>
+              <th></th>
+              <th>{this.props.name}</th>
+            </tr>
+            {features}
+          </tbody>
         </table>
       </div>
     )

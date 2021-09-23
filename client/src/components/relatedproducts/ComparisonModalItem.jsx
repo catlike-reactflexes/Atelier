@@ -10,19 +10,36 @@ class ComparisonModalItem extends React.Component {
 
 
   render() {
+    let overviewHasFeature = false;
+    for (var i = 0; i < this.props.overviewProductFeatures.length; i++) {
+      let currentFeature = this.props.overviewProductFeatures[i];
+      if (currentFeature.feature === this.props.feature &&
+        currentFeature.value === this.props.value) {
+        overviewHasFeature = true;
+      }
+    }
+
+    let productHasFeature = false;
+    for (var i = 0; i < this.props.productFeatures.length; i++) {
+      let currentFeature = this.props.productFeatures[i];
+      if (currentFeature.feature === this.props.feature &&
+        currentFeature.value === this.props.value) {
+        productHasFeature = true;
+      }
+    }
+
     return (
-      <tbody>
-        <tr>
-          <th>{this.props.name}</th>
-          <th></th>
-          <th>{this.props.overviewProduct.name}</th>
-        </tr>
-        <tr>
-          <td>{this.props.value}</td>
-          <td>{this.props.feature}</td>
-          <td>{this.props.overviewProduct.features.feature}</td>
-        </tr>
-      </tbody>
+      <tr>
+
+        <td>
+          {overviewHasFeature && "✓"}
+        </td>
+        <td>{this.props.feature} : {this.props.value}</td>
+        <td>
+          {productHasFeature && "✓"}
+        </td>
+      </tr>
+
 
     )
   }
