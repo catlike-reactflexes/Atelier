@@ -13,6 +13,7 @@ class App extends React.Component {
       productId: 47421,
       productName:'Camo Onesie',
       productFeatures: [],
+      reviewValue: null,
       quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
@@ -26,6 +27,7 @@ class App extends React.Component {
       } else {
         this.setState({ productId: data.id, productName: data.name });
       }
+      window.history.replaceState(null, '', `/product?id=${data.id}`);
     } else {
       console.error('Unhandled data in update: ', data);
     }
