@@ -63,8 +63,11 @@ app.get('/reviewmeta', (req, res) => {
   })
 })
 
-app.put('/helpful', (req, res) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/helpful`)
+app.get('/helpful', (req, res) => {
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN}
+  }
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/helpful`, config)
   .then(response => {
     res.send(response)
   })
@@ -74,6 +77,19 @@ app.put('/helpful', (req, res) => {
   })
 })
 
+app.get('/report', (req, res) => {
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN}
+  }
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/report`, config)
+  .then(response => {
+    res.send(response)
+  })
+  .catch(err => {
+    console.log('report review put error: ', err)
+    throw err
+  })
+})
 
 /*
   ----------------------------
