@@ -6,10 +6,10 @@
  import '@testing-library/jest-dom';
  import { render, screen } from '@testing-library/react';
 
- import YourOutfitList from ' ../../../client/src/components/reviews/ReviewBreakdown.jsx';
+ import ReviewBreakdown from ' ../../../client/src/components/reviews/ReviewBreakdown.jsx';
 
 
 
- describe('some test', function () {
+ describe('sliders have their apis value', function () {
    test.todo('todo');
  })
