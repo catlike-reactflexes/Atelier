@@ -66,6 +66,7 @@ describe('Tests for Product Details component', function () {
   test('Product Details component renders to page', () => {
     const app = render(<ProductDetails category={'Pants'} name={'Morning Joggers'} price={'40.00'} loaded={true}/>);
     expect(Object.is(app.queryByTestId('overview-details'), null)).toBe(false);
+    expect(app.getByText("Morning Joggers")).toBeInTheDocument();
   });
 });
 

@@ -5,7 +5,8 @@ const ProductImage = (props) => {
   return (
     props.loaded ?
       <div id="mainProductImageContainer" data-testid="overview-image" >
-        <img id="mainImg" alt="Product Image" src={props.photos[0].url} />
+        <img className="blurredImage" src={props.photos[0].url} />
+        <img id="mainImg" src={props.photos[0].url} />
         <StyleThumbnails />
       </div>
     : <div id="mainProductImageContainer" data-testid="overview-image">
