@@ -339,6 +339,24 @@ object-fit: fill;
 }
 
 .RnR {
-  grid: flex;
-  flex-direction: row;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.reviewBreakdown {
+  display: flex;
+  flex-basis:33%
+}
+
+.reviewList {
+  display: flex;
+  flex-basis:66%;
+  flex-direction: column
+}
+
+.helpfulBtn {
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
 }

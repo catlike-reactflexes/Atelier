@@ -45,7 +45,6 @@ app.get('/reviews', (req, res) => {
     })
 })
 
-<<<<<<< HEAD
 app.get('/reviewmeta', (req, res) => {
   let product_id = Number(req.query.productID)
   let config = {
@@ -63,16 +62,26 @@ app.get('/reviewmeta', (req, res) => {
   })
 })
 
+app.put('/helpful', (req, res) => {
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/helpful`)
+  .then(response => {
+    res.send(response)
+  })
+  .catch(err => {
+    console.log('helpful review put error: ', err)
+    throw err
+  })
+})
+
+
 /*
   ----------------------------
   | End of Review Routes |
   ----------------------------
-=======
 /*
  *  ---------------------------
  *  | Product Overview Routes |
  *  ---------------------------
->>>>>>> 012d8d8a6ea12ae20611625227c0ef9e28e8eba8
 */
 
 app.get('/product', (req, res) => {

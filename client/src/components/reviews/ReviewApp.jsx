@@ -44,12 +44,47 @@ class ReviewApp extends React.Component {
         },
       ],
       defaultProductID: props.id,
-      reviewCharacteristics: {},
+      reviewCharacteristics: {
+        "Length": {
+          "id": 14,
+          "value": "4.0000"
+        },
+        "Width": {
+          "id": 15,
+          "value": "3.5000"
+        },
+        "Comfort": {
+          "id": 16,
+          "value": "4.0000"
+        },
+        "Fit": {
+          "id": 17,
+          "value": "3.0000"
+        }
+        // ...
+      },
       reviewRating: {},
       reviewRecommended: {}
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
+    this.markReviewAsHelpful = this.markReviewAsHelpful.bind(this)
+  }
+
+  markReviewAsHelpful(reviewID) {
+    console.log('review id: ', reviewID)
+    axios.put('/helpful', {
+      params: {
+        review_id: reviewID
+      }
+    })
+    .then(response => {
+      console.log('put response', response)
+    })
+    .catch(error => {
+      console.log('put error', error)
+      throw error
+    })
   }
 
   getReviews() {
@@ -61,6 +96,10 @@ class ReviewApp extends React.Component {
       .then(arrayOfReviews => {
         // console.log('this is reviews from api call:', arrayOfReviews.data.results)
         this.setState({reviews:arrayOfReviews.data.results})
+      })
+      .catch(error => {
+        console.log('get error', error)
+        throw error
       })
   }
 
@@ -78,6 +117,10 @@ class ReviewApp extends React.Component {
           reviewRecommended: reviewMetaData.data.recommended
         })
       })
+      .catch(error => {
+        console.log('get meta error', error)
+        throw error
+      })
   }
 
   componentDidMount() {
@@ -91,8 +134,10 @@ class ReviewApp extends React.Component {
     return (
       <div className='reviews'>
         {/* <Search /> */}
-        <ReviewList reviews = {this.state.reviews}/>
-        <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
+        <div className='RnR'>
+          <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
+          <ReviewList reviews = {this.state.reviews}/>
+        </div>
         <NewReview />
       </div>
     );
