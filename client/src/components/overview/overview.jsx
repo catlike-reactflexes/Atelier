@@ -73,7 +73,7 @@ class Overview extends React.Component {
         <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} />
         <div className="sidebar column-flex">
           <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
-          <ProductSyles styles={this.state.productStyles} />
+          <ProductSyles styles={this.state.productStyles} loaded={this.state.stylesLoaded} />
           <ProductButtons favoriteItem={this.saveToOutfit} />
         </div>
         <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features} loaded={this.state.detailsLoaded} />

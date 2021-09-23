@@ -48,7 +48,6 @@ body {
   z-index: 1;
   position: relative;
   margin: 0 auto;
-  filter: hue-rotate(45deg);
 }
 
 .blurredImage {
@@ -86,12 +85,22 @@ body {
   border: 1px solid dimgray;
 }
 
-#stylesContainer .styleBtn {
+.styleBtn {
+  display: flex;
   width: 7vw;
   height: 7vw;
   margin-top: 1vw;
   border-radius: 50%;
   border: 1px solid dimgray;
+  position: relative;
+  overflow: hidden;
+}
+
+.styleBtn img {
+  max-height: 150px;
+  position: absolute;
+  object-position: 50% 50%;
+  overflow: hidden;
 }
 
 #styleButtons {
