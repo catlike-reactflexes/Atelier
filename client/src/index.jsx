@@ -12,13 +12,23 @@ class App extends React.Component {
     this.state = {
       productId: 47421,
       productName:'Camo Onesie',
+      productFeatures: [],
       quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
   }
 
-  handleProductUpdate(id) {
-    this.setState({ productId: id });
+  handleProductUpdate(data) {
+    let update = {}
+    if (data.id && data.name) {
+      if (data.features) {
+        this.setState({ productId: data.id, productName: data.name, productFeatures: data.features });
+      } else {
+        this.setState({ productId: data.id, productName: data.name });
+      }
+    } else {
+      console.error('Unhandled data in update: ', data);
+    }
   }
 
 
