@@ -7,20 +7,24 @@ class RelatedProductsCard extends React.Component {
     this.state = {
       comparisonModalVisible: false
     }
+    this.hideComparisonModal = this.hideComparisonModal.bind(this);
     this.showComparisonModal = this.showComparisonModal.bind(this);
   }
 
-  showComparisonModal() {
+  showComparisonModal(event) {
     event.preventDefault();
-    this.setState({
-      comparisonModalVisible: true
+    this.setState({ comparisonModalVisible: true });
+    document.addEventListener('click', this.hideComparisonModal, true);
+  }
+
+  hideComparisonModal() {
+    this.setState({ comparisonModalVisible: false }, () => {
+      document.removeEventListener('click', this.hideComparisonModal);
     });
   }
 
-
   //set star to absolute position within the card element
   render() {
-    console.log('props in cards: ', this.props);
     return (
       <div>
         <li className="relatedProductsItems" >

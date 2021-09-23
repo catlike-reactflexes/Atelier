@@ -8,7 +8,6 @@ class RelatedProductsList extends React.Component {
 
 
   render() {
-    console.log('props in card list: ', this.props);
     for (var i = 0; i < this.props.productData.length; i++) {
       this.props.productData[i].image = this.props.imageData[i];
     }

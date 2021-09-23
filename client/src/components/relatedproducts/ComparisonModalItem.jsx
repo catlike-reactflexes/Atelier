@@ -10,7 +10,6 @@ class ComparisonModalItem extends React.Component {
 
 
   render() {
-    console.log('props in comparison modal item: ', this.props.overviewProduct.value);
     return (
       <tbody>
         <tr>
@@ -28,5 +27,7 @@ class ComparisonModalItem extends React.Component {
     )
   }
 }
+
+
 
 export default ComparisonModalItem;
