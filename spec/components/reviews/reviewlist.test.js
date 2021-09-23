@@ -9,7 +9,7 @@
  import ReviewList from ' ../../../client/src/components/reviews/ReviewList.jsx';
 
  describe('Review List Component', function () {
-   test('Should render a new review', function () {
+   test('Should render new reviews', function () {
      const reviews = [
       {
           "review_id": 781037,
