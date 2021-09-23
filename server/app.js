@@ -102,7 +102,7 @@ app.get('/report', (req, res) => {
 */
 
 app.get('/product', (req, res) => {
-  console.log('/product route req.query: ', req.query)
+  // console.log('/product route req.query: ', req.query)
   let id = req.query.id;
   axios({
     method: 'get',
