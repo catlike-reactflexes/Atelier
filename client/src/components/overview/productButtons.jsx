@@ -10,7 +10,7 @@ const ProductButtons = (props) => {
         <option>1</option>
       </select>
       <button id="bagBtn">ADD TO BAG</button>
-      <button id="favBtn">*</button>
+      <button id="favBtn" onClick={props.favoriteItem} >*</button>
     </div>
   )
 }
