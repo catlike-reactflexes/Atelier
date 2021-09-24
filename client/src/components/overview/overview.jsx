@@ -13,11 +13,12 @@ class Overview extends React.Component {
       productId: props.id,
       productDetails: {},
       productStyles: [],
-      styleId: 0,
+      styleId: 286894,
       stylePhotos: null,
       loaded: false
     };
     this.getProductStyles = this.getProductStyles.bind(this);
+    this.updateStyle = this.updateStyle.bind(this);
     this.saveToOutfit = this.saveToOutfit.bind(this);
   }
 
@@ -44,16 +45,36 @@ class Overview extends React.Component {
       url: '/styles',
       params: { id: id }
     }).then((response) => {
-      let data = response.data;
-      this.setState({ productStyles: data.results, stylePhotos: data.results[0].photos, stylesLoaded: true });
+      let results = response.data.results;
+      let photos = [];
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].style_id === this.state.styleId) {
+          photos = results[i].photos;
+          break;
+        }
+      }
+      this.setState({ productStyles: results, stylePhotos: photos, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
     })
   }
 
+  updateStyle(event) {
+    event.preventDefault();
+    //this.setState({ stylesLoaded: false })
+    let id = parseInt(event.target.id);
+    let styles = this.state.productStyles;
+    let photos = [];
+    for (let i = 0; i < styles.length; i++) {
+      if (styles[i].style_id === id) {;
+        photos = styles[i].photos;
+        break;
+      }
+    }
+    this.setState({ styleId: id, stylePhotos: photos, stylesLoaded: true });
+  }
+
   saveToOutfit() {
-    // TODO: implement using localStorage
-    // load outfit data on component mount
     let id = this.state.productId;
     let outfitData;
     if (localStorage.getItem('myOutfit') === null) {
@@ -73,7 +94,7 @@ class Overview extends React.Component {
         <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} />
         <div className="sidebar column-flex">
           <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
-          <ProductSyles styles={this.state.productStyles} loaded={this.state.stylesLoaded} />
+          <ProductSyles styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
           <ProductButtons favoriteItem={this.saveToOutfit} />
         </div>
         <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features} loaded={this.state.detailsLoaded} />

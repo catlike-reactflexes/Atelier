@@ -2,6 +2,7 @@ import React from 'react';
 import StyleThumbnails from './styleThumbnails.jsx';
 
 const ProductImage = (props) => {
+  console.log('ProductImage props.photos: ', props.photos);
   return (
     props.loaded ?
       <div id="mainProductImageContainer" data-testid="overview-image" >
