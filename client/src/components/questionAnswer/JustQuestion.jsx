@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AddAnswer from './AddAnswer.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class JustQuestion extends React.Component{
   constructor(props){
@@ -13,7 +14,7 @@ class JustQuestion extends React.Component{
       questionReport: false
     }
 
-    // console.log('Just Question-->', this.props)
+    console.log('Just Question-->', this.props)
     this.setOpen = this.setOpen.bind(this);
     this.questionUpdateHelpfulness = this.questionUpdateHelpfulness.bind(this);
     this.questionReport = this.questionReport.bind(this);
@@ -44,7 +45,7 @@ class JustQuestion extends React.Component{
 
   questionReport = (questionId) => {
     //user only allowed to click one time
-
+    this.props.sendInteraction('Report Question')
     if(!this.state.questionReport) {
       // console.log('Hello-->', questionId)
       axios.put('/report', {
@@ -94,4 +95,4 @@ class JustQuestion extends React.Component{
   }
 }
 
-export default JustQuestion;
+export default ClickTracker(JustQuestion, 'Question And Answer') ;

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class AddQuestion extends React.Component {
     })
   }
   submitQuestion = () => {
+    this.props.sendInteraction('submit Question')
     console.log('SubmitQuestion- props->',this.props);
     console.log('SubmitQuestion-->',this.props.productId, this.state);
 
@@ -116,4 +118,4 @@ const OVERLAY_STYLES = {
 
 
 
-export default AddQuestion;
+export default ClickTracker(AddQuestion, 'Questions And Answers');

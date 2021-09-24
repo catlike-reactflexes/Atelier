@@ -21,7 +21,34 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
+/*
+  ---------------------------
+  | Atelier Interactions API
+  ---------------------------
+*/
 
+app.post('/api/interactions', (req, res)=> {
+  console.log('Interaction API-->',req.body) ;
+  axios({
+    method: 'POST',
+    url: `${API_URL}/interactions`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    data: {
+      element: req.body.element,
+      widget: req.body.widget,
+      time: req.body.time
+    }
+  }).then(function (response) {
+    console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
+    res.status(response.status).send(response.data);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(response.status).send(err);
+  })
+
+})
 /*
   ----------------------------
   | Review Routes |
