@@ -2,6 +2,7 @@ import React from 'react';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
+import ComparisonModalItem from './ComparisonModalItem.jsx';
 import axios from 'axios';
 
 
@@ -13,11 +14,33 @@ class RelatedProducts extends React.Component {
       relatedProductsStyles: [],
       defaultImages: [],
       yourOutfitData: [],
-      defaultProductId: 47421
+      defaultProductId: 47421,
+      overviewProductData: {
+        "id": 47421,
+        "campus": "hr-rpp",
+        "name": "Camo Onesie",
+        "slogan": "Blend in to your crowd",
+        "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+        "category": "Jackets",
+        "default_price": "140.00",
+        "created_at": "2021-08-26T20:30:48.129Z",
+        "updated_at": "2021-08-26T20:30:48.129Z",
+        "features": [
+          {
+            "feature": "Fabric",
+            "value": "Canvas"
+          },
+          {
+            "feature": "Buttons",
+            "value": "Brass"
+          }
+        ]
+      }
     }
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
+
   }
 
 
@@ -68,6 +91,8 @@ class RelatedProducts extends React.Component {
   getYourOutfitData() {
   }
 
+
+
   componentDidMount() {
     this.getRelatedProductsData();
     this.getRelatedProductsStyles();
@@ -80,9 +105,13 @@ class RelatedProducts extends React.Component {
     return (
       <div>
         <h3>Related Products</h3>
-        <RelatedProductsList productData={this.state.relatedProductsData} imageData={this.state.defaultImages} />
+        <RelatedProductsList
+          productData={this.state.relatedProductsData}
+          imageData={this.state.defaultImages}
+          overviewProduct={this.state.overviewProductData} />
         <h3>Your Outfit</h3>
-        <YourOutfitList dummyData={this.state.relatedProductsData} />
+        <YourOutfitList
+          dummyData={this.state.relatedProductsData} />
       </div>
     )
   }
