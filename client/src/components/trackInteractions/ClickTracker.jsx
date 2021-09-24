@@ -2,33 +2,34 @@ import React from 'react';
 import axios from 'axios';
 
 //https://reactjs.org/docs/higher-order-components.html
-//
+// HOC for click tracker
 
-const ClickTracker = function (WrappedComponent, widget) {
+function ClickTracker (WrappedComponent) {
+
   return class extends React.Component {
     constructor(props) {
       super(props);
 
-      this.sendInteraction = this.sendInteraction.bind(this);
+      this.postTrackInteractions = this.postTrackInteractions.bind(this);
     }
-      sendInteraction(element) {
-        const data = {
-          element: element,
-          widget: widget,
+      postTrackInteractions(elementName, widgetName) {
+
+        axios.post('/api/interactions', {
+          element: elementName,
+          widget: widgetName,
           time: new Date().toString()
-        };
-        axios.post('/api/interactions', data)
+        })
         .then((response) => {
-          console.log('Sent interaction data successfully ', response);
+          console.log('Success->', response);
         })
         .catch((err) => {
-          console.log('Error happened while sending interactions data');
+          console.log('Error with posting click tracker-->', err);
         });
       }
 
       render() {
         return (
-          <WrappedComponent sendInteraction={this.sendInteraction} {...this.props} />
+          <WrappedComponent postTrackInteractions={this.postTrackInteractions} {...this.props} />
         );
       }
 

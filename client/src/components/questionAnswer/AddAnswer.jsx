@@ -1,5 +1,6 @@
 const React = require('react');
 import axios from 'axios';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class AddAnswer extends React.Component {
   constructor(props){
@@ -14,9 +15,11 @@ class AddAnswer extends React.Component {
     console.log('Add Answer-props->', this.props)
   }
   submitAnswer = ()=> {
+    this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
+    
     console.log('submit answer');
     console.log(this.state)
-    axios.post('/addAnswer', {
+    axios.post('/api/addAnswer', {
       question_id: this.props.oneQues.question_id,
       body: this.state.answer,
       name: this.state.nickname,
@@ -109,4 +112,4 @@ const OVERLAY_STYLES = {
   backgroundColor: 'rgba(0, 0, 0, .4)',
   zIndex: 1000
 }
-export default AddAnswer;
+export default ClickTracker(AddAnswer);

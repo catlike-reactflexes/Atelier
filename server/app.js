@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
   ---------------------------
   | Atelier Interactions API
   ---------------------------
+  //make a post to API
 */
 
 app.post('/api/interactions', (req, res)=> {
@@ -278,7 +279,7 @@ app.get('/api/qa/id=*', (req, res) => {
       })
 
 });
-app.post('/addAnswer', (req, res)=> {
+app.post('/api/addAnswer', (req, res)=> {
   // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
   axios({
     method: 'POST',
@@ -302,7 +303,7 @@ app.post('/addAnswer', (req, res)=> {
   })
 
 })
-app.post('/addQuestion', (req, res)=> {
+app.post('/api/addQuestion', (req, res)=> {
   // console.log('QA**request AddAQuestion-->',req.body) ;
   axios({
     method: 'POST',
@@ -326,7 +327,7 @@ app.post('/addQuestion', (req, res)=> {
   })
 
 })
-app.put('/update', (req, res) => {
+app.put('/api/update', (req, res) => {
   // console.log('request-->', req.body.data)
   const {questionid} = req.body.data;
   const {answerid} = req.body.data;
@@ -360,7 +361,7 @@ app.put('/update', (req, res) => {
 
 })
 
-app.put('/report', (req, res) => {
+app.put('/api/report', (req, res) => {
   console.log('request-->', req.body.data)
   const {questionid} = req.body.data;
   const {answerid} = req.body.data;
@@ -384,7 +385,7 @@ app.put('/report', (req, res) => {
   })
     .then(function (response) {
     //looking for 204 to get update
-    console.log('api response--> ', response);
+    // console.log('api response--> ', response);
     res.sendStatus(response.status);
   })
     .catch(function (err) {

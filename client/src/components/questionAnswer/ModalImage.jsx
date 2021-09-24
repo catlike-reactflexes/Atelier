@@ -1,5 +1,5 @@
 const React = require('react');
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ModalImage extends React.Component {
   constructor(props){
@@ -12,6 +12,7 @@ class ModalImage extends React.Component {
   }
 
   handleOnClick = () => {
+    this.props.postTrackInteractions('Answer photo', 'Questions and Answers')
     console.log('--->Closing--->')
     this.props.onClose();
 
@@ -53,4 +54,4 @@ const OVERLAY_STYLES1 = {
   backgroundColor: 'rgba(0, 0, 0, .4)',
   zIndex: 1000
 }
-export default ModalImage;
+export default ClickTracker(ModalImage);

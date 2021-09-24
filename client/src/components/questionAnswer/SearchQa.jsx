@@ -1,5 +1,5 @@
 const React = require('react');
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class SearchQa extends React.Component {
   constructor(props) {
@@ -40,6 +40,7 @@ class SearchQa extends React.Component {
 
         <div data-testid="searchQues">
             <textarea
+              onClick={()=>this.props.postTrackInteractions('search', 'Questions and Answers')}
               type="text"
               name='searchBar'
               className='search'
@@ -56,4 +57,4 @@ class SearchQa extends React.Component {
 
 }
 
-export default SearchQa;
+export default ClickTracker(SearchQa);

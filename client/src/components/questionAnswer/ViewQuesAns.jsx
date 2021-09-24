@@ -2,7 +2,7 @@ import React from 'react';
 import QuesAns from './QuesAns.jsx';
 import MoreQuestion from './MoreQuestion.jsx';
 import AddQuestion from './AddQuestion.jsx';
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ViewQuesAns extends React.Component {
 
@@ -17,9 +17,10 @@ class ViewQuesAns extends React.Component {
     }
     this.setOpen = this.setOpen.bind(this);
     this.updateQuesAns = this.updateQuesAns.bind(this);
-    console.log('ViewQuestion--->', this.state.twoQuestions, this.state.restOfQuestions)
+    // console.log('ViewQuestion--->', this.state.twoQuestions, this.state.restOfQuestions)
   }
   setOpen = (option) =>{
+    this.props.postTrackInteractions('Add A Question', 'Questions and Answers');
     this.setState({
       isOpen:option
     })
@@ -86,4 +87,4 @@ const BUTTON_STYLES = {
   position: 'relative',
   zIndex: 1
 }
-export default ViewQuesAns;
+export default ClickTracker(ViewQuesAns);

@@ -20,11 +20,11 @@ class AddQuestion extends React.Component {
     })
   }
   submitQuestion = () => {
-    this.props.sendInteraction('submit Question')
-    console.log('SubmitQuestion- props->',this.props);
-    console.log('SubmitQuestion-->',this.props.productId, this.state);
+    this.props.postTrackInteractions('Submit question', 'Questions And Answers')
+    // console.log('SubmitQuestion- props->',this.props);
+    // console.log('SubmitQuestion-->',this.props.productId, this.state);
 
-    axios.post('/addQuestion', {
+    axios.post('/api/addQuestion', {
       product_id: this.props.productId,
       body: this.state.question,
       name: this.state.nickname,
@@ -118,4 +118,4 @@ const OVERLAY_STYLES = {
 
 
 
-export default ClickTracker(AddQuestion, 'Questions And Answers');
+export default ClickTracker(AddQuestion);

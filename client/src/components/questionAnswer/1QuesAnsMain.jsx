@@ -2,6 +2,7 @@
 import React from 'react';
 import SearchQa from './SearchQa.jsx';
 import ViewQuesAns from './ViewQuesAns.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class QuesAnsMain extends React.Component {
 
@@ -15,14 +16,14 @@ class QuesAnsMain extends React.Component {
 
     }
     this.updateQuesAns = this.updateQuesAns.bind(this);
-    console.log('filteresQues-->', this.state, this.props)
+    // console.log('filteresQues-->', this.state, this.props)
 
   }
   updateQuesAns = (data) => {
-    console.log('Response->', data)
+    // console.log('Response->', data)
     let search = '';
     search += data;
-    console.log('Search--1->' , search);
+    // console.log('Search--1->' , search);
 
     if(search.length >=3 ){
 
@@ -51,28 +52,35 @@ class QuesAnsMain extends React.Component {
 
     const {quesAns, id, productName} = this.props;
     const {search, filteredQues,updated} = this.state;
-    console.log('QuestionAns filtered props--->', filteredQues)
+    // console.log('QuestionAns filtered props--->', filteredQues)
     return (
       <div className="qa">
-        {/* {filteredQues.map(each)} */}
-        <p>Questions and Answers</p>
+
+        <p
+          onClick={()=>this.props.postTrackInteractions('label', 'Questions and Answers')}>
+          Questions and Answers
+        </p>
+
         <SearchQa
           filteredQues={filteredQues}
           updateQuesAns={this.updateQuesAns}
-          // handleQAUpdate={this.props.handleQAUpdate}
         />
-        {/* {this.renderQuesAns(filteredQues)} */}
-        {updated? <div>
+
+        {
+          updated?
+          <div>
             <ViewQuesAns
               filteredQues={filteredQues}
               productId={id}
               productName={productName}
             />
-          </div>: <ViewQuesAns
+          </div> :
+            <ViewQuesAns
               filteredQues={quesAns}
               productId={id}
               productName={productName}
-            />}
+            />
+        }
 
 
       </div>
@@ -84,4 +92,4 @@ class QuesAnsMain extends React.Component {
 
 }
 
-export default QuesAnsMain;
+export default ClickTracker(QuesAnsMain);
