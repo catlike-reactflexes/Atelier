@@ -17,9 +17,16 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
+
+/*
+  ----------------------------
+  | Review Routes |
+  ----------------------------
+*/
 
 app.get('/reviews', (req, res) => {
   let product_id = Number(req.query.productID)
@@ -39,6 +46,55 @@ app.get('/reviews', (req, res) => {
     })
 })
 
+app.get('/reviewmeta', (req, res) => {
+  let product_id = Number(req.query.productID)
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN},
+    params: {'product_id': product_id}
+  }
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', config)
+  .then(metadata => {
+    // console.log('meta api response: ', metadata.data);
+    res.json(metadata.data)
+  })
+  .catch(err => {
+    console.log('review get error: ', err)
+    throw err
+  })
+})
+
+app.get('/helpful', (req, res) => {
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN}
+  }
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/helpful`, config)
+  .then(response => {
+    res.send(response)
+  })
+  .catch(err => {
+    console.log('helpful review put error: ', err)
+    throw err
+  })
+})
+
+app.get('/report', (req, res) => {
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN}
+  }
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/report`, config)
+  .then(response => {
+    res.send(response)
+  })
+  .catch(err => {
+    console.log('report review put error: ', err)
+    throw err
+  })
+})
+
+/*
+  ----------------------------
+  | End of Review Routes |
+  ----------------------------
 /*
  *  ---------------------------
  *  | Product Overview Routes |
@@ -46,8 +102,8 @@ app.get('/reviews', (req, res) => {
 */
 
 app.get('/product', (req, res) => {
+  // console.log('/product route req.query: ', req.query)
   let id = req.query.id;
-  // console.log()
   axios({
     method: 'get',
     url: `${API_URL}/products/${id}`,

@@ -85,12 +85,22 @@ body {
   border: 1px solid dimgray;
 }
 
-#stylesContainer .styleBtn {
+.styleBtn {
+  display: flex;
   width: 7vw;
   height: 7vw;
   margin-top: 1vw;
   border-radius: 50%;
   border: 1px solid dimgray;
+  position: relative;
+  overflow: hidden;
+}
+
+.styleBtn img {
+  max-height: 150px;
+  position: absolute;
+  object-position: 50% 50%;
+  overflow: hidden;
 }
 
 #styleButtons {
@@ -384,6 +394,31 @@ object-fit: fill;
 }
 
 .RnR {
-  grid: flex;
-  flex-direction: row;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.reviewBreakdown {
+  display: flex;
+  flex-basis:33%
+}
+
+.reviewList {
+  display: flex;
+  flex-basis:66%;
+  flex-direction: column
+}
+
+.helpfulBtn {
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.reportBtn {
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
 }
