@@ -11,10 +11,10 @@ const makeStyles = (styles, update) => {
 const ProductSyles = (props) => {
   return (
     <div id="stylesContainer" data-testid="overview-styles">
-      <span><em>STYLE ></em> SELECTED STYLE</span>
+      <span><em>STYLE ></em> {props.name.toUpperCase()}</span>
         {
           props.loaded ?
-          makeStyles(props.styles, props.update)
+            makeStyles(props.styles, props.update)
           : <span>Style Options Loading</span>
         }
     </div>

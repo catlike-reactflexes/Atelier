@@ -14,6 +14,7 @@ class Overview extends React.Component {
       productDetails: {},
       productStyles: [],
       styleId: 286894,
+      styleName: '',
       stylePhotos: null,
       loaded: false
     };
@@ -47,13 +48,15 @@ class Overview extends React.Component {
     }).then((response) => {
       let results = response.data.results;
       let photos = [];
+      let name = '';
       for (let i = 0; i < results.length; i++) {
         if (results[i].style_id === this.state.styleId) {
           photos = results[i].photos;
+          name = results[i].name;
           break;
         }
       }
-      this.setState({ productStyles: results, stylePhotos: photos, stylesLoaded: true });
+      this.setState({ productStyles: results, styleName: name, stylePhotos: photos, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
     })
@@ -65,13 +68,16 @@ class Overview extends React.Component {
     let id = parseInt(event.target.id);
     let styles = this.state.productStyles;
     let photos = [];
+    let name = '';
+    console.log('styles: ', styles)
     for (let i = 0; i < styles.length; i++) {
       if (styles[i].style_id === id) {;
         photos = styles[i].photos;
+        name = styles[i].name;
         break;
       }
     }
-    this.setState({ styleId: id, stylePhotos: photos, stylesLoaded: true });
+    this.setState({ styleId: id, styleName: name, stylePhotos: photos });
   }
 
   saveToOutfit() {
@@ -94,7 +100,7 @@ class Overview extends React.Component {
         <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} />
         <div className="sidebar column-flex">
           <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
-          <ProductSyles styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
+          <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
           <ProductButtons favoriteItem={this.saveToOutfit} />
         </div>
         <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features} loaded={this.state.detailsLoaded} />
