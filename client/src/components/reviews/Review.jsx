@@ -7,7 +7,7 @@ const Review = (props) => {
 let markReviewAsHelpful = (reviewID) => {
   console.log('review id in helpful', reviewID)
   axios.get('/helpful', {
-    params: {
+    data: {
       review_id: reviewID
     }
   })
@@ -15,8 +15,8 @@ let markReviewAsHelpful = (reviewID) => {
     console.log('put response', response)
   })
   .catch(error => {
-    console.log('put error', error)
-    throw error
+    console.log('put error--->', error)
+    // throw error
   })
 }
 

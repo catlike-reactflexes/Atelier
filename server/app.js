@@ -36,7 +36,7 @@ app.get('/reviews', (req, res) => {
   }
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
     .then(data => {
-      // console.log('api response: ', data.data.results);
+      console.log('api response---1-----: ', data.data.results);
       res.json(data.data)
     })
     .catch(err => {
@@ -63,17 +63,29 @@ app.get('/reviewmeta', (req, res) => {
 })
 
 app.get('/helpful', (req, res) => {
-  let config = {
-    headers: {'Authorization': process.env.API_TOKEN}
-  }
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${Number(req.query.productID)}/helpful`, config)
-  .then(response => {
-    res.send(response)
+  // console.log('HELPFUL-->', req.query.productID);
+  const test_url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/820855/helpful'
+  let test_data = {reveiw_id : 820855}
+
+  axios({
+    method: 'put',
+    url: test_url,
+    data: test_data,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    }
+
   })
-  .catch(err => {
-    console.log('helpful review put error: ', err)
-    throw err
+    .then(function (response) {
+    //looking for 204 to get update
+    console.log('api response--> ', response.status);
+    res.sendStatus(response.status);
   })
+    .catch(function (err) {
+    // console.log('api request error--> ', err);
+    res.status(404).send(err);
+  })
+
 })
 
 app.get('/report', (req, res) => {
@@ -356,7 +368,7 @@ app.put('/report', (req, res) => {
   })
     .then(function (response) {
     //looking for 204 to get update
-    // console.log('api response--> ', response.status);
+    console.log('api response--> ', response);
     res.sendStatus(response.status);
   })
     .catch(function (err) {
