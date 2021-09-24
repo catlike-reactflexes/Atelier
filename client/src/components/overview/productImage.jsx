@@ -16,5 +16,3 @@ const ProductImage = (props) => {
 }
 
 export default ProductImage;
-
-// saving for later <div className="blurredImage" style={{ 'background-image': `url(${props.photos[0].url})` }} ></div>

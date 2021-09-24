@@ -17,6 +17,7 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
@@ -101,8 +102,8 @@ app.get('/report', (req, res) => {
 */
 
 app.get('/product', (req, res) => {
+  // console.log('/product route req.query: ', req.query)
   let id = req.query.id;
-  // console.log()
   axios({
     method: 'get',
     url: `${API_URL}/products/${id}`,
