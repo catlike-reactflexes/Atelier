@@ -69,7 +69,7 @@ class Overview extends React.Component {
     let styles = this.state.productStyles;
     let photos = [];
     let name = '';
-    console.log('styles: ', styles)
+    // console.log('styles: ', styles)
     for (let i = 0; i < styles.length; i++) {
       if (styles[i].style_id === id) {;
         photos = styles[i].photos;
