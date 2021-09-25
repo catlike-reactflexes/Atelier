@@ -104,6 +104,18 @@ body {
   border: 1px solid dimgray;
 }
 
+.overviewStars {
+  display: flex;
+  flex-direction: row;
+  max-height: 20px;
+}
+
+.fullStar {
+  height: 100%;
+  width: 20px;
+  content: url('./resources/fullstar.svg');
+}
+
 #stylesContainer {
   display: flex;
   flex-direction: column;
