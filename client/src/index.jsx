@@ -33,11 +33,12 @@ class App extends React.Component {
       console.error('Unhandled data in update: ', data);
     }
   }
-    handleQAUpdate(updateList) {
 
-      this.setState({quesAns: [{updateList}]})
-      // console.log('UpdateLIST--->', updateList);
-    }
+  handleQAUpdate(updateList) {
+
+    this.setState({quesAns: [{updateList}]})
+    // console.log('UpdateLIST--->', updateList);
+  }
 
   fetchQuestionAnswer() {
     const {productId} = this.state;

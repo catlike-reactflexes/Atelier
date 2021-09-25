@@ -1,9 +1,9 @@
 import React from 'react';
 
 const makeFeatureList = (data) => {
-  let items = data.map( obj => {
+  let items = data.map((obj, index) => {
     let str = `${obj.feature}: ${obj.value}`;
-    return <li>{str}</li>
+    return <li key={index}>{str}</li>
   })
   return <ul className="featureList">{items}</ul>
 }
