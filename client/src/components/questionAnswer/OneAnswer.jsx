@@ -60,7 +60,7 @@ class OneAnswer extends React.Component {
     return (
 
       <div className="oneAnswer"
-        onClick={()=>this.props.postTrackInteractions('Answer, 'Question And Answer')}
+        onClick={()=>this.props.postTrackInteractions('Answer', 'Question And Answer')}
       >
           <div className="ans1">
             <div className='bigA'>A:</div>
