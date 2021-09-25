@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -19,10 +20,11 @@ class AddQuestion extends React.Component {
     })
   }
   submitQuestion = () => {
-    console.log('SubmitQuestion- props->',this.props);
-    console.log('SubmitQuestion-->',this.props.productId, this.state);
+    this.props.postTrackInteractions('Submit question', 'Questions And Answers')
+    // console.log('SubmitQuestion- props->',this.props);
+    // console.log('SubmitQuestion-->',this.props.productId, this.state);
 
-    axios.post('/addQuestion', {
+    axios.post('/api/addQuestion', {
       product_id: this.props.productId,
       body: this.state.question,
       name: this.state.nickname,
@@ -116,4 +118,4 @@ const OVERLAY_STYLES = {
 
 
 
-export default AddQuestion;
+export default ClickTracker(AddQuestion);

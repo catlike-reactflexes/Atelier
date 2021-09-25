@@ -2,28 +2,87 @@
 import React from 'react';
 import SearchQa from './SearchQa.jsx';
 import ViewQuesAns from './ViewQuesAns.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class QuesAnsMain extends React.Component {
 
   //props-> {quesAns: Array(2), id: 47421, productUpdate: ƒ}
   constructor(props) {
    super(props)
+   this.state = {
+     search: '',
+     filteredQues: this.props.quesAns,
+     updated: false
+
+    }
+    this.updateQuesAns = this.updateQuesAns.bind(this);
+    // console.log('filteresQues-->', this.state, this.props)
+
+  }
+  updateQuesAns = (data) => {
+    // console.log('Response->', data)
+    let search = '';
+    search += data;
+    // console.log('Search--1->' , search);
+
+    if(search.length >=3 ){
+
+      const filteredQues = this.state.filteredQues.filter(question => {
+        return (question.question_body.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+      })
+      console.log('Search--->', filteredQues)
+
+       this.setState({
+        filteredQues: filteredQues,
+        updated: true
+      },()=>{console.log('newlist---->', this.state.filteredQues)})
+    } else {
+      this.setState({
+        filteredQues: this.props.quesAns,
+        updated: false
+      })
+    }
+
+
+
   }
 
-  render() {
-    console.log('QuestionAns MAIN props--->', this.props)
-    const {quesAns, id} = this.props;
 
+  render() {
+
+    const {quesAns, id, productName} = this.props;
+    const {search, filteredQues,updated} = this.state;
+    // console.log('QuestionAns filtered props--->', filteredQues)
     return (
       <div className="qa">
-        <p>Questions and Answers</p>
-        <SearchQa quesAns={quesAns} productId={id}/>
+
+        <p
+          onClick={()=>this.props.postTrackInteractions('label', 'Questions and Answers')}>
+          Questions and Answers
+        </p>
+
+        <SearchQa
+          filteredQues={filteredQues}
+          updateQuesAns={this.updateQuesAns}
+        />
 
         {
-          this.props.quesAns.length > 0 ?
-          <div><ViewQuesAns quesAns={quesAns} productId={id} productName={this.props.productName}/></div> : undefined
+          updated?
+          <div>
+            <ViewQuesAns
+              filteredQues={filteredQues}
+              productId={id}
+              productName={productName}
+            />
+          </div> :
+            <ViewQuesAns
+              filteredQues={quesAns}
+              productId={id}
+              productName={productName}
+            />
         }
-        {console.log('QuestionAns MAIN props-2-->', this.props)}
+
+
       </div>
 
 
@@ -33,4 +92,4 @@ class QuesAnsMain extends React.Component {
 
 }
 
-export default QuesAnsMain;
+export default ClickTracker(QuesAnsMain);

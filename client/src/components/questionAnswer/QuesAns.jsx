@@ -11,7 +11,7 @@ class QuesAns extends React.Component{
   render(){
 
     const {quesAnsLists} = this.props;
-    console.log('QUES*ANS*START*******', quesAnsLists)
+    // console.log('QUES*ANS*START*******', quesAnsLists)
 
     return (
       <div className='viewQuesAns'>
@@ -19,7 +19,7 @@ class QuesAns extends React.Component{
         { //format Answers into array object
           quesAnsLists && quesAnsLists.map((quesAns, index) =>
           {
-            console.log('viewQA-->', quesAns)
+            // console.log('viewQA-->', quesAns)
             if(quesAns) {
               const ansList = quesAns.answers ;
               const ansKey = [];
@@ -27,11 +27,11 @@ class QuesAns extends React.Component{
               for(let key in ansList){
                 ansKey.push(key);
               }
-              console.log('AnswerKey--->',ansKey)
+              // console.log('AnswerKey--->',ansKey)
               for(let i =0; i < ansKey.length; i++){
                 moreAnsList.push(quesAns.answers[ansKey[i]])
               }
-              console.log('final answer array--->',moreAnsList)
+              // console.log('final answer array--->',moreAnsList)
 
               return (
                 <OneQA  key = {quesAns.question_id}

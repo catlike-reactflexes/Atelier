@@ -21,7 +21,35 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
+/*
+  ---------------------------
+  | Atelier Interactions API
+  ---------------------------
+  //make a post to API
+*/
 
+app.post('/api/interactions', (req, res)=> {
+  console.log('Interaction API-->',req.body) ;
+  axios({
+    method: 'POST',
+    url: `${API_URL}/interactions`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    data: {
+      element: req.body.element,
+      widget: req.body.widget,
+      time: req.body.time
+    }
+  }).then(function (response) {
+    console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
+    res.status(response.status).send(response.data);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(response.status).send(err);
+  })
+
+})
 /*
   ----------------------------
   | Review Routes |
@@ -37,7 +65,7 @@ app.get('/reviews', (req, res) => {
   }
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
     .then(data => {
-      // console.log('api response: ', data.data.results);
+      console.log('api response---1-----: ', data.data.results);
       res.json(data.data)
     })
     .catch(err => {
@@ -229,7 +257,7 @@ app.get('/relatedProductStyles', (req, res) => {
 
 //CS- Questions & Answer START------------------------------------------------------------
 app.get('/api/qa/id=*', (req, res) => {
-  console.log('QA**request-->', req.query.product_id) ;
+  // console.log('QA**request-->', req.query.product_id) ;
   // console.log('request-->', req.path) ;
 
   axios({
@@ -251,7 +279,7 @@ app.get('/api/qa/id=*', (req, res) => {
       })
 
 });
-app.post('/addAnswer', (req, res)=> {
+app.post('/api/addAnswer', (req, res)=> {
   // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
   axios({
     method: 'POST',
@@ -275,8 +303,8 @@ app.post('/addAnswer', (req, res)=> {
   })
 
 })
-app.post('/addQuestion', (req, res)=> {
-  console.log('QA**request AddAQuestion-->',req.body) ;
+app.post('/api/addQuestion', (req, res)=> {
+  // console.log('QA**request AddAQuestion-->',req.body) ;
   axios({
     method: 'POST',
     url: `${API_URL}/qa/questions/`,
@@ -290,17 +318,17 @@ app.post('/addQuestion', (req, res)=> {
       product_id: req.body.product_id
     }
   }).then(function (response) {
-    console.log('SUCCESS___>>>api response: ', response.data);
+    // console.log('SUCCESS___>>>api response: ', response.data);
 
     res.status(200).send(response.data);
   }).catch(function (err) {
-    console.log('api request error: ', err);
+    // console.log('api request error: ', err);
     res.status(500).send(err);
   })
 
 })
-app.put('/update', (req, res) => {
-  console.log('request-->', req.body.data)
+app.put('/api/update', (req, res) => {
+  // console.log('request-->', req.body.data)
   const {questionid} = req.body.data;
   const {answerid} = req.body.data;
   let urlPut, idHelpfulness ;
@@ -327,13 +355,13 @@ app.put('/update', (req, res) => {
     res.sendStatus(response.status);
   })
     .catch(function (err) {
-    console.log('UPDATE ERROR ', err);
+    // console.log('UPDATE ERROR ', err);
     res.status(404).send(err);
   })
 
 })
 
-app.put('/report', (req, res) => {
+app.put('/api/report', (req, res) => {
   console.log('request-->', req.body.data)
   const {questionid} = req.body.data;
   const {answerid} = req.body.data;
@@ -357,11 +385,11 @@ app.put('/report', (req, res) => {
   })
     .then(function (response) {
     //looking for 204 to get update
-    console.log('api response--> ', response.status);
+    // console.log('api response--> ', response);
     res.sendStatus(response.status);
   })
     .catch(function (err) {
-    console.log('api request error--> ', err);
+    // console.log('api request error--> ', err);
     res.status(404).send(err);
   })
 
