@@ -2,6 +2,7 @@ import React from 'react';
 import StyleThumbnails from './styleThumbnails.jsx';
 
 const ProductImage = (props) => {
+  console.log('ProductImage props.photos: ', props.photos);
   return (
     props.loaded ?
       <div id="mainProductImageContainer" data-testid="overview-image" >
@@ -16,5 +17,3 @@ const ProductImage = (props) => {
 }
 
 export default ProductImage;
-
-// saving for later <div className="blurredImage" style={{ 'background-image': `url(${props.photos[0].url})` }} ></div>

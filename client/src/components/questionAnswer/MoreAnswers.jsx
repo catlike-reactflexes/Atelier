@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import OneAnswer from './OneAnswer.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class MoreAnswer extends React.Component{
   constructor(props){
@@ -11,9 +12,10 @@ class MoreAnswer extends React.Component{
       showMore : true
     }
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
-    console.log('More Answers-->', this.props)
+    // console.log('More Answers-->', this.props)
   }
   fetchMoreAns = () => {
+    this.props.postTrackInteractions('Load more answers', 'Question And Answer')
     // console.log('Fetch More Answer, checking the length of rest of Answer-->', this.state.restOfAnswer)
     if(this.state.restOfAnswer.length <= 2){
       const addTwoAns = this.state.restOfAnswer;
@@ -53,4 +55,4 @@ class MoreAnswer extends React.Component{
   }
 }
 
-export default MoreAnswer;
+export default ClickTracker(MoreAnswer);

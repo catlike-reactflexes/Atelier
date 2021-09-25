@@ -2,6 +2,7 @@ const React = require('react');
 import axios from 'axios';
 import JustQuestion from './JustQuestion.jsx';
 import MoreAnswer from './MoreAnswers.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class OneQA extends React.Component{
   constructor(props){
@@ -11,14 +12,19 @@ class OneQA extends React.Component{
   render(){
 
     const {allAns, oneQues} = this.props;
-    console.log('ONE QA--->', allAns, oneQues);
+    // console.log('ONE QA--->', allAns, oneQues);
 
     return (
       <div className="oneQA">
 
-        <div className="oneQuestion">
-          <JustQuestion oneQues={oneQues} productName={this.props.productName}/>
+        <div
+            className="oneQuestion"
+            onClick={()=>{this.props.postTrackInteractions('Question', 'Question And Answer')}}>
+            <JustQuestion
+              oneQues={oneQues} productName={this.props.productName}
+            />
         </div>
+        
         <div className="oneAnswer1">
             <MoreAnswer allAns={allAns} oneQues={oneQues}/>
         </div>
@@ -28,4 +34,4 @@ class OneQA extends React.Component{
   }
 }
 
-export default OneQA;
+export default ClickTracker(OneQA);

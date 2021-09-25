@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import NewReview from './NewReview.jsx';
 import ReviewBreakdown from './ReviewBreakdown.jsx'
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ReviewApp extends React.Component {
   constructor(props) {
@@ -68,23 +69,6 @@ class ReviewApp extends React.Component {
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
-    this.markReviewAsHelpful = this.markReviewAsHelpful.bind(this)
-  }
-
-  markReviewAsHelpful(reviewID) {
-    console.log('review id: ', reviewID)
-    axios.put('/helpful', {
-      params: {
-        review_id: reviewID
-      }
-    })
-    .then(response => {
-      console.log('put response', response)
-    })
-    .catch(error => {
-      console.log('put error', error)
-      throw error
-    })
   }
 
   getReviews() {

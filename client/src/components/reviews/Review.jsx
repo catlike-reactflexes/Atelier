@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 const Review = (props) => {
   // console.log(props.review)
 
 let markReviewAsHelpful = () => {
+  props.postTrackInteractions('helpful button', 'Reviews')
   axios.get('/reviewhelpful', {
     params: {
       review_id: props.review.review_id
@@ -19,6 +21,7 @@ let markReviewAsHelpful = () => {
 }
 
 let reportReview = () => {
+  props.postTrackInteractions('report button', 'Reviews')
   axios.get('/reviewreport', {
     params: {
       review_id: props.review.review_id
@@ -33,12 +36,12 @@ let reportReview = () => {
 }
   return (
     <div className='review'>
-      <div className='reviewer_name'>{props.review.reviewer_name}</div>
-      <div className='review_body'>{props.review.body}</div>
+      <div className='reviewer_name' onClick={() => {props.postTrackInteractions('reviewer name', 'Reviews')}}>{props.review.reviewer_name}</div>
+      <div className='review_body' onClick={() => {props.postTrackInteractions('review body', 'Reviews')}}>{props.review.body}</div>
       <button className='helpfulBtn' onClick = {() => {markReviewAsHelpful()}}>helpful? {props.review.helpfulness}</button>
       <button className='reportBtn' onClick = {() => {reportReview()}}>report</button>
     </div>
   )
 }
 
-export default Review
+export default ClickTracker(Review)
