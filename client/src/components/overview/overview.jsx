@@ -4,7 +4,9 @@ import ProductDetails from './productDetails.jsx';
 import ProductSyles from './productStyles.jsx';
 import ProductButtons from './productButtons.jsx';
 import ProductDescription from './productDescription.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 import axios from 'axios';
+
 
 class Overview extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Overview extends React.Component {
       productDetails: {},
       productStyles: [],
       styleId: 286894,
+      selectedStyle: null,
       styleName: '',
       stylePhotos: null,
       loaded: false
@@ -47,40 +50,46 @@ class Overview extends React.Component {
       params: { id: id }
     }).then((response) => {
       let results = response.data.results;
+      let selected = null;
       let photos = [];
       let name = '';
       for (let i = 0; i < results.length; i++) {
         if (results[i].style_id === this.state.styleId) {
           photos = results[i].photos;
           name = results[i].name;
+          selected = results[i];
           break;
         }
       }
-      this.setState({ productStyles: results, styleName: name, stylePhotos: photos, stylesLoaded: true });
+      this.setState({ productStyles: results, selectedStyle: selected, styleName: name, stylePhotos: photos, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
     })
   }
 
   updateStyle(event) {
+    this.props.postTrackInteractions('Style Option', 'Product Styles');
     event.preventDefault();
     //this.setState({ stylesLoaded: false })
     let id = parseInt(event.target.id);
     let styles = this.state.productStyles;
+    let selected = null;
     let photos = [];
     let name = '';
     // console.log('styles: ', styles)
     for (let i = 0; i < styles.length; i++) {
-      if (styles[i].style_id === id) {;
+      if (styles[i].style_id === id) {
+        selected = styles[i];
         photos = styles[i].photos;
         name = styles[i].name;
         break;
       }
     }
-    this.setState({ styleId: id, styleName: name, stylePhotos: photos });
+    this.setState({ styleId: id, selectedStyle: selected, styleName: name, stylePhotos: photos });
   }
 
   saveToOutfit() {
+    this.props.postTrackInteractions('Add to outfit', 'Product Buttons');
     let id = this.state.productId;
     let outfitData;
     if (localStorage.getItem('myOutfit') === null) {
@@ -101,7 +110,7 @@ class Overview extends React.Component {
         <div className="sidebar column-flex">
           <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
           <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
-          <ProductButtons favoriteItem={this.saveToOutfit} />
+          <ProductButtons selected={this.state.selectedStyle} favoriteItem={this.saveToOutfit} loaded={this.state.stylesLoaded} />
         </div>
         <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features} loaded={this.state.detailsLoaded} />
       </div>
@@ -109,4 +118,4 @@ class Overview extends React.Component {
   }
 }
 
-export default Overview;
+export default ClickTracker(Overview);
