@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class YourOutfitCard extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class YourOutfitCard extends React.Component {
   render() {
     return (
       <div>
-        <li className="relatedProductsItems" >
+        <li className="relatedProductsItems">
           <div className="card">
             <img src="https://via.placeholder.com/150"></img>
             <h4>{this.props.name}</h4>
@@ -24,4 +24,4 @@ class YourOutfitCard extends React.Component {
 
 }
 
-export default YourOutfitCard;
+export default ClickTracker(YourOutfitCard);

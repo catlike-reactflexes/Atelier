@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ComparisonModalItem extends React.Component {
   constructor(props) {
@@ -47,4 +47,4 @@ class ComparisonModalItem extends React.Component {
 
 
 
-export default ComparisonModalItem;
+export default ClickTracker(ComparisonModalItem);
