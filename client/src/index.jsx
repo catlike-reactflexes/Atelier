@@ -13,9 +13,11 @@ class App extends React.Component {
       productId: 47421,
       productName:'Camo Onesie',
       productFeatures: [],
+      reviewValue: null,
       quesAns: []
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
+    this.handleQAUpdate = this.handleQAUpdate.bind(this)
   }
 
   handleProductUpdate(data) {
@@ -26,12 +28,16 @@ class App extends React.Component {
       } else {
         this.setState({ productId: data.id, productName: data.name });
       }
-      console.log('Successful update of app data: ', data);
+      // window.history.replaceState(null, '', `/product?id=${data.id}`);
     } else {
       console.error('Unhandled data in update: ', data);
     }
   }
+    handleQAUpdate(updateList) {
 
+      this.setState({quesAns: [{updateList}]})
+      // console.log('UpdateLIST--->', updateList);
+    }
 
   fetchQuestionAnswer() {
     const {productId} = this.state;
@@ -54,19 +60,21 @@ class App extends React.Component {
   }
 
   render() {
+    const {quesAns} = this.state;
 
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
-        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        <QuesAnsMain
+        {/* <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} /> */}
+        {quesAns.length > 0 &&  <QuesAnsMain
+          handleQAUpdate = {this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}
           quesAns={this.state.quesAns}
           id={this.state.productId}
           productName={this.state.productName}
-        />
-        <Reviews id={this.state.productId}/>
+        /> }
+       {/* <Reviews id={this.state.productId}/> */}
       </div >
     );
   }

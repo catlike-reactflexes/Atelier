@@ -43,9 +43,48 @@ class ReviewApp extends React.Component {
           "photos": [],
         },
       ],
-      defaultProductID: props.id
+      defaultProductID: props.id,
+      reviewCharacteristics: {
+        "Length": {
+          "id": 14,
+          "value": "4.0000"
+        },
+        "Width": {
+          "id": 15,
+          "value": "3.5000"
+        },
+        "Comfort": {
+          "id": 16,
+          "value": "4.0000"
+        },
+        "Fit": {
+          "id": 17,
+          "value": "3.0000"
+        }
+        // ...
+      },
+      reviewRating: {},
+      reviewRecommended: {}
     };
     this.getReviews = this.getReviews.bind(this)
+    this.getReviewMeta = this.getReviewMeta.bind(this)
+    this.markReviewAsHelpful = this.markReviewAsHelpful.bind(this)
+  }
+
+  markReviewAsHelpful(reviewID) {
+    console.log('review id: ', reviewID)
+    axios.put('/helpful', {
+      params: {
+        review_id: reviewID
+      }
+    })
+    .then(response => {
+      console.log('put response', response)
+    })
+    .catch(error => {
+      console.log('put error', error)
+      throw error
+    })
   }
 
   getReviews() {
@@ -58,10 +97,35 @@ class ReviewApp extends React.Component {
         // console.log('this is reviews from api call:', arrayOfReviews.data.results)
         this.setState({reviews:arrayOfReviews.data.results})
       })
+      .catch(error => {
+        console.log('get error', error)
+        throw error
+      })
+  }
+
+  getReviewMeta() {
+    axios.get('/reviewmeta', {
+      params: {
+        productID: this.state.defaultProductID
+      }
+    })
+      .then(reviewMetaData => {
+        console.log('this is review metaData:', reviewMetaData.data)
+        this.setState({
+          reviewCharacteristics: reviewMetaData.data.characteristics,
+          reviewRating: reviewMetaData.data.ratings,
+          reviewRecommended: reviewMetaData.data.recommended
+        })
+      })
+      .catch(error => {
+        console.log('get meta error', error)
+        throw error
+      })
   }
 
   componentDidMount() {
     this.getReviews()
+    this.getReviewMeta()
   }
 
 
@@ -71,8 +135,8 @@ class ReviewApp extends React.Component {
       <div className='reviews'>
         {/* <Search /> */}
         <div className='RnR'>
-        <ReviewList reviews = {this.state.reviews}/>
-        <ReviewBreakdown />
+          <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
+          <ReviewList reviews = {this.state.reviews}/>
         </div>
         <NewReview />
       </div>

@@ -31,6 +31,8 @@
 
      const app = render(<Review key = {0} review = {review}  />)
 
+    //  app.querySelector('.summary')
+
      expect(app.getByText("This product was ok!")).toBeInTheDocument();
 
 

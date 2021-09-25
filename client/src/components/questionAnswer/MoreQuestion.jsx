@@ -1,6 +1,6 @@
 const React = require('react');
 import axios from 'axios';
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class MoreQuestion extends React.Component{
   constructor(props){
@@ -11,6 +11,7 @@ class MoreQuestion extends React.Component{
   }
   fetchMoreQues = () => {
     // console.log('Fetch more--Have to revisit these again');
+    this.props.postTrackInteractions('More Answered Question', 'Question And Answer')
     const {restOfQuestions} = this.props;
 
     if(restOfQuestions.length < 2){
@@ -32,4 +33,4 @@ class MoreQuestion extends React.Component{
   }
 }
 
-export default MoreQuestion;
+export default ClickTracker(MoreQuestion);

@@ -33,14 +33,29 @@ body {
 }
 
 #mainProductImageContainer {
+  display: flex;
   width: 65%;
   height: 80%;
-  border: 1px solid dimgray;
+  /* border: 1px solid dimgray; */
   position: relative;
+  overflow: hidden;
 }
 
-#mainProductImageContainer #mainImg {
+#mainImg {
   max-height: 100%;
+  background: center no-repeat;
+  filter: none;
+  z-index: 1;
+  position: relative;
+  margin: 0 auto;
+}
+
+.blurredImage {
+  background-size: cover;
+  filter: blur(8px);
+  width: 100%;
+  position: absolute;
+  z-index: 1;
 }
 
 #styleThumbnails {
@@ -70,12 +85,22 @@ body {
   border: 1px solid dimgray;
 }
 
-#stylesContainer .styleBtn {
+.styleBtn {
+  display: flex;
   width: 7vw;
   height: 7vw;
   margin-top: 1vw;
   border-radius: 50%;
   border: 1px solid dimgray;
+  position: relative;
+  overflow: hidden;
+}
+
+.styleBtn img {
+  max-height: 150px;
+  position: absolute;
+  object-position: 50% 50%;
+  overflow: hidden;
 }
 
 #styleButtons {
@@ -128,9 +153,24 @@ body {
   width: 100%;
 }
 
-.featureList, .featureList li {
+#productDescription p {
+  width: 65%;
+}
+
+.featureList {
+  margin-left: 0;
+  padding-left: 2em;
+  text-indent: -1em;
   align-self: flex-end;
   width: 30%;
+  list-style-type: none;
+  border-left: 2px solid darkslategray;
+}
+
+.featureList li:before {
+  font-size: 1.2em;
+  font-weight: bold;
+  content: "✓";
 }
 
 .column-flex {
@@ -258,8 +298,62 @@ body {
   border: 1px solid #ddd; /* Gray border */
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
-  width: 30px; /* Set a small width */
+  width: 100px; /* Set a small width */
   cursor:pointer;
+}
+.full_image {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 500px; /* Set a small width */
+
+}
+.slider {
+  position: relative;
+  /* height: 100vh; */
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.image {
+  width: 100px;
+  height: 60px;
+  border-radius: 5px;
+  cursor:pointer;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  font-size: 1rem;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  font-size: 1rem;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
 }
 
 /*
@@ -308,6 +402,14 @@ flex-direction: row;
 justify-content: center;
 }
 
+#cardContainer{
+font-family: 'Font Awesome 5 Free';
+font-weight: 900;
+display:flex;
+flex-direction: row;
+justify-content: center;
+}
+
 
 
 .imageContainer {
@@ -319,6 +421,13 @@ height: 100%;
 width: 100%;
 object-fit: fill;
 }
+
+/*
+  ----------------------------
+  | RelatedProducts Modal Styling  |
+  ----------------------------
+*/
+
 
 /*
   ----------------------------
@@ -339,6 +448,31 @@ object-fit: fill;
 }
 
 .RnR {
-  grid: flex;
-  flex-direction: row;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.reviewBreakdown {
+  display: flex;
+  flex-basis:33%
+}
+
+.reviewList {
+  display: flex;
+  flex-basis:66%;
+  flex-direction: column
+}
+
+.helpfulBtn {
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.reportBtn {
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
 }
