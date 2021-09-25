@@ -66,7 +66,7 @@ class App extends React.Component {
     return (
       <div>
         <div>Header Placeholder</div>
-        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />
+        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />}
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
         {quesAns.length > 0 &&  <QuesAnsMain
           handleQAUpdate = {this.handleQAUpdate}

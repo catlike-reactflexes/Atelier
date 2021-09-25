@@ -4,7 +4,7 @@ import YourOutfitList from './YourOutfitList.jsx';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
 import ComparisonModalItem from './ComparisonModalItem.jsx';
 import axios from 'axios';
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class RelatedProducts extends React.Component {
   constructor(props) {
@@ -104,12 +104,12 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <div>
-        <h3>Related Products</h3>
+        <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Related Products</h3>
         <RelatedProductsList
           productData={this.state.relatedProductsData}
           imageData={this.state.defaultImages}
           overviewProduct={this.state.overviewProductData} />
-        <h3>Your Outfit</h3>
+        <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</h3>
         <YourOutfitList
           dummyData={this.state.relatedProductsData} />
       </div>
@@ -122,4 +122,4 @@ class RelatedProducts extends React.Component {
 
 }
 
-export default RelatedProducts;
+export default ClickTracker(RelatedProducts);

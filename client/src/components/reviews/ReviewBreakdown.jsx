@@ -1,21 +1,20 @@
 import React from 'react';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ReviewBreakdown extends React.Component {
   constructor(props) {
     super(props)
   }
 
-  componentDidMount
-
   render() {
-    console.log('comfort value', this.props.reviewChars)
+    // console.log('comfort value', this.props.reviewChars)
     let sliderStyle = {
         height: '24px',
         width: '50%'
     }
     return (
     <div className='reviewBreakdown'>
-      <div className='sliders'>
+      <div className='sliders' onClick = {() => {this.props.postTrackInteractions('characteristic ratings', 'Reviews')}}>
         <input type="range" min="1" max="5" value={this.props.reviewChars.Comfort.value}  id="comfortSlider"></input>
         <input type="range" min="1" max="5" value={this.props.reviewChars.Fit.value}  id="fitSlider"></input>
         <input type="range" min="1" max="5" value={this.props.reviewChars.Length}  id="lengthSlider"></input>
@@ -33,4 +32,4 @@ class ReviewBreakdown extends React.Component {
   }
 };
 
-export default ReviewBreakdown
+export default ClickTracker(ReviewBreakdown)

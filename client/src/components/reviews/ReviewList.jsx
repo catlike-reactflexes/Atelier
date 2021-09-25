@@ -1,5 +1,6 @@
 import React from 'react';
 import Review from './Review.jsx'
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 const ReviewList = (props) => {
   return (
@@ -11,4 +12,4 @@ const ReviewList = (props) => {
   )
 };
 
-export default ReviewList;
+export default ClickTracker(ReviewList);
