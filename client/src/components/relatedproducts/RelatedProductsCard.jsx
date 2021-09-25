@@ -1,5 +1,6 @@
 import React from 'react';
 import ComparisonModalList from './ComparisonModalList.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class RelatedProductsCard extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class RelatedProductsCard extends React.Component {
   render() {
     return (
       <div>
-        <li className="relatedProductsItems" >
+        <li className="relatedProductsItems">
           <div className="card">
             <div className="imageContainer">
               <img onClick={this.showComparisonModal} className="relatedProductImg" src={this.props.image}></img>
@@ -46,4 +47,4 @@ class RelatedProductsCard extends React.Component {
 
 }
 
-export default RelatedProductsCard;
+export default ClickTracker(RelatedProductsCard);
