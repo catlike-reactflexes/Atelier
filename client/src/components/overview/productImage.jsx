@@ -1,5 +1,6 @@
 import React from 'react';
 import StyleThumbnails from './styleThumbnails.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ProductImage extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class ProductImage extends React.Component {
       this.props.loaded ?
         <div id="mainProductImageContainer" data-testid="overview-image" >
           <img className="blurredImage" src={this.props.photos[this.state.selected].url} />
-          <img id="mainImg" src={this.props.photos[this.state.selected].url} />
+          <img id="mainImg" src={this.props.photos[this.state.selected].url} onClick={() => {this.props.postTrackInteractions('Main Image', 'Product Image')}}/>
           <StyleThumbnails photos={this.props.photos} />
         </div>
       : <div id="mainProductImageContainer" data-testid="overview-image">
@@ -28,4 +29,4 @@ class ProductImage extends React.Component {
   }
 }
 
-export default ProductImage;
+export default ClickTracker(ProductImage);
