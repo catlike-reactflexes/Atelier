@@ -59,11 +59,37 @@ body {
 }
 
 #styleThumbnails {
+  display: flex;
+  align-content: space-between;
   position: absolute;
   top: 0;
   left: 0;
   display: inline-block;
-  width: 15%;
+  width: 12%;
+  z-index: 2;
+}
+
+.thumbWrapper {
+  margin-top: 10px;
+  margin-left: 10px;
+  align-content: center;
+  width: 100%;
+  max-height: 160px;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.styleThumb {
+  max-width: 160px;
+  max-height: 160px;
+  min-width: 120px;
+  object-position: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 
 .sidebar {
@@ -103,7 +129,6 @@ body {
 .styleBtn img {
   max-height: 180px;
   max-width: 180px;
-  object-position: center;
   position: absolute;
   object-position: 50% 50%;
   overflow: hidden;
