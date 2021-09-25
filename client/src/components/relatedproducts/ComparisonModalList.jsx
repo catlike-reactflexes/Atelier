@@ -1,11 +1,13 @@
 import React from 'react';
 import ComparisonModalItem from './ComparisonModalItem.jsx';
-
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class ComparisonModalList extends React.Component {
   constructor(props) {
     super(props)
   }
+
+
 
   render() {
     const totalFeatures = [...this.props.productFeatures, ...this.props.overviewProduct.features];
@@ -16,10 +18,12 @@ class ComparisonModalList extends React.Component {
         overviewProductFeatures={this.props.overviewProduct.features} />
     });
     return (
-      <div style={RPOVERLAY_STYLES}>
+      <div style={RPOVERLAY_STYLES} onClick={() => this.props.postTrackInteractions('comparison modal', 'Related Products')}>
         <table style={MODAL_STYLES}>
-          Comparing
           <tbody>
+            <tr>
+              <th>Comparing</th>
+            </tr>
             <tr>
               <th>{this.props.overviewProduct.name}</th>
               <th></th>
@@ -51,4 +55,4 @@ const RPOVERLAY_STYLES = {
   zIndex: 1000
 }
 
-export default ComparisonModalList;
+export default ClickTracker(ComparisonModalList);
