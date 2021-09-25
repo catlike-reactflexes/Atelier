@@ -119,9 +119,6 @@ app.get('/reviewhelpful', (req, res) => {
 app.get('/reviewreport', (req, res) => {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.query.review_id}/report`
   console.log('report url, ', url)
-  let config = {
-    headers: {'Authorization': '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'},
-  }
 
   axios({
     method: 'put',
