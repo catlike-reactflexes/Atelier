@@ -46,7 +46,6 @@ class RelatedProductsList extends React.Component {
         productFeatures={item.features} />
     })
     let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }
-    console.log(transformStyle)
     return (
       <>
         <div id="cardContainer" >
