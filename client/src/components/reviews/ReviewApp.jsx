@@ -66,11 +66,13 @@ class ReviewApp extends React.Component {
         // ...
       },
       reviewRating: {},
-      reviewRecommended: {}
+      reviewRecommended: {},
+      totalRating: 0
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
   }
+
 
   getReviews() {
     axios.get('/reviews', {

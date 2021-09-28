@@ -14,11 +14,36 @@ class App extends React.Component {
       productName:'Camo Onesie',
       productFeatures: [],
       reviewValue: null,
-      quesAns: []
+      quesAns: [],
+      totalRating: 0
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
     this.handleQAUpdate = this.handleQAUpdate.bind(this)
+    this.getRatingAverage = this.getRatingAverage.bind(this)
   }
+
+  getRatingAverage() {
+    return axios.get('/reviewratings', {
+      params: {
+       productID: this.state.productId,
+       count: 100
+     }
+   })
+     .then(arrayOfReviews => {
+       let sum = 0
+       for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
+         console.log('rating: ', arrayOfReviews.data.results[i].rating)
+         sum = sum + arrayOfReviews.data.results[i].rating
+       }
+       let average = sum / arrayOfReviews.data.results.length
+       console.log('this is the average: ', average)
+       this.setState({totalRating: average})
+     })
+     .catch(error => {
+       console.log('get error', error)
+       throw error
+     })
+ }
 
   handleProductUpdate(data) {
     let update = {}
@@ -57,7 +82,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchQuestionAnswer();
-
+    this.getRatingAverage()
   }
 
   render() {
