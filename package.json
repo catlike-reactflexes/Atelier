@@ -8,7 +8,8 @@
     "react-dev": "webpack --watch --config webpack.config.js",
     "test": "jest --verbose --coverage",
     "testqa": "jest spec/components/questionAnswer --watch --verbose --coverage",
-    "testreviews": "jest spec/components/reviews --verbose --coverage"
+    "testreviews": "jest spec/components/reviews --verbose --coverage",
+    "test-overview": "jest spec/components/overview --verbose --coverage"
   },
   "repository": {
     "type": "git",
