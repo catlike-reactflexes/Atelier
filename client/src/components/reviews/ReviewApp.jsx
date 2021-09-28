@@ -4,6 +4,7 @@ import ReviewList from './ReviewList.jsx';
 import NewReview from './NewReview.jsx';
 import ReviewBreakdown from './ReviewBreakdown.jsx'
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import NewReviewModal from './NewReviewModal.jsx';
 
 class ReviewApp extends React.Component {
   constructor(props) {
@@ -87,6 +88,10 @@ class ReviewApp extends React.Component {
       })
   }
 
+  click() {
+    this.getReviews()
+  }
+
   getReviewMeta() {
     axios.get('/reviewmeta', {
       params: {
@@ -120,9 +125,10 @@ class ReviewApp extends React.Component {
         {/* <Search /> */}
         <div className='RnR'>
           <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
-          <ReviewList reviews = {this.state.reviews}/>
+          <ReviewList click= {this.click.bind(this)} reviews = {this.state.reviews}/>
         </div>
         <NewReview />
+        {/* <NewReviewModal /> */}
       </div>
     );
   }
