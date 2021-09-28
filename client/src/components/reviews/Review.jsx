@@ -38,8 +38,8 @@ let reportReview = () => {
     <div className='review'>
       <div className='reviewer_name' onClick={() => {props.postTrackInteractions('reviewer name', 'Reviews')}}>{props.review.reviewer_name}</div>
       <div className='review_body' onClick={() => {props.postTrackInteractions('review body', 'Reviews')}}>{props.review.body}</div>
-      <button className='helpfulBtn' onClick = {() => {markReviewAsHelpful()}}>helpful? {props.review.helpfulness}</button>
-      <button className='reportBtn' onClick = {() => {reportReview()}}>report</button>
+      <button className='helpfulBtn' onClick = {() => {markReviewAsHelpful(); props.click()}}>helpful? {props.review.helpfulness}</button>
+      <button className='reportBtn' onClick = {() => {reportReview(); props.click()}}>report</button>
     </div>
   )
 }

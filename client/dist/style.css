@@ -518,3 +518,8 @@ object-fit: fill;
   font-size: 16px;
   cursor: pointer;
 }
+
+#reviewBody {
+  height: 100px;
+  width: 400px
+}
