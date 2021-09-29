@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.2"
-     inkscape:cx="13.883294"
-     inkscape:cy="31.202117"
+     inkscape:cx="25.669008"
+     inkscape:cy="36.534467"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,10 +55,9 @@
      id="layer1"
      transform="translate(0,-280.06665)">
     <g
-       id="g1392"
-       transform="rotate(-0.69728167,8.3351188,288.63799)">
+       id="g2808">
       <path
-         transform="scale(-1,1)"
+         transform="matrix(-0.99992595,0.01216956,0.01216956,0.99992595,-3.5119803,0.12280891)"
          inkscape:transform-center-y="-0.64040959"
          inkscape:transform-center-x="-0.01610906"
          d="m -1.80337,287.14441 -3.8959297,3.00053 1.4596673,4.69583 -4.0575805,-2.77803 -4.0149371,2.83931 1.388207,-4.71745 -3.941034,-2.94103 4.9155394,-0.13751 1.5792434,-4.65697 1.6497635,4.63246 z"
@@ -79,10 +78,10 @@
          sodipodi:nodetypes="cccccc"
          inkscape:connector-curvature="0"
          id="path836"
-         d="m 10.285031,293.46591 2.027119,1.43614 -1.388207,-4.71745 3.941035,-2.94103 -4.579947,-0.10861 z"
+         d="m 10.34364,293.44182 2.044446,1.41137 -1.445513,-4.70021 3.904952,-2.98877 -4.58093,-0.0529 z"
          style="fill:#ffffff;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
-         transform="scale(-1,1)"
+         transform="matrix(-0.99992595,0.01216956,0.01216956,0.99992595,-3.5119803,0.12280891)"
          inkscape:transform-center-y="-0.64040959"
          inkscape:transform-center-x="-0.01610906"
          d="m -1.80337,287.14441 -3.8959297,3.00053 1.4596673,4.69583 -4.0575805,-2.77803 -4.0149371,2.83931 1.388207,-4.71745 -3.941034,-2.94103 4.9155394,-0.13751 1.5792434,-4.65697 1.6497635,4.63246 z"
@@ -97,7 +96,7 @@
          sodipodi:cx="-8.3180647"
          sodipodi:sides="5"
          id="path10-4"
-         style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1"
+         style="fill:none;stroke:#000000;stroke-width:0.52916667;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
          sodipodi:type="star" />
     </g>
   </g>
