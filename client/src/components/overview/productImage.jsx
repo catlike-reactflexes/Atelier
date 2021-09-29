@@ -17,7 +17,10 @@ class ProductImage extends React.Component {
   render() {
     return (
       this.props.loaded ?
-        <div id="mainProductImageContainer" data-testid="overview-image" >
+        this.props.expand ?
+          <div id="mainProductImageContainer" data-testid="overview-image" className={'expanded'}></div>
+          :
+          <div id="mainProductImageContainer" data-testid="overview-image" >
           <img className="blurredImage" src={this.props.photos[this.state.selected].url} />
           <img id="mainImg" src={this.props.photos[this.state.selected].url} onClick={() => {this.props.postTrackInteractions('Main Image', 'Product Image')}}/>
           <StyleThumbnails photos={this.props.photos} />
