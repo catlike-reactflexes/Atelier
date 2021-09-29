@@ -93,14 +93,13 @@ class RelatedProducts extends React.Component {
   getYourOutfitData() {
     if (localStorage.getItem("myOutfit") !== undefined) {
       let favorites = JSON.parse(localStorage.getItem("myOutfit"));
-      console.log('this is what is saved in local storage: ', favorites);
       axios.get('/yourOutfitProductData', {
         params: {
           yourOufitIds: favorites
         }
       })
         .then((yourOutfitData) => {
-          console.log('success getting outfit data on client: ', yourOutfitData.data);
+          //console.log('success getting outfit data on client: ', yourOutfitData.data);
           this.setState({
             yourOutfitData: yourOutfitData.data
           })
@@ -114,14 +113,13 @@ class RelatedProducts extends React.Component {
   getYourOutfitStyles() {
     if (localStorage.getItem("myOutfit") !== undefined) {
       let favorites = JSON.parse(localStorage.getItem("myOutfit"));
-      console.log('this is what is saved in local storage: ', favorites);
       axios.get('/yourOutfitStyles', {
         params: {
           yourOufitIds: favorites
         }
       })
         .then((yourOutfitStyles) => {
-          console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
+          //console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
           this.setState({
             yourOutfitImageURLs: yourOutfitStyles.data
           })
@@ -145,10 +143,7 @@ class RelatedProducts extends React.Component {
 
 
   render() {
-    // if (localStorage.getItem("myOutfit") !== undefined) {
-    //   let favorites = localStorage.getItem("myOutfit");
-    //   console.log('this is what is saved in local storage: ', favorites);
-    // }
+
     return (
       <div>
         <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Related Products</h3>
@@ -158,7 +153,7 @@ class RelatedProducts extends React.Component {
           overviewProduct={this.state.overviewProductData} />
         <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</h3>
         <YourOutfitList
-          dummyData={this.state.relatedProductsData} />
+          yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs} />
       </div>
     )
   }

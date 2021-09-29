@@ -452,16 +452,15 @@ flex-direction: row;
 justify-content: center;
 }
 
-
-
 .imageContainer {
 height:65%;
 width: 100%;
 }
+
 .relatedProductImg {
 height: 100%;
 width: 100%;
-object-fit: fill;
+object-fit: cover;
 }
 
 /*

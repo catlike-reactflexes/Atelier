@@ -276,42 +276,53 @@ app.get('/relatedProductStyles', (req, res) => {
 
 app.get('/yourOutfitProductData', (req, res) => {
   let yourOutfitIds = JSON.parse(req.query.yourOufitIds);
+  let arrayOfOutfitPromises = [];
   for (var i = 0; i < yourOutfitIds.length; i++) {
     let id = yourOutfitIds[i];
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
+    arrayOfOutfitPromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
       headers: {
         'Authorization': process.env.API_TOKEN,
         'product_id': id
       }
-    })
-      .then((outfitProductData) => {
-        //console.log('success getting outfit product data: ', outfitProductData.data);
-        res.send(outfitProductData.data);
-      })
-      .catch((error) => {
-        console.log('error getting outfit product data: ');
-      })
+    }))
+
   }
+  Promise.all(arrayOfOutfitPromises)
+    .then((outfitProductData) => {
+      // console.log('success getting outfit product data: ', outfitProductData);
+      let outfitData = outfitProductData.map(response => {
+        return response.data;
+      })
+      res.send(outfitData);
+    })
+    .catch((error) => {
+      console.log('error getting outfit product data: ');
+    })
 })
 
 app.get('/yourOutfitStyles', (req, res) => {
   let yourOutfitIds = JSON.parse(req.query.yourOufitIds);
+  let arrayOfStylePromises = [];
   for (var i = 0; i < yourOutfitIds.length; i++) {
     let id = yourOutfitIds[i];
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
+    arrayOfStylePromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
       headers: {
         'Authorization': process.env.API_TOKEN,
         'product_id': id
       }
-    })
-      .then((yourOutfitStyles) => {
-        //console.log('success getting outfit syles on server: ', yourOutfitStyles.data);
-        res.send(yourOutfitStyles.data);
-      })
-      .catch((error) => {
-        console.log('error getting outfit styles on server');
-      })
+    }))
   }
+  Promise.all(arrayOfStylePromises)
+    .then((outfitStyles) => {
+      //console.log('success getting outfit style data: ', outfitStyles);
+      let outfitStyleData = outfitStyles.map(response => {
+        return response.data;
+      })
+      res.send(outfitStyleData);
+    })
+    .catch((error) => {
+      console.log('error getting outfit style data: ');
+    })
 })
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
