@@ -16,7 +16,7 @@ class ProductButtons extends React.Component {
       return <option id={key} key={key} data-quantity={skus[key].quantity}>{skus[key].size}</option>
     })
     sizes.unshift(<option value="" disabled selected>SELECT SIZE</option>);
-    return <select onClick={() => {this.props.postTrackInteractions('Select Size', 'Product Buttons')}} id="sizeSelect">{sizes}
+    return <select onClick={() => { this.props.postTrackInteractions('Select Size', 'Product Buttons') }} id="sizeSelect">{sizes}
     </select>;
   }
 
@@ -33,10 +33,10 @@ class ProductButtons extends React.Component {
             <select id="qtySelect">
               <option>1</option>
             </select>
-            <button id="bagBtn" onClick={() => {this.props.postTrackInteractions('Add to bag', 'Product Buttons')}}>ADD TO BAG</button>
-            <button id="favBtn" onClick={() => {this.props.favoriteItem}} >*</button>
+            <button id="bagBtn" onClick={() => { this.props.postTrackInteractions('Add to bag', 'Product Buttons') }}>ADD TO BAG</button>
+            <button id="favBtn" onClick={() => { this.props.favoriteItem() }} >*</button>
           </div>
-        : <div>Loading Data</div>}
+          : <div>Loading Data</div>}
       </div>
     )
   }

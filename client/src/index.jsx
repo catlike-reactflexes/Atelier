@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 47421,
-      productName:'Camo Onesie',
+      productName: 'Camo Onesie',
       productFeatures: [],
       reviewValue: null,
       quesAns: []
@@ -36,12 +36,12 @@ class App extends React.Component {
 
   handleQAUpdate(updateList) {
 
-    this.setState({quesAns: [{updateList}]})
+    this.setState({ quesAns: [{ updateList }] })
     // console.log('UpdateLIST--->', updateList);
   }
 
   fetchQuestionAnswer() {
-    const {productId} = this.state;
+    const { productId } = this.state;
     axios.get(`/api/qa/id=${productId}`, {
       params: {
         product_id: productId
@@ -61,21 +61,21 @@ class App extends React.Component {
   }
 
   render() {
-    const {quesAns} = this.state;
+    const { quesAns } = this.state;
 
     return (
       <div>
         <div>Header Placeholder</div>
         {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />}
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-        {quesAns.length > 0 &&  <QuesAnsMain
-          handleQAUpdate = {this.handleQAUpdate}
+        {quesAns.length > 0 && <QuesAnsMain
+          handleQAUpdate={this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}
           quesAns={this.state.quesAns}
           id={this.state.productId}
           productName={this.state.productName}
-        /> }
-       <Reviews id={this.state.productId} productName = {this.state.productName}/>
+        />}
+        {/* <Reviews id={this.state.productId} productName = {this.state.productName}/> */}
       </div >
     );
   }
