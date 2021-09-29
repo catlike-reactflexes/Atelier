@@ -15,7 +15,7 @@ class ProductDetails extends React.Component {
     const classes = {
       '0' : 'emptyStar',
       '0.25' : 'quarterStar',
-      '0.5' : 'halfStar',
+      '0.50' : 'halfStar',
       '0.75' : 'threeQuarterStar',
       '1' : 'fullStar'
     };
@@ -27,8 +27,8 @@ class ProductDetails extends React.Component {
     }
     if (remainder > 0) {
       let quarter = (Math.round(remainder * 4) / 4).toFixed(2);
-      console.log(`remainder: ${remainder}, quarter: ${quarter}`);
-      console.log('class quarter: ', classes[quarter])
+      // console.log(`remainder: ${remainder}, quarter: ${quarter}`);
+      // console.log('class quarter: ', classes[quarter])
       result.push(classes[quarter]);
       counter++;
     }
@@ -37,7 +37,7 @@ class ProductDetails extends React.Component {
         result.push(classes['0']);
       }
     }
-    console.log('classes: ', result);
+    // console.log('classes: ', result);
     let starList = result.map((star) => {
       return <span className={star}></span>
     })

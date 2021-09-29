@@ -26,6 +26,7 @@ class Overview extends React.Component {
     this.getProductStyles = this.getProductStyles.bind(this);
     this.updateStyle = this.updateStyle.bind(this);
     this.saveToOutfit = this.saveToOutfit.bind(this);
+    this.expandMainImage = this.expandMainImage.bind(this);
   }
 
   componentDidMount() {
@@ -106,6 +107,7 @@ class Overview extends React.Component {
   }
 
   expandMainImage(event) {
+    console.log('Expand fired.')
     let flag = this.state.expandImage;
     this.setState({ expandImage: !flag });
   }
@@ -113,7 +115,7 @@ class Overview extends React.Component {
   render() {
     return (
       <div id="overview" data-testid="overview-element">
-        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} expand={this.state.expandImage} />
+        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} />
         {this.state.expandImage ?
           <div style={{display:'none'}}></div>
         : <div className="sidebar column-flex">
