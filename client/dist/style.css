@@ -116,6 +116,30 @@ body {
   content: url('./resources/fullstar.svg');
 }
 
+.threeQuarterStar {
+  height: 100%;
+  width: 20px;
+  content: url('./resources/threequarterstar.svg');
+}
+
+.halfStar {
+  height: 100%;
+  width: 20px;
+  content: url('./resources/halfstar.svg');
+}
+
+.quarterStar {
+  height: 100%;
+  width: 20px;
+  content: url('./resources/quarterstar.svg');
+}
+
+.emptyStar {
+  height: 100%;
+  width: 20px;
+  content: url('./resources/emptystar.svg');
+}
+
 #stylesContainer {
   display: flex;
   flex-direction: column;
