@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import NewReview from './NewReview.jsx';
 import ReviewBreakdown from './ReviewBreakdown.jsx'
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import NewReviewModal from './NewReviewModal.jsx';
 
 class ReviewApp extends React.Component {
   constructor(props) {
@@ -64,28 +66,13 @@ class ReviewApp extends React.Component {
         // ...
       },
       reviewRating: {},
-      reviewRecommended: {}
+      reviewRecommended: {},
+      totalRating: 0
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
-    this.markReviewAsHelpful = this.markReviewAsHelpful.bind(this)
   }
 
-  markReviewAsHelpful(reviewID) {
-    console.log('review id: ', reviewID)
-    axios.put('/helpful', {
-      params: {
-        review_id: reviewID
-      }
-    })
-    .then(response => {
-      console.log('put response', response)
-    })
-    .catch(error => {
-      console.log('put error', error)
-      throw error
-    })
-  }
 
   getReviews() {
     axios.get('/reviews', {
@@ -101,6 +88,10 @@ class ReviewApp extends React.Component {
         console.log('get error', error)
         throw error
       })
+  }
+
+  click() {
+    this.getReviews()
   }
 
   getReviewMeta() {
@@ -136,9 +127,10 @@ class ReviewApp extends React.Component {
         {/* <Search /> */}
         <div className='RnR'>
           <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
-          <ReviewList reviews = {this.state.reviews}/>
+          <ReviewList click= {this.click.bind(this)} reviews = {this.state.reviews}/>
         </div>
         <NewReview />
+        {/* <NewReviewModal /> */}
       </div>
     );
   }

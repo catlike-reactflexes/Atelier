@@ -107,3 +107,6 @@ typings/
 /server/relatedProducts/config.js
 /server/questionAnswer/config.js
 .env
+
+#review data for me (Trevor) to reference
+/reviewsDummyData.js

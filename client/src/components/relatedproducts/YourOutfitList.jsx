@@ -1,5 +1,6 @@
 import React from 'react';
 import YourOutfitCard from './YourOutfitCard.jsx';
+import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class YourOutfitList extends React.Component {
   constructor(props) {
@@ -11,11 +12,13 @@ class YourOutfitList extends React.Component {
       return <YourOutfitCard key={index} name={item.name} />
     })
     return (
-      <ul id="relatedProductCards">
-        {outfitItems}
-      </ul>
+      <div>
+        <ul id="relatedProductCards" onClick={() => this.props.postTrackInteractions('related product card', 'Related Products')}>
+          {outfitItems}
+        </ul>
+      </div>
     )
   }
 }
 
-export default YourOutfitList;
+export default ClickTracker(YourOutfitList);
