@@ -4,12 +4,15 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
-const axios = require('axios')
-const $ = require('jquery')
-const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
-// const QuestionAnswer_API = require('./questionAnswer');
+const axios = require('axios');
+const $ = require('jquery');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/'});
+const {uploadFile} = require('./s3')
 
+const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +33,7 @@ app.get('/', (req, res) => {
 */
 
 app.post('/api/interactions', (req, res)=> {
-  console.log('Interaction API-->',req.body) ;
+  // console.log('Interaction API-->',req.body) ;
   axios({
     method: 'POST',
     url: `${API_URL}/interactions`,
@@ -43,7 +46,7 @@ app.post('/api/interactions', (req, res)=> {
       time: req.body.time
     }
   }).then(function (response) {
-    console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
+    // console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
     res.status(response.status).send(response.data);
   }).catch(function (err) {
     console.log('api request error: ', err);
@@ -300,8 +303,18 @@ app.get('/api/qa/id=*', (req, res) => {
       })
 
 });
-app.post('/api/addAnswer', (req, res)=> {
-  // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
+app.post('/api/addAnswer', upload.single('image'), async (req, res)=> {
+  console.log('QA**request AddAnswer-->', req) ;
+  const file = req.file
+  console.log('Looking for file-->', file)
+  const result = await uploadFile(file)
+  console.log('AWS--S3 --->', result)
+
+  // const description = req.body.description
+  // const fd= new FormData()
+  // fd.append('photo', req.body.photos)
+  //   console.log('fd--->', fd)
+
   axios({
     method: 'POST',
     url: `${API_URL}/qa/questions/${req.body.question_id}/answers`,
@@ -311,11 +324,11 @@ app.post('/api/addAnswer', (req, res)=> {
     data: {
       body: req.body.body,
       name: req.body.name,
-      email: req.body.email,
-      photos: req.body.photos
+      email: 'testing@gmail.com',
+      photos: [result.Location]
     }
   }).then(function (response) {
-    // console.log('SUCCESS___>>>api response: ', response.data);
+    console.log('SUCCESS___>>>api response: ', response.data);
 
     res.status(200).send(response.data);
   }).catch(function (err) {
@@ -326,6 +339,7 @@ app.post('/api/addAnswer', (req, res)=> {
 })
 app.post('/api/addQuestion', (req, res)=> {
   // console.log('QA**request AddAQuestion-->',req.body) ;
+
   axios({
     method: 'POST',
     url: `${API_URL}/qa/questions/`,

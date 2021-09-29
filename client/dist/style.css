@@ -398,6 +398,25 @@ body {
   transform: scale(1.08);
 }
 
+.thumbnail {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 50px; /* Set a small width */
+  height: 50px;
+}
+
+#close {
+  display: block;
+  position: absolute;
+  width:10px;
+  height:10px;
+  top: 2px;
+  right: 2px;
+  background: url(http://icons.iconarchive.com/icons/kyo-tux/delikate/512/Close-icon.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 /*
   ----------------------------
   | RelatedProducts Card Styling  |

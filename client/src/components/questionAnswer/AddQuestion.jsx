@@ -83,7 +83,7 @@ class AddQuestion extends React.Component {
               id="email"
 
               onChange={this.handleQuestionChange}
-              placeholder = 'Why did you like the product or not?'/>
+              placeholder = 'atelier@yahoo.com'/>
           </label>
         </div>
 

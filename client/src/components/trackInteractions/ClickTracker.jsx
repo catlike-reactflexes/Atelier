@@ -13,7 +13,7 @@ function ClickTracker (WrappedComponent) {
       this.postTrackInteractions = this.postTrackInteractions.bind(this);
     }
       postTrackInteractions(elementName, widgetName) {
-        console.log('Interaction from ' + elementName + ' in ' + widgetName);
+        // console.log('Interaction from ' + elementName + ' in ' + widgetName);
 
         axios.post('/api/interactions', {
           element: elementName,
@@ -21,7 +21,7 @@ function ClickTracker (WrappedComponent) {
           time: new Date().toString()
         })
         .then((response) => {
-          console.log('Success->', response);
+          // console.log('Success->', response);
         })
         .catch((err) => {
           console.log('Error with posting click tracker-->', err);
