@@ -19,11 +19,14 @@ class Overview extends React.Component {
       selectedStyle: null,
       styleName: '',
       stylePhotos: null,
-      loaded: false
+      detailsLoaded: false,
+      loaded: false,
+      expandImage: false
     };
     this.getProductStyles = this.getProductStyles.bind(this);
     this.updateStyle = this.updateStyle.bind(this);
     this.saveToOutfit = this.saveToOutfit.bind(this);
+    this.expandMainImage = this.expandMainImage.bind(this);
   }
 
   componentDidMount() {
@@ -103,15 +106,24 @@ class Overview extends React.Component {
     localStorage.setItem('myOutfit', outfitData);
   }
 
+  expandMainImage(event) {
+    console.log('Expand fired.')
+    let flag = this.state.expandImage;
+    this.setState({ expandImage: !flag });
+  }
+
   render() {
     return (
       <div id="overview" data-testid="overview-element">
-        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} />
-        <div className="sidebar column-flex">
-          <ProductDetails name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
-          <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
-          <ProductButtons selected={this.state.selectedStyle} favoriteItem={this.saveToOutfit} loaded={this.state.stylesLoaded} />
-        </div>
+        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} />
+        {this.state.expandImage ?
+          <div style={{display:'none'}}></div>
+        : <div className="sidebar column-flex">
+            <ProductDetails rating={this.props.rating} name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
+            <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
+            <ProductButtons selected={this.state.selectedStyle} favoriteItem={this.saveToOutfit} loaded={this.state.stylesLoaded} />
+          </div>
+        }
         <ProductDescription slogan={this.state.productDetails.slogan} description={this.state.productDetails.description} features={this.state.productDetails.features} loaded={this.state.detailsLoaded} />
       </div>
     );
