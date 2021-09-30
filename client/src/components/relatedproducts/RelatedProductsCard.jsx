@@ -35,7 +35,7 @@ class RelatedProductsCard extends React.Component {
             </div>
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>
-            <p className="price">${this.props.price}</p>
+            <p className="price">${Number(this.props.price).toFixed()}</p>
           </div>
         </li >
         {this.state.comparisonModalVisible ?

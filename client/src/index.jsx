@@ -11,14 +11,38 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 47421,
-      productName:'Camo Onesie',
+      productName: 'Camo Onesie',
       productFeatures: [],
-      reviewValue: null,
-      quesAns: []
+      quesAns: [],
+      totalRating: 0
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
     this.handleQAUpdate = this.handleQAUpdate.bind(this)
+    this.getRatingAverage = this.getRatingAverage.bind(this)
   }
+
+  getRatingAverage() {
+    return axios.get('/reviewratings', {
+      params: {
+       productID: this.state.productId,
+       count: 100
+     }
+   })
+     .then(arrayOfReviews => {
+       let sum = 0
+       for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
+         console.log('rating: ', arrayOfReviews.data.results[i].rating)
+         sum = sum + arrayOfReviews.data.results[i].rating
+       }
+       let average = sum / arrayOfReviews.data.results.length
+       console.log('this is the average: ', average)
+       this.setState({totalRating: average})
+     })
+     .catch(error => {
+       console.log('get error', error)
+       throw error
+     })
+ }
 
   handleProductUpdate(data) {
     let update = {}
@@ -36,12 +60,12 @@ class App extends React.Component {
 
   handleQAUpdate(updateList) {
 
-    this.setState({quesAns: [{updateList}]})
+    this.setState({ quesAns: [{ updateList }] })
     // console.log('UpdateLIST--->', updateList);
   }
 
   fetchQuestionAnswer() {
-    const {productId} = this.state;
+    const { productId } = this.state;
     axios.get(`/api/qa/id=${productId}`, {
       params: {
         product_id: productId
@@ -57,29 +81,25 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchQuestionAnswer();
-
+    this.getRatingAverage()
   }
 
   render() {
-    const {quesAns} = this.state;
+    const { quesAns } = this.state;
 
     return (
       <div>
-        {quesAns.length > 0 &&  <QuesAnsMain
-          handleQAUpdate = {this.handleQAUpdate}
+        <div>Header Placeholder</div>
+        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} />}
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
+        {quesAns.length > 0 && <QuesAnsMain
+          handleQAUpdate={this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}
           quesAns={this.state.quesAns}
           id={this.state.productId}
           productName={this.state.productName}
-        /> }
-        
-        <div>Header Placeholder</div>
-        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} />}
-        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
-
-
-
-       <Reviews id={this.state.productId}/>
+        />}
+        {/* <Reviews id={this.state.productId} productName = {this.state.productName}/> */}
       </div >
     );
   }
