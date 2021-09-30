@@ -110,15 +110,12 @@ class Overview extends React.Component {
     if (localStorage.getItem('myOutfit') === null) {
       outfitData.data = [];
     } else {
-      outfitData = localStorage.getItem('myOutfit');
+      outfitData = JSON.parse(localStorage.getItem('myOutfit'));
     }
     if (!outfitData.data.includes(id)) {
       outfitData.data.push(id);
     }
-    //I had to JSON.stringify this to get the data to save in the correct format
-    // console.log('outfit data: ', outfitData);
     localStorage.setItem('myOutfit', JSON.stringify(outfitData));
-    // console.log('your outfit data on overview: ', localStorage.getItem('myOutfit'));
   }
 
   expandMainImage(event) {
@@ -132,8 +129,8 @@ class Overview extends React.Component {
       <div id="overview" data-testid="overview-element">
         <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} mainImg={this.state.mainUrl} updateMain={this.updateMainImg} />
         {this.state.expandImage ?
-          <div style={{display:'none'}}></div>
-        : <div className="sidebar column-flex">
+          <div style={{ display: 'none' }}></div>
+          : <div className="sidebar column-flex">
             <ProductDetails rating={this.props.rating} name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
             <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
             <ProductButtons selected={this.state.selectedStyle} favoriteItem={this.saveToOutfit} loaded={this.state.stylesLoaded} />
