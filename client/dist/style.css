@@ -480,7 +480,7 @@ flex-direction: row;
 justify-content: center;
 }
 
-#cardContainer{
+.cardContainer{
 font-family: 'Font Awesome 5 Free';
 font-weight: 900;
 display:flex;
@@ -488,16 +488,15 @@ flex-direction: row;
 justify-content: center;
 }
 
-
-
 .imageContainer {
 height:65%;
 width: 100%;
 }
+
 .relatedProductImg {
 height: 100%;
 width: 100%;
-object-fit: fill;
+object-fit: cover;
 }
 
 /*

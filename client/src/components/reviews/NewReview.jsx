@@ -10,6 +10,8 @@ const NewReview = (props) => {
     console.log('this is the count: ', count)
   }
 
+  let openModal = () => {}
+
   return (
     <div className='buttons'>
       <button className='newReview' type="button" onClick= {() => {props.postTrackInteractions('new review button', 'reviews')}}>Add a Review</button>

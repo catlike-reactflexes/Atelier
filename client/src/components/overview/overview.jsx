@@ -17,16 +17,19 @@ class Overview extends React.Component {
       productStyles: [],
       styleId: 286894,
       selectedStyle: null,
+      mainId: 0,
       styleName: '',
       stylePhotos: null,
       detailsLoaded: false,
       loaded: false,
-      expandImage: false
+      expandImage: false,
+      mainUrl: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
     };
     this.getProductStyles = this.getProductStyles.bind(this);
     this.updateStyle = this.updateStyle.bind(this);
     this.saveToOutfit = this.saveToOutfit.bind(this);
     this.expandMainImage = this.expandMainImage.bind(this);
+    this.updateMainImg = this.updateMainImg.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +73,13 @@ class Overview extends React.Component {
     })
   }
 
+  updateMainImg(event) {
+    let selection = event.target.id;
+    // console.log(`handle change selection: ${selection}, state photos: ${this.state.stylePhotos}`);
+    let url = this.state.stylePhotos[selection].url;
+    this.setState({ mainUrl: url, mainId: selection });
+  }
+
   updateStyle(event) {
     this.props.postTrackInteractions('Style Option', 'Product Styles');
     event.preventDefault();
@@ -79,16 +89,18 @@ class Overview extends React.Component {
     let selected = null;
     let photos = [];
     let name = '';
+    let main = '';
     // console.log('styles: ', styles)
     for (let i = 0; i < styles.length; i++) {
       if (styles[i].style_id === id) {
         selected = styles[i];
         photos = styles[i].photos;
         name = styles[i].name;
+        main = photos[this.state.mainId].url;
         break;
       }
     }
-    this.setState({ styleId: id, selectedStyle: selected, styleName: name, stylePhotos: photos });
+    this.setState({ styleId: id, selectedStyle: selected, styleName: name, stylePhotos: photos, mainUrl: main });
   }
 
   saveToOutfit() {
@@ -103,11 +115,13 @@ class Overview extends React.Component {
     if (!outfitData.includes(id)) {
       outfitData.push(id);
     }
-    localStorage.setItem('myOutfit', outfitData);
+    //I had to JSON.stringify this to get the data to save in the correct format
+    localStorage.setItem('myOutfit', JSON.stringify(outfitData));
+    console.log('your outfit data on overview: ', localStorage);
   }
 
   expandMainImage(event) {
-    console.log('Expand fired.')
+    // console.log('Expand fired.')
     let flag = this.state.expandImage;
     this.setState({ expandImage: !flag });
   }
@@ -115,7 +129,7 @@ class Overview extends React.Component {
   render() {
     return (
       <div id="overview" data-testid="overview-element">
-        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} />
+        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} mainImg={this.state.mainUrl} updateMain={this.updateMainImg} />
         {this.state.expandImage ?
           <div style={{display:'none'}}></div>
         : <div className="sidebar column-flex">
