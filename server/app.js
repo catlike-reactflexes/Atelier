@@ -60,15 +60,36 @@ app.post('/api/interactions', (req, res) => {
 app.get('/reviews', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
-  // console.log(typeof product_id)
   let config = {
     headers: { 'Authorization': process.env.API_TOKEN },
     params: { 'product_id': product_id }
   }
+
+  // console.log(typeof product_id)
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
     .then(data => {
       // console.log('api response: ', data.data.results);
-      res.json(data.data)
+      return res.json(data.data)
+    })
+    .catch(err => {
+      console.log('review get error: ', err)
+      throw err
+    })
+})
+
+app.get('/reviewratings', (req, res) => {
+  // console.log('reviews api token: ', process.env.API_TOKEN)
+  let product_id = Number(req.query.productID)
+  let config = {
+    headers: {'Authorization': process.env.API_TOKEN},
+    params: {'product_id': product_id, 'count': Number(req.query.count)}
+  }
+
+  // console.log(typeof product_id)
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
+    .then(data => {
+      // console.log('api response: ', data.data.results);
+      return res.json(data.data)
     })
     .catch(err => {
       console.log('review get error: ', err)
