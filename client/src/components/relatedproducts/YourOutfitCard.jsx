@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
 class YourOutfitCard extends React.Component {

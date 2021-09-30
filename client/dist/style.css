@@ -444,7 +444,7 @@ flex-direction: row;
 justify-content: center;
 }
 
-#cardContainer{
+.cardContainer{
 font-family: 'Font Awesome 5 Free';
 font-weight: 900;
 display:flex;

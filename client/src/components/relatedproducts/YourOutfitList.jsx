@@ -5,7 +5,32 @@ import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 class YourOutfitList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentIndex: 0
+    }
+    this.transformLeft = this.transformLeft.bind(this);
+    this.transformRight = this.transformRight.bind(this);
+  }
 
+  transformLeft() {
+    // transform: "translateX-(25%)"
+    this.props.postTrackInteractions('Left carousel arrow', 'Related Products');
+    console.log('left chevron clicked')
+    this.setState((prevState) => {
+      return { currentIndex: prevState.currentIndex - 1 }
+    })
+    // document.getElementById("relatedProductCards").style.transform = "translateX(-25%)"
+  }
+
+
+  transformRight() {
+    // transform: "translateX(25%)"
+    console.log('right chevron clicked')
+    this.props.postTrackInteractions('Right chevron arrow', 'Related Products');
+    this.setState((prevState) => {
+      return { currentIndex: prevState.currentIndex + 1 }
+    })
+    // document.getElementById("relatedProductCards").style.transform = "translateX(25%)";
   }
 
 
@@ -23,12 +48,19 @@ class YourOutfitList extends React.Component {
           category={item.category} />
       })
     }
+    let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }
     return (
-      <div>
-        <ul id="relatedProductCards" onClick={() => this.props.postTrackInteractions('related product card', 'Related Products')}>
-          {outfitItems}
-        </ul>
-      </div>
+      <>
+        <div className="cardContainer">
+          {this.state.currentIndex > 0 && <FaChevronLeft onClick={this.transformLeft} />}
+          <div style={{ overflow: 'hidden', width: '825px' }}>
+            <ul style={transformStyle} id="relatedProductCards" onClick={() => this.props.postTrackInteractions('your outfit card', 'Your Outfit')}>
+              {outfitItems}
+            </ul>
+          </div>
+          {this.state.currentIndex < this.props.yourOutfitData.length - 3 && <FaChevronRight onClick={this.transformRight} />}
+        </div>
+      </>
     )
   }
 }

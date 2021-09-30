@@ -48,7 +48,7 @@ class RelatedProductsList extends React.Component {
     let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }
     return (
       <>
-        <div id="cardContainer" >
+        <div className="cardContainer" >
           {this.state.currentIndex > 0 && <FaChevronLeft onClick={this.transformLeft} />}
           < div style={{ overflow: 'hidden', width: '825px' }} >
             <ul style={transformStyle} id="relatedProductCards" onClick={() => this.props.postTrackInteractions('related product card', 'Related Products')}>
