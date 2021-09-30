@@ -115,7 +115,9 @@ class Overview extends React.Component {
     if (!outfitData.includes(id)) {
       outfitData.push(id);
     }
-    localStorage.setItem('myOutfit', outfitData);
+    //I had to JSON.stringify this to get the data to save in the correct format
+    localStorage.setItem('myOutfit', JSON.stringify(outfitData));
+    console.log('your outfit data on overview: ', localStorage);
   }
 
   expandMainImage(event) {
