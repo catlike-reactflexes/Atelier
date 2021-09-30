@@ -452,6 +452,15 @@ body {
   align-content: flex-start;
 }
 
+.windowClose{
+
+}
+
+.stars{
+display: flex;
+flex-direction: row;
+color: grey;
+}
 .category{
   color: grey;
   font-size: 12px;
