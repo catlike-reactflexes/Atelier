@@ -31,11 +31,11 @@ class App extends React.Component {
      .then(arrayOfReviews => {
        let sum = 0
        for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
-         console.log('rating: ', arrayOfReviews.data.results[i].rating)
+         // console.log('rating: ', arrayOfReviews.data.results[i].rating)
          sum = sum + arrayOfReviews.data.results[i].rating
        }
        let average = sum / arrayOfReviews.data.results.length
-       console.log('this is the average: ', average)
+       // console.log('this is the average: ', average)
        this.setState({totalRating: average})
      })
      .catch(error => {
