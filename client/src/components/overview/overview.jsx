@@ -106,18 +106,19 @@ class Overview extends React.Component {
   saveToOutfit() {
     this.props.postTrackInteractions('Add to outfit', 'Product Buttons');
     let id = this.state.productId;
-    let outfitData;
+    let outfitData = { data: [] };
     if (localStorage.getItem('myOutfit') === null) {
-      outfitData = [];
+      outfitData.data = [];
     } else {
       outfitData = localStorage.getItem('myOutfit');
     }
-    if (!outfitData.includes(id)) {
-      outfitData.push(id);
+    if (!outfitData.data.includes(id)) {
+      outfitData.data.push(id);
     }
     //I had to JSON.stringify this to get the data to save in the correct format
+    // console.log('outfit data: ', outfitData);
     localStorage.setItem('myOutfit', JSON.stringify(outfitData));
-    console.log('your outfit data on overview: ', localStorage);
+    // console.log('your outfit data on overview: ', localStorage.getItem('myOutfit'));
   }
 
   expandMainImage(event) {
