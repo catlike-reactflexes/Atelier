@@ -67,17 +67,24 @@ class ReviewApp extends React.Component {
       },
       reviewRating: {},
       reviewRecommended: {},
-      totalRating: 0
+      totalRating: 0,
+      modalIsOpen: false,
+
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
+    this.openModal = this.openModal.bind(this)
   }
 
+  openModal() {
 
-  getReviews() {
+  }
+
+  getReviews(count = 2) {
     axios.get('/reviews', {
       params: {
-        productID: this.state.defaultProductID
+        productID: this.state.defaultProductID,
+        count: count
       }
     })
       .then(arrayOfReviews => {
@@ -129,8 +136,8 @@ class ReviewApp extends React.Component {
           <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
           <ReviewList click= {this.click.bind(this)} reviews = {this.state.reviews}/>
         </div>
-        <NewReview />
-        {/* <NewReviewModal /> */}
+        <NewReview moreReviews = {this.getReviews} openModal = {this.openModal}/>
+        <NewReviewModal isOpen = {this.state.modalIsOpen}/>
       </div>
     );
   }

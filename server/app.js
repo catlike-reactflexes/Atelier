@@ -62,7 +62,10 @@ app.get('/reviews', (req, res) => {
   let product_id = Number(req.query.productID)
   let config = {
     headers: {'Authorization': process.env.API_TOKEN},
-    params: {'product_id': product_id}
+    params: {
+      'product_id': product_id,
+      'count': req.query.count
+  }
   }
 
   // console.log(typeof product_id)
@@ -72,8 +75,9 @@ app.get('/reviews', (req, res) => {
       return res.json(data.data)
     })
     .catch(err => {
-      console.log('review get error: ', err)
-      throw err
+      console.log('review get error: ', err.response.status)
+      res.send(err.response.status)
+      // throw err
     })
 })
 
@@ -92,8 +96,8 @@ app.get('/reviewratings', (req, res) => {
       return res.json(data.data)
     })
     .catch(err => {
-      console.log('review get error: ', err)
-      throw err
+      console.log('reviewratings get error: ', err.response.status)
+      res.send(err.response.status)
     })
 })
 
@@ -109,8 +113,8 @@ app.get('/reviewmeta', (req, res) => {
     res.json(metadata.data)
   })
   .catch(err => {
-    console.log('review get error: ', err)
-    throw err
+    console.log('reviewmeta get error: ', err.response.status)
+    res.send(err.response.status)
   })
 })
 
