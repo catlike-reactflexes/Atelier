@@ -7,10 +7,7 @@ const path = require('path');
 const axios = require('axios');
 const $ = require('jquery');
 const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/'});
-const {uploadFile} = require('./s3')
+
 
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -352,6 +349,10 @@ app.get('/yourOutfitStyles', (req, res) => {
 
 
 //CS- Questions & Answer START------------------------------------------------------------
+// const fileUpload = require('express-fileupload');
+
+
+
 app.get('/api/qa/id=*', (req, res) => {
   // console.log('QA**request-->', req.query.product_id) ;
   // console.log('request-->', req.path) ;
@@ -375,17 +376,33 @@ app.get('/api/qa/id=*', (req, res) => {
   })
 
 });
-app.post('/api/addAnswer', upload.single('image'), async (req, res)=> {
+//multer, s3
+const multer = require('multer');
+// const upload = multer({ dest: 'uploads/'});
+const {uploadFile} = require('./Questions/s3')
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, 'server/Questions/image_uploads/');
+  },
+
+  filename: function(req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+var upload = multer({ storage: storage })
+app.post('/api/addAnswer', upload.array('images'), async (req, res)=> {
   console.log('QA**request AddAnswer-->', req) ;
-  const file = req.file
-  console.log('Looking for file-->', file)
-  const result = await uploadFile(file)
-  console.log('AWS--S3 --->', result)
+  const files = req.files
+  console.log('Looking for file-->', files)
+  // const result = await uploadFile(files)
+  // console.log('AWS--S3 --->', result)
 
   // const description = req.body.description
   // const fd= new FormData()
   // fd.append('photo', req.body.photos)
   //   console.log('fd--->', fd)
+
+/* start axios file
 
   axios({
     method: 'POST',
@@ -407,7 +424,7 @@ app.post('/api/addAnswer', upload.single('image'), async (req, res)=> {
     console.log('api request error: ', err);
     res.status(500).send(err);
   })
-
+*/
 })
 app.post('/api/addQuestion', (req, res) => {
   // console.log('QA**request AddAQuestion-->',req.body) ;

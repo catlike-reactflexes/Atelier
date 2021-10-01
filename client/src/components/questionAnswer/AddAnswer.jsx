@@ -40,7 +40,8 @@ class AddAnswer extends React.Component {
     this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
     const config = { headers: { 'Content-Type': 'multipart/form-data' } };
     const formData = new FormData();
-    formData.append('image', this.state.photos[0])
+    formData.append('images', this.state.photos[0])
+    formData.append('images', this.state.photos[1])
     formData.append('question_id', this.props.oneQues.question_id)
     formData.append('body', this.state.answer)
     formData.append('name', this.state.nickname)
