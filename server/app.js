@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 */
 
 app.post('/api/interactions', (req, res) => {
-  console.log('Interaction API-->', req.body);
+  // console.log('Interaction API-->', req.body);
   axios({
     method: 'POST',
     url: `${API_URL}/interactions`,

@@ -49,46 +49,60 @@ class AddQuestion extends React.Component {
       <div id="add-question">
       <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_Q_STYLES}>
-        <h3> Ask Your Question</h3>
-        <h3> About the *Product Name*</h3>
-
-        <div>
-
-          <label htmlFor="question">Question</label>
-          <textarea
-              data-testid="question"
-              id="question"
-              onChange={this.handleQuestionChange}
-              row={5}/>
+        <div className="modal-header">
+          <h3>Ask Your Question</h3>
+          <span onClick={()=>this.props.onClose()}>X</span>
         </div>
 
-        <p>For privacy reasons, do not use your full name or email address</p>
-        <div>
-          <label htmlFor="nickname">nickname (mandatory): </label>
-            <input
-              data-testid="nickname"
-              type="text"
-              id="nickname"
-              onChange={this.handleQuestionChange}
-              placeholder='Example: jackson11!'/>
+        <div className="modal-content">
+          <p className="modal-product">Your Product: {this.props.productName} </p>
+          <div className="modal-body">
+            <div className="modal-question">
+              <div style={{padding:"10px"}}>Question</div>
+                <textarea
+                    data-testid="question"
+                    id="question"
+                    placeholder="Go ahead, ask away"
+                    onChange={this.handleQuestionChange}
+                    rows={5}
+                    cols={50}
+                />
+
+            </div>
+            <p>For privacy reasons, do not use your full name or email address</p>
+            <div className="modal-info">
+              <div htmlFor="nickname" style={{padding:"10px"}}>nickname (mandatory) </div>
+                <input
+                  data-testid="nickname"
+                  type="text"
+                  id="nickname"
+                  onChange={this.handleQuestionChange}
+                  placeholder='Example: jackson11!'/>
+
+
+
+                <div htmlFor="email" style={{padding:"10px"}}>email (mandatory)</div>
+
+                  <input
+                    data-testid="email"
+                    type="text"
+                    id="email"
+
+                    onChange={this.handleQuestionChange}
+                    placeholder = 'atelier@yahoo.com'/>
+
+
+
+            </div>
+
+          </div>
+
+          <div className="modal-footer">
+          <button type="submit" onClick={this.submitQuestion}>Submit Question</button>
+          </div>
+
 
         </div>
-
-        <div>
-          <label htmlFor="email">
-            email (mandatory):
-            <input
-              data-testid="email"
-              type="text"
-              id="email"
-
-              onChange={this.handleQuestionChange}
-              placeholder = 'atelier@yahoo.com'/>
-          </label>
-        </div>
-
-
-        <button type="submit" onClick={this.submitQuestion}>Submit Question</button>
 
       </div>
       </div>
@@ -103,7 +117,6 @@ const MODAL_Q_STYLES = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
-  padding: '50px',
   zIndex: 1000
 }
 const OVERLAY_STYLES = {
@@ -112,7 +125,7 @@ const OVERLAY_STYLES = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, .4)',
+  backgroundColor: 'rgba(0, 0, 0, .8)',
   zIndex: 1000
 }
 

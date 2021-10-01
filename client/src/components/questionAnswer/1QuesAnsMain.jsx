@@ -56,10 +56,11 @@ class QuesAnsMain extends React.Component {
     return (
       <div className="qa">
 
-        <p
+        <h2
+
           onClick={()=>this.props.postTrackInteractions('label', 'Questions and Answers')}>
           Questions and Answers
-        </p>
+        </h2>
 
         <SearchQa
           filteredQues={filteredQues}
