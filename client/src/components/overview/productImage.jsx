@@ -1,7 +1,7 @@
 import React from 'react';
 import StyleThumbnails from './styleThumbnails.jsx';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa';
 
 const expandedStyle = {
   display: "flex",
@@ -35,8 +35,11 @@ class ProductImage extends React.Component {
     return (
       this.props.loaded ?
         <div id="mainProductImageContainer" data-testid="overview-image" style={this.props.expand ? expandedStyle : {}}>
+          <FaChevronLeft className={'mainImgLeft'} />
           <img className="blurredImage" src={this.props.mainImg} />
-          <img id="mainImg" src={this.props.mainImg} onClick={this.mainImageClick}/>
+          <img id="mainImg" src={this.props.mainImg} />
+          <FaChevronRight className={'mainImgRight'} />
+          <FaExpand className={'expandIcon'} onClick={this.mainImageClick}/>
           <StyleThumbnails click={this.props.updateMain} photos={this.props.photos} />
         </div>
       : <div id="mainProductImageContainer" data-testid="overview-image">
