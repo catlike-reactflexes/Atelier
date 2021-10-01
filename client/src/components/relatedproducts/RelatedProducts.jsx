@@ -92,10 +92,11 @@ class RelatedProducts extends React.Component {
 
   getYourOutfitData() {
     if (localStorage.getItem("myOutfit") !== undefined) {
-      let favorites = JSON.parse(localStorage.getItem("myOutfit"));
+      let favorites = localStorage.getItem("myOutfit");
+      //console.log('local storage after parse in related: ', favorites);
       axios.get('/yourOutfitProductData', {
         params: {
-          yourOufitIds: favorites
+          yourOutfitIds: favorites
         }
       })
         .then((yourOutfitData) => {
@@ -115,7 +116,7 @@ class RelatedProducts extends React.Component {
       let favorites = JSON.parse(localStorage.getItem("myOutfit"));
       axios.get('/yourOutfitStyles', {
         params: {
-          yourOufitIds: favorites
+          yourOutfitIds: favorites
         }
       })
         .then((yourOutfitStyles) => {

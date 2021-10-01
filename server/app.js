@@ -296,10 +296,11 @@ app.get('/relatedProductStyles', (req, res) => {
 })
 
 app.get('/yourOutfitProductData', (req, res) => {
-  let yourOutfitIds = JSON.parse(req.query.yourOufitIds);
+  let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
+  //console.log('outfit ids on server: ', yourOutfitIds.data);
   let arrayOfOutfitPromises = [];
-  for (var i = 0; i < yourOutfitIds.length; i++) {
-    let id = yourOutfitIds[i];
+  for (var i = 0; i < yourOutfitIds.data.length; i++) {
+    let id = yourOutfitIds.data[i];
     arrayOfOutfitPromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
       headers: {
         'Authorization': process.env.API_TOKEN,
@@ -310,7 +311,7 @@ app.get('/yourOutfitProductData', (req, res) => {
   }
   Promise.all(arrayOfOutfitPromises)
     .then((outfitProductData) => {
-      // console.log('success getting outfit product data: ', outfitProductData);
+      //console.log('success getting outfit product data: ', outfitProductData);
       let outfitData = outfitProductData.map(response => {
         return response.data;
       })
@@ -322,10 +323,10 @@ app.get('/yourOutfitProductData', (req, res) => {
 })
 
 app.get('/yourOutfitStyles', (req, res) => {
-  let yourOutfitIds = JSON.parse(req.query.yourOufitIds);
+  let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
   let arrayOfStylePromises = [];
-  for (var i = 0; i < yourOutfitIds.length; i++) {
-    let id = yourOutfitIds[i];
+  for (var i = 0; i < yourOutfitIds.data.length; i++) {
+    let id = yourOutfitIds.data[i];
     arrayOfStylePromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
       headers: {
         'Authorization': process.env.API_TOKEN,
