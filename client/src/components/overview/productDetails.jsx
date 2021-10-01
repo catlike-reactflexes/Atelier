@@ -13,28 +13,28 @@ class ProductDetails extends React.Component {
     let result = [];
     let counter = 0;
     const classes = {
-      '0' : 'emptyStar',
+      '0.00' : 'emptyStar',
       '0.25' : 'quarterStar',
       '0.50' : 'halfStar',
       '0.75' : 'threeQuarterStar',
-      '1' : 'fullStar'
+      '1.00' : 'fullStar'
     };
     let wholeNum = Math.floor(stars);
     let remainder = stars - wholeNum;
     for (let i = 0; i < wholeNum; i++) {
-      result.push(classes['1']);
+      result.push(classes['1.00']);
       counter++;
     }
     if (remainder > 0) {
       let quarter = (Math.round(remainder * 4) / 4).toFixed(2);
-      // console.log(`remainder: ${remainder}, quarter: ${quarter}`);
-      // console.log('class quarter: ', classes[quarter])
+      console.log(`remainder: ${remainder}, quarter: ${quarter}`);
+      console.log('class quarter: ', classes[quarter])
       result.push(classes[quarter]);
       counter++;
     }
     if (counter < 5) {
       for (let i = counter; i < 5; i++) {
-        result.push(classes['0']);
+        result.push(classes['0.00']);
       }
     }
     // console.log('classes: ', result);
