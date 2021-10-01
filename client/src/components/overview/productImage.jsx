@@ -1,6 +1,7 @@
 import React from 'react';
 import StyleThumbnails from './styleThumbnails.jsx';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const expandedStyle = {
   display: "flex",

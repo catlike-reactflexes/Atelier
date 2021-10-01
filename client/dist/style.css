@@ -125,30 +125,35 @@ body {
 .fullStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/fullstar.svg');
 }
 
 .threeQuarterStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/threequarterstar.svg');
 }
 
 .halfStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/halfstar.svg');
 }
 
 .quarterStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/quarterstar.svg');
 }
 
 .emptyStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/emptystar.svg');
 }
 
@@ -217,8 +222,13 @@ body {
 
 #favBtn {
   margin-top: 1vw;
+  padding: 0;
   width: 12.5%;
   height: 4vw;
+}
+
+#favBtn .fullStar {
+  margin: auto;
 }
 
 #productDescription {
