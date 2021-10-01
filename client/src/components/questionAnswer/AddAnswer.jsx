@@ -80,50 +80,54 @@ class AddAnswer extends React.Component {
 
     //The modal should be titled “Submit your Answer”.  The modal should be subtitled:   “[Product Name]: [Question Body]”
     return (
-      <>
+      <div className="modal-addAnswer">
       <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_Q_STYLES}>
-        <p>Submit your Answer</p>
-        <p>{productName} : {question_body}</p>
-        <div>
-          <label htmlFor="answer">Your Answer (mandatory</label>
-            <textarea
-                data-testid="answer"
-                id="answer"
-                onChange={this.handleAnswerChange}
-                row={5}/>
+      <div className="modal-header">
+          <h3>Submit your Answer</h3>
+          <span onClick={()=>this.props.onClose()}>X</span>
+      </div>
+      <div className="modal-content">
+          <p className="modal-product">{productName}  :  {question_body} </p>
+          <div className="modal-body">
+            <div>
+              <label className="answer">Your Answer (mandatory</label>
+                <textarea
+                    data-testid="answer"
+                    id="answer"
+                    onChange={this.handleAnswerChange}
+                    row={5}
+                />
+            </div>
+            <div>
+              <label className="nickname">nickname (mandatory) </label>
+                <input
+                  data-testid="nickname"
+                  type="text"
+                  id="nickname"
+                  onChange={this.handleAnswerChange}
+                  placeholder='Example: jackson543'/>
 
-        </div>
+            </div>
+            <div>
+              <label className="email">email (mandatory)</label>
+                <input
+                  data-testid="email"
+                  type="text"
+                  id="email"
+                  onChange={this.handleAnswerChange}
+                  placeholder = 'jack@email.com'/>
+            </div>
 
-        <div>
-          <label htmlFor="nickname">nickname (mandatory): </label>
-            <input
-              data-testid="nickname"
-              type="text"
-              id="nickname"
-              onChange={this.handleAnswerChange}
-              placeholder='Example: jackson543'/>
+            {
+          this.state.previewImages.length > 0 ?
+          <div className="upload-images">{this.state.previewImages.map((preview, index)=>
+            (<img className="thumbnail" key={index} src={preview} alt="🧐"/>))}
+          </div> : null
 
-        </div>
-
-        <div>
-          <label htmlFor="email">
-            email (mandatory):
-            <input
-              data-testid="email"
-              type="text"
-              id="email"
-
-              onChange={this.handleAnswerChange}
-              placeholder = 'jack@email.com'/>
-          </label>
-        </div>
-        {
-          this.state.previewImages.length > 0 &&
-          this.state.previewImages.map((preview, index)=>(<img className="thumbnail" key={index} src={preview} alt="🧐"/>))
 
         }
-        <button onClick={()=> this.setOpen(true)}>Upload Photos (5 max)</button>
+        <button className="btn-upload-image"onClick={()=> this.setOpen(true)}>Upload Photos (5 max)</button>
 
                 {
                   this.state.isOpen ?
@@ -136,9 +140,17 @@ class AddAnswer extends React.Component {
                   : null
                 }
 
-        <button onClick={this.submitAnswer}>Submit Answer</button>
+          </div>
       </div>
-      </>
+
+
+
+        <div className="modal-footer">
+          <button onClick={this.submitAnswer}>Submit Answer</button>
+        </div>
+
+      </div>
+      </div>
     );
   }
 }
@@ -148,7 +160,6 @@ const MODAL_Q_STYLES = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
-  padding: '50px',
   zIndex: 1000
 }
 const OVERLAY_STYLES = {
@@ -157,7 +168,7 @@ const OVERLAY_STYLES = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, .4)',
+  backgroundColor: 'rgba(0, 0, 0, .8)',
   zIndex: 1000
 }
 export default ClickTracker(AddAnswer);

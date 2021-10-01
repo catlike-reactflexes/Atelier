@@ -79,15 +79,20 @@ class PhotoUpload extends React.Component {
         <input type='file'  multiple onChange={this.fileSelectedHandler}></input>
         {
           this.state.picturePreview.length > 0  &&
-            this.state.picturePreview.map((preview, index) => {
-              return (
-                <div key={index}>
-                  <img className="thumbnail" src={preview} alt="🧐"
-                    onClick={()=> this.closePreview(index)}
-                  />
-                </div>
-              )
-            })
+          <div className="upload-images">
+            {
+              this.state.picturePreview.map((preview, index) => {
+                return (
+                  <div key={index}>
+                    <img className="thumbnail" src={preview} alt="🧐"
+                      onClick={()=> this.closePreview(index)}
+                    />
+                  </div>
+                )
+              })
+            }
+          </div>
+
         }
 
         {

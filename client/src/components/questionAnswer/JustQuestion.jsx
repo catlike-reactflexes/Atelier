@@ -79,8 +79,8 @@ class JustQuestion extends React.Component{
                 Yes ({this.state.questionHelpful})
             </div>
             <div className="report" onClick={() => this.questionReport(oneQues.question_id)}> | report  </div>
-            <div className="AddAns">
-              <div onClick={() => this.setOpen(true)}> |  Add Answer</div>
+
+              <div className="label-Ans" onClick={() => this.setOpen(true)}> |  Add Answer</div>
                 {
                   this.state.isOpen ?
                   <AddAnswer
@@ -91,7 +91,7 @@ class JustQuestion extends React.Component{
                   : null
                 }
             </div>
-        </div>
+        
       </div>
     );
   }

@@ -285,20 +285,15 @@ body {
   outline: none;
 }
 .viewQuesAns {
-
   grid: flex;
-
 }
 .oneQA {
-
   grid: flex;
   flex-direction: column;
-
   margin-bottom: 1rem;
 }
 .justQues {
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: row;
   background-color: rgba(121, 121, 118, 0.698);
 }
@@ -312,17 +307,16 @@ body {
   display: flex;
   margin: 5px;
   width:70%;
-  /* justify-content: right; */
-  /* width:20%; */
-  /* order: 2; */
+
 }
-.helpful, .AddAns, .yes, .report, .loadAns{
+
+.yes, .report , .label-Ans{
   width:20%;
   border: 1px;
   display: flex;
   order: 2;
-  justify-content: flex-end;
-  color:mediumblue
+  justify-content: space-evenly;
+  color:rgb(99, 99, 129)
 }
 .oneAnswer {
   display: flex;
@@ -344,14 +338,14 @@ body {
   justify-content:center;
 }
 
-.yes, .addAns , .report, .loadAns{
+.yes, .label-Ans , .report, .loadAns{
   display: flex;
   margin-left: 5px;
   width: fit-content;
   text-decoration: underline;
   cursor:pointer;
 }
-.by, .helpful, .AddAns, .yes, .ansName, .report{
+.by, .helpful, .label-Ans, .yes, .ansName, .report{
   margin-left: 5px;
   width: fit-content;
   display: flex;
@@ -364,6 +358,7 @@ body {
   margin: 5px;
 }
 .loadAns{
+  padding-left: 30px;
   display: flex;
   margin: 10px;
   font-size: 0.7rem;
@@ -440,8 +435,12 @@ body {
   transition-duration: 1s;
   transform: scale(1.08);
 }
-
+.upload-images {
+    grid:flex;
+  flex-direction: row;
+}
 .thumbnail {
+
   border: 1px solid #ddd; /* Gray border */
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
@@ -464,16 +463,17 @@ body {
   cursor: pointer;
 }
 .modal-content {
-  padding: 10px;
+  padding: 20px;
   margin: 5px;
 }
-.modal-body {
+.modal-body{
   align-items: center;
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
   margin: 5px;
 }
+
 .modal-product {
   font-weight: bold;
   color: #b2beb5;
@@ -486,10 +486,12 @@ body {
   padding-bottom: 10px;
   margin: 5px;
 }
-#question, #email, #nickname {
+#question, #email, #nickname , #answer{
   padding: 10px;
+  margin: 5px;
   border-color: #b2beb5;
   outline: none;
+  align-items: center;
   border-radius: 3px;
 }
 .modal-info {
@@ -499,11 +501,21 @@ body {
   padding-bottom: 10px;
   margin: 5px;
 }
+.btn-upload-image {
+  display: block;
+  font-size: 1rem;
+  padding: 2px;
+  background: #b2beb5;
+  color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .modal-footer button {
   display: block;
   font-size: 1rem;
   margin-left: auto;
-  padding: 5px;
+  padding: 2px;
   background: #b2beb5;
   color: rgb(255, 255, 255);
   border: none;
