@@ -391,18 +391,18 @@ const storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage })
 app.post('/api/addAnswer', upload.array('images'), async (req, res)=> {
-  console.log('QA**request AddAnswer-->', req) ;
+  // console.log('QA**request AddAnswer-->', req) ;
   const files = req.files
-  console.log('Looking for file-->', files)
-  // const result = await uploadFile(files)
-  // console.log('AWS--S3 --->', result)
+  console.log('Looking for file-->', files.length)
+  const result = await uploadFile(files[0])
+  console.log('AWS--S3 --->', result)
 
   // const description = req.body.description
   // const fd= new FormData()
   // fd.append('photo', req.body.photos)
   //   console.log('fd--->', fd)
 
-/* start axios file
+
 
   axios({
     method: 'POST',
@@ -424,7 +424,7 @@ app.post('/api/addAnswer', upload.array('images'), async (req, res)=> {
     console.log('api request error: ', err);
     res.status(500).send(err);
   })
-*/
+
 })
 app.post('/api/addQuestion', (req, res) => {
   // console.log('QA**request AddAQuestion-->',req.body) ;
