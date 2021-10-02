@@ -1,6 +1,8 @@
 import React from 'react';
 import ComparisonModalList from './ComparisonModalList.jsx';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import Stars from './Stars.jsx';
+import { FaStar } from 'react-icons/fa';
 
 class RelatedProductsCard extends React.Component {
   constructor(props) {
@@ -30,12 +32,14 @@ class RelatedProductsCard extends React.Component {
       <div>
         <li className="relatedProductsItems">
           <div className="card">
+            <FaStar />
             <div className="imageContainer">
               <img onClick={this.showComparisonModal} className="relatedProductImg" src={this.props.image}></img>
             </div>
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>
             <p className="price">${Number(this.props.price).toFixed()}</p>
+            <Stars />
           </div>
         </li >
         {this.state.comparisonModalVisible ?
