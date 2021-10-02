@@ -53,7 +53,7 @@ class ProductDetails extends React.Component {
           <a onClick={() => {this.props.postTrackInteractions('Read Review Link', 'Product Details')}} href="">Read all reviews</a>
         </div>
         <span id="po-category">{this.props.category.toUpperCase()}</span>
-        <h1 id="po-name">{this.props.name}</h1>
+        <span id="po-name">{this.props.name}</span>
         <span onClick={() => {this.props.postTrackInteractions('Price', 'Product Details')}}>${this.props.price}</span>
       </div>
       :
