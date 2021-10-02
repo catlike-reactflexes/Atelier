@@ -376,9 +376,9 @@ app.get('/api/qa/id=*', (req, res) => {
   })
 
 });
+
 //multer, s3
 const multer = require('multer');
-// const upload = multer({ dest: 'uploads/'});
 const {uploadFile} = require('./Questions/s3')
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -390,42 +390,67 @@ const storage = multer.diskStorage({
   }
 });
 var upload = multer({ storage: storage })
-app.post('/api/addAnswer', upload.array('images'), async (req, res)=> {
-  // console.log('QA**request AddAnswer-->', req) ;
-  const files = req.files
-  console.log('Looking for file-->', files.length)
-  const result = await uploadFile(files[0])
-  console.log('AWS--S3 --->', result)
-
-  // const description = req.body.description
-  // const fd= new FormData()
-  // fd.append('photo', req.body.photos)
-  //   console.log('fd--->', fd)
 
 
+app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
+  console.log('QA**request AddAnswer-->', req.body) ;
+  let photoUrl = [];
+  const files = req.files;
 
-  axios({
-    method: 'POST',
-    url: `${API_URL}/qa/questions/${req.body.question_id}/answers`,
-    headers: {
-      Authorization: process.env.API_TOKEN
-    },
-    data: {
-      body: req.body.body,
-      name: req.body.name,
-      email: 'testing@gmail.com',
-      photos: [result.Location]
-    }
-  }).then(function (response) {
-    console.log('SUCCESS___>>>api response: ', response.data);
+  const postAnswer = (question_id, body, name, photoUrl) => {
 
-    res.status(200).send(response.data);
-  }).catch(function (err) {
-    console.log('api request error: ', err);
-    res.status(500).send(err);
-  })
+    console.log('Inside postAnswer Axio--->');
+    console.log('ready to post---',photoUrl)
+    axios({
+      method: 'POST',
+      url: `${API_URL}/qa/questions/${question_id}/answers`,
+      headers: {
+        Authorization: process.env.API_TOKEN
+      },
+      data: {
+        body: body,
+        name: name,
+        email: 'testing@gmail.com',
+        photos: photoUrl
+      }
+    }).then(function (response) {
+      console.log('SUCCESS___>>>api response: ', response.data);
+      res.status(response.status).send(response.data);
+    }).catch(function (err) {
+      console.log('Why error????')
+      console.log('api request error: ', err.data, err.status);
+      res.status(err.status).send(err.data);
+    })
+  }
+
+  const uploadImages =  async (cb) => {
+    let imagesUrl = [];
+    let promises = files.map(async file => {
+      const ans = await uploadFile(file)
+      imagesUrl.push(ans.Location);
+      console.log('Answer-3->', ans)
+    })
+    result = await Promise.all(promises);
+    console.log('Test-1->', result)
+    console.log('Test-2->', imagesUrl)
+    cb(null,imagesUrl);
+  }
+  //if there is no images, then POST
+  if(files.length === 0) {
+    postAnswer(req.body.question_id, req.body.body,req.body.name, photoUrl);
+  } else {
+    //upload to S3
+    uploadImages((err, imageData)=>{
+      //once we have URL, then POST
+      if(imageData){
+        console.log('ready to post---',imageData)
+        postAnswer(req.body.question_id, req.body.body,req.body.name, imageData);
+      }
+    });
+  }
 
 })
+
 app.post('/api/addQuestion', (req, res) => {
   // console.log('QA**request AddAQuestion-->',req.body) ;
 

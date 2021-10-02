@@ -40,8 +40,11 @@ class AddAnswer extends React.Component {
     this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
     const config = { headers: { 'Content-Type': 'multipart/form-data' } };
     const formData = new FormData();
-    formData.append('images', this.state.photos[0])
-    formData.append('images', this.state.photos[1])
+    if(this.state.photos.length > 0) {
+      for(let i =0; i < this.state.photos.length; i++) {
+        formData.append('images', this.state.photos[i],this.state.photos[i].name)
+      }
+    } 
     formData.append('question_id', this.props.oneQues.question_id)
     formData.append('body', this.state.answer)
     formData.append('name', this.state.nickname)
@@ -61,7 +64,7 @@ class AddAnswer extends React.Component {
         console.log('Success Creating the Answer-->',response);
       })
       .catch(function (error) {
-        console.log('Error sending to server->', error)
+        console.log('Error sending to server->', error.data)
       })
 
     this.props.onClose();
