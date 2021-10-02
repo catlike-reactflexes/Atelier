@@ -93,7 +93,7 @@ class RelatedProducts extends React.Component {
   getYourOutfitData() {
     if (localStorage.getItem("myOutfit") !== undefined) {
       let favorites = localStorage.getItem("myOutfit");
-      //console.log('local storage after parse in related: ', favorites);
+      // console.log('local storage after parse in related: ', favorites);
       axios.get('/yourOutfitProductData', {
         params: {
           yourOutfitIds: favorites

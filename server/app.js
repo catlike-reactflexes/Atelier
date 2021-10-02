@@ -300,6 +300,7 @@ app.get('/yourOutfitProductData', (req, res) => {
   let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
   //console.log('outfit ids on server: ', yourOutfitIds.data);
   let arrayOfOutfitPromises = [];
+  
   for (var i = 0; i < yourOutfitIds.data.length; i++) {
     let id = yourOutfitIds.data[i];
     arrayOfOutfitPromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
