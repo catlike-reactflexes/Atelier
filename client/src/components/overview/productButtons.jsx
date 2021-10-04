@@ -44,7 +44,7 @@ class ProductButtons extends React.Component {
             {this.getSizes(this.props.selected.skus)}
             {this.displayQty(this.state.quantity)}
             <button id="bagBtn" onClick={() => { this.props.postTrackInteractions('Add to bag', 'Product Buttons') }} data-testid={'bag-btn'}>ADD TO BAG</button>
-            <button id="favBtn" onClick={this.props.favoriteItem()} data-testid={'outfit-btn'}><span className={'fullStar'}></span></button>
+            <button id="favBtn" onClick={this.props.favoriteItem} data-testid={'outfit-btn'}><span className={'fullStar'}></span></button>
           </>
           : <div>Loading Data</div>
         }
