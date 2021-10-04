@@ -12,9 +12,13 @@ const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
+//this is a regex expression that will allow the app to serve the static files
+//dynamically with our default product id and a real url
+app.use('/:id(\\d{5})', express.static('client/dist'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -29,8 +33,8 @@ app.get('/', (req, res) => {
   //make a post to API
 */
 
-app.post('/api/interactions', (req, res)=> {
-  console.log('Interaction API-->',req.body) ;
+app.post('/api/interactions', (req, res) => {
+  console.log('Interaction API-->', req.body);
   axios({
     method: 'POST',
     url: `${API_URL}/interactions`,
@@ -61,8 +65,8 @@ app.get('/reviews', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
   let config = {
-    headers: {'Authorization': process.env.API_TOKEN},
-    params: {'product_id': product_id}
+    headers: { 'Authorization': process.env.API_TOKEN },
+    params: { 'product_id': product_id }
   }
 
   // console.log(typeof product_id)
@@ -81,12 +85,12 @@ app.get('/reviewratings', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
   let config = {
-    headers: {'Authorization': process.env.API_TOKEN},
-    params: {'product_id': product_id, 'count': Number(req.query.count)}
+    headers: { 'Authorization': process.env.API_TOKEN },
+    params: { 'product_id': product_id, 'count': Number(req.query.count) }
   }
 
   // console.log(typeof product_id)
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
     .then(data => {
       // console.log('api response: ', data.data.results);
       return res.json(data.data)
@@ -100,41 +104,41 @@ app.get('/reviewratings', (req, res) => {
 app.get('/reviewmeta', (req, res) => {
   let product_id = Number(req.query.productID)
   let config = {
-    headers: {'Authorization': process.env.API_TOKEN},
-    params: {'product_id': product_id}
+    headers: { 'Authorization': process.env.API_TOKEN },
+    params: { 'product_id': product_id }
   }
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', config)
-  .then(metadata => {
-    // console.log('meta api response: ', metadata.data);
-    res.json(metadata.data)
-  })
-  .catch(err => {
-    console.log('review get error: ', err)
-    throw err
-  })
+    .then(metadata => {
+      // console.log('meta api response: ', metadata.data);
+      res.json(metadata.data)
+    })
+    .catch(err => {
+      console.log('review get error: ', err)
+      throw err
+    })
 })
 
 app.get('/reviewhelpful', (req, res) => {
   let config = {
-    headers: {'Authorization': process.env.API_TOKEN}
+    headers: { 'Authorization': process.env.API_TOKEN }
   }
   axios({
     method: 'put',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.query.review_id}/helpful`,
-    data: {review_id: req.query.review_id},
+    data: { review_id: req.query.review_id },
     headers: {
       Authorization: process.env.API_TOKEN
     }
 
   })
-  .then(response => {
-    console.log('helpful api response ', response.status)
-    res.send(response)
-  })
-  .catch(err => {
-    res.sendStatus(404)
-    // console.log('helpful review put error: ', err)
-  })
+    .then(response => {
+      console.log('helpful api response ', response.status)
+      res.send(response)
+    })
+    .catch(err => {
+      res.sendStatus(404)
+      // console.log('helpful review put error: ', err)
+    })
 })
 
 app.get('/reviewreport', (req, res) => {
@@ -144,21 +148,21 @@ app.get('/reviewreport', (req, res) => {
   axios({
     method: 'put',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.query.review_id}/report`,
-    data: {review_id: req.query.review_id},
+    data: { review_id: req.query.review_id },
     headers: {
       Authorization: process.env.API_TOKEN
     }
 
   })
     .then(function (response) {
-    //looking for 204 to get update
-    console.log('report api response--> ', response.status);
-    res.sendStatus(response.status);
-  })
+      //looking for 204 to get update
+      console.log('report api response--> ', response.status);
+      res.sendStatus(response.status);
+    })
     .catch(function (err) {
-    // console.log('api request error--> ', err);
-    res.sendStatus(err.response.status)
-  })
+      // console.log('api request error--> ', err);
+      res.sendStatus(err.response.status)
+    })
 })
 
 /*
@@ -303,25 +307,25 @@ app.get('/api/qa/id=*', (req, res) => {
   // console.log('request-->', req.path) ;
 
   axios({
-        method: 'get',
-        url: `${API_URL}/qa/questions`,
-        headers: {
-          Authorization: process.env.API_TOKEN
-        },
-        params: {
-          product_id: req.query.product_id
-        }
-      }).then(function (response) {
-        // console.log('api response: ', response.data);
+    method: 'get',
+    url: `${API_URL}/qa/questions`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    params: {
+      product_id: req.query.product_id
+    }
+  }).then(function (response) {
+    // console.log('api response: ', response.data);
 
-        res.status(200).send(response.data.results);
-      }).catch(function (err) {
-        console.log('api request error: ', err);
-        res.status(500).send(err);
-      })
+    res.status(200).send(response.data.results);
+  }).catch(function (err) {
+    console.log('api request error: ', err);
+    res.status(500).send(err);
+  })
 
 });
-app.post('/api/addAnswer', (req, res)=> {
+app.post('/api/addAnswer', (req, res) => {
   // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
   axios({
     method: 'POST',
@@ -345,7 +349,7 @@ app.post('/api/addAnswer', (req, res)=> {
   })
 
 })
-app.post('/api/addQuestion', (req, res)=> {
+app.post('/api/addQuestion', (req, res) => {
   // console.log('QA**request AddAQuestion-->',req.body) ;
   axios({
     method: 'POST',
@@ -371,15 +375,15 @@ app.post('/api/addQuestion', (req, res)=> {
 })
 app.put('/api/update', (req, res) => {
   // console.log('request-->', req.body.data)
-  const {questionid} = req.body.data;
-  const {answerid} = req.body.data;
-  let urlPut, idHelpfulness ;
-  if(questionid){
+  const { questionid } = req.body.data;
+  const { answerid } = req.body.data;
+  let urlPut, idHelpfulness;
+  if (questionid) {
     urlPut = `${API_URL}/qa/questions/${questionid}/helpful`;
-    idHelpfulness = {question_id : questionid};
+    idHelpfulness = { question_id: questionid };
   } else {
     urlPut = `${API_URL}/qa/answers/${answerid}/helpful`;
-    idHelpfulness = {answer_id : answerid}
+    idHelpfulness = { answer_id: answerid }
   }
   // console.log('request-->',question_id)
   axios({
@@ -392,28 +396,28 @@ app.put('/api/update', (req, res) => {
 
   })
     .then(function (response) {
-    //looking for 204 to get update
-    // console.log('api response--> ', response.status);
-    res.sendStatus(response.status);
-  })
+      //looking for 204 to get update
+      // console.log('api response--> ', response.status);
+      res.sendStatus(response.status);
+    })
     .catch(function (err) {
-    // console.log('UPDATE ERROR ', err);
-    res.status(404).send(err);
-  })
+      // console.log('UPDATE ERROR ', err);
+      res.status(404).send(err);
+    })
 
 })
 
 app.put('/api/report', (req, res) => {
   console.log('request-->', req.body.data)
-  const {questionid} = req.body.data;
-  const {answerid} = req.body.data;
-  let urlPut, report_id ;
-  if(questionid){
+  const { questionid } = req.body.data;
+  const { answerid } = req.body.data;
+  let urlPut, report_id;
+  if (questionid) {
     urlPut = `${API_URL}/qa/questions/${questionid}/report`;
-    report_id = {question_id : questionid};
+    report_id = { question_id: questionid };
   } else {
     urlPut = `${API_URL}/qa/answers/${answerid}/report`;
-    report_id = {answer_id : answerid}
+    report_id = { answer_id: answerid }
   }
   // console.log('request-->',question_id)
   axios({
@@ -426,14 +430,14 @@ app.put('/api/report', (req, res) => {
 
   })
     .then(function (response) {
-    //looking for 204 to get update
-    // console.log('api response--> ', response);
-    res.sendStatus(response.status);
-  })
+      //looking for 204 to get update
+      // console.log('api response--> ', response);
+      res.sendStatus(response.status);
+    })
     .catch(function (err) {
-    // console.log('api request error--> ', err);
-    res.status(404).send(err);
-  })
+      // console.log('api request error--> ', err);
+      res.status(404).send(err);
+    })
 
 })
 
