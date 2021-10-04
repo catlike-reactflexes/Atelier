@@ -8,7 +8,7 @@ const axios = require('axios');
 const $ = require('jquery');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const {uploadFile} = require('./Questions/s3');
+// const {uploadFile} = require('./Questions/s3');
 
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
