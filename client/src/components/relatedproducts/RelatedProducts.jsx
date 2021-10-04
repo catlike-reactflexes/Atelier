@@ -15,7 +15,7 @@ class RelatedProducts extends React.Component {
       defaultImages: [],
       yourOutfitData: [],
       yourOutfitImageURLs: [],
-      defaultProductId: 47421,
+      defaultProductId: this.props.id,
       overviewProductData: {
         "id": 47421,
         "campus": "hr-rpp",
@@ -64,6 +64,7 @@ class RelatedProducts extends React.Component {
   }
 
   getRelatedProductsStyles() {
+    console.log('this is the id now: ', this.state.defaultProductId)
     axios.get('/relatedProductStyles', {
       params: {
         defaultProductId: this.state.defaultProductId

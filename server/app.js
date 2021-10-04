@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-app.use(express.static(path.resolve(__dirname, '../client/dist')));
+//app.use(express.static(path.resolve(__dirname, '../client/dist')));
 //this is a regex expression that will allow the app to serve the static files
 //dynamically with our default product id and a real url
 app.use('/:id(\\d{5})', express.static('client/dist'));
