@@ -210,27 +210,48 @@ body {
   /*border: 1px solid dimgray;*/
 }
 
+.styleBtnWrapper {
+  margin-top: 1vw;
+  margin-right: 1.5%;
+  position: relative;
+}
+
 .styleBtn {
   display: flex;
   justify-content: center;
   max-width: 120px;
   max-height: 120px;
-  width: 7vw;
-  height: 7vw;
+  width: 6vw;
+  height: 6vw;
   margin-top: 1vw;
   margin-right: 1.5%;
+  padding: 0;
   border-radius: 50%;
-  /*border: 1px solid dimgray;*/
   position: relative;
   overflow: hidden;
+  border: 2px solid #444;
+  box-shadow: inset 0 0 6px 2px rgba(0, 0, 0, 0.4);
 }
 
-.styleBtn img {
+.styleCheck {
+  position: absolute;
+  top: 15%;
+  left: 78%;
+  color: #444;
+  font-weight: bold;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.styleBtnImg {
   max-height: 180px;
   max-width: 180px;
+  margin-top: -20px;
   position: absolute;
-  object-position: 50% 50%;
   overflow: hidden;
+  z-index: -1;
+  clip-path: circle(50% at 50% 50%);
 }
 
 #styleButtons {
