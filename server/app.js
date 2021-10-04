@@ -296,6 +296,7 @@ app.get('/relatedProductStyles', (req, res) => {
     .catch((error) => {
       console.log('error getting styles info on server from API: ', error);
       res.sendStatus(500);
+
     })
 })
 
