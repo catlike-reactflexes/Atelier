@@ -298,6 +298,58 @@ app.get('/relatedProductStyles', (req, res) => {
       res.sendStatus(500);
     })
 })
+
+app.get('/yourOutfitProductData', (req, res) => {
+  let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
+  //console.log('outfit ids on server: ', yourOutfitIds.data);
+  let arrayOfOutfitPromises = [];
+  for (var i = 0; i < yourOutfitIds.data.length; i++) {
+    let id = yourOutfitIds.data[i];
+    arrayOfOutfitPromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
+      headers: {
+        'Authorization': process.env.API_TOKEN,
+        'product_id': id
+      }
+    }))
+
+  }
+  Promise.all(arrayOfOutfitPromises)
+    .then((outfitProductData) => {
+      //console.log('success getting outfit product data: ', outfitProductData);
+      let outfitData = outfitProductData.map(response => {
+        return response.data;
+      })
+      res.send(outfitData);
+    })
+    .catch((error) => {
+      console.log('error getting outfit product data: ');
+    })
+})
+
+app.get('/yourOutfitStyles', (req, res) => {
+  let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
+  let arrayOfStylePromises = [];
+  for (var i = 0; i < yourOutfitIds.data.length; i++) {
+    let id = yourOutfitIds.data[i];
+    arrayOfStylePromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
+      headers: {
+        'Authorization': process.env.API_TOKEN,
+        'product_id': id
+      }
+    }))
+  }
+  Promise.all(arrayOfStylePromises)
+    .then((outfitStyles) => {
+      //console.log('success getting outfit style data: ', outfitStyles);
+      let outfitStyleData = outfitStyles.map(response => {
+        return response.data;
+      })
+      res.send(outfitStyleData);
+    })
+    .catch((error) => {
+      console.log('error getting outfit style data: ');
+    })
+})
 //----------------------------------------------------- END RELATED PRODUCTS--------------------------------------
 
 

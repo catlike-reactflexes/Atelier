@@ -14,6 +14,7 @@ class RelatedProducts extends React.Component {
       relatedProductsStyles: [],
       defaultImages: [],
       yourOutfitData: [],
+      yourOutfitImageURLs: [],
       defaultProductId: 47421,
       overviewProductData: {
         "id": 47421,
@@ -40,7 +41,8 @@ class RelatedProducts extends React.Component {
     this.getRelatedProductsData = this.getRelatedProductsData.bind(this);
     this.getRelatedProductsStyles = this.getRelatedProductsStyles.bind(this);
     this.getYourOutfitData = this.getYourOutfitData.bind(this);
-
+    this.getYourOutfitData = this.getYourOutfitData.bind(this);
+    this.getYourOutfitStyles = this.getYourOutfitStyles.bind(this);
   }
 
 
@@ -51,7 +53,7 @@ class RelatedProducts extends React.Component {
       }
     })
       .then((relatedProductsData) => {
-        console.log('success getting related products data in related products client index: ', relatedProductsData.data);
+        //console.log('success getting related products data in related products client index: ', relatedProductsData.data);
         this.setState({
           relatedProductsData: relatedProductsData.data
         })
@@ -68,7 +70,7 @@ class RelatedProducts extends React.Component {
       }
     })
       .then((relatedProductsStyles) => {
-        console.log('success getting related products styles in related products client index: ', relatedProductsStyles.data);
+        //console.log('success getting related products styles in related products client index: ', relatedProductsStyles.data);
         let imagesArray = [];
         let defaultImagesArray = [];
         let styleData = relatedProductsStyles.data
@@ -89,6 +91,44 @@ class RelatedProducts extends React.Component {
   }
 
   getYourOutfitData() {
+    if (localStorage.getItem("myOutfit") !== undefined) {
+      let favorites = localStorage.getItem("myOutfit");
+      //console.log('local storage after parse in related: ', favorites);
+      axios.get('/yourOutfitProductData', {
+        params: {
+          yourOutfitIds: favorites
+        }
+      })
+        .then((yourOutfitData) => {
+          //console.log('success getting outfit data on client: ', yourOutfitData.data);
+          this.setState({
+            yourOutfitData: yourOutfitData.data
+          })
+        })
+        .catch((error) => {
+          console.log('error getting youroutfitData on client: ', error);
+        })
+    }
+  }
+
+  getYourOutfitStyles() {
+    if (localStorage.getItem("myOutfit") !== undefined) {
+      let favorites = JSON.parse(localStorage.getItem("myOutfit"));
+      axios.get('/yourOutfitStyles', {
+        params: {
+          yourOutfitIds: favorites
+        }
+      })
+        .then((yourOutfitStyles) => {
+          //console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
+          this.setState({
+            yourOutfitImageURLs: yourOutfitStyles.data
+          })
+        })
+        .catch((error) => {
+          console.log('error getting youroutfitData on client: ', error);
+        })
+    }
   }
 
 
@@ -96,12 +136,15 @@ class RelatedProducts extends React.Component {
   componentDidMount() {
     this.getRelatedProductsData();
     this.getRelatedProductsStyles();
+    this.getYourOutfitData();
+    this.getYourOutfitStyles();
   }
 
 
 
 
   render() {
+
     return (
       <div>
         <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Related Products</h3>
@@ -111,7 +154,7 @@ class RelatedProducts extends React.Component {
           overviewProduct={this.state.overviewProductData} />
         <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</h3>
         <YourOutfitList
-          dummyData={this.state.relatedProductsData} />
+          yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs} />
       </div>
     )
   }

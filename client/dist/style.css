@@ -29,7 +29,7 @@ body {
   flex-wrap: wrap;
   width: 100%;
   height: 60vw;
-  border: 2px solid darkslategray;
+  /*border: 2px solid darkslategray;*/
 }
 
 #mainProductImageContainer {
@@ -67,6 +67,44 @@ body {
   z-index: 1;
 }
 
+.mainImgLeft {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  font-size: 1.2em;
+  color: #111;
+  align-self: center;
+  margin-left: 135px;
+  z-index: 2;
+  filter: drop-shadow(1px 1px 2px rgba(255, 255, 255, 0.5));
+}
+
+.mainImgRight {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  font-size: 1.2em;
+  color: #111;
+  align-self: center;
+  margin-left: 95%;
+  margin-right: 15px;
+  z-index: 2;
+  filter: drop-shadow(1px 1px 2px rgba(255, 255, 255, 0.5));
+}
+
+.expandIcon {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  font-size: 1.2em;
+  color: #111;
+  margin-left: 95%;
+  margin-top: 15px;
+  margin-right: 15px;
+  z-index: 2;
+  filter: drop-shadow(1px 1px 2px rgba(255, 255, 255, 0.5));
+}
+
 #styleThumbnails {
   display: flex;
   align-content: space-between;
@@ -74,7 +112,7 @@ body {
   top: 0;
   left: 0;
   display: inline-block;
-  width: 12%;
+  width: 10%;
   z-index: 2;
 }
 
@@ -83,8 +121,8 @@ body {
   margin-left: 10px;
   align-content: center;
   width: 100%;
-  max-height: 160px;
-  width: 120px;
+  max-height: 140px;
+  width: 100px;
   height: fit-content;
   position: relative;
   overflow: hidden;
@@ -93,9 +131,9 @@ body {
 }
 
 .styleThumb {
-  max-width: 160px;
-  max-height: 160px;
-  min-width: 120px;
+  max-width: 140px;
+  max-height: 140px;
+  min-width: 100px;
   object-position: center;
   overflow: hidden;
   position: relative;
@@ -110,8 +148,15 @@ body {
 #detailsContainer {
   display: flex;
   flex-direction: column;
+  height: 35%;
   width: 100%;
-  border: 1px solid dimgray;
+  /*border: 1px solid dimgray;*/
+}
+
+#po-name {
+  margin: 20px 0;
+  font-size: 2.4em;
+  font-weight: bold;
 }
 
 /* Star Styling */
@@ -120,35 +165,41 @@ body {
   display: flex;
   flex-direction: row;
   max-height: 20px;
+  margin-bottom: 12px;;
 }
 
 .fullStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/fullstar.svg');
 }
 
 .threeQuarterStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/threequarterstar.svg');
 }
 
 .halfStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/halfstar.svg');
 }
 
 .quarterStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/quarterstar.svg');
 }
 
 .emptyStar {
   height: 100%;
   width: 20px;
+  min-width: 20px;
   content: url('./resources/emptystar.svg');
 }
 
@@ -156,7 +207,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid dimgray;
+  /*border: 1px solid dimgray;*/
 }
 
 .styleBtn {
@@ -169,7 +220,7 @@ body {
   margin-top: 1vw;
   margin-right: 1.5%;
   border-radius: 50%;
-  border: 1px solid dimgray;
+  /*border: 1px solid dimgray;*/
   position: relative;
   overflow: hidden;
 }
@@ -186,7 +237,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border: 1px solid dimgray;
+  /*border: 1px solid dimgray;*/
 }
 
 #productButtons {
@@ -217,8 +268,13 @@ body {
 
 #favBtn {
   margin-top: 1vw;
+  padding: 0;
   width: 12.5%;
   height: 4vw;
+}
+
+#favBtn .fullStar {
+  margin: auto;
 }
 
 #productDescription {
@@ -452,6 +508,15 @@ body {
   align-content: flex-start;
 }
 
+.windowClose{
+
+}
+
+.stars{
+display: flex;
+flex-direction: row;
+color: grey;
+}
 .category{
   color: grey;
   font-size: 12px;
@@ -480,7 +545,7 @@ flex-direction: row;
 justify-content: center;
 }
 
-#cardContainer{
+.cardContainer{
 font-family: 'Font Awesome 5 Free';
 font-weight: 900;
 display:flex;
@@ -488,16 +553,15 @@ flex-direction: row;
 justify-content: center;
 }
 
-
-
 .imageContainer {
 height:65%;
 width: 100%;
 }
+
 .relatedProductImg {
 height: 100%;
 width: 100%;
-object-fit: fill;
+object-fit: cover;
 }
 
 /*

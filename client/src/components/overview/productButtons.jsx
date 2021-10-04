@@ -18,7 +18,7 @@ class ProductButtons extends React.Component {
       return <option id={key} key={key} data-qty={skus[key].quantity} value={skus[key].size}>{skus[key].size}</option>
     })
     sizes.unshift(<option key={0} value="SELECT SIZE" disabled>SELECT SIZE</option>);
-    return <select onClick={() => {this.props.postTrackInteractions('Select Size', 'Product Buttons')}} id="sizeSelect" onChange={this.handleChange} defaultValue={'SELECT SIZE'} data-testid={'size-select'}>{sizes}</select>;
+    return <select onClick={() => { this.props.postTrackInteractions('Select Size', 'Product Buttons') }} id="sizeSelect" onChange={this.handleChange} defaultValue={'SELECT SIZE'} data-testid={'size-select'}>{sizes}</select>;
   }
 
   handleChange(event) {
@@ -40,13 +40,14 @@ class ProductButtons extends React.Component {
     return (
       <div id="productButtons" data-testid="overview-buttons">
         {this.props.loaded ?
-          <div>
+          <>
             {this.getSizes(this.props.selected.skus)}
             {this.displayQty(this.state.quantity)}
-            <button id="bagBtn" onClick={() => {this.props.postTrackInteractions('Add to bag', 'Product Buttons')}} data-testid={'bag-btn'}>ADD TO BAG</button>
-            <button id="favBtn" onClick={this.props.favoriteItem} data-testid={'outfit-btn'}>*</button>
-          </div>
-        : <div>Loading Data</div>}
+            <button id="bagBtn" onClick={() => { this.props.postTrackInteractions('Add to bag', 'Product Buttons') }} data-testid={'bag-btn'}>ADD TO BAG</button>
+            <button id="favBtn" onClick={this.props.favoriteItem()} data-testid={'outfit-btn'}><span className={'fullStar'}></span></button>
+          </>
+          : <div>Loading Data</div>
+        }
       </div>
     )
   }
