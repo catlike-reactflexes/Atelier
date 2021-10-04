@@ -300,7 +300,7 @@ app.get('/yourOutfitProductData', (req, res) => {
   let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
   //console.log('outfit ids on server: ', yourOutfitIds.data);
   let arrayOfOutfitPromises = [];
-  
+
   for (var i = 0; i < yourOutfitIds.data.length; i++) {
     let id = yourOutfitIds.data[i];
     arrayOfOutfitPromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
@@ -367,10 +367,11 @@ app.get('/api/qa/id=*', (req, res) => {
       Authorization: process.env.API_TOKEN
     },
     params: {
-      product_id: req.query.product_id
+      product_id: req.query.product_id,
+      count: 10
     }
   }).then(function (response) {
-    // console.log('api response: ', response.data);
+    console.log('api response: ', response.data.results);
 
     res.status(200).send(response.data.results);
   }).catch(function (err) {
@@ -454,7 +455,7 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
 })
 
 app.post('/api/addQuestion', (req, res) => {
-  // console.log('QA**request AddAQuestion-->',req.body) ;
+  console.log('QA**request AddAQuestion-->',req.body) ;
 
   axios({
     method: 'POST',
@@ -469,7 +470,7 @@ app.post('/api/addQuestion', (req, res) => {
       product_id: req.body.product_id
     }
   }).then(function (response) {
-    // console.log('SUCCESS___>>>api response: ', response.data);
+    console.log('SUCCESS___>>>api response: ', response.data);
 
     res.status(200).send(response.data);
   }).catch(function (err) {

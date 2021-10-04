@@ -90,8 +90,8 @@ class App extends React.Component {
     return (
       <div>
         <div>Header Placeholder</div>
-          <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} />
-          <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
+          {/* <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} />
+          <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} /> */}
           {quesAns.length > 0 && <QuesAnsMain
             handleQAUpdate={this.handleQAUpdate}
             productUpdate={this.handleProductUpdate}
@@ -99,7 +99,7 @@ class App extends React.Component {
             id={this.state.productId}
             productName={this.state.productName}
           />}
-          <Reviews id={this.state.productId} productName = {this.state.productName}/>
+          {/* <Reviews id={this.state.productId} productName = {this.state.productName}/> */}
       </div >
     );
   }

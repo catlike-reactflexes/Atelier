@@ -107,12 +107,12 @@ class PhotoUpload extends React.Component {
 }
 const MODAL_Q_STYLES = {
   position: 'fixed',
-  top: '50%',
-  left: '50%',
+  top: '70%',
+  left: '70%',
   transform: 'translate(-50%, -50%)',
   backgroundColor:'#D0D0D0',
   padding: '50px',
-  zIndex: 1000
+  zIndex: 2
 }
 const OVERLAY_STYLES = {
   position: 'fixed',
