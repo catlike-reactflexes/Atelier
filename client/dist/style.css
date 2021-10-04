@@ -506,16 +506,26 @@ body {
   display:flex;
   flex-direction: column;
   align-content: flex-start;
+  position:relative;
 }
 
-.windowClose{
+.modalStar {
+margin-left: 175px;
+margin-top: 5px;
+position:absolute;
+color: orange;
+}
 
+#windowClose{
+  margin-left: 175px;
+  margin-top: 5px;
+  position:absolute;
 }
 
 .stars{
 display: flex;
 flex-direction: row;
-color: grey;
+color: orange;
 }
 .category{
   color: grey;
