@@ -12,9 +12,13 @@ const bodyParser = require('body-parser');
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
+//this is a regex expression that will allow the app to serve the static files
+//dynamically with our default product id and a real url
+app.use('/:id(\\d{5})', express.static('client/dist'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -296,11 +300,12 @@ app.get('/relatedProductStyles', (req, res) => {
     .catch((error) => {
       console.log('error getting styles info on server from API: ', error);
       res.sendStatus(500);
+
     })
 })
 
 app.get('/yourOutfitProductData', (req, res) => {
-  let yourOutfitIds = JSON.parse(req.query.yourOufitIds);
+  let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
   let arrayOfOutfitPromises = [];
   for (var i = 0; i < yourOutfitIds.length; i++) {
     let id = yourOutfitIds[i];
@@ -314,7 +319,7 @@ app.get('/yourOutfitProductData', (req, res) => {
   }
   Promise.all(arrayOfOutfitPromises)
     .then((outfitProductData) => {
-      // console.log('success getting outfit product data: ', outfitProductData);
+      //console.log('success getting outfit product data: ', outfitProductData);
       let outfitData = outfitProductData.map(response => {
         return response.data;
       })
@@ -326,7 +331,7 @@ app.get('/yourOutfitProductData', (req, res) => {
 })
 
 app.get('/yourOutfitStyles', (req, res) => {
-  let yourOutfitIds = JSON.parse(req.query.yourOufitIds);
+  let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
   let arrayOfStylePromises = [];
   for (var i = 0; i < yourOutfitIds.length; i++) {
     let id = yourOutfitIds[i];

@@ -91,11 +91,12 @@ class RelatedProducts extends React.Component {
   }
 
   getYourOutfitData() {
-    if (localStorage.getItem("myOutfit") !== undefined) {
-      let favorites = JSON.parse(localStorage.getItem("myOutfit"));
+    if (this.props.outfit.data.length > 0) {
+      let favorites = JSON.stringify(this.props.outfit.data);
+      //console.log('local storage after parse in related: ', favorites);
       axios.get('/yourOutfitProductData', {
         params: {
-          yourOufitIds: favorites
+          yourOutfitIds: favorites
         }
       })
         .then((yourOutfitData) => {
@@ -111,11 +112,12 @@ class RelatedProducts extends React.Component {
   }
 
   getYourOutfitStyles() {
-    if (localStorage.getItem("myOutfit") !== undefined) {
-      let favorites = JSON.parse(localStorage.getItem("myOutfit"));
+    console.log('props data: ', this.props.outfit.data)
+    if (this.props.outfit.data.length > 0) {
+      let favorites = JSON.stringify(this.props.outfit.data);
       axios.get('/yourOutfitStyles', {
         params: {
-          yourOufitIds: favorites
+          yourOutfitIds: favorites
         }
       })
         .then((yourOutfitStyles) => {
@@ -130,7 +132,17 @@ class RelatedProducts extends React.Component {
     }
   }
 
-
+  componentDidUpdate(prevProps) {
+    //componentDidUpdate(prevProps, prevState, snapshot)
+    // if (this.props.userID !== prevProps.userID) {
+    //   this.fetchData(this.props.userID);
+    // }
+    if (JSON.stringify(this.props.outfit.data) !== JSON.stringify(prevProps.outfit.data)) {
+      console.log('component did update ran');
+      this.getYourOutfitData();
+      this.getYourOutfitStyles();
+    }
+  }
 
   componentDidMount() {
     this.getRelatedProductsData();
@@ -153,7 +165,9 @@ class RelatedProducts extends React.Component {
           overviewProduct={this.state.overviewProductData} />
         <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</h3>
         <YourOutfitList
-          yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs} />
+          yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs}
+          updateOutfitData={this.props.updateOutfitData}
+          outfit={this.props.outfit} />
       </div>
     )
   }

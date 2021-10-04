@@ -45,7 +45,7 @@ class YourOutfitList extends React.Component {
 
       outfitItems = this.props.yourOutfitData.map((item, index) => {
         return <YourOutfitCard key={index} name={item.name} image={item.image} price={item.default_price}
-          category={item.category} />
+          category={item.category} id={item.id} updateOutfitData={this.props.updateOutfitData} />
       })
     }
     let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }

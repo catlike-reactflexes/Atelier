@@ -15,7 +15,7 @@ class Overview extends React.Component {
       productId: props.id,
       productDetails: {},
       productStyles: [],
-      styleId: 286894,
+      styleId: null,
       selectedStyle: null,
       mainId: 0,
       styleName: '',
@@ -39,6 +39,7 @@ class Overview extends React.Component {
       url: '/product',
       params: { id: id }
     }).then((response) => {
+      // console.log('product get res: ', response);
       let data = response.data;
       this.setState({ productDetails: data, detailsLoaded: true });
     }).catch((error) => {
@@ -55,12 +56,14 @@ class Overview extends React.Component {
       url: '/styles',
       params: { id: id }
     }).then((response) => {
+      console.log('style res: ', response);
       let results = response.data.results;
       let selected = null;
       let photos = [];
       let name = '';
       for (let i = 0; i < results.length; i++) {
-        if (results[i].style_id === this.state.styleId) {
+        if (results[i]['default?']) {
+          this.setState({ styleId: results[i].style_id });
           photos = results[i].photos;
           name = results[i].name;
           selected = results[i];
@@ -106,18 +109,17 @@ class Overview extends React.Component {
   saveToOutfit() {
     this.props.postTrackInteractions('Add to outfit', 'Product Buttons');
     let id = this.state.productId;
-    let outfitData;
+    let outfitData = { data: [] };
     if (localStorage.getItem('myOutfit') === null) {
-      outfitData = [];
+      outfitData.data = [];
     } else {
-      outfitData = localStorage.getItem('myOutfit');
+      outfitData = JSON.parse(localStorage.getItem('myOutfit'));
     }
-    if (!outfitData.includes(id)) {
-      outfitData.push(id);
+    if (!outfitData.data.includes(id)) {
+      outfitData.data.push(id);
     }
-    //I had to JSON.stringify this to get the data to save in the correct format
     localStorage.setItem('myOutfit', JSON.stringify(outfitData));
-    console.log('your outfit data on overview: ', localStorage);
+    this.props.updateOutfitData(outfitData);
   }
 
   expandMainImage(event) {
@@ -131,8 +133,8 @@ class Overview extends React.Component {
       <div id="overview" data-testid="overview-element">
         <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} mainImg={this.state.mainUrl} updateMain={this.updateMainImg} />
         {this.state.expandImage ?
-          <div style={{display:'none'}}></div>
-        : <div className="sidebar column-flex">
+          <div style={{ display: 'none' }}></div>
+          : <div className="sidebar column-flex">
             <ProductDetails rating={this.props.rating} name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
             <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
             <ProductButtons selected={this.state.selectedStyle} favoriteItem={this.saveToOutfit} loaded={this.state.stylesLoaded} />

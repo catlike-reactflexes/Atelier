@@ -6,13 +6,12 @@ const ReviewBreakdown = (props) => {
 
     // console.log('comfort value', this.props.reviewChars)
     let sliderStyle = {
-        height: '24px',
-        width: '50%'
+
     };
 
     return (
     <React.Fragment>
-    <div className='reviewBreakdown'>
+    <div className='productBreakdown'>
       <div className='sliders' onClick = {() => {props.postTrackInteractions('characteristic ratings', 'Reviews')}}>
         <input type="range" min="1" max="5" value={props.reviewChars.Comfort.value}  id="comfortSlider"></input>
         <input type="range" min="1" max="5" value={props.reviewChars.Fit.value}  id="fitSlider"></input>

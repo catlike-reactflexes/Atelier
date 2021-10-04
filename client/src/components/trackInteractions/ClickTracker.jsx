@@ -13,7 +13,7 @@ function ClickTracker (WrappedComponent) {
       this.postTrackInteractions = this.postTrackInteractions.bind(this);
     }
       postTrackInteractions(elementName, widgetName) {
-        console.log('Interaction from ' + elementName + ' in ' + widgetName);
+        // console.log('Interaction from ' + elementName + ' in ' + widgetName);
 
         axios.post('/api/interactions', {
           element: elementName,
