@@ -529,7 +529,7 @@ object-fit: cover;
   /* flex-direction: column; */
 }
 
-.reviewBreakdown {
+.productBreakdown {
   display: flex;
   flex-basis:33%
 }

@@ -76,11 +76,13 @@ class ReviewApp extends React.Component {
     this.openModal = this.openModal.bind(this)
   }
 
-  openModal() {
-
+  openModal(bool) {
+    console.log('modal click registered')
+    this.setState({modalIsOpen:bool})
   }
 
   getReviews(count = 2) {
+    console.log('more reviews click')
     axios.get('/reviews', {
       params: {
         productID: this.state.defaultProductID,
@@ -137,7 +139,7 @@ class ReviewApp extends React.Component {
           <ReviewList click= {this.click.bind(this)} reviews = {this.state.reviews}/>
         </div>
         <NewReview moreReviews = {this.getReviews} openModal = {this.openModal}/>
-        <NewReviewModal isOpen = {this.state.modalIsOpen}/>
+        <NewReviewModal isOpen = {this.state.modalIsOpen} openModal = {this.openModal}/>
       </div>
     );
   }
