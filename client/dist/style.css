@@ -209,15 +209,17 @@ body {
 }
 
 .styleBtnWrapper {
-  margin-top: 1vw;
+  margin-top: 2%;
   margin-right: 1.5%;
   position: relative;
+  background: transparent;
 }
 
 .styleBtn {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
   max-width: 120px;
   max-height: 120px;
   width: 6vw;
@@ -244,11 +246,10 @@ body {
 }
 
 .styleBtnImg {
-  max-height: 180px;
-  max-width: 180px;
-  margin-top: -20px;
+  display: flex;
+  max-height: 140px;
+  max-width: 140px;
   position: absolute;
-  overflow: hidden;
   z-index: -1;
   clip-path: circle(50% at 50% 50%);
 }
