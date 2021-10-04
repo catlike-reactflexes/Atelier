@@ -6,43 +6,53 @@ import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 import Reviews from './components/reviews/ReviewApp.jsx'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 47421,
+      productId: Number(window.location.pathname.split('/')[1]),
       productName: 'Camo Onesie',
       productFeatures: [],
       quesAns: [],
-      totalRating: 0
+      totalRating: 0,
+      outfit: JSON.parse(localStorage.getItem("myOutfit")) || { data: [] }
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
     this.handleQAUpdate = this.handleQAUpdate.bind(this)
     this.getRatingAverage = this.getRatingAverage.bind(this)
+    this.updateOutfitData = this.updateOutfitData.bind(this)
+  }
+
+  updateOutfitData(data) {
+    console.log(`we got the outfit`);
+    this.setState({
+      outfit: data
+    })
   }
 
   getRatingAverage() {
     return axios.get('/reviewratings', {
       params: {
-       productID: this.state.productId,
-       count: 100
-     }
-   })
-     .then(arrayOfReviews => {
-       let sum = 0
-       for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
-         // console.log('rating: ', arrayOfReviews.data.results[i].rating)
-         sum = sum + arrayOfReviews.data.results[i].rating
-       }
-       let average = sum / arrayOfReviews.data.results.length
-       // console.log('this is the average: ', average)
-       this.setState({totalRating: average})
-     })
-     .catch(error => {
-       console.log('get error', error)
-       throw error
-     })
- }
+        productID: this.state.productId,
+        count: 100
+      }
+    })
+      .then(arrayOfReviews => {
+        let sum = 0
+        for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
+          // console.log('rating: ', arrayOfReviews.data.results[i].rating)
+          sum = sum + arrayOfReviews.data.results[i].rating
+        }
+        let average = sum / arrayOfReviews.data.results.length
+        // console.log('this is the average: ', average)
+        this.setState({ totalRating: average })
+      })
+      .catch(error => {
+        console.log('get error', error)
+        throw error
+      })
+  }
 
   handleProductUpdate(data) {
     let update = {}
@@ -85,13 +95,14 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('what does the id look like:', this.state.productId);
     const { quesAns } = this.state;
 
     return (
       <div>
         <div>Header Placeholder</div>
-        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} />}
-        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} />
+        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />}
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData} outfit={this.state.outfit} />
         {quesAns.length > 0 && <QuesAnsMain
           handleQAUpdate={this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}
@@ -99,7 +110,7 @@ class App extends React.Component {
           id={this.state.productId}
           productName={this.state.productName}
         />}
-        {/* <Reviews id={this.state.productId} productName = {this.state.productName}/> */}
+        <Reviews id={this.state.productId} productName = {this.state.productName}/>
       </div >
     );
   }
