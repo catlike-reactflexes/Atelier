@@ -116,6 +116,7 @@ class Overview extends React.Component {
       outfitData.data.push(id);
     }
     localStorage.setItem('myOutfit', JSON.stringify(outfitData));
+    this.props.updateOutfitData(outfitData);
   }
 
   expandMainImage(event) {
