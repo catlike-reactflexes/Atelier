@@ -32,9 +32,9 @@ class RelatedProductsCard extends React.Component {
       <div>
         <li className="relatedProductsItems">
           <div className="card">
-            <FaStar />
+            <FaStar className="modalStar" onClick={this.showComparisonModal} />
             <div className="imageContainer">
-              <img onClick={this.showComparisonModal} className="relatedProductImg" src={this.props.image}></img>
+              <img className="relatedProductImg" src={this.props.image}></img>
             </div>
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>

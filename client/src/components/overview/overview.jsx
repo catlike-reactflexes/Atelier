@@ -15,7 +15,7 @@ class Overview extends React.Component {
       productId: props.id,
       productDetails: {},
       productStyles: [],
-      styleId: 286894,
+      styleId: null,
       selectedStyle: null,
       mainId: 0,
       styleName: '',
@@ -39,6 +39,7 @@ class Overview extends React.Component {
       url: '/product',
       params: { id: id }
     }).then((response) => {
+      // console.log('product get res: ', response);
       let data = response.data;
       this.setState({ productDetails: data, detailsLoaded: true });
     }).catch((error) => {
@@ -55,12 +56,14 @@ class Overview extends React.Component {
       url: '/styles',
       params: { id: id }
     }).then((response) => {
+      console.log('style res: ', response);
       let results = response.data.results;
       let selected = null;
       let photos = [];
       let name = '';
       for (let i = 0; i < results.length; i++) {
-        if (results[i].style_id === this.state.styleId) {
+        if (results[i]['default?']) {
+          this.setState({ styleId: results[i].style_id });
           photos = results[i].photos;
           name = results[i].name;
           selected = results[i];
@@ -116,6 +119,7 @@ class Overview extends React.Component {
       outfitData.data.push(id);
     }
     localStorage.setItem('myOutfit', JSON.stringify(outfitData));
+    this.props.updateOutfitData(outfitData);
   }
 
   expandMainImage(event) {

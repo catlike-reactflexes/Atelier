@@ -14,11 +14,16 @@ class YourOutfitCard extends React.Component {
   }
 
   removeFavorite() {
-    console.log('click worked');
-    localStorage.removeItem('myOutfit');
+    let outfitIds = JSON.parse(localStorage.getItem("myOutfit"));
+    let index = outfitIds.data.indexOf(this.props.id);
+    outfitIds.data.splice(index, 1);
+    localStorage.setItem("myOutfit", JSON.stringify(outfitIds));
+    this.props.updateOutfitData(outfitIds);
+
     this.setState({
       closeClicked: true
     })
+
   }
 
   render() {
@@ -28,7 +33,7 @@ class YourOutfitCard extends React.Component {
           <div className="card">
             <div className="imageContainer">
               <FaWindowClose id="windowClose" onClick={this.removeFavorite} />
-              <img onClick={this.showComparisonModal} className="relatedProductImg" src={this.props.image.results[0].photos[0].thumbnail_url}></img>
+              <img className="relatedProductImg" src={this.props.image.results[0].photos[0].thumbnail_url}></img>
             </div>
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>
