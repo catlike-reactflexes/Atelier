@@ -6,6 +6,7 @@ import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
 import Reviews from './components/reviews/ReviewApp.jsx'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
