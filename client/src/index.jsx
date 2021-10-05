@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: Number(window.location.pathname.split('/')[1]),
+      productId: Number((window.location.pathname.split('/')[1] || 47421)),
       productName: 'Camo Onesie',
       productFeatures: [],
       quesAns: [],
