@@ -6,7 +6,7 @@ const ReviewList = (props) => {
   return (
     <div className='reviewList'>
       {props.reviews.map((review, index)=> {
-          return <Review key = {index} review = {review} click = {props.click}/>
+          return <Review key = {index} review = {review} refreshReviews = {props.refreshReviews} count = {props.count}/>
       })}
     </div>
   )

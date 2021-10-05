@@ -69,6 +69,7 @@ class ReviewApp extends React.Component {
       reviewRecommended: {},
       totalRating: 0,
       modalIsOpen: false,
+      count: 2,
 
     };
     this.getReviews = this.getReviews.bind(this)
@@ -91,6 +92,7 @@ class ReviewApp extends React.Component {
     })
       .then(arrayOfReviews => {
         // console.log('this is reviews from api call:', arrayOfReviews.data.results)
+        this.setState({count: this.state.count + 2})
         this.setState({reviews:arrayOfReviews.data.results})
       })
       .catch(error => {
@@ -136,9 +138,9 @@ class ReviewApp extends React.Component {
         {/* <Search /> */}
         <div className='RnR'>
           <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
-          <ReviewList click= {this.click.bind(this)} reviews = {this.state.reviews}/>
+          <ReviewList refreshReviews = {this.getReviews.bind(this)} reviews = {this.state.reviews} count = {this.state.count}/>
         </div>
-        <NewReview moreReviews = {this.getReviews} openModal = {this.openModal}/>
+        <NewReview moreReviews = {this.getReviews} openModal = {this.openModal} count = {this.state.count}/>
         <NewReviewModal isOpen = {this.state.modalIsOpen} openModal = {this.openModal}/>
       </div>
     );

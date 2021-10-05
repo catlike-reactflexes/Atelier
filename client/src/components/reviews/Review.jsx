@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import Moment from 'react-moment';
 
 const Review = (props) => {
   // console.log(props.review)
@@ -36,10 +37,12 @@ let reportReview = () => {
 }
   return (
     <div className='review'>
-      <div className='reviewer_name' onClick={() => {props.postTrackInteractions('reviewer name', 'Reviews')}}>{props.review.reviewer_name}</div>
+      <span className='reviewer_name' onClick={() => {props.postTrackInteractions('reviewer name', 'Reviews')}}>{props.review.reviewer_name}</span>
+      <span className='review_date' ><Moment format="MMM, DD, YYYY">{props.review.date}</Moment></span>
+      <div className='review_summary'>{props.review.summary}</div>
       <div className='review_body' onClick={() => {props.postTrackInteractions('review body', 'Reviews')}}>{props.review.body}</div>
-      <button className='helpfulBtn' onClick = {() => {markReviewAsHelpful(); props.click()}}>helpful? {props.review.helpfulness}</button>
-      <button className='reportBtn' onClick = {() => {reportReview(); props.click()}}>report</button>
+      <button className='helpfulBtn' onClick = {() => {markReviewAsHelpful(); props.refreshReviews(props.count)}}>helpful? {props.review.helpfulness}</button>
+      <button className='reportBtn' onClick = {() => {reportReview(); props.refreshReviews(props.count)}}>report</button>
     </div>
   )
 }

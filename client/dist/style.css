@@ -654,3 +654,14 @@ object-fit: cover;
   height: 100px;
   width: 400px
 }
+
+.barContainer {
+  display: flex;
+  background-color: gray;
+  width: 80%;
+  border-radius: 15px;
+}
+
+.bar {
+  flex-direction: column;
+}
