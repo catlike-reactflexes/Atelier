@@ -21,7 +21,7 @@ function ClickTracker (WrappedComponent) {
           time: new Date().toString()
         })
         .then((response) => {
-          console.log('Success->', response);
+          // console.log('Success->', response);
         })
         .catch((err) => {
           console.log('Error with posting click tracker-->', err);
