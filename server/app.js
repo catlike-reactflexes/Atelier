@@ -6,7 +6,9 @@ const port = 3000;
 const path = require('path');
 const axios = require('axios');
 const $ = require('jquery');
+
 const bodyParser = require('body-parser');
+const fs = require('fs');
 
 
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
@@ -210,6 +212,35 @@ app.get('/styles', (req, res) => {
     console.log('/styles api request error: ', error);
   })
 })
+
+/* exploring products
+
+app.get('/product-list', (req, res) => {
+  let idList = [];
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    params: {
+      count: 500
+    }
+  }).then(function (response) {
+    data = response.data;
+    data.forEach(obj => idList.push(obj.id));
+    console.log('idlist: ', idList);
+    fs.writeFile(__dirname + 'idlist.txt', JSON.stringify(idList), (err) => {
+      if (err) {
+        console.log('error writing file: ', err);
+        return;
+      }
+    })
+  }).catch(function (error) {
+    console.log('/styles api request error: ', error);
+  })
+})
+*/
 
 /*
   ----------------------------
