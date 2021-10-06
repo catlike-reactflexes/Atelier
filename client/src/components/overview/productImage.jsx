@@ -32,25 +32,19 @@ class ProductImage extends React.Component {
     this.setState({ photos: data });
   }
 
-  makeExpand() {
+  makeExpand(flag) {
     let imgUrl = this.state.selectedUrl;
     let imgSource = new Image();
+    imgSource.src = imgUrl;
     imgSource.onload = function() {
-      let zoomer = document.getElementById('expandImage');
-      console.log('zoomer: ', zoomer);
-      let imgCss = window.getComputedStyle(zoomer, false);
-      let imgWidth = imgSource.naturalWidth;
-      let imgHeight = imgSource.naturalHeight;
+      let zoomer = document.getElementById('expandImage')
+        || document.querySelector('.mainImg');
+      let imgWidth = zoomer.naturalWidth;
+      let imgHeight = zoomer.naturalHeight;
       let ratio = imgHeight / imgWidth;
       let percent = ratio * 100 + '%';
-      if (ratio < 1) {
-        let temp = imgHeight;
-        imgHeight = imgWidth;
-        imgWidth = temp;
-      }
-      // zoomer.style.paddingBottom = percent;
 
-      zoomer.onmousemove = function(event) {
+      function mouseMove(event) {
         let boxWidth = zoomer.clientWidth;
         let boxHeight = zoomer.clientHeight;
         let xPos = event.pageX - this.offsetLeft;
@@ -66,9 +60,9 @@ class ProductImage extends React.Component {
           width: imgWidth + 'px',
           height: imgHeight + 'px'
         });
-      };
+      }
 
-      zoomer.onmouseleave = function(event) {
+      function mouseLeave(event) {
         Object.assign(zoomer.style, {
           top: 0 + 'px',
           left: 0 + 'px',
@@ -77,8 +71,17 @@ class ProductImage extends React.Component {
           height: 100 + '%'
         });
       }
+
+      if (flag) {
+
+        zoomer.onmousemove = mouseMove;
+        zoomer.onmouseleave = mouseLeave;
+
+      } else {
+        zoomer.onmousemove = () => {};
+        zoomer.onmouseleave = () => {};
+      }
     }
-    imgSource.src = imgUrl;
   }
 
 
@@ -92,7 +95,7 @@ class ProductImage extends React.Component {
           <FaArrowRight className={'mainImgRight'} />
           <FaExpand className={'expandIcon'} onClick={this.mainImageClick}/>
           <StyleThumbnails click={this.props.updateMain} photos={this.props.photos} />
-          {this.props.expand ? this.makeExpand() : ()=>{} }
+          {this.makeExpand(this.props.expand)}
         </div>
       : <div id="mainProductImageContainer" data-testid="overview-image">
           <span>Loading Image</span>

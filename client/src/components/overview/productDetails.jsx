@@ -27,8 +27,6 @@ class ProductDetails extends React.Component {
     }
     if (remainder > 0) {
       let quarter = (Math.round(remainder * 4) / 4).toFixed(2);
-      console.log(`remainder: ${remainder}, quarter: ${quarter}`);
-      console.log('class quarter: ', classes[quarter])
       result.push(classes[quarter]);
       counter++;
     }
@@ -50,7 +48,7 @@ class ProductDetails extends React.Component {
       <div id="detailsContainer" data-testid="overview-details">
         <div className={'overviewStars'}>
           {this.displayRating(this.props.rating)}
-          <a onClick={() => {this.props.postTrackInteractions('Read Review Link', 'Product Details')}} href="">Read all reviews</a>
+          <a onClick={() => {this.props.postTrackInteractions('Read Review Link', 'Product Details')}} href={'#reviewSection'}>Read all reviews</a>
         </div>
         <span id="po-category">{this.props.category.toUpperCase()}</span>
         <span id="po-name">{this.props.name}</span>

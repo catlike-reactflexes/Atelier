@@ -123,7 +123,7 @@ class ReviewApp extends React.Component {
 
   render() {
     return (
-      <div className='reviews'>
+      <div className='reviews' id="reviewSection">
         {/* <Search /> */}
         <div className='RnR'>
           <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>

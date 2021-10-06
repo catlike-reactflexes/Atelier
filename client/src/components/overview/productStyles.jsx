@@ -33,7 +33,7 @@ class ProductSyles extends React.Component {
   render() {
     return (
       <div id="stylesContainer" data-testid="overview-styles">
-        <span onClick={() => {this.props.postTrackInteractions('Style Name', 'Product Styles')}}><em>STYLE ></em> {this.props.name.toUpperCase()}</span>
+        <span onClick={() => {this.props.postTrackInteractions('Style Name', 'Product Styles')}}><strong>STYLE ></strong> {this.props.name.toUpperCase()}</span>
           {
             this.props.loaded ?
               this.makeStyles(this.props.styles, this.selectStyle)
