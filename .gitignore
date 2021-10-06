@@ -113,3 +113,6 @@ typings/
 
 #aws
 *.pem
+
+#misc
+.DS_Store
