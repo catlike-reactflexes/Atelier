@@ -25,7 +25,6 @@ class App extends React.Component {
   }
 
   updateOutfitData(data) {
-    console.log(`we got the outfit`);
     this.setState({
       outfit: data
     })
@@ -95,14 +94,15 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('what does the id look like:', this.state.productId);
     const { quesAns } = this.state;
 
     return (
       <div>
         <div>Header Placeholder</div>
         {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />}
-        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData} outfit={this.state.outfit} />
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData}
+          outfit={this.state.outfit}
+          rating={this.getRatingAverage} />
         {quesAns.length > 0 && <QuesAnsMain
           handleQAUpdate={this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}

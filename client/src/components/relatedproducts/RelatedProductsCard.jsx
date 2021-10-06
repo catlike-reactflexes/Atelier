@@ -14,6 +14,8 @@ class RelatedProductsCard extends React.Component {
     this.showComparisonModal = this.showComparisonModal.bind(this);
   }
 
+
+
   showComparisonModal(event) {
     event.preventDefault();
     this.setState({ comparisonModalVisible: true });
@@ -26,7 +28,6 @@ class RelatedProductsCard extends React.Component {
     });
   }
 
-  //set star to absolute position within the card element
   render() {
     return (
       <div>
@@ -39,7 +40,7 @@ class RelatedProductsCard extends React.Component {
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>
             <p className="price">${Number(this.props.price).toFixed()}</p>
-            <Stars />
+            <Stars id={this.props.id} />
           </div>
         </li >
         {this.state.comparisonModalVisible ?

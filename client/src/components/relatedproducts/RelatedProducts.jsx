@@ -64,7 +64,6 @@ class RelatedProducts extends React.Component {
   }
 
   getRelatedProductsStyles() {
-    console.log('this is the id now: ', this.state.defaultProductId)
     axios.get('/relatedProductStyles', {
       params: {
         defaultProductId: this.state.defaultProductId
@@ -109,11 +108,15 @@ class RelatedProducts extends React.Component {
         .catch((error) => {
           console.log('error getting youroutfitData on client: ', error);
         })
+    } else {
+      this.setState({
+        yourOutfitData: []
+      })
     }
   }
 
   getYourOutfitStyles() {
-    console.log('props data: ', this.props.outfit.data)
+    //console.log('props data: ', this.props.outfit.data)
     if (this.props.outfit.data.length > 0) {
       let favorites = JSON.stringify(this.props.outfit.data);
       axios.get('/yourOutfitStyles', {
@@ -130,16 +133,21 @@ class RelatedProducts extends React.Component {
         .catch((error) => {
           console.log('error getting youroutfitData on client: ', error);
         })
+    } else {
+      this.setState({
+        yourOutfitImageURLs: []
+      })
     }
   }
 
+
+
   componentDidUpdate(prevProps) {
-    //componentDidUpdate(prevProps, prevState, snapshot)
-    // if (this.props.userID !== prevProps.userID) {
-    //   this.fetchData(this.props.userID);
-    // }
-    if (JSON.stringify(this.props.outfit.data) !== JSON.stringify(prevProps.outfit.data)) {
-      console.log('component did update ran');
+    console.log('props: ', this.props.outfit.data);
+    console.log('prevprops: ', prevProps.outfit.data);
+    if (this.props.outfit.data.length !== prevProps.outfit.data.length) {
+      console.log('did this run or no');
+      // if (JSON.stringify(this.props.outfit.data) !== JSON.stringify(prevProps.outfit.data)) {
       this.getYourOutfitData();
       this.getYourOutfitStyles();
     }
@@ -163,7 +171,8 @@ class RelatedProducts extends React.Component {
         <RelatedProductsList
           productData={this.state.relatedProductsData}
           imageData={this.state.defaultImages}
-          overviewProduct={this.state.overviewProductData} />
+          overviewProduct={this.state.overviewProductData}
+          rating={this.props.rating} />
         <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</h3>
         <YourOutfitList
           yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs}

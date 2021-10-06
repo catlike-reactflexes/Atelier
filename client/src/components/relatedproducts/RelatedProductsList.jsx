@@ -1,5 +1,6 @@
 import React from 'react';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
+import axios from 'axios';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
@@ -13,6 +14,8 @@ class RelatedProductsList extends React.Component {
     this.transformRight = this.transformRight.bind(this);
 
   }
+
+
 
   transformLeft() {
     // transform: "translateX-(25%)"
@@ -40,7 +43,8 @@ class RelatedProductsList extends React.Component {
       return <RelatedProductsCard key={index} name={item.name} price={item.default_price} category={item.category} description={item.description}
         overviewProduct={this.props.overviewProduct}
         image={item.image}
-        productFeatures={item.features} />
+        productFeatures={item.features}
+        id={item.id} />
     })
     let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }
     return (

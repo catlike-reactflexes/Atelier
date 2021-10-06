@@ -13,24 +13,20 @@ class YourOutfitList extends React.Component {
   }
 
   transformLeft() {
-    // transform: "translateX-(25%)"
     this.props.postTrackInteractions('Left carousel arrow', 'Related Products');
     console.log('left chevron clicked')
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex - 1 }
     })
-    // document.getElementById("relatedProductCards").style.transform = "translateX(-25%)"
   }
 
 
   transformRight() {
-    // transform: "translateX(25%)"
     console.log('right chevron clicked')
     this.props.postTrackInteractions('Right chevron arrow', 'Related Products');
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex + 1 }
     })
-    // document.getElementById("relatedProductCards").style.transform = "translateX(25%)";
   }
 
 

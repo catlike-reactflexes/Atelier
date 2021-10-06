@@ -26,6 +26,8 @@ class YourOutfitCard extends React.Component {
 
   }
 
+
+
   render() {
     return (
       <div>
@@ -38,7 +40,7 @@ class YourOutfitCard extends React.Component {
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>
             <p className="price">${Number(this.props.price).toFixed()}</p>
-            <Stars />
+            <Stars id={this.props.id} />
           </div>
         </li >
 

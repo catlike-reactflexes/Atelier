@@ -12,6 +12,7 @@ Deliver a fully functional web application that meets the specifications and req
 - Node
 - Github
 - Trello board
+- AWS
 
 ## API
 - GitHub token is located within the .env file. The variable is `API_TOKEN = FILL_ME_IN`.

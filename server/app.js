@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 */
 
 app.post('/api/interactions', (req, res) => {
-  console.log('Interaction API-->', req.body);
+  //console.log('Interaction API-->', req.body);
   axios({
     method: 'POST',
     url: `${API_URL}/interactions`,
@@ -47,7 +47,7 @@ app.post('/api/interactions', (req, res) => {
       time: req.body.time
     }
   }).then(function (response) {
-    console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
+    //console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
     res.status(response.status).send(response.data);
   }).catch(function (err) {
     console.log('api request error: ', err);
@@ -300,6 +300,7 @@ app.get('/relatedProductStyles', (req, res) => {
     })
 })
 
+
 app.get('/yourOutfitProductData', (req, res) => {
   let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
   let arrayOfOutfitPromises = [];
@@ -498,7 +499,7 @@ app.put('/api/report', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${port}`);
 });
 
 
