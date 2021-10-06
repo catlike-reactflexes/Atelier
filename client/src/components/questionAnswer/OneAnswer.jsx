@@ -34,9 +34,14 @@ class OneAnswer extends React.Component {
     }
   }
 
+
   answerReport = (answerId) => {
+    console.log('report')
     //user only allowed to click one time
     this.props.postTrackInteractions('Answer report', 'Question And Answer')
+    this.setState({
+      answerReport: true}, ()=> console.log('answer', this.state.answerReport))
+
     if(!this.state.answerReport) {
       // console.log('Hello-->', questionId)
       axios.put('/api/report', {
@@ -46,15 +51,15 @@ class OneAnswer extends React.Component {
       })
         .then(response => {
           this.setState({
-            questionReport: true})
+            answerReport: true}, ()=> console.log('answer', this.state.answerReport))
           })
     }
   }
   render() {
-
+    const {answerReport} = this.state;
     const {id, body, answerer_name, date, helpfulness, photos} = this.props.oneAnswer;
     const {oneQues} = this.props;
-
+    console.log('answer', this.state.answerReport)
     // console.log('one answer->', this.props.photos)
     // console.log('IS PHOTO URL-->', photos.length, id)
     return (
@@ -80,16 +85,27 @@ class OneAnswer extends React.Component {
 
               </div>
                 <div className="ansName">
-                      <div  style={{ fontWeight: 'bold' }}>{answerer_name}   </div>
+                      {
+                        answerer_name.toLowerCase() === 'seller' ?
+                          <div style={{ fontWeight: 'bold' }}>{answerer_name}   </div>
+                          : <div>{answerer_name}   </div>
+                      }
+
                       <div className="date"> .    <Moment format="MMM, DD, YYYY">{date}</Moment></div>
                       <div className="helpful" > | Helpful?</div>
                       <div className="yes"
                         onClick={() => this.answerUpdateHelpfulness(id,helpfulness)} >
                           Yes ({this.state.answerHelpful})</div>
-                      <div  className="report"
+                      {
+                        answerReport ?
+                          <div  className="reported">
+                               | Reported   |
+                          </div>:
+                           <div  className="report"
                             onClick={() => this.answerReport(id)}>
                                | Report
-                      </div>
+                          </div>
+                      }
                 </div>
             </div>
 

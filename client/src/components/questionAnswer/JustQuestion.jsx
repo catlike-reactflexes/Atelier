@@ -65,6 +65,7 @@ class JustQuestion extends React.Component{
   render(){
       // console.log('More answers--->', this.props)
     const {oneQues} = this.props;
+    const {questionReport} = this.state;
 
     return (
       <div className="justQues">
@@ -78,7 +79,13 @@ class JustQuestion extends React.Component{
               onClick={() => this.questionUpdateHelpfulness(oneQues.question_id)} >
                 Yes ({this.state.questionHelpful})
             </div>
-            <div className="report" onClick={() => this.questionReport(oneQues.question_id)}> | report  </div>
+            {
+              questionReport ?
+                <div className="reported"> | Reported    |</div> :
+                <div className="report"
+                  onClick={() => this.questionReport(oneQues.question_id)}> | Report    |
+                </div>
+            }
 
               <div className="label-Ans" onClick={() => this.setOpen(true)}> |  Add Answer</div>
                 {
@@ -91,7 +98,7 @@ class JustQuestion extends React.Component{
                   : null
                 }
             </div>
-        
+
       </div>
     );
   }

@@ -102,9 +102,10 @@ class AddQuestion extends React.Component {
 
         <div className="modal-content">
           <p className="modal-product">Your Product: {this.props.productName} </p>
+          <p style={{color:"#727A74",fontStyle: "italic"}}>* (mandatory)</p>
           <div className="modal-body">
             <div className="modal-question">
-              <div style={{padding:"10px"}}>Question</div>
+              <div style={{padding:"10px"}}>Question*</div>
                 <textarea
                     data-testid="question"
                     id="question"
@@ -113,11 +114,11 @@ class AddQuestion extends React.Component {
                     rows={5}
                     cols={50}
                 />
-            {(!this.state.questionEmpty) && <span style={{color:'red'}}>* Question Required</span>}
+            {(!this.state.questionEmpty) && <span style={REQUIRED_STYLES}>* question required</span>}
             </div>
             <p>For privacy reasons, do not use your full name or email address</p>
             <div className="modal-info">
-              <div htmlFor="nickname" style={{padding:"10px"}}>nickname (mandatory) </div>
+              <div htmlFor="nickname" style={{padding:"10px"}}>nickname*</div>
                 <input
                   data-testid="nickname"
                   type="text"
@@ -125,9 +126,9 @@ class AddQuestion extends React.Component {
                   onChange={this.handleQuestionChange}
                   placeholder='Example: jackson11!'/>
 
-            {(!this.state.nicknameEmpty) && <span style={{color:'red'}}>* nickname Required</span>}
+            {(!this.state.nicknameEmpty) && <span style={REQUIRED_STYLES}>* nickname required</span>}
 
-                <div htmlFor="email" style={{padding:"10px"}}>email (mandatory)</div>
+                <div htmlFor="email" style={{padding:"10px"}}>email*</div>
 
                   <input
                     data-testid="email"
@@ -137,8 +138,8 @@ class AddQuestion extends React.Component {
                     onChange={this.handleQuestionChange}
                     placeholder = 'atelier@aol.com'/>
 
-            {(!this.state.emailEmpty) && <span style={{color:'red'}}>* email Required</span>}
-            {(!this.state.emailValid) && <span style={{color:'red'}}>* invalid Email</span>}
+            {(!this.state.emailEmpty) && <span style={REQUIRED_STYLES}>* email required</span>}
+            {(!this.state.emailValid) && <span style={REQUIRED_STYLES}>* invalid email</span>}
             </div>
 
           </div>
@@ -174,7 +175,12 @@ const OVERLAY_STYLES = {
   backgroundColor: 'rgba(0, 0, 0, .8)',
   zIndex: 100
 }
+const REQUIRED_STYLES = {
+  color:'#be3e8d',
+  fontStyle: "italic",
+  fontSize:'12px'
 
+}
 
 
 export default ClickTracker(AddQuestion);

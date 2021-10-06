@@ -90,7 +90,7 @@ class AddAnswer extends React.Component {
           console.log('Success Creating the Answer-->',response);
         })
         .catch(function (error) {
-          console.log('Error sending to server->', error.data)
+          console.log('??????????->', error)
         })
 
       this.props.onClose();
@@ -135,9 +135,10 @@ class AddAnswer extends React.Component {
       </div>
       <div className="modal-content">
           <p className="modal-product">{productName}  :  {question_body} </p>
+          <p style={{color:"#727A74",fontStyle: "italic"}}>* (mandatory)</p>
           <div className="modal-body">
             <div>
-              <label className="answer">Your Answer (mandatory</label>
+              <label className="answer">Your Answer *</label>
                 <textarea
                     data-testid="answer"
                     id="answer"
@@ -145,9 +146,9 @@ class AddAnswer extends React.Component {
                     row={5}
                 />
             </div>
-            {(!this.state.answerEmpty) && <span style={{color:'red'}}>* Answer Required</span>}
+            {(!this.state.answerEmpty) && <span style={REQUIRED_STYLES}>* answer required</span>}
             <div>
-              <label className="nickname">nickname (mandatory) </label>
+              <label className="nickname">nickname *</label>
                 <input
                   data-testid="nickname"
                   type="text"
@@ -156,9 +157,9 @@ class AddAnswer extends React.Component {
                   placeholder='Example: jackson543'/>
 
             </div>
-            {(!this.state.nicknameEmpty) && <span style={{color:'red'}}>* nickname Required</span>}
+            {(!this.state.nicknameEmpty) && <span style={REQUIRED_STYLES}>* nickname required</span>}
             <div>
-              <label className="email">email (mandatory)</label>
+              <label className="email">email *</label>
                 <input
                   data-testid="email"
                   type="text"
@@ -166,8 +167,8 @@ class AddAnswer extends React.Component {
                   onChange={this.handleAnswerChange}
                   placeholder = 'jack@email.com'/>
             </div>
-            {(!this.state.emailEmpty) && <span style={{color:'red'}}>* email Required</span>}
-            {(!this.state.emailValid) && <span style={{color:'red'}}>* invalid Email</span>}
+            {(!this.state.emailEmpty) && <span style={REQUIRED_STYLES}>* email required</span>}
+            {(!this.state.emailValid) && <span style={REQUIRED_STYLES}>* invalid email</span>}
             {
           this.state.previewImages.length > 0 ?
           <div className="upload-images">{this.state.previewImages.map((preview, index)=>
@@ -219,5 +220,11 @@ const OVERLAY_STYLES = {
   bottom: 0,
   backgroundColor: 'rgba(0, 0, 0, .8)',
   zIndex: 1000
+}
+const REQUIRED_STYLES = {
+  color:'#be3e8d',
+  fontStyle: "italic",
+  fontSize:'12px'
+
 }
 export default ClickTracker(AddAnswer);

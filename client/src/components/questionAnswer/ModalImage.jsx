@@ -37,7 +37,7 @@ class ModalImage extends React.Component {
   }
 }
 const MODAL_Q_STYLES1 = {
-  position: 'fixed',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',

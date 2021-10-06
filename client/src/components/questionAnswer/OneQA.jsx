@@ -13,6 +13,20 @@ class OneQA extends React.Component{
 
     const {allAns, oneQues} = this.props;
     // console.log('ONE QA--->', allAns, oneQues);
+    let sellerList = []
+    let newAnswerList = [];
+
+    for(let i =0; i < allAns.length; i++) {
+      if(allAns[i].answerer_name.toLowerCase() === 'seller'){
+        console.log('found seller', this.props.allAns[i].answerer_name)
+        sellerList.push(allAns[i])
+      } else {
+        newAnswerList.push(allAns[i])
+      }
+    }
+    if(sellerList.length > 0){
+      newAnswerList = sellerList.concat(newAnswerList)
+    }
 
     return (
       <div className="oneQA">
@@ -24,9 +38,9 @@ class OneQA extends React.Component{
               oneQues={oneQues} productName={this.props.productName}
             />
         </div>
-        
+
         <div className="oneAnswer1">
-            <MoreAnswer allAns={allAns} oneQues={oneQues}/>
+            <MoreAnswer allAns={newAnswerList} oneQues={oneQues}/>
         </div>
 
       </div>

@@ -452,8 +452,9 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
         photos: photoUrl
       }
     }).then(function (response) {
-      console.log('SUCCESS___>>>api response: ', response.data);
-      res.status(response.status).send(response.data);
+      console.log('SUCCESS___>>>api response: ', response.data, 'Status:', response.status);
+      // res.status(response.status).send(response.data);
+      res.status(204).send('Success');
     }).catch(function (err) {
       console.log('Why error????')
       console.log('api request error: ', err.data, err.status);

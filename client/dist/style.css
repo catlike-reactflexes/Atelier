@@ -420,13 +420,13 @@ body {
 }
 
 .yes, .label-Ans , .report, .loadAns{
-  display: flex;
+  /* display: flex;
   margin-left: 5px;
-  width: fit-content;
+  width: fit-content; */
   text-decoration: underline;
   cursor:pointer;
 }
-.by, .helpful, .label-Ans, .yes, .ansName, .report{
+.by, .helpful, .label-Ans, .yes, .ansName, .report, .reported{
   margin-left: 5px;
   width: fit-content;
   display: flex;
@@ -549,6 +549,7 @@ body {
 }
 .modal-body{
   align-items: center;
+  color: #727A74;
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
@@ -570,7 +571,7 @@ body {
 #question, #email, #nickname , #answer{
   padding: 10px;
   margin: 5px;
-  border-color: #b2beb5;
+  border-color: #727A74;
   outline: none;
   align-items: center;
   border-radius: 3px;

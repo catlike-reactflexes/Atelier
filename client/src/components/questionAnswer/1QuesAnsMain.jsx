@@ -16,7 +16,7 @@ class QuesAnsMain extends React.Component {
 
     }
     this.updateQuesAns = this.updateQuesAns.bind(this);
-    console.log('filteresQues-->', this.state, this.props)
+    // console.log('filteresQues-->', this.state, this.props)
 
   }
   updateQuesAns = (data) => {
