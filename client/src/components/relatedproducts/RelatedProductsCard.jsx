@@ -12,9 +12,12 @@ class RelatedProductsCard extends React.Component {
     }
     this.hideComparisonModal = this.hideComparisonModal.bind(this);
     this.showComparisonModal = this.showComparisonModal.bind(this);
+    this.redirectPage = this.redirectPage.bind(this);
   }
 
-
+  redirectPage() {
+    window.location.href = "http://localhost:3000/47445/"
+  }
 
   showComparisonModal(event) {
     event.preventDefault();
@@ -29,13 +32,14 @@ class RelatedProductsCard extends React.Component {
   }
 
   render() {
+    console.log('image: ', this.props.image)
     return (
       <div>
         <li className="relatedProductsItems">
           <div className="card">
             <FaStar className="modalStar" onClick={this.showComparisonModal} />
             <div className="imageContainer">
-              <img className="relatedProductImg" src={this.props.image}></img>
+              <img className="relatedProductImg" src={this.props.image} onClick={this.redirectPage}></img>
             </div>
             <p className="category">{this.props.category}</p>
             <p className="productName">{this.props.name}</p>

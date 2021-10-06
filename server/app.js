@@ -195,7 +195,6 @@ app.get('/product', (req, res) => {
 
 app.get('/styles', (req, res) => {
   let id = req.query.id;
-  // console.log()
   axios({
     method: 'get',
     url: `${API_URL}/products/${id}/styles`,
@@ -250,7 +249,6 @@ let retrieveRelatedProducts = (relatedProductIds) => {
 
 }
 
-//get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
@@ -274,8 +272,6 @@ app.get('/relatedProducts', (req, res) => {
     })
 });
 
-
-//get related product styles and images
 app.get('/relatedProductStyles', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {

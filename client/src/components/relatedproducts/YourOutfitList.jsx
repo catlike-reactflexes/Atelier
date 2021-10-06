@@ -14,7 +14,6 @@ class YourOutfitList extends React.Component {
 
   transformLeft() {
     this.props.postTrackInteractions('Left carousel arrow', 'Related Products');
-    console.log('left chevron clicked')
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex - 1 }
     })
@@ -22,7 +21,6 @@ class YourOutfitList extends React.Component {
 
 
   transformRight() {
-    console.log('right chevron clicked')
     this.props.postTrackInteractions('Right chevron arrow', 'Related Products');
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex + 1 }

@@ -22,16 +22,15 @@ class Stars extends React.Component {
       .then(arrayOfReviews => {
         let sum = 0
         for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
-          sum = sum + arrayOfReviews.data.results[i].rating
+          sum = sum + arrayOfReviews.data.results[i].rating;
         }
-        let average = sum / arrayOfReviews.data.results.length
-        console.log('this is the average: ', average)
+        let average = sum / arrayOfReviews.data.results.length;
         this.setState({
           rating: average
         })
       })
       .catch(error => {
-        console.log('get error', error)
+        console.log('get error', error);
         throw error
       })
   }

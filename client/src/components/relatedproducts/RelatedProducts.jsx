@@ -143,11 +143,7 @@ class RelatedProducts extends React.Component {
 
 
   componentDidUpdate(prevProps) {
-    console.log('props: ', this.props.outfit.data);
-    console.log('prevprops: ', prevProps.outfit.data);
     if (this.props.outfit.data.length !== prevProps.outfit.data.length) {
-      console.log('did this run or no');
-      // if (JSON.stringify(this.props.outfit.data) !== JSON.stringify(prevProps.outfit.data)) {
       this.getYourOutfitData();
       this.getYourOutfitStyles();
     }
@@ -167,13 +163,13 @@ class RelatedProducts extends React.Component {
 
     return (
       <div>
-        <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Related Products</h3>
+        <span onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Related Products</span>
         <RelatedProductsList
           productData={this.state.relatedProductsData}
           imageData={this.state.defaultImages}
           overviewProduct={this.state.overviewProductData}
           rating={this.props.rating} />
-        <h3 onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</h3>
+        <span onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</span>
         <YourOutfitList
           yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs}
           updateOutfitData={this.props.updateOutfitData}
