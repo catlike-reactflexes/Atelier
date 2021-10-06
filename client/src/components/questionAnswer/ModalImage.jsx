@@ -1,5 +1,6 @@
 const React = require('react');
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import { FiMinimize2 } from "react-icons/fi";
 
 class ModalImage extends React.Component {
   constructor(props){
@@ -8,12 +9,12 @@ class ModalImage extends React.Component {
 
     }
     this.handleOnClick = this.handleOnClick.bind(this);
-    console.log('Modal Image-props->', this.props)
+    // console.log('Modal Image-props->', this.props)
   }
 
   handleOnClick = () => {
     this.props.postTrackInteractions('Answer photo', 'Questions and Answers')
-    console.log('--->Closing--->')
+    // console.log('--->Closing--->')
     this.props.onClose();
 
   }
@@ -28,7 +29,7 @@ class ModalImage extends React.Component {
       <div style={MODAL_Q_STYLES1}>
         <div>
           <img src={this.props.expandImageUrl} onClick={this.handleOnClick} alt='answers image' className='full_image' />
-
+          <FiMinimize2 className="minimize-icon" onClick={()=> this.props.onClose()}/>
         </div>
 
      </div>
@@ -43,15 +44,16 @@ const MODAL_Q_STYLES1 = {
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
   padding: '50px',
-  zIndex: 50000
+  zIndex: 50
 }
-const OVERLAY_STYLES1 = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, .4)',
-  zIndex: 500
-}
+// const OVERLAY_STYLES1 = {
+//   position: 'fixed',
+//   top: 0,
+//   left: 0,
+//   right: 0,
+//   bottom: 0,
+//   backgroundColor: 'rgba(0, 0, 0, .4)',
+//   zIndex: 500
+// }
+
 export default ClickTracker(ModalImage);

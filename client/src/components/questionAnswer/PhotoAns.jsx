@@ -60,38 +60,63 @@ class PhotoAns extends React.Component {
     // if(!this.props.open) return null;
     const {urlPhoto} = this.props;
 
-
     return (
-      <section className='slider'>
-        <FaChevronLeft className='left-arrow' onClick={this.prevSlide}/>
-        <FaChevronRight className='right-arrow' onClick={this.nextSlide}/>
-          {
-            urlPhoto && urlPhoto.map((oneUrl, index) => {
-              return(
-                <div
-                  className={index === this.state.current ? 'slide active' : 'slide'}
-                  key={index}
-                >
-                {index === this.state.current && (
-                  <img src={oneUrl} onClick={(e) => this.setOpen(true,e)} alt='answers image' className='image' />
-                )}
-                {
-                  this.state.isOpen ?
-                  <ModalImage
-                    expandImageUrl={this.state.expandImageUrl}
-                    open ={this.state.isOpen}
-                    onClose={() => this.setOpen(false, null)}/>
-                  : null
-                }
-                </div>
+        <section className='slider'>
+            {
+              urlPhoto && urlPhoto.map((oneUrl, index) => {
+                return(
+                  <div style={{padding:"2px"}} key={index}>
+                    <img src={oneUrl} onClick={(e) => this.setOpen(true,e)} alt='answers image' className='image' />
 
-              )
-            })
-          }
+                  {
+                    this.state.isOpen ?
+                    <ModalImage
+                      expandImageUrl={this.state.expandImageUrl}
+                      open ={this.state.isOpen}
+                      onClose={() => this.setOpen(false, null)}/>
+                    : null
+                  }
+                  </div>
+
+                )
+              })
+            }
 
 
-      </section>
-    );
+        </section>
+      );
+
+    // return (
+    //   <section className='slider'>
+    //     <FaChevronLeft className='left-arrow' onClick={this.prevSlide}/>
+    //     <FaChevronRight className='right-arrow' onClick={this.nextSlide}/>
+    //       {
+    //         urlPhoto && urlPhoto.map((oneUrl, index) => {
+    //           return(
+    //             <div
+    //               className={index === this.state.current ? 'slide active' : 'slide'}
+    //               key={index}
+    //             >
+    //             {index === this.state.current && (
+    //               <img src={oneUrl} onClick={(e) => this.setOpen(true,e)} alt='answers image' className='image' />
+    //             )}
+    //             {
+    //               this.state.isOpen ?
+    //               <ModalImage
+    //                 expandImageUrl={this.state.expandImageUrl}
+    //                 open ={this.state.isOpen}
+    //                 onClose={() => this.setOpen(false, null)}/>
+    //               : null
+    //             }
+    //             </div>
+
+    //           )
+    //         })
+    //       }
+
+
+    //   </section>
+    // );
   }
 }
 

@@ -385,7 +385,7 @@ header {
   max-height: 36rem;
   overflow: auto;
 }
-.search-bar {
+.qa-search-bar {
   display: flex;
   width: 97%;
   border: 1px #696969 solid;
@@ -394,7 +394,7 @@ header {
   padding:10px;
   margin-bottom: 5px;
 }
-.search {
+.qa-search {
   border: none;
   outline: none;
 }
@@ -637,10 +637,17 @@ header {
   outline: none;
   cursor: pointer;
 }
-.close-icon {
-  top:0%;
-  right:0%;
-  z-index: 4;
+.minimize-icon {
+
+    position: absolute;
+    top: 12%;
+    right: 11%;
+    font-size: 2rem;
+    color: rgba(124, 120, 120, 0.664);
+    z-index:6000;
+    cursor: pointer;
+    user-select: none;
+
 }
 
 /*

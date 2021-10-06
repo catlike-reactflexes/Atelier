@@ -64,14 +64,39 @@ class JustQuestion extends React.Component{
 
   render(){
       // console.log('More answers--->', this.props)
-    const {oneQues} = this.props;
+    const {oneQues, queryString} = this.props;
     const {questionReport} = this.state;
+    let string1='', string2='', string3 ='';
+    if(queryString){
+      let queryLength=queryString.length || 0;
+      let indexAtQueryString = oneQues.question_body.indexOf(queryString);
+      console.log('indexquery->', queryString, indexAtQueryString, queryLength)
+      if(indexAtQueryString !== -1){
+        string1= oneQues.question_body.slice(0, indexAtQueryString)
+        string2=oneQues.question_body.slice(indexAtQueryString,indexAtQueryString + queryLength )
+        string3=oneQues.question_body.slice(indexAtQueryString + queryLength )
+      }
+      console.log('String:', string1, 'string2', string2, 'string3',string3)
+    }
+
+    // console.log('Query String in Just Question-->', queryString)
 
     return (
       <div className="justQues">
         <div className="qBody">
             <div className="bigQ">Q:</div>
-            <div className="qBody1">{oneQues.question_body}</div>
+
+            <div className="qBody1">
+              {
+                !queryString ? <div className="qBody1">{oneQues.question_body}</div> :
+                <div>
+                  <span>{string1}</span>
+                  <span style={{backgroundColor:"yellow"}}>{string2}</span>
+                  <span>{string3}</span>
+                </div>
+              }
+            </div>
+            {/* <div className="qBody1">{oneQues.question_body}</div> */}
         </div>
         <div className="ques2">
           <div className="helpful">Helpful?</div>

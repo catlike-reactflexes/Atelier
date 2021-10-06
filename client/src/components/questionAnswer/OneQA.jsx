@@ -18,7 +18,7 @@ class OneQA extends React.Component{
 
     for(let i =0; i < allAns.length; i++) {
       if(allAns[i].answerer_name.toLowerCase() === 'seller'){
-        console.log('found seller', this.props.allAns[i].answerer_name)
+        // console.log('found seller', this.props.allAns[i].answerer_name)
         sellerList.push(allAns[i])
       } else {
         newAnswerList.push(allAns[i])
@@ -35,7 +35,7 @@ class OneQA extends React.Component{
             className="oneQuestion"
             onClick={()=>{this.props.postTrackInteractions('Question', 'Question And Answer')}}>
             <JustQuestion
-              oneQues={oneQues} productName={this.props.productName}
+              oneQues={oneQues} productName={this.props.productName} queryString={this.props.queryString}
             />
         </div>
 

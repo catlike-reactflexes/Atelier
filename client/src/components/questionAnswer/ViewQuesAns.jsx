@@ -54,12 +54,13 @@ class ViewQuesAns extends React.Component {
     return (
 
       <div className="questions">
-        <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA} productName={this.props.productName}/>
+        <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA} productName={this.props.productName} queryString={this.props.queryString}/>
         <div className="twoButton">
           {
             restOfQuestions.length > 0 && moreQA ?
             <div>
               <MoreQuestion  restOfQuestions={restOfQuestions}
+                              queryString={this.props.queryString}
                               moreQA={moreQA}
                               updateQA={this.updateQuesAns}/>
             </div> : undefined

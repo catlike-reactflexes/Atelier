@@ -59,7 +59,7 @@ class OneAnswer extends React.Component {
     const {answerReport} = this.state;
     const {id, body, answerer_name, date, helpfulness, photos} = this.props.oneAnswer;
     const {oneQues} = this.props;
-    console.log('answer', this.state.answerReport)
+    // console.log('Oneanswer l62', this.state.answerReport)
     // console.log('one answer->', this.props.photos)
     // console.log('IS PHOTO URL-->', photos.length, id)
     return (

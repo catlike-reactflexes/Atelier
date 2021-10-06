@@ -43,7 +43,7 @@ class AddAnswer extends React.Component {
   }
   validation = () => {
     if(this.state.answer.trim() === '' && this.state.nickname.trim() === '' && this.state.email.trim() === ''){
-      console.log('test1')
+      // console.log('test1')
       this.setState({
         answerEmpty: false,
         nicknameEmpty: false,

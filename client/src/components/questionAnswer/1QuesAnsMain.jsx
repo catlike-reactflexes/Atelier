@@ -10,7 +10,7 @@ class QuesAnsMain extends React.Component {
   constructor(props) {
    super(props)
    this.state = {
-     search: '',
+     queryString: '',
      filteredQues: this.props.quesAns,
      updated: false
 
@@ -20,7 +20,7 @@ class QuesAnsMain extends React.Component {
 
   }
   updateQuesAns = (data) => {
-    // console.log('Response->', data)
+    console.log('Response search->', data)
     let search = '';
     search += data;
     // console.log('Search--1->' , search);
@@ -34,10 +34,12 @@ class QuesAnsMain extends React.Component {
 
        this.setState({
         filteredQues: filteredQues,
+        queryString: search,
         updated: true
       },()=>{console.log('newlist---->', this.state.filteredQues)})
     } else {
       this.setState({
+        queryString: '',
         filteredQues: this.props.quesAns,
         updated: false
       })
@@ -51,7 +53,7 @@ class QuesAnsMain extends React.Component {
   render() {
 
     const {quesAns, id, productName} = this.props;
-    const {search, filteredQues,updated} = this.state;
+    const {queryString, filteredQues,updated} = this.state;
     // console.log('QuestionAns filtered props--->', filteredQues)
     return (
       <div className="qa">
@@ -72,6 +74,7 @@ class QuesAnsMain extends React.Component {
           <div>
             <ViewQuesAns
               filteredQues={filteredQues}
+              queryString={queryString}
               productId={id}
               productName={productName}
             />

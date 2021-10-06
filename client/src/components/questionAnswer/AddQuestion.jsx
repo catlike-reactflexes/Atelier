@@ -15,7 +15,7 @@ class AddQuestion extends React.Component {
       emailValid:true,
       validateInfo: false
     }
-    console.log('SubmitQuestion- props->',this.props);
+    // console.log('SubmitQuestion- props->',this.props);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
     this.validation = this.validation.bind(this);
@@ -39,7 +39,7 @@ class AddQuestion extends React.Component {
   }
   validation = () => {
     if(this.state.question.trim() === '' && this.state.nickname.trim() === '' && this.state.email.trim() === ''){
-      console.log('test')
+      // console.log('test')
       this.setState({
         questionEmpty: false,
         nicknameEmpty: false,
@@ -63,7 +63,7 @@ class AddQuestion extends React.Component {
     // console.log('SubmitQuestion- props->',this.state);
     this.validation ();
     if(this.state.validateInfo){
-      console.log('SubmitQuestion-->',this.props.productId, this.state);
+      // console.log('SubmitQuestion-->',this.props.productId, this.state);
       if(this.validation ()){
         axios.post('/api/addQuestion', {
           product_id: this.props.productId,
