@@ -83,7 +83,7 @@ class Overview extends React.Component {
     let selection = event.target.id;
     // console.log(`handle change selection: ${selection}, state photos: ${this.state.stylePhotos}`);
     let url = this.state.stylePhotos[selection].url;
-    this.setState({ mainUrl: url, mainId: selection });
+    this.setState({ mainUrl: url, mainIndex: selection });
   }
 
   updateStyle(event) {
