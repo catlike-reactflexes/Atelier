@@ -1,6 +1,6 @@
 const React= require('react');
 import ModalImage from './ModalImage.jsx';
-import {FaArrowAltCircleRight,FaArrowAltCircleLeft,BsSearch } from 'react-icons/fa';
+import {FaChevronLeft,FaChevronRight } from 'react-icons/fa';
 
 class PhotoAns extends React.Component {
   constructor(props){
@@ -63,8 +63,8 @@ class PhotoAns extends React.Component {
 
     return (
       <section className='slider'>
-        <FaArrowAltCircleLeft className='left-arrow' onClick={this.prevSlide}/>
-        <FaArrowAltCircleRight className='right-arrow' onClick={this.nextSlide}/>
+        <FaChevronLeft className='left-arrow' onClick={this.prevSlide}/>
+        <FaChevronRight className='right-arrow' onClick={this.nextSlide}/>
           {
             urlPhoto && urlPhoto.map((oneUrl, index) => {
               return(

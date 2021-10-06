@@ -53,7 +53,7 @@ class ViewQuesAns extends React.Component {
 
     return (
 
-      <div>
+      <div className="questions">
         <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA} productName={this.props.productName}/>
         <div className="twoButton">
           {

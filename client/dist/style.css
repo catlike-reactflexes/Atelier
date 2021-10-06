@@ -348,6 +348,10 @@ body {
   margin: 5px;
   font-family: 'Guardian Egyptian';
 }
+.questions {
+  max-height: 36rem;
+  overflow: auto;
+}
 .search-bar {
   display: flex;
   width: 97%;
@@ -474,7 +478,7 @@ body {
 }
 
 .image {
-  width: 100px;
+  width: 80px;
   height: 60px;
   border-radius: 5px;
   cursor:pointer;
@@ -483,10 +487,10 @@ body {
 .right-arrow {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 1px;
   font-size: 1rem;
-  color: #000;
-  z-index: 10;
+  color: rgba(219, 219, 219, 0.404);
+  z-index: 3;
   cursor: pointer;
   user-select: none;
 }
@@ -494,10 +498,10 @@ body {
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 0px;
   font-size: 1rem;
-  color: #000;
-  z-index: 10;
+  color: rgba(219, 219, 219, 0.404);
+  z-index: 3;
   cursor: pointer;
   user-select: none;
 }
@@ -599,7 +603,11 @@ body {
   outline: none;
   cursor: pointer;
 }
-
+.close-icon {
+  top:0%;
+  right:0%;
+  z-index: 4;
+}
 
 /*
   ----------------------------

@@ -24,14 +24,14 @@ class ModalImage extends React.Component {
 
     return (
       <>
-      <div style={OVERLAY_STYLES1}></div>
+
       <div style={MODAL_Q_STYLES1}>
         <div>
           <img src={this.props.expandImageUrl} onClick={this.handleOnClick} alt='answers image' className='full_image' />
 
         </div>
 
-      </div>
+     </div>
       </>
     );
   }
@@ -43,7 +43,7 @@ const MODAL_Q_STYLES1 = {
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
   padding: '50px',
-  zIndex: 1000
+  zIndex: 50000
 }
 const OVERLAY_STYLES1 = {
   position: 'fixed',
@@ -52,6 +52,6 @@ const OVERLAY_STYLES1 = {
   right: 0,
   bottom: 0,
   backgroundColor: 'rgba(0, 0, 0, .4)',
-  zIndex: 1000
+  zIndex: 500
 }
 export default ClickTracker(ModalImage);
