@@ -125,7 +125,7 @@ class RelatedProducts extends React.Component {
         }
       })
         .then((yourOutfitStyles) => {
-          //console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
+          console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
           this.setState({
             yourOutfitImageURLs: yourOutfitStyles.data
           })

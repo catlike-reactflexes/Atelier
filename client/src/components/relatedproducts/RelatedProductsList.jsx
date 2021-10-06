@@ -32,9 +32,11 @@ class RelatedProductsList extends React.Component {
   }
 
   render() {
+    console.log('image data: ', this.props.imageData)
     for (var i = 0; i < this.props.productData.length; i++) {
       this.props.productData[i].image = this.props.imageData[i];
     }
+    // if (this.props.productData.length > 0 && this.props.imageData.length > 0) {
     let productItems = this.props.productData.map((item, index) => {
       return <RelatedProductsCard key={index} name={item.name} price={item.default_price} category={item.category} description={item.description}
         overviewProduct={this.props.overviewProduct}
@@ -42,6 +44,7 @@ class RelatedProductsList extends React.Component {
         productFeatures={item.features}
         id={item.id} />
     })
+    // }
     let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }
     return (
       <>

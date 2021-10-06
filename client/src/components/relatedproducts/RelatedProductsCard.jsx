@@ -8,7 +8,8 @@ class RelatedProductsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comparisonModalVisible: false
+      comparisonModalVisible: false,
+      dataLoaded: false
     }
     this.hideComparisonModal = this.hideComparisonModal.bind(this);
     this.showComparisonModal = this.showComparisonModal.bind(this);
@@ -16,7 +17,7 @@ class RelatedProductsCard extends React.Component {
   }
 
   redirectPage() {
-    window.location.href = "http://localhost:3000/47445/"
+    window.location.href = `http://localhost:3000/${this.props.id}/`
   }
 
   showComparisonModal(event) {
@@ -31,11 +32,20 @@ class RelatedProductsCard extends React.Component {
     });
   }
 
+  dataLoaded() {
+    if (this.props.image.length > 0) {
+      this.setState({
+        dataLoaded: true
+      })
+    }
+  }
+
   render() {
-    console.log('image: ', this.props.image)
     return (
       <div>
+
         <li className="relatedProductsItems">
+
           <div className="card">
             <FaStar className="modalStar" onClick={this.showComparisonModal} />
             <div className="imageContainer">
@@ -45,7 +55,9 @@ class RelatedProductsCard extends React.Component {
             <p className="productName">{this.props.name}</p>
             <p className="price">${Number(this.props.price).toFixed()}</p>
             <Stars id={this.props.id} />
+
           </div>
+
         </li >
         {this.state.comparisonModalVisible ?
           <ComparisonModalList productFeatures={this.props.productFeatures} name={this.props.name} overviewProduct={this.props.overviewProduct} /> :
