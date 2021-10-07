@@ -15,7 +15,7 @@ class RelatedProducts extends React.Component {
       defaultImages: [],
       yourOutfitData: [],
       yourOutfitImageURLs: [],
-      defaultProductId: this.props.id,
+      defaultProductId: 47421,
       overviewProductData: {
         "id": 47421,
         "campus": "hr-rpp",
@@ -91,69 +91,92 @@ class RelatedProducts extends React.Component {
   }
 
   getYourOutfitData() {
-    if (this.props.outfit.data.length > 0) {
-      let favorites = JSON.stringify(this.props.outfit.data);
-      //console.log('local storage after parse in related: ', favorites);
-      axios.get('/yourOutfitProductData', {
-        params: {
-          yourOutfitIds: favorites
-        }
-      })
-        .then((yourOutfitData) => {
-          //console.log('success getting outfit data on client: ', yourOutfitData.data);
-          this.setState({
-            yourOutfitData: yourOutfitData.data
+    return new Promise((resolve, reject) => {
+      if (this.props.outfit.data.length > 0) {
+        let favorites = JSON.stringify(this.props.outfit.data);
+        //console.log('local storage after parse in related: ', favorites);
+        axios.get('/yourOutfitProductData', {
+          params: {
+            yourOutfitIds: favorites
+          }
+        })
+          .then((yourOutfitData) => {
+            //console.log('success getting outfit data on client: ', yourOutfitData.data);
+            resolve(yourOutfitData.data);
+            // this.setState({
+            //   yourOutfitData: yourOutfitData.data
+            // })
           })
-        })
-        .catch((error) => {
-          console.log('error getting youroutfitData on client: ', error);
-        })
-    } else {
-      this.setState({
-        yourOutfitData: []
-      })
-    }
+          .catch((error) => {
+            console.log('error getting youroutfitData on client: ', error);
+            reject(error);
+          })
+      }
+    })
   }
 
   getYourOutfitStyles() {
-    //console.log('props data: ', this.props.outfit.data)
-    if (this.props.outfit.data.length > 0) {
-      let favorites = JSON.stringify(this.props.outfit.data);
-      axios.get('/yourOutfitStyles', {
-        params: {
-          yourOutfitIds: favorites
-        }
-      })
-        .then((yourOutfitStyles) => {
-          console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
-          this.setState({
-            yourOutfitImageURLs: yourOutfitStyles.data
+    return new Promise((resolve, reject) => {
+      //console.log('props data: ', this.props.outfit.data)
+      if (this.props.outfit.data.length > 0) {
+        let favorites = JSON.stringify(this.props.outfit.data);
+        axios.get('/yourOutfitStyles', {
+          params: {
+            yourOutfitIds: favorites
+          }
+        })
+          .then((yourOutfitStyles) => {
+            //console.log('success getting outfit styles on client: ', yourOutfitStyles.data);
+            resolve(yourOutfitStyles.data);
+            // this.setState({
+            //   yourOutfitImageURLs: yourOutfitStyles.data
+            // })
           })
-        })
-        .catch((error) => {
-          console.log('error getting youroutfitData on client: ', error);
-        })
-    } else {
-      this.setState({
-        yourOutfitImageURLs: []
-      })
-    }
+          .catch((error) => {
+            console.log('error getting youroutfitData on client: ', error);
+            reject(error);
+          })
+      }
+    })
   }
 
-
-
   componentDidUpdate(prevProps) {
-    if (this.props.outfit.data.length !== prevProps.outfit.data.length) {
-      this.getYourOutfitData();
-      this.getYourOutfitStyles();
+    //componentDidUpdate(prevProps, prevState, snapshot)
+    // if (this.props.userID !== prevProps.userID) {
+    //   this.fetchData(this.props.userID);
+    // }
+    if (JSON.stringify(this.props.outfit.data) !== JSON.stringify(prevProps.outfit.data)) {
+      //console.log('component did update ran');
+      let tempOutfitData = [];
+      this.getYourOutfitData()
+        .then((outfitData) => {
+          tempOutfitData = outfitData
+          return this.getYourOutfitStyles()
+        })
+        .then((outfitStyles) => {
+          this.setState({
+            yourOutfitData: tempOutfitData,
+            yourOutfitImageURLs: outfitStyles
+          })
+        })
     }
   }
 
   componentDidMount() {
     this.getRelatedProductsData();
     this.getRelatedProductsStyles();
-    this.getYourOutfitData();
-    this.getYourOutfitStyles();
+    let tempOutfitData = [];
+    this.getYourOutfitData()
+      .then((outfitData) => {
+        tempOutfitData = outfitData
+        return this.getYourOutfitStyles()
+      })
+      .then((outfitStyles) => {
+        this.setState({
+          yourOutfitData: tempOutfitData,
+          yourOutfitImageURLs: outfitStyles
+        })
+      })
   }
 
 
@@ -167,8 +190,7 @@ class RelatedProducts extends React.Component {
         <RelatedProductsList
           productData={this.state.relatedProductsData}
           imageData={this.state.defaultImages}
-          overviewProduct={this.state.overviewProductData}
-          rating={this.props.rating} />
+          overviewProduct={this.state.overviewProductData} />
         <span onClick={() => this.props.postTrackInteractions('label', 'Related Products')}>Your Outfit</span>
         <YourOutfitList
           yourOutfitData={this.state.yourOutfitData} yourOutfitImageURLs={this.state.yourOutfitImageURLs}

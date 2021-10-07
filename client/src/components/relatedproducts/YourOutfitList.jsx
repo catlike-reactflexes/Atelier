@@ -29,10 +29,12 @@ class YourOutfitList extends React.Component {
 
 
   render() {
+
     let outfitItems = [];
 
     for (var i = 0; i < this.props.yourOutfitData.length; i++) {
       this.props.yourOutfitData[i].image = this.props.yourOutfitImageURLs[i];
+
     }
 
     if (this.props.yourOutfitImageURLs.length > 0 && this.props.yourOutfitData.length > 0) {
