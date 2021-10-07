@@ -14,7 +14,7 @@ const fs = require('fs');
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-app.use(express.static(path.resolve(__dirname, '../client/dist')));
+//app.use(express.static(path.resolve(__dirname, '../client/dist')));
 //this is a regex expression that will allow the app to serve the static files
 //dynamically with our default product id and a real url
 app.use('/:id(\\d{5})', express.static('client/dist'));
@@ -197,7 +197,6 @@ app.get('/product', (req, res) => {
 
 app.get('/styles', (req, res) => {
   let id = req.query.id;
-  // console.log()
   axios({
     method: 'get',
     url: `${API_URL}/products/${id}/styles`,
@@ -281,7 +280,6 @@ let retrieveRelatedProducts = (relatedProductIds) => {
 
 }
 
-//get related product ids and related product info
 app.get('/relatedProducts', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
@@ -305,8 +303,6 @@ app.get('/relatedProducts', (req, res) => {
     })
 });
 
-
-//get related product styles and images
 app.get('/relatedProductStyles', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
@@ -330,6 +326,7 @@ app.get('/relatedProductStyles', (req, res) => {
 
     })
 })
+
 
 app.get('/yourOutfitProductData', (req, res) => {
   let yourOutfitIds = JSON.parse(req.query.yourOutfitIds);
@@ -588,7 +585,7 @@ app.put('/api/report', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${port}`);
 });
 
 

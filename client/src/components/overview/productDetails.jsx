@@ -13,11 +13,11 @@ class ProductDetails extends React.Component {
     let result = [];
     let counter = 0;
     const classes = {
-      '0.00' : 'emptyStar',
-      '0.25' : 'quarterStar',
-      '0.50' : 'halfStar',
-      '0.75' : 'threeQuarterStar',
-      '1.00' : 'fullStar'
+      '0.00': 'emptyStar',
+      '0.25': 'quarterStar',
+      '0.50': 'halfStar',
+      '0.75': 'threeQuarterStar',
+      '1.00': 'fullStar'
     };
     let wholeNum = Math.floor(stars);
     let remainder = stars - wholeNum;
@@ -42,20 +42,19 @@ class ProductDetails extends React.Component {
     return <div>{starList}</div>
   }
 
-  render () {
+  render() {
     return (
       this.props.loaded ?
-      <div id="detailsContainer" data-testid="overview-details">
-        <div className={'overviewStars'}>
-          {this.displayRating(this.props.rating)}
-          <a onClick={() => {this.props.postTrackInteractions('Read Review Link', 'Product Details')}} href={'#reviewSection'}>Read all reviews</a>
+        <div id="detailsContainer" data-testid="overview-details">
+          <div className={'overviewStars'}>
+            {this.displayRating(this.props.rating)}
+            <a onClick={() => { this.props.postTrackInteractions('Read Review Link', 'Product Details') }} href={'#reviewSection'}>Read all reviews</a>
+          </div>
         </div>
-        <span id="po-category">{this.props.category.toUpperCase()}</span>
-        <span id="po-name">{this.props.name}</span>
-        <span onClick={() => {this.props.postTrackInteractions('Price', 'Product Details')}}>${this.props.price}</span>
-      </div>
-      :
-      <span>product loading</span>
+        :
+
+        <span>product loading</span>
+
     )
   }
 }

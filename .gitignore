@@ -116,3 +116,5 @@ typings/
 
 #misc
 .DS_Store
+#bundle
+./client/dist/bundle.js

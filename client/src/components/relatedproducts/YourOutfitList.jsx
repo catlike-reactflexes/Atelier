@@ -13,32 +13,28 @@ class YourOutfitList extends React.Component {
   }
 
   transformLeft() {
-    // transform: "translateX-(25%)"
     this.props.postTrackInteractions('Left carousel arrow', 'Related Products');
-    console.log('left chevron clicked')
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex - 1 }
     })
-    // document.getElementById("relatedProductCards").style.transform = "translateX(-25%)"
   }
 
 
   transformRight() {
-    // transform: "translateX(25%)"
-    console.log('right chevron clicked')
     this.props.postTrackInteractions('Right chevron arrow', 'Related Products');
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex + 1 }
     })
-    // document.getElementById("relatedProductCards").style.transform = "translateX(25%)";
   }
 
 
   render() {
+
     let outfitItems = [];
 
     for (var i = 0; i < this.props.yourOutfitData.length; i++) {
       this.props.yourOutfitData[i].image = this.props.yourOutfitImageURLs[i];
+
     }
 
     if (this.props.yourOutfitImageURLs.length > 0 && this.props.yourOutfitData.length > 0) {
