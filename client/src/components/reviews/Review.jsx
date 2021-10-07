@@ -50,9 +50,9 @@ render() {
   return (
     <div className='review'>
       <span className='reviewer_name' onClick={() => {this.props.postTrackInteractions('reviewer name', 'Reviews')}}>{this.props.review.reviewer_name}</span>
-      <span className='review_date' ><Moment format="MMM, DD, YYYY">{this.props.review.date}</Moment></span>
+      <span className='review_date' ><Moment format="MMM DD, YYYY">{this.props.review.date}</Moment></span>
       <br></br>
-      <div className='review_summary'>{this.props.review.summary}</div>
+      <b className='review_summary'>{this.props.review.summary}</b>
       <div className='review_body' onClick={() => {this.props.postTrackInteractions('review body', 'Reviews')}}>{this.props.review.body}</div>
       <button className='helpfulBtn' onClick = {() => {this.markReviewAsHelpful();}}>helpful? {this.state.helpfulness}</button>
       <button className='reportBtn' onClick = {() => {this.reportReview();this.props.refreshReviews()}}>report</button>

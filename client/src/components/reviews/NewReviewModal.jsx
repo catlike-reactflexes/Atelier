@@ -7,6 +7,7 @@ class NewReviewModal extends React.Component {
     super(props);
     this.state = {
       chars: 50,
+      doesRecommend: '',
       reviewSummary: '',
       reviewBody: '',
       reviewerName: '',
@@ -14,11 +15,25 @@ class NewReviewModal extends React.Component {
 
     }
     this.countBodyChars = this.countBodyChars.bind(this)
+    this.handleRec = this.handleRec.bind(this)
+  }
+
+  handleRec(e) {
+    console.log('yes or no', e.target.value)
+    this.setState({ doesRecommend: e.target.value });
   }
 
   countBodyChars(e) {
     // console.log('body: ' e.target.value)
-    this.setState({chars: this.state.chars - 1})
+
+    var key = e.keyCode;
+    console.log('backspace detected: ', key)
+
+    if (key === 8 || key === 46) {
+      console.log('backspace detected: ', key)
+      return;
+    }
+    this.setState({chars: 50 - this.state.chars})
   }
 
   render() {
@@ -32,14 +47,14 @@ class NewReviewModal extends React.Component {
           <form className= 'reviewForm' style={MODAL_STYLES}>
           <h4>Write your Review about the {productName}</h4>
 
-          <p className = 'recRadioBtns'>Do you recommend this product?</p>
-          <input type = 'radio' id = 'recBtnYes'></input>
+          <p className = 'recRadioBtns'>(required) Do you recommend this product?</p>
+          <input type = 'radio' value='yes' onChange = {this.handleRec} id = 'recBtnYes'></input>
           <label for ='recBtnYes'>Yes</label>
-          <input type = 'radio' id = 'recBtnNo'></input>
+          <input type = 'radio' value = 'no' onChange = {this.handleRec} id = 'recBtnNo'></input>
           <label for ='recBtnNo'>No</label>
 
           <div className={'review-modal-input'}>
-          <div required>Please rate each characteristic * </div>
+          <div required>Please rate each characteristic:  </div>
           <Chars characteristic='Size' options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}/>
           <Chars characteristic='Width' options={['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide']}/>
           <Chars characteristic='Comfort' options={['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect']}/>
@@ -55,21 +70,21 @@ class NewReviewModal extends React.Component {
 
           <br></br>
           <br></br>
-          <label for = 'reviewBody'>type review here: </label>
+          <label for = 'reviewBody'>(required) type review here: </label>
           <textarea placeholder='Why did you like the product or not?' id="reviewBody" cols="40" rows="5" onChange={this.countBodyChars}></textarea>
           <br></br>
           <i>You need need {this.state.chars} more chararacters</i>
 
           <br></br>
           <br></br>
-          <label for = 'reviewerName'>type your username here: </label>
+          <label for = 'reviewerName'>(required) type your username here: </label>
           <input placeholder='Example: jackson11!' type = 'text' id = 'reviewerName'></input>
           <br></br>
           <i>For privacy reasons, do not use your full name or email address</i>
 
           <br></br>
           <br></br>
-          <label for = 'reviewerEmail'>type your email: </label>
+          <label for = 'reviewerEmail'>(required) type your email: </label>
           <input placeholder='Example: jackson11@email.com'type = 'text' id = 'reviewerEmail'></input>
           <br></br>
           <i>For authentication reasons, you will not be emailed</i>
@@ -77,18 +92,13 @@ class NewReviewModal extends React.Component {
           <br></br>
           <br></br>
 
-          <label for ='photos'> Upload photos (5 max) </label>
-          <input type ='file' id='photos'></input>
-{/*
+          {/* <label for ='photos'> Upload photos (5 max) </label>
+          <input type ='file' id='photos'></input> */}
+
           <div>
-                <div><b>Upload photo (Max: 5)</b></div>
-                <input
-                  type='file'
-                  id='photos'
-                  name='filename'
-                  style={{ marginBottom: '10px' }}
-                />
-              </div> */}
+                <b>Upload photo (Max: 5)</b>
+                <input type='file'id='photos'></input>
+              </div>
         </form>
         </React.Fragment>
 
