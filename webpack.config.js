@@ -1,7 +1,7 @@
 const path = require("path");
 const SRC_DIR = path.join(__dirname, "/client/src/index.jsx");
 const DIST_DIR = path.join(__dirname, "/client/dist");
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const WebpackCompressionPlugin = require("compression-webpack-plugin");
 // const WebpackBundleAnalyzer = require("webpack-bundle-analyzer")
 //   .BundleAnalyzerPlugin;
@@ -9,7 +9,7 @@ const DIST_DIR = path.join(__dirname, "/client/dist");
 // let devMode = process.env.devMode || true;
 
 module.exports = {
-  mode:"development",
+  mode:"production",
   entry: SRC_DIR ,
   output: {
     filename: "bundle.js",
@@ -26,6 +26,9 @@ module.exports = {
       },
 
     ],
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
   },
   // plugins: [
   //   new CompressionPlugin(),
