@@ -139,7 +139,7 @@ app.get('/reviewhelpful', (req, res) => {
   })
     .then(response => {
       console.log('helpful api response ', response.status)
-      res.send(response)
+      res.send(response.status)
     })
     .catch(err => {
       res.sendStatus(404)
@@ -163,7 +163,7 @@ app.get('/reviewreport', (req, res) => {
     .then(function (response) {
       //looking for 204 to get update
       console.log('report api response--> ', response.status);
-      res.sendStatus(response.status);
+      res.send(response.status);
     })
     .catch(function (err) {
       // console.log('api request error--> ', err);

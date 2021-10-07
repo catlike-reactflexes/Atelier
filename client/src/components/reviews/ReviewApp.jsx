@@ -135,13 +135,20 @@ class ReviewApp extends React.Component {
   render() {
     return (
       <div className='reviews'>
+        <label for="options">Sort by:</label>
+
+        <select name="options" id="options">
+          <option value="helpful">helpful</option>
+          <option value="relevant">relevant</option>
+          <option value="newest">newest</option>
+        </select>
         {/* <Search /> */}
         <div className='RnR'>
           <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
           <ReviewList refreshReviews = {this.getReviews.bind(this)} reviews = {this.state.reviews} count = {this.state.count}/>
         </div>
         <NewReview moreReviews = {this.getReviews} openModal = {this.openModal} count = {this.state.count}/>
-        <NewReviewModal isOpen = {this.state.modalIsOpen} openModal = {this.openModal}/>
+        <NewReviewModal isOpen = {this.state.modalIsOpen} openModal = {this.openModal} productName = {this.props.productName}/>
       </div>
     );
   }
