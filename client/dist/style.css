@@ -381,7 +381,11 @@ header {
   padding:20px;
   margin: 5px;
 }
-.search-bar {
+.questions {
+  max-height: 36rem;
+  overflow: auto;
+}
+.qa-search-bar {
   display: flex;
   width: 97%;
   border: 1px #696969 solid;
@@ -390,7 +394,7 @@ header {
   padding:10px;
   margin-bottom: 5px;
 }
-.search {
+.qa-search {
   border: none;
   outline: none;
 }
@@ -449,13 +453,13 @@ header {
 }
 
 .yes, .label-Ans , .report, .loadAns{
-  display: flex;
+  /* display: flex;
   margin-left: 5px;
-  width: fit-content;
+  width: fit-content; */
   text-decoration: underline;
   cursor:pointer;
 }
-.by, .helpful, .label-Ans, .yes, .ansName, .report{
+.by, .helpful, .label-Ans, .yes, .ansName, .report, .reported{
   margin-left: 5px;
   width: fit-content;
   display: flex;
@@ -507,7 +511,7 @@ header {
 }
 
 .image {
-  width: 100px;
+  width: 80px;
   height: 60px;
   border-radius: 5px;
   cursor:pointer;
@@ -516,10 +520,10 @@ header {
 .right-arrow {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 1px;
   font-size: 1rem;
-  color: #000;
-  z-index: 10;
+  color: rgba(219, 219, 219, 0.404);
+  z-index: 3;
   cursor: pointer;
   user-select: none;
 }
@@ -527,10 +531,10 @@ header {
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 0px;
   font-size: 1rem;
-  color: #000;
-  z-index: 10;
+  color: rgba(219, 219, 219, 0.404);
+  z-index: 3;
   cursor: pointer;
   user-select: none;
 }
@@ -578,6 +582,7 @@ header {
 }
 .modal-body{
   align-items: center;
+  color: #727A74;
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
@@ -599,7 +604,7 @@ header {
 #question, #email, #nickname , #answer{
   padding: 10px;
   margin: 5px;
-  border-color: #b2beb5;
+  border-color: #727A74;
   outline: none;
   align-items: center;
   border-radius: 3px;
@@ -632,7 +637,18 @@ header {
   outline: none;
   cursor: pointer;
 }
+.minimize-icon {
 
+    position: absolute;
+    top: 12%;
+    right: 11%;
+    font-size: 2rem;
+    color: rgba(124, 120, 120, 0.664);
+    z-index:6000;
+    cursor: pointer;
+    user-select: none;
+
+}
 
 /*
   ----------------------------

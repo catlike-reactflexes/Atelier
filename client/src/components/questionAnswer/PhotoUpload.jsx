@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { IconName } from "react-icons/fa";
 
 class PhotoUpload extends React.Component {
   constructor(props){
@@ -39,8 +39,8 @@ class PhotoUpload extends React.Component {
   }
 
   fileSelectedHandler = (e) => {
-    console.log('File selected->', typeof(e.target.files));
-    console.log('length--->', e.target.files.length);
+    // console.log('File selected->', typeof(e.target.files));
+    // console.log('length--->', e.target.files.length);
     //check if there is more than 5 images
     let imageCount = e.target.files.length;
     if(imageCount > 5 && this.state.selectedFile.length > 5){
@@ -52,7 +52,7 @@ class PhotoUpload extends React.Component {
       tempImageList.push(e.target.files[i]);
       tempImageUrl.push(URL.createObjectURL(e.target.files[i]))
     }
-    console.log('File temp list ->', tempImageList)
+    // console.log('File temp list ->', tempImageList)
     // picturePreview: [...this.state.picturePreview, URL.createObjectURL(e.target.files)]
       this.setState({
         selectedFile: [...this.state.selectedFile, ...tempImageList],
@@ -60,7 +60,7 @@ class PhotoUpload extends React.Component {
 
     }, ()=> console.log('checking State for preview---1--->', this.state.picturePreview))
 
-    console.log('checking State for preview- 3--->', this.state.selectedFile)
+    // console.log('checking State for preview- 3--->', this.state.selectedFile)
 
   }
   uploadHandler = () => {
@@ -74,8 +74,15 @@ class PhotoUpload extends React.Component {
   render() {
 
     return (
+      <>
+      <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_Q_STYLES}>
+        <div className="modal-header">
         <h3>Maximum of 5 pictures</h3>
+          <span onClick={()=>this.props.onClose()}>X</span>
+      </div>
+
+
         <input type='file'  multiple onChange={this.fileSelectedHandler}></input>
         {
           this.state.picturePreview.length > 0  &&
@@ -101,18 +108,19 @@ class PhotoUpload extends React.Component {
           <button onClick={this.uploadHandler}>Upload</button>
         }
       </div>
+      </>
+
     )
   }
 
 }
 const MODAL_Q_STYLES = {
   position: 'fixed',
-  top: '70%',
-  left: '70%',
+  top: '50%',
+  left: '50%',
   transform: 'translate(-50%, -50%)',
-  backgroundColor:'#D0D0D0',
-  padding: '50px',
-  zIndex: 2
+  backgroundColor:'#ECECEC',
+  zIndex: 1000
 }
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -120,7 +128,7 @@ const OVERLAY_STYLES = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, .4)',
+  backgroundColor: 'rgba(0, 0, 0, .7)',
   zIndex: 1000
 }
 export default PhotoUpload;
