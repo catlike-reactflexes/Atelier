@@ -27,11 +27,6 @@ class ProductDetails extends React.Component {
     }
     if (remainder > 0) {
       let quarter = (Math.round(remainder * 4) / 4).toFixed(2);
-<<<<<<< HEAD
-      //console.log(`remainder: ${remainder}, quarter: ${quarter}`);
-      //console.log('class quarter: ', classes[quarter])
-=======
->>>>>>> main
       result.push(classes[quarter]);
       counter++;
     }
