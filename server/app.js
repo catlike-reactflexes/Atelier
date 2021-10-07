@@ -401,7 +401,7 @@ app.get('/api/qa/id=*', (req, res) => {
       count: 10
     }
   }).then(function (response) {
-    console.log('api response: ', response.data.results);
+    // console.log('api response: ', response.data.results);
 
     res.status(200).send(response.data.results);
   }).catch(function (err) {
@@ -412,7 +412,7 @@ app.get('/api/qa/id=*', (req, res) => {
 });
 
 //S3, Multer
-const multer = require('multer');
+  const multer = require('multer');
   const {uploadFile} = require('./Questions/s3');
   const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -449,8 +449,9 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
         photos: photoUrl
       }
     }).then(function (response) {
-      console.log('SUCCESS___>>>api response: ', response.data);
-      res.status(response.status).send(response.data);
+      console.log('SUCCESS___>>>api response: ', response.data, 'Status:', response.status);
+      // res.status(response.status).send(response.data);
+      res.status(204).send('Success');
     }).catch(function (err) {
       console.log('Why error????')
       console.log('api request error: ', err.data, err.status);
