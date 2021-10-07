@@ -71,6 +71,7 @@ class ViewQuesAns extends React.Component {
               this.state.isOpen ?
               <AddQuestion
               productId = {this.props.productId}
+              productName = {this.props.productName}
               open ={this.state.isOpen}
               onClose={() => this.setOpen(false)}/> : null
             }

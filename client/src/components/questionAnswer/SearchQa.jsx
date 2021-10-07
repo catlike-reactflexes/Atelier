@@ -1,5 +1,6 @@
 const React = require('react');
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
+import { FaSearchPlus} from 'react-icons/fa';
 
 class SearchQa extends React.Component {
   constructor(props) {
@@ -36,21 +37,23 @@ class SearchQa extends React.Component {
   render() {
 
     return (
-      <div className='searchBar'>
 
-        <div data-testid="searchQues">
-            <textarea
-              onClick={()=>this.props.postTrackInteractions('search', 'Questions and Answers')}
-              type="text"
-              name='searchBar'
-              className='search'
-              onChange={(e)=>this.props.updateQuesAns(e.target.value)}
-              placeholder = 'HAVE A QUESTION? SEARCH FOR ANSWERS...'
-              rows="5"
-              cols="30"
-              />
+
+        <div className="search-bar">
+
+          <textarea
+            onClick={()=>this.props.postTrackInteractions('search', 'Questions and Answers')}
+            type="text"
+            name='searchBar'
+            className='search'
+            onChange={(e)=>this.props.updateQuesAns(e.target.value)}
+            placeholder = 'HAVE A QUESTION? SEARCH FOR ANSWERS...'
+            rows="2"
+            cols="150"
+          />
+          <div ><FaSearchPlus color="#dcdcdc"size="30px"/></div>
         </div>
-      </div>
+
 
     );
   }

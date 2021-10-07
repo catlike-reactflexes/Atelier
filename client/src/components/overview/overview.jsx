@@ -17,7 +17,7 @@ class Overview extends React.Component {
       productStyles: [],
       styleId: null,
       selectedStyle: null,
-      mainId: 0,
+      mainIndex: 0,
       styleName: '',
       stylePhotos: null,
       detailsLoaded: false,
@@ -59,18 +59,21 @@ class Overview extends React.Component {
       console.log('style res: ', response);
       let results = response.data.results;
       let selected = null;
+      let styleId = null;
       let photos = [];
+      let url = '';
       let name = '';
       for (let i = 0; i < results.length; i++) {
         if (results[i]['default?']) {
-          this.setState({ styleId: results[i].style_id });
+          styleId = results[i].style_id;
           photos = results[i].photos;
+          url = photos[this.state.mainIndex].url;
           name = results[i].name;
           selected = results[i];
           break;
         }
       }
-      this.setState({ productStyles: results, selectedStyle: selected, styleName: name, stylePhotos: photos, stylesLoaded: true });
+      this.setState({ productStyles: results, selectedStyle: selected, styleId: styleId, styleName: name, stylePhotos: photos, mainUrl: url, stylesLoaded: true });
     }).catch((error) => {
       console.log('Error getting styles: ', error);
     })
@@ -80,7 +83,7 @@ class Overview extends React.Component {
     let selection = event.target.id;
     // console.log(`handle change selection: ${selection}, state photos: ${this.state.stylePhotos}`);
     let url = this.state.stylePhotos[selection].url;
-    this.setState({ mainUrl: url, mainId: selection });
+    this.setState({ mainUrl: url, mainIndex: selection });
   }
 
   updateStyle(event) {
@@ -99,7 +102,7 @@ class Overview extends React.Component {
         selected = styles[i];
         photos = styles[i].photos;
         name = styles[i].name;
-        main = photos[this.state.mainId].url;
+        main = photos[this.state.mainIndex].url;
         break;
       }
     }
@@ -136,7 +139,7 @@ class Overview extends React.Component {
           <div style={{ display: 'none' }}></div>
           : <div className="sidebar column-flex">
             <ProductDetails rating={this.props.rating} name={this.state.productDetails.name} category={this.state.productDetails.category} price={this.state.productDetails.default_price} loaded={this.state.detailsLoaded} />
-            <ProductSyles name={this.state.styleName} styles={this.state.productStyles} update={this.updateStyle} loaded={this.state.stylesLoaded} />
+            <ProductSyles name={this.state.styleName} styles={this.state.productStyles} default={this.state.styleId} update={this.updateStyle} loaded={this.state.stylesLoaded} />
             <ProductButtons selected={this.state.selectedStyle} favoriteItem={this.saveToOutfit} loaded={this.state.stylesLoaded} />
           </div>
         }

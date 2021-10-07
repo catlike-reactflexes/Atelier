@@ -22,9 +22,7 @@ class StyleThumbnails extends React.Component {
   }
 
   makeThumbnails(photos, click) {
-    console.log(`state index: ${this.state.selection}`);
     let thumbs = photos.map((photo, index) => {
-      console.log(`thumbnails index: ${index}`);
       return <div className={'thumbWrapper'} key={'thumb' + index} style={this.state.selection === index ? selected : {}}><img onClick={click} className={'styleThumb'} id={index} key={index} src={photo.thumbnail_url} /></div>
     });
     return thumbs;

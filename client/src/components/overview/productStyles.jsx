@@ -11,7 +11,7 @@ class ProductSyles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0
+      id: this.props.default
     };
     this.selectStyle = this.selectStyle.bind(this);
   }
@@ -25,7 +25,7 @@ class ProductSyles extends React.Component {
 
   makeStyles = (styles, update) => {
     let list = styles.map((style) => {
-      return <div className={'styleBtnWrapper'}>{style.style_id === this.state.id ? <FaRegCheckCircle className={'styleCheck'} /> : ''}<div className={'styleBtn'} style={style.style_id === this.state.id ? selected : {}} key={style.style_id} id={style.style_id} onClick={update}> <img className={'styleBtnImg'} src={style.photos[0].thumbnail_url} /></div></div>
+      return <div className={'styleBtnWrapper'}>{style.style_id === this.props.default ? <FaRegCheckCircle className={'styleCheck'} /> : ''}<div className={'styleBtn'} style={style.style_id === this.props.default ? selected : {}} key={style.style_id} id={style.style_id} onClick={update}> <img className={'styleBtnImg'} src={style.photos[0].thumbnail_url} /></div></div>
     })
     return <div id="styleButtons">{list}</div>;
   }
@@ -33,7 +33,7 @@ class ProductSyles extends React.Component {
   render() {
     return (
       <div id="stylesContainer" data-testid="overview-styles">
-        <span onClick={() => {this.props.postTrackInteractions('Style Name', 'Product Styles')}}><em>STYLE ></em> {this.props.name.toUpperCase()}</span>
+        <span onClick={() => {this.props.postTrackInteractions('Style Name', 'Product Styles')}}><strong>STYLE ></strong> {this.props.name.toUpperCase()}</span>
           {
             this.props.loaded ?
               this.makeStyles(this.props.styles, this.selectStyle)

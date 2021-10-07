@@ -1,6 +1,6 @@
 const React= require('react');
 import ModalImage from './ModalImage.jsx';
-import {FaArrowAltCircleRight,FaArrowAltCircleLeft } from 'react-icons/fa';
+import {FaArrowAltCircleRight,FaArrowAltCircleLeft,BsSearch } from 'react-icons/fa';
 
 class PhotoAns extends React.Component {
   constructor(props){
@@ -14,7 +14,7 @@ class PhotoAns extends React.Component {
     // console.log('PhotoAns--->', this.props)
     this.prevSlide = this.prevSlide.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
-    
+
   }
   setOpen = (option, e) => {
     if(e){

@@ -16,7 +16,7 @@ class QuesAnsMain extends React.Component {
 
     }
     this.updateQuesAns = this.updateQuesAns.bind(this);
-    // console.log('filteresQues-->', this.state, this.props)
+    console.log('filteresQues-->', this.state, this.props)
 
   }
   updateQuesAns = (data) => {
@@ -56,10 +56,11 @@ class QuesAnsMain extends React.Component {
     return (
       <div className="qa">
 
-        <p
+        <h2
+
           onClick={()=>this.props.postTrackInteractions('label', 'Questions and Answers')}>
           Questions and Answers
-        </p>
+        </h2>
 
         <SearchQa
           filteredQues={filteredQues}

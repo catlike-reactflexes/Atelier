@@ -4,12 +4,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
-const axios = require('axios')
-const $ = require('jquery')
-const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews'
-// const QuestionAnswer_API = require('./questionAnswer');
-const bodyParser = require('body-parser');
+const axios = require('axios');
+const $ = require('jquery');
 
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
+
+const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 //app.use(express.static(path.resolve(__dirname, '../client/dist')));
@@ -34,7 +36,7 @@ app.get('/', (req, res) => {
 */
 
 app.post('/api/interactions', (req, res) => {
-  //console.log('Interaction API-->', req.body);
+  // console.log('Interaction API-->', req.body);
   axios({
     method: 'POST',
     url: `${API_URL}/interactions`,
@@ -47,7 +49,7 @@ app.post('/api/interactions', (req, res) => {
       time: req.body.time
     }
   }).then(function (response) {
-    //console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
+    // console.log('SUCCESS(201)**Interaction API-->', response.status, response.statusText);
     res.status(response.status).send(response.data);
   }).catch(function (err) {
     console.log('api request error: ', err);
@@ -210,6 +212,35 @@ app.get('/styles', (req, res) => {
   })
 })
 
+/* exploring products
+
+app.get('/product-list', (req, res) => {
+  let idList = [];
+  axios({
+    method: 'get',
+    url: `${API_URL}/products/`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    params: {
+      count: 500
+    }
+  }).then(function (response) {
+    data = response.data;
+    data.forEach(obj => idList.push(obj.id));
+    console.log('idlist: ', idList);
+    fs.writeFile(__dirname + 'idlist.txt', JSON.stringify(idList), (err) => {
+      if (err) {
+        console.log('error writing file: ', err);
+        return;
+      }
+    })
+  }).catch(function (error) {
+    console.log('/styles api request error: ', error);
+  })
+})
+*/
+
 /*
   ----------------------------
   | RelatedProducts Routes |
@@ -351,6 +382,10 @@ app.get('/yourOutfitStyles', (req, res) => {
 
 
 //CS- Questions & Answer START------------------------------------------------------------
+// const fileUpload = require('express-fileupload');
+
+
+
 app.get('/api/qa/id=*', (req, res) => {
   // console.log('QA**request-->', req.query.product_id) ;
   // console.log('request-->', req.path) ;
@@ -362,10 +397,11 @@ app.get('/api/qa/id=*', (req, res) => {
       Authorization: process.env.API_TOKEN
     },
     params: {
-      product_id: req.query.product_id
+      product_id: req.query.product_id,
+      count: 10
     }
   }).then(function (response) {
-    // console.log('api response: ', response.data);
+    console.log('api response: ', response.data.results);
 
     res.status(200).send(response.data.results);
   }).catch(function (err) {
@@ -374,32 +410,85 @@ app.get('/api/qa/id=*', (req, res) => {
   })
 
 });
-app.post('/api/addAnswer', (req, res) => {
-  // console.log('QA**request AddAnswer-->', req.body.question_id, req.body) ;
-  axios({
-    method: 'POST',
-    url: `${API_URL}/qa/questions/${req.body.question_id}/answers`,
-    headers: {
-      Authorization: process.env.API_TOKEN
-    },
-    data: {
-      body: req.body.body,
-      name: req.body.name,
-      email: req.body.email,
-      photos: req.body.photos
-    }
-  }).then(function (response) {
-    // console.log('SUCCESS___>>>api response: ', response.data);
 
-    res.status(200).send(response.data);
-  }).catch(function (err) {
-    console.log('api request error: ', err);
-    res.status(500).send(err);
-  })
+//S3, Multer
+const multer = require('multer');
+  const {uploadFile} = require('./Questions/s3');
+  const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'server/Questions/image_uploads/');
+    },
+
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+  var upload = multer({ storage: storage })
+
+app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
+  console.log('QA**request AddAnswer-->', req.body) ;
+
+
+  let photoUrl = [];
+  const files = req.files;
+
+  const postAnswer = (question_id, body, name, photoUrl) => {
+
+    console.log('Inside postAnswer Axio--->');
+    console.log('ready to post---',photoUrl)
+    axios({
+      method: 'POST',
+      url: `${API_URL}/qa/questions/${question_id}/answers`,
+      headers: {
+        Authorization: process.env.API_TOKEN
+      },
+      data: {
+        body: body,
+        name: name,
+        email: 'testing@gmail.com',
+        photos: photoUrl
+      }
+    }).then(function (response) {
+      console.log('SUCCESS___>>>api response: ', response.data);
+      res.status(response.status).send(response.data);
+    }).catch(function (err) {
+      console.log('Why error????')
+      console.log('api request error: ', err.data, err.status);
+      res.status(err.status).send(err.data);
+    })
+  }
+
+  const uploadImages =  async (cb) => {
+    let imagesUrl = [];
+    let promises = files.map(async file => {
+      const ans = await uploadFile(file)
+      imagesUrl.push(ans.Location);
+      console.log('Answer-3->', ans)
+    })
+    result = await Promise.all(promises);
+    console.log('Test-1->', result)
+    console.log('Test-2->', imagesUrl)
+    cb(null,imagesUrl);
+  }
+  //if there is no images, then POST
+  if(files.length === 0) {
+    postAnswer(req.body.question_id, req.body.body,req.body.name, photoUrl);
+  } else {
+    //upload to S3
+    uploadImages((err, imageData)=>{
+      //once we have URL, then POST
+      if(imageData){
+        console.log('ready to post---',imageData)
+        postAnswer(req.body.question_id, req.body.body,req.body.name, imageData);
+      }
+    });
+  }
 
 })
+
 app.post('/api/addQuestion', (req, res) => {
-  // console.log('QA**request AddAQuestion-->',req.body) ;
+  console.log('QA**request AddAQuestion-->',req.body) ;
+
   axios({
     method: 'POST',
     url: `${API_URL}/qa/questions/`,
@@ -413,7 +502,7 @@ app.post('/api/addQuestion', (req, res) => {
       product_id: req.body.product_id
     }
   }).then(function (response) {
-    // console.log('SUCCESS___>>>api response: ', response.data);
+    console.log('SUCCESS___>>>api response: ', response.data);
 
     res.status(200).send(response.data);
   }).catch(function (err) {
