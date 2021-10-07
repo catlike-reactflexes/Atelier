@@ -1,4 +1,4 @@
-#!/bin/env node
+
 require('dotenv').config();
 //process.env.API_TOKEN
 const compression = require('compression');
