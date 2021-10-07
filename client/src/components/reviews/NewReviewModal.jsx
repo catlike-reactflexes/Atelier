@@ -12,7 +12,6 @@ class NewReviewModal extends React.Component {
       reviewBody: '',
       reviewerName: '',
       reviewerEmail: '',
-
     }
     this.countBodyChars = this.countBodyChars.bind(this)
     this.handleRec = this.handleRec.bind(this)

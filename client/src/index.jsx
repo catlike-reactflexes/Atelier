@@ -17,6 +17,7 @@ class App extends React.Component {
       productFeatures: [],
       quesAns: [],
       totalRating: 0,
+      numOfReviews: 0,
       outfit: JSON.parse(localStorage.getItem("myOutfit")) || { data: [] }
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
@@ -36,7 +37,7 @@ class App extends React.Component {
     return axios.get('/reviewratings', {
       params: {
         productID: this.state.productId,
-        count: 100
+        count: 1000
       }
     })
       .then(arrayOfReviews => {
@@ -46,8 +47,7 @@ class App extends React.Component {
           sum = sum + arrayOfReviews.data.results[i].rating
         }
         let average = sum / arrayOfReviews.data.results.length
-        // console.log('this is the average: ', average)
-        this.setState({ totalRating: average })
+        this.setState({numOfReviews: arrayOfReviews.data.results.length, totalRating: average})
       })
       .catch(error => {
         console.log('get error', error)
@@ -111,7 +111,7 @@ class App extends React.Component {
           id={this.state.productId}
           productName={this.state.productName}
         />}
-         <Reviews id={this.state.productId} productName = {this.state.productName}/> 
+         <Reviews id={this.state.productId} productName = {this.state.productName} numOfReviews = {this.state.numOfReviews}/>
       </div >
     );
   }
