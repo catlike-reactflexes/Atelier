@@ -9,7 +9,8 @@ class MoreAnswer extends React.Component{
     this.state = {
       twoAnswer : this.props.allAns.slice(0,2),
       restOfAnswer : this.props.allAns.slice(2),
-      showMore : true
+      showMore : true,
+      foundSeller: false
     }
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
     // console.log('More Answers-->', this.props)
@@ -36,7 +37,7 @@ class MoreAnswer extends React.Component{
   render(){
 
     const {oneQues, twoAnswer, showMore, restOfAnswer} = this.state;
-
+    
     return (
       <div>
         {

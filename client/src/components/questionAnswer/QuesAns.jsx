@@ -35,6 +35,7 @@ class QuesAns extends React.Component{
 
               return (
                 <OneQA  key = {quesAns.question_id}
+                        queryString={this.props.queryString}
                         oneQues = {quesAns}
                         allAns = {moreAnsList}
                         productName={this.props.productName}

@@ -9,16 +9,21 @@ class AddAnswer extends React.Component {
     this.state = {
       isOpen: false,
       answer: '',
+      answerEmpty:true,
       nickname:'',
+      nicknameEmpty:true,
       email:'',
+      emailEmpty:true,
+      emailValid:true,
+      validationInfo: false,
       previewImages:[],
       photos:[]
     }
     this.submitAnswer= this.submitAnswer.bind(this);
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.uploadPhotos = this.uploadPhotos.bind(this);
-
-    console.log('Add Answer-props->', this.props)
+    this.validation = this.validation.bind(this);
+    // console.log('Add Answer-props->', this.props)
   }
   setOpen = (option) => {
 
@@ -28,7 +33,7 @@ class AddAnswer extends React.Component {
   }
   uploadPhotos = (imageData, previewData) => {
     // this.props.postTrackInteractions('Add answer', 'Questions and Answers');
-    console.log('imageData--3-->', imageData);
+    // console.log('imageData--3-->', imageData);
     // console.log('click upload name', data.name);
 
     this.setState({
@@ -36,44 +41,81 @@ class AddAnswer extends React.Component {
       photos: imageData
     })
   }
+  validation = () => {
+    if(this.state.answer.trim() === '' && this.state.nickname.trim() === '' && this.state.email.trim() === ''){
+      // console.log('test1')
+      this.setState({
+        answerEmpty: false,
+        nicknameEmpty: false,
+        emailEmpty: false
+      })
+    }
+    if(this.state.answer.trim() === ''){
+      this.setState({answerEmpty: false})
+    }
+    if(this.state.nickname.trim() === ''){
+      this.setState({nicknameEmpty: false})
+    }
+    if(this.state.email.trim() === ''){
+      this.setState({emailEmpty: false})
+    }
+    if(!/\S+@\S+\.\S+/.test(this.state.email)) {
+      this.setState({emailValid: false})
+    }
+
+
+  }
   submitAnswer = ()=> {
-    this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
-    const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-    const formData = new FormData();
-    if(this.state.photos.length > 0) {
-      for(let i =0; i < this.state.photos.length; i++) {
-        formData.append('images', this.state.photos[i],this.state.photos[i].name)
+    // this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
+    this.validation();
+
+    if(this.state.validationInfo) {
+
+        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const formData = new FormData();
+      if(this.state.photos.length > 0) {
+        console.log('ready to go server--->')
+        for(let i =0; i < this.state.photos.length; i++) {
+          formData.append('images', this.state.photos[i],this.state.photos[i].name)
+        }
       }
-    } 
-    formData.append('question_id', this.props.oneQues.question_id)
-    formData.append('body', this.state.answer)
-    formData.append('name', this.state.nickname)
-    formData.append('email', this.state.email)
-    console.log('submit answer', this.state.photos);
-    // console.log(this.state)
-    // axios.post('/api/addAnswer', {
-    //   question_id: this.props.oneQues.question_id,
-    //   body: this.state.answer,
-    //   name: this.state.nickname,
-    //   email: this.state.email,
-    //   photos: formData
-    // })
+      formData.append('question_id', this.props.oneQues.question_id)
+      formData.append('body', this.state.answer)
+      formData.append('name', this.state.nickname)
+      formData.append('email', this.state.email)
+      // console.log('submitAnswer***************')
 
-    axios.post('/api/addAnswer', formData, config)
-      .then(function(reponse){
-        console.log('Success Creating the Answer-->',response);
-      })
-      .catch(function (error) {
-        console.log('Error sending to server->', error.data)
-      })
+      axios.post('/api/addAnswer', formData, config)
+        .then(function(reponse){
+          console.log('Success Creating the Answer-->',response);
+        })
+        .catch(function (error) {
+          console.log('??????????->', error)
+        })
 
-    this.props.onClose();
+      this.props.onClose();
+    }
+
   }
   handleAnswerChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
     })
-
+    if(this.state.answer.trim() !== ''){
+      this.setState({answerEmpty: true})
+    }
+    if(this.state.nickname.trim() !== ''){
+      this.setState({nicknameEmpty: true})
+    }
+    if(this.state.email.trim() !== ''){
+      this.setState({emailEmpty: true})
+    }
+    if(/\S+@\S+\.\S+/.test(this.state.email)) {
+      this.setState({emailValid: true})
+    }
+    if(this.state.answerEmpty && this.state.nickname && this.state.emailEmpty && this.state.emailValid){
+      this.setState({validationInfo: true})
+    }
   }
 
   render(){
@@ -93,9 +135,10 @@ class AddAnswer extends React.Component {
       </div>
       <div className="modal-content">
           <p className="modal-product">{productName}  :  {question_body} </p>
+          <p style={{color:"#727A74",fontStyle: "italic"}}>* (mandatory)</p>
           <div className="modal-body">
             <div>
-              <label className="answer">Your Answer (mandatory</label>
+              <label className="answer">Your Answer *</label>
                 <textarea
                     data-testid="answer"
                     id="answer"
@@ -103,8 +146,9 @@ class AddAnswer extends React.Component {
                     row={5}
                 />
             </div>
+            {(!this.state.answerEmpty) && <span style={REQUIRED_STYLES}>* answer required</span>}
             <div>
-              <label className="nickname">nickname (mandatory) </label>
+              <label className="nickname">nickname *</label>
                 <input
                   data-testid="nickname"
                   type="text"
@@ -113,8 +157,9 @@ class AddAnswer extends React.Component {
                   placeholder='Example: jackson543'/>
 
             </div>
+            {(!this.state.nicknameEmpty) && <span style={REQUIRED_STYLES}>* nickname required</span>}
             <div>
-              <label className="email">email (mandatory)</label>
+              <label className="email">email *</label>
                 <input
                   data-testid="email"
                   type="text"
@@ -122,7 +167,8 @@ class AddAnswer extends React.Component {
                   onChange={this.handleAnswerChange}
                   placeholder = 'jack@email.com'/>
             </div>
-
+            {(!this.state.emailEmpty) && <span style={REQUIRED_STYLES}>* email required</span>}
+            {(!this.state.emailValid) && <span style={REQUIRED_STYLES}>* invalid email</span>}
             {
           this.state.previewImages.length > 0 ?
           <div className="upload-images">{this.state.previewImages.map((preview, index)=>
@@ -174,5 +220,11 @@ const OVERLAY_STYLES = {
   bottom: 0,
   backgroundColor: 'rgba(0, 0, 0, .8)',
   zIndex: 1000
+}
+const REQUIRED_STYLES = {
+  color:'#be3e8d',
+  fontStyle: "italic",
+  fontSize:'12px'
+
 }
 export default ClickTracker(AddAnswer);
