@@ -32,7 +32,6 @@ class RelatedProductsList extends React.Component {
   }
 
   render() {
-    console.log('image data: ', this.props.imageData)
     for (var i = 0; i < this.props.productData.length; i++) {
       this.props.productData[i].image = this.props.imageData[i];
     }
