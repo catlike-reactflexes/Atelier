@@ -50,8 +50,11 @@ class ProductDetails extends React.Component {
             {this.displayRating(this.props.rating)}
             <a onClick={() => { this.props.postTrackInteractions('Read Review Link', 'Product Details') }} href={'#reviewSection'}>Read all reviews</a>
           </div>
+        </div>
         :
+
         <span>product loading</span>
+
     )
   }
 }
