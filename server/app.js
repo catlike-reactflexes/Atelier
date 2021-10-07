@@ -1,5 +1,7 @@
+
 require('dotenv').config();
 //process.env.API_TOKEN
+const compression = require('compression');
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -17,6 +19,7 @@ const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 //app.use(express.static(path.resolve(__dirname, '../client/dist')));
 //this is a regex expression that will allow the app to serve the static files
 //dynamically with our default product id and a real url
+app.use(compression());
 app.use('/:id(\\d{5})', express.static('client/dist'));
 
 app.use(express.json());
@@ -412,21 +415,21 @@ app.get('/api/qa/id=*', (req, res) => {
 });
 
 //S3, Multer
-  const multer = require('multer');
-  const {uploadFile} = require('./Questions/s3');
-  const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, 'server/Questions/image_uploads/');
-    },
+const multer = require('multer');
+const { uploadFile } = require('./Questions/s3');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'server/Questions/image_uploads/');
+  },
 
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-  });
-  var upload = multer({ storage: storage })
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+var upload = multer({ storage: storage })
 
-app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
-  console.log('QA**request AddAnswer-->', req.body) ;
+app.post('/api/addAnswer', upload.array('images'), (req, res) => {
+  console.log('QA**request AddAnswer-->', req.body);
 
 
   let photoUrl = [];
@@ -435,7 +438,7 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
   const postAnswer = (question_id, body, name, photoUrl) => {
 
     console.log('Inside postAnswer Axio--->');
-    console.log('ready to post---',photoUrl)
+    console.log('ready to post---', photoUrl)
     axios({
       method: 'POST',
       url: `${API_URL}/qa/questions/${question_id}/answers`,
@@ -459,7 +462,7 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
     })
   }
 
-  const uploadImages =  async (cb) => {
+  const uploadImages = async (cb) => {
     let imagesUrl = [];
     let promises = files.map(async file => {
       const ans = await uploadFile(file)
@@ -469,18 +472,18 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
     result = await Promise.all(promises);
     console.log('Test-1->', result)
     console.log('Test-2->', imagesUrl)
-    cb(null,imagesUrl);
+    cb(null, imagesUrl);
   }
   //if there is no images, then POST
-  if(files.length === 0) {
-    postAnswer(req.body.question_id, req.body.body,req.body.name, photoUrl);
+  if (files.length === 0) {
+    postAnswer(req.body.question_id, req.body.body, req.body.name, photoUrl);
   } else {
     //upload to S3
-    uploadImages((err, imageData)=>{
+    uploadImages((err, imageData) => {
       //once we have URL, then POST
-      if(imageData){
-        console.log('ready to post---',imageData)
-        postAnswer(req.body.question_id, req.body.body,req.body.name, imageData);
+      if (imageData) {
+        console.log('ready to post---', imageData)
+        postAnswer(req.body.question_id, req.body.body, req.body.name, imageData);
       }
     });
   }
@@ -488,7 +491,7 @@ app.post('/api/addAnswer', upload.array('images'),  (req, res)=> {
 })
 
 app.post('/api/addQuestion', (req, res) => {
-  console.log('QA**request AddAQuestion-->',req.body) ;
+  console.log('QA**request AddAQuestion-->', req.body);
 
   axios({
     method: 'POST',
