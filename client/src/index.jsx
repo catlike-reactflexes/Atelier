@@ -4,14 +4,15 @@ import axios from 'axios';
 import Overview from './components/overview/overview.jsx';
 import QuesAnsMain from './components/questionAnswer/1QuesAnsMain.jsx';
 import RelatedProducts from './components/relatedproducts/RelatedProducts.jsx';
-import Reviews from './components/reviews/ReviewApp.jsx'
+import Reviews from './components/reviews/ReviewApp.jsx';
+import { FaSearch } from 'react-icons/fa';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: Number(window.location.pathname.split('/')[1]),
+      productId: Number((window.location.pathname.split('/')[1] || 47421)),
       productName: 'Camo Onesie',
       productFeatures: [],
       quesAns: [],
@@ -100,7 +101,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <div>Header Placeholder</div>
+        <header><span id="logo"></span><span id="searchBar"></span><FaSearch className={'searchBarIcon'}/></header>
         <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData} outfit={this.state.outfit} />
         {quesAns.length > 0 && <QuesAnsMain

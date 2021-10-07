@@ -114,3 +114,6 @@ client/dist/test.html
 
 #aws
 *.pem
+
+#misc
+.DS_Store

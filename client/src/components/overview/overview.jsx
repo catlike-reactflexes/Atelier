@@ -17,7 +17,7 @@ class Overview extends React.Component {
       productStyles: [],
       styleId: null,
       selectedStyle: null,
-      mainId: 0,
+      mainIndex: 0,
       styleName: '',
       stylePhotos: null,
       detailsLoaded: false,
@@ -67,7 +67,7 @@ class Overview extends React.Component {
         if (results[i]['default?']) {
           styleId = results[i].style_id;
           photos = results[i].photos;
-          url = photos[this.state.mainId].url;
+          url = photos[this.state.mainIndex].url;
           name = results[i].name;
           selected = results[i];
           break;
@@ -83,7 +83,7 @@ class Overview extends React.Component {
     let selection = event.target.id;
     // console.log(`handle change selection: ${selection}, state photos: ${this.state.stylePhotos}`);
     let url = this.state.stylePhotos[selection].url;
-    this.setState({ mainUrl: url, mainId: selection });
+    this.setState({ mainUrl: url, mainIndex: selection });
   }
 
   updateStyle(event) {
@@ -102,7 +102,7 @@ class Overview extends React.Component {
         selected = styles[i];
         photos = styles[i].photos;
         name = styles[i].name;
-        main = photos[this.state.mainId].url;
+        main = photos[this.state.mainIndex].url;
         break;
       }
     }
