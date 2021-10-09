@@ -20,7 +20,7 @@ const item = {
   "name": "Morning Joggers",
   "slogan": "Make yourself a morning person",
   "updated_at": "2021-08-26T20:30:48.129Z",
-  "productFeatures": [{ "feature": "Lenses", "value": "Ultrasheen" }]
+  "features": [{ "feature": "Lenses", "value": "Ultrasheen" }]
 
 }
 
@@ -37,7 +37,7 @@ describe('Related Products Card Component', function () {
     const app = render(<RelatedProductsCard key={0} name={item.name} price={item.default_price} category={item.category} description={item.description}
       image={item.image}
       overviewProduct={item}
-      productFeatures={item.productFeatures}
+      productFeatures={item.features}
       id={item.id} />)
 
     const modal = app.container.querySelector('.modalStar');

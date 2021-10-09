@@ -65,7 +65,7 @@ class Stars extends React.Component {
       }
     }
     let starList = result.map((star) => {
-      return <span className={star}></span>
+      return <span data-testId='star' className={star}></span>
     })
     return <div>{starList}</div>
   }

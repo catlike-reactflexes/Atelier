@@ -29,7 +29,6 @@ class YourOutfitCard extends React.Component {
 
 
   render() {
-    console.log('the data: ', this.props);
     return (
       <div>
         <li className="relatedProductsItems">
