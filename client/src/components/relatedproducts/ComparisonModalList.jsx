@@ -18,7 +18,7 @@ class ComparisonModalList extends React.Component {
         overviewProductFeatures={this.props.overviewProduct.features} />
     });
     return (
-      <div style={RPOVERLAY_STYLES} onClick={() => this.props.postTrackInteractions('comparison modal', 'Related Products')}>
+      <div id="modal" style={RPOVERLAY_STYLES} onClick={() => this.props.postTrackInteractions('comparison modal', 'Related Products')}>
         <table style={MODAL_STYLES}>
           <tbody>
             <tr>

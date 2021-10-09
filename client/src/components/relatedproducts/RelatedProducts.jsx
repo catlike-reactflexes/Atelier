@@ -53,7 +53,7 @@ class RelatedProducts extends React.Component {
       }
     })
       .then((relatedProductsData) => {
-        //console.log('success getting related products data in related products client index: ', relatedProductsData.data);
+        console.log('success getting related products data in related products client index: ', relatedProductsData.data);
         this.setState({
           relatedProductsData: relatedProductsData.data
         })

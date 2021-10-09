@@ -2138,7 +2138,9 @@ describe('Related Products Component', function () {
         return res(ctx.json(ratings))
       })
     );
-    const app = render(<RelatedProducts />)
+    const app = render(<RelatedProducts id={47421} productUpdate={() => { }} updateOutfitData={() => { }}
+      outfit={{ data: [] }}
+      rating={() => { }} />)
     expect(app.getByText('Related Products')).toBeInTheDocument();
     app.findAllByText(relatedProductsData[0].name)
       .then((elements) => {

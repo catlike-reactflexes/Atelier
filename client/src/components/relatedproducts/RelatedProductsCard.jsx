@@ -41,6 +41,7 @@ class RelatedProductsCard extends React.Component {
   }
 
   render() {
+    console.log('features pls: ', this.props);
     return (
       <div>
 
