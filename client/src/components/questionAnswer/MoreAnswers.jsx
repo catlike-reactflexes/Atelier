@@ -13,8 +13,18 @@ class MoreAnswer extends React.Component{
       foundSeller: false
     }
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
-    // console.log('More Answers-->', this.props)
+    this.updateState = this.updateState.bind(this);
+
+    console.log('More Answers--props>', this.props)
+    console.log('More Answers--state>', this.state)
   }
+  updateState = (newProps)=>{
+    this.setState({
+      twoAnswer : newProps.slice(0,2),
+      restOfAnswer : newProps.slice(2),
+    })
+  }
+
   fetchMoreAns = () => {
     this.props.postTrackInteractions('Load more answers', 'Question And Answer')
     // console.log('Fetch More Answer, checking the length of rest of Answer-->', this.state.restOfAnswer)
@@ -36,13 +46,20 @@ class MoreAnswer extends React.Component{
   }
   render(){
 
-    const {oneQues, twoAnswer, showMore, restOfAnswer} = this.state;
-    
+    let {twoAnswer, showMore, restOfAnswer} = this.state;
+    if(this.props.incomingAnswer){
+      // this.updateState(this.props.allAns)
+      twoAnswer = this.props.allAns.slice(0,2);
+      restOfAnswer = this.props.allAns.slice(2)
+    }
+    const strangeTwoAns = this.props.allAns.slice(0,2);
+    const strangeRestOfAnswers = this.props.allAns.slice(2)
+    console.log('moreAnswer-->', twoAnswer)
     return (
       <div>
         {
           twoAnswer.map((oneAns, index)=> {
-          return (<OneAnswer key={index} oneAnswer={oneAns} oneQues={oneQues}/>)
+          return (<OneAnswer key={index} oneAnswer={oneAns} />)
           })
         }
 

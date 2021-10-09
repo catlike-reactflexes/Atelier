@@ -18,6 +18,7 @@ class JustQuestion extends React.Component{
     this.setOpen = this.setOpen.bind(this);
     this.questionUpdateHelpfulness = this.questionUpdateHelpfulness.bind(this);
     this.questionReport = this.questionReport.bind(this);
+    this.postAnswer = this.postAnswer.bind(this);
   }
   setOpen = (option) => {
     this.props.postTrackInteractions('Add answer', 'Questions and Answers')
@@ -25,7 +26,41 @@ class JustQuestion extends React.Component{
       isOpen: option
     })
   }
+  postAnswer = (photos, answer, nickname, email)=> {
+    // this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
 
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const formData = new FormData();
+      if(photos.length > 0) {
+        console.log('ready to go server--->')
+        for(let i =0; i < photos.length; i++) {
+          formData.append('images', photos[i],photos[i].name)
+        }
+      }
+      formData.append('product_id', this.props.productId)
+      formData.append('question_id', this.props.oneQues.question_id)
+      formData.append('body', answer)
+      formData.append('name', nickname)
+      formData.append('email', email)
+
+      // console.log('submitAnswer***************')
+
+      axios.post('/api/addAnswer', formData, config)
+        .then(response => {
+          console.log('Success Creating the Answer-->',response);
+          // this.props.fetchQuestionAnswer();
+          this.props.fetchAnswers();
+        }
+
+
+        )
+        .catch(error=>{
+          console.log('why ??????????->', error)
+        })
+
+
+
+  }
   questionUpdateHelpfulness = (questionId) => {
     this.props.postTrackInteractions('Question helpfulness','Question And Answer')
     //user only allowed to click one time
@@ -119,7 +154,7 @@ class JustQuestion extends React.Component{
                     oneQues={oneQues}
                     productName={this.props.productName}
                     productId = {this.props.productId}
-                    fetchQuestionAnswer={this.props.fetchQuestionAnswer}
+                    postAnswer = {this.postAnswer}
                     open ={this.state.isOpen}
                     onClose={() => this.setOpen(false)}/>
                   : null

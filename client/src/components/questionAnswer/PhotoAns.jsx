@@ -12,8 +12,8 @@ class PhotoAns extends React.Component {
       length: this.props.urlPhoto.length
     }
     // console.log('PhotoAns--->', this.props)
-    this.prevSlide = this.prevSlide.bind(this);
-    this.nextSlide = this.nextSlide.bind(this);
+    // this.prevSlide = this.prevSlide.bind(this);
+    // this.nextSlide = this.nextSlide.bind(this);
 
   }
   setOpen = (option, e) => {
@@ -32,33 +32,43 @@ class PhotoAns extends React.Component {
 
 
   }
-  nextSlide = ()=> {
-    if(this.state.current !== this.state.length - 1){
-      this.setState ({
-        current : this.state.current + 1
-      },()=>{console.log('prevSlide1->', this.state.current, this.state.length)})
-    } else {
-      this.setState ({
-        current: 0
-      },()=>{console.log('prevSlide2->', this.state.current, this.state.length)})
-    }
-  }
-  prevSlide = () => {
-    if(this.state.current === 0){
-      this.setState ({
-        length: this.state.length - 1
-      },()=>{console.log('NextSlide1->', this.state.current, this.state.length)})
-    } else {
-      this.setState ({
-        current: this.state.current - 1
-      },()=>{console.log('NextSlide2->', this.state.current, this.state.length)})
-    }
-    // setCurrent(current === 0 ? length - 1 : current - 1);
-  }
+  // nextSlide = ()=> {
+  //   if(this.state.current !== this.state.length - 1){
+  //     this.setState ({
+  //       current : this.state.current + 1
+  //     },()=>{console.log('prevSlide1->', this.state.current, this.state.length)})
+  //   } else {
+  //     this.setState ({
+  //       current: 0
+  //     },()=>{console.log('prevSlide2->', this.state.current, this.state.length)})
+  //   }
+  // }
+  // prevSlide = () => {
+  //   if(this.state.current === 0){
+  //     this.setState ({
+  //       length: this.state.length - 1
+  //     },()=>{console.log('NextSlide1->', this.state.current, this.state.length)})
+  //   } else {
+  //     this.setState ({
+  //       current: this.state.current - 1
+  //     },()=>{console.log('NextSlide2->', this.state.current, this.state.length)})
+  //   }
+  //   // setCurrent(current === 0 ? length - 1 : current - 1);
+  // }
 
   render(){
     // if(!this.props.open) return null;
-    const {urlPhoto} = this.props;
+    let {urlPhoto} = this.props;
+    let updateUrl=[];
+    // console.log('Photo--->', typeof(urlPhoto[0]));
+    if(typeof(urlPhoto[0]) !== 'string'){
+
+      for(let i =0; i< urlPhoto.length; i++){
+        updateUrl.push(urlPhoto[i].url);
+      }
+      urlPhoto = updateUrl;
+    }
+    // console.log('updateUrl-->', urlPhoto)
 
     return (
         <section className='slider'>

@@ -20,11 +20,21 @@ class AddAnswer extends React.Component {
       previewImages:[],
       photos:[]
     }
-    this.submitAnswer= this.submitAnswer.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.uploadPhotos = this.uploadPhotos.bind(this);
     this.validation = this.validation.bind(this);
     // console.log('Add Answer-props->', this.props)
+  }
+  submitAnswer = () => {
+    const {photos,answer, nickname,email} = this.state
+    this.validation();
+    if(this.state.validationInfo){
+      this.props.postAnswer(photos,answer, nickname,email);
+      this.setState({formSubmit: true})
+    } 
+
+    // this.props.onClose();
   }
   setOpen = (option) => {
 
@@ -65,44 +75,7 @@ class AddAnswer extends React.Component {
     }
 
   }
-  submitAnswer = ()=> {
-    // this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
-    this.validation();
 
-    if(this.state.validationInfo) {
-
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      const formData = new FormData();
-      if(this.state.photos.length > 0) {
-        console.log('ready to go server--->')
-        for(let i =0; i < this.state.photos.length; i++) {
-          formData.append('images', this.state.photos[i],this.state.photos[i].name)
-        }
-      }
-      formData.append('product_id', this.props.productId)
-      formData.append('question_id', this.props.oneQues.question_id)
-      formData.append('body', this.state.answer)
-      formData.append('name', this.state.nickname)
-      formData.append('email', this.state.email)
-
-      // console.log('submitAnswer***************')
-
-      axios.post('/api/addAnswer', formData, config)
-        .then(response => {
-          console.log('Success Creating the Answer-->',response);
-          this.props.fetchQuestionAnswer();
-        }
-
-          // handleQAUpdate={this.props.handleQAUpdate}
-        )
-        .catch(error=>{
-          console.log('why ??????????->', error)
-        })
-      this.setState({formSubmit: true})
-      // this.props.onClose();
-    }
-
-  }
   handleAnswerChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value

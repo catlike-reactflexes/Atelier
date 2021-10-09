@@ -45,16 +45,17 @@ class AddQuestion extends React.Component {
         nicknameEmpty: false,
         emailEmpty: false
       })
-    } else
+    }
     if(this.state.nickname.trim() === ''){
       this.setState({nicknameEmpty: false})
-    } else
+    }
     if(this.state.email.trim() === ''){
       this.setState({emailEmpty: false})
-    } else
+    }
     if(!/\S+@\S+\.\S+/.test(this.state.email)) {
       this.setState({emailValid: false})
-    } else {
+    }
+    if(this.state.questionEmpty=== true) {
       this.setState({validateInfo: true})
     }
   }
@@ -64,7 +65,8 @@ class AddQuestion extends React.Component {
     this.validation ();
     if(this.state.validateInfo){
       // console.log('SubmitQuestion-->',this.props.productId, this.state);
-      if(this.validation ()){
+
+        console.log('really?')
         axios.post('/api/addQuestion', {
           product_id: this.props.productId,
           body: this.state.question,
@@ -72,13 +74,13 @@ class AddQuestion extends React.Component {
           email: this.state.email
 
         })
-          .then(function(reponse){
+          .then((reponse)=>{
             console.log('Success Creating the Question-->',response);
           })
-          .catch(function (error) {
+          .catch((error)=> {
             console.log('Error sending to server with your Question->', error)
           })
-      }
+
 
       this.props.onClose();
     }

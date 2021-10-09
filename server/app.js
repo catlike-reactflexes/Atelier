@@ -420,7 +420,7 @@ const fetchQuestions = (product_id, cb) => {
 }
 
 app.get('/api/qa/id=*', (req, res) => {
-  // console.log('QA**request-->', req.query.product_id) ;
+  // console.log('QA**request-->', req) ;
   // console.log('request-->', req.path) ;
   fetchQuestions(req.query.product_id, (data, error)=>{
     if(data){
@@ -430,6 +430,32 @@ app.get('/api/qa/id=*', (req, res) => {
       console.log('cs errorr-->', error)
       res.status(500).send(error)
     }
+  })
+
+});
+
+app.get('/api/getAnswers/*', (req, res) => {
+  console.log('Server get answers->', req.query.question_id) ;
+  // console.log('request-->', req.path) ;
+  axios({
+    method: 'get',
+    url: `${API_URL}/qa/questions/${req.query.question_id}/answers`,
+    headers: {
+      Authorization: process.env.API_TOKEN
+    },
+    params: {
+      question_id: req.query.question_id,
+      count: 10
+    }
+  })
+  .then( (response)=> {
+    console.log('fetching Answer api response cs->: ', response.data);
+    res.status(200).send(response.data.results)
+
+  })
+  .catch((err)=> {
+    console.log('fetching answer api request error: cs->', err);
+    res.status(500).send(err)
   })
 
 });

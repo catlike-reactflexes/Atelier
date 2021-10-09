@@ -119,7 +119,8 @@ class App extends React.Component {
           productId={this.state.productId}
           productName={this.state.productName}
         />}
-         <Reviews totalRating = {this.state.totalRating} id={this.state.productId} productName = {this.state.productName} numOfReviews = {this.state.numOfReviews}/>
+
+         {/* <Reviews totalRating = {this.state.totalRating} id={this.state.productId} productName = {this.state.productName} numOfReviews = {this.state.numOfReviews}/> */}
       </div >
     );
   }
