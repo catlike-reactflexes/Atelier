@@ -72,8 +72,11 @@ app.get('/reviews', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
   let config = {
-    headers: { 'Authorization': process.env.API_TOKEN },
-    params: { 'product_id': product_id }
+    headers: {'Authorization': process.env.API_TOKEN},
+    params: {
+      'product_id': product_id,
+      'count': req.query.count
+  }
   }
 
   // console.log(typeof product_id)
@@ -83,8 +86,9 @@ app.get('/reviews', (req, res) => {
       return res.json(data.data)
     })
     .catch(err => {
-      console.log('review get error: ', err)
-      throw err
+      console.log('review get error: ', err.response.status)
+      res.send(err.response.status)
+      // throw err
     })
 })
 
@@ -103,8 +107,8 @@ app.get('/reviewratings', (req, res) => {
       return res.json(data.data)
     })
     .catch(err => {
-      console.log('review get error: ', err)
-      throw err
+      console.log('reviewratings get error: ', err.response.status)
+      res.send(err.response.status)
     })
 })
 
@@ -115,14 +119,14 @@ app.get('/reviewmeta', (req, res) => {
     params: { 'product_id': product_id }
   }
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', config)
-    .then(metadata => {
-      // console.log('meta api response: ', metadata.data);
-      res.json(metadata.data)
-    })
-    .catch(err => {
-      console.log('review get error: ', err)
-      throw err
-    })
+  .then(metadata => {
+    // console.log('meta api response: ', metadata.data);
+    res.json(metadata.data)
+  })
+  .catch(err => {
+    console.log('reviewmeta get error: ', err.response.status)
+    res.send(err.response.status)
+  })
 })
 
 app.get('/reviewhelpful', (req, res) => {
@@ -140,7 +144,7 @@ app.get('/reviewhelpful', (req, res) => {
   })
     .then(response => {
       console.log('helpful api response ', response.status)
-      res.send(response)
+      res.send(response.status)
     })
     .catch(err => {
       res.sendStatus(404)
@@ -164,7 +168,7 @@ app.get('/reviewreport', (req, res) => {
     .then(function (response) {
       //looking for 204 to get update
       console.log('report api response--> ', response.status);
-      res.sendStatus(response.status);
+      res.send(response.status);
     })
     .catch(function (err) {
       // console.log('api request error--> ', err);

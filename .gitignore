@@ -110,6 +110,7 @@ typings/
 
 #review data for me (Trevor) to reference
 /reviewsDummyData.js
+client/dist/test.html
 
 #aws
 *.pem
