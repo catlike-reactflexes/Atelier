@@ -40,7 +40,7 @@ class OneQA extends React.Component{
 
     const {allAns, oneQues} = this.props;
     let {incomingAnswersList} = this.state;
-    console.log('ONE QA--incomingList- 1-->', incomingAnswersList);
+    // console.log('ONE QA--incomingList- 1-->', incomingAnswersList);
 
     // let sellerList = []
     // let newAnswerList = [];
@@ -71,7 +71,7 @@ class OneQA extends React.Component{
       newIncomingAnswerList = incomingSellerList.concat(newIncomingAnswerList)
     }
 
-    console.log('ONE QA---incoming list-2->', newIncomingAnswerList, this.state.incomingAnswer);
+    // console.log('ONE QA---incoming list-2->', newIncomingAnswerList, this.state.incomingAnswer);
     return (
       <div className="oneQA">
 

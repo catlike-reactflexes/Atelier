@@ -54,8 +54,8 @@ class QuesAnsMain extends React.Component {
 
     const {quesAns, productId, productName} = this.props;
     const {queryString, filteredQues,updated} = this.state;
-    console.log('1Questions--1->', filteredQues)
-    console.log('1Questions--2->', quesAns)
+    // console.log('1Questions--1->', filteredQues)
+    // console.log('1Questions--2->', quesAns)
     return (
       <div className="qa">
 

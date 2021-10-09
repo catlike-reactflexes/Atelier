@@ -15,8 +15,8 @@ class MoreAnswer extends React.Component{
     this.fetchMoreAns = this.fetchMoreAns.bind(this);
     this.updateState = this.updateState.bind(this);
 
-    console.log('More Answers--props>', this.props)
-    console.log('More Answers--state>', this.state)
+    // console.log('More Answers--props>', this.props)
+    // console.log('More Answers--state>', this.state)
   }
   updateState = (newProps)=>{
     this.setState({
@@ -54,7 +54,7 @@ class MoreAnswer extends React.Component{
     }
     const strangeTwoAns = this.props.allAns.slice(0,2);
     const strangeRestOfAnswers = this.props.allAns.slice(2)
-    console.log('moreAnswer-->', twoAnswer)
+    // console.log('moreAnswer-->', twoAnswer)
     return (
       <div>
         {
