@@ -39,19 +39,19 @@ class App extends React.Component {
         count: 1000
       }
     })
-      .then(arrayOfReviews => {
-        let sum = 0
-        for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
-          // console.log('rating: ', arrayOfReviews.data.results[i].rating)
-          sum = sum + arrayOfReviews.data.results[i].rating
-        }
-        let average = sum / arrayOfReviews.data.results.length
-        this.setState({numOfReviews: arrayOfReviews.data.results.length, totalRating: average})
-      })
-      .catch(error => {
-        console.log('get error', error)
-        throw error
-      })
+    .then(arrayOfReviews => {
+      let sum = 0
+      for (var i = 0; i < arrayOfReviews.data.results.length; i++) {
+        // console.log('rating: ', arrayOfReviews.data.results[i].rating)
+        sum = sum + arrayOfReviews.data.results[i].rating
+      }
+      let average = sum / arrayOfReviews.data.results.length
+      this.setState({numOfReviews: arrayOfReviews.data.results.length, totalRating: average})
+    })
+    .catch(error => {
+      console.log('get error', error)
+      throw error
+    })
   }
 
   handleProductUpdate(data) {
