@@ -8,7 +8,7 @@ const port = 3000;
 const path = require('path');
 const axios = require('axios');
 const $ = require('jquery');
-const compression = require('compression');
+
 
 app.use(compression());
 const bodyParser = require('body-parser');

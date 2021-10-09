@@ -9,13 +9,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // let devMode = process.env.devMode || true;
 
 module.exports = {
-<<<<<<< HEAD
-  mode:"production",
-  entry: SRC_DIR ,
-=======
   mode: "production",
   entry: SRC_DIR,
->>>>>>> bb3b7bf6f8cd91736f49ad2551d3b00015aaa023
   output: {
     filename: "bundle.js",
     path: DIST_DIR,
