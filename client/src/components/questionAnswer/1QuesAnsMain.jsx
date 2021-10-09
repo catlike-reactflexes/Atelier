@@ -52,9 +52,10 @@ class QuesAnsMain extends React.Component {
 
   render() {
 
-    const {quesAns, id, productName} = this.props;
+    const {quesAns, productId, productName} = this.props;
     const {queryString, filteredQues,updated} = this.state;
-    // console.log('QuestionAns filtered props--->', filteredQues)
+    console.log('1Questions--1->', filteredQues)
+    console.log('1Questions--2->', quesAns)
     return (
       <div className="qa">
 
@@ -75,14 +76,16 @@ class QuesAnsMain extends React.Component {
             <ViewQuesAns
               filteredQues={filteredQues}
               queryString={queryString}
-              productId={id}
+              productId={productId}
               productName={productName}
+              fetchQuestionAnswer={this.props.fetchQuestionAnswer}
             />
           </div> :
             <ViewQuesAns
               filteredQues={quesAns}
-              productId={id}
+              productId={productId}
               productName={productName}
+              fetchQuestionAnswer={this.props.fetchQuestionAnswer}
             />
         }
 

@@ -35,7 +35,7 @@ class OneQA extends React.Component{
             className="oneQuestion"
             onClick={()=>{this.props.postTrackInteractions('Question', 'Question And Answer')}}>
             <JustQuestion
-              oneQues={oneQues} productName={this.props.productName} queryString={this.props.queryString}
+              oneQues={oneQues} productName={this.props.productName} productId = {this.props.productId} queryString={this.props.queryString} fetchQuestionAnswer={this.props.fetchQuestionAnswer}
             />
         </div>
 

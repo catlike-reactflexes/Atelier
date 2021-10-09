@@ -389,11 +389,8 @@ app.get('/yourOutfitStyles', (req, res) => {
 //CS- Questions & Answer START------------------------------------------------------------
 // const fileUpload = require('express-fileupload');
 
-
-
-app.get('/api/qa/id=*', (req, res) => {
-  // console.log('QA**request-->', req.query.product_id) ;
-  // console.log('request-->', req.path) ;
+const fetchQuestions = (product_id, cb) => {
+  let result = {};
 
   axios({
     method: 'get',
@@ -402,16 +399,33 @@ app.get('/api/qa/id=*', (req, res) => {
       Authorization: process.env.API_TOKEN
     },
     params: {
-      product_id: req.query.product_id,
+      product_id: product_id,
       count: 10
     }
-  }).then(function (response) {
-    // console.log('api response: ', response.data.results);
+  })
+  .then( (response)=> {
+    // console.log('fetching questions ** api response cs->: ', response.data.results);
 
-    res.status(200).send(response.data.results);
-  }).catch(function (err) {
-    console.log('api request error: ', err);
-    res.status(500).send(err);
+    cb(response.data.results, null)
+
+  })
+  .catch((err)=> {
+    console.log('api request error: cs->', err);
+    cb(null, err)
+  })
+}
+
+app.get('/api/qa/id=*', (req, res) => {
+  // console.log('QA**request-->', req.query.product_id) ;
+  // console.log('request-->', req.path) ;
+  fetchQuestions(req.query.product_id, (data, error)=>{
+    if(data){
+      console.log('fetching questions ** CS data-->', data)
+      res.status(200).send(data)
+    } else {
+      console.log('cs errorr-->', error)
+      res.status(500).send(error)
+    }
   })
 
 });
@@ -431,7 +445,7 @@ const storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 app.post('/api/addAnswer', upload.array('images'), (req, res) => {
-  console.log('QA**request AddAnswer-->', req.body);
+  // console.log('QA**request AddAnswer-->', req.body);
 
 
   let photoUrl = [];
@@ -454,9 +468,19 @@ app.post('/api/addAnswer', upload.array('images'), (req, res) => {
         photos: photoUrl
       }
     }).then(function (response) {
-      console.log('SUCCESS___>>>api response: ', response.data, 'Status:', response.status);
-      // res.status(response.status).send(response.data);
-      res.status(204).send('Success');
+      console.log('Answer created success->: ', response.data, 'Status:', response.status);
+      res.status(response.status).send(response.data);
+
+      // fetchQuestions(req.body.product_id, (data, error)=>{
+      //   if(data){
+      //     console.log('CS after adding Answer data-->', data)
+      //     res.status(200).send(data)
+      //   } else {
+      //     console.log('cs after adding Answer errorr-->', error)
+      //     res.status(500).send(error)
+      //   }
+      // })
+
     }).catch(function (err) {
       console.log('Why error????')
       console.log('api request error: ', err.data, err.status);

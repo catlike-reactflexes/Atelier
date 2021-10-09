@@ -79,7 +79,7 @@ class JustQuestion extends React.Component{
       console.log('String:', string1, 'string2', string2, 'string3',string3)
     }
 
-    // console.log('Query String in Just Question-->', queryString)
+    // console.log('justQuestion props->', this.props)
 
     return (
       <div className="justQues">
@@ -118,6 +118,8 @@ class JustQuestion extends React.Component{
                   <AddAnswer
                     oneQues={oneQues}
                     productName={this.props.productName}
+                    productId = {this.props.productId}
+                    fetchQuestionAnswer={this.props.fetchQuestionAnswer}
                     open ={this.state.isOpen}
                     onClose={() => this.setOpen(false)}/>
                   : null

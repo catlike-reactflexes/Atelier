@@ -565,13 +565,18 @@ header {
 
 .modal-header {
   background: #b2beb5;
-  padding-inline: 20px;
+  padding-inline: 10px;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
+.modal-thanks {
+  background: #aaa2a4a8;
+  height: 100px;
+  font-weight: bolder;
+  color: #ffffff;
+}
 .modal-header span {
   font-size: 0.9rem;
   cursor: pointer;

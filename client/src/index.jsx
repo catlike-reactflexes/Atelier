@@ -20,7 +20,7 @@ class App extends React.Component {
       outfit: JSON.parse(localStorage.getItem("myOutfit")) || { data: [] }
     }
     this.handleProductUpdate = this.handleProductUpdate.bind(this)
-    this.handleQAUpdate = this.handleQAUpdate.bind(this)
+    this.fetchQuestionAnswer = this.fetchQuestionAnswer.bind(this)
     this.getRatingAverage = this.getRatingAverage.bind(this)
     this.updateOutfitData = this.updateOutfitData.bind(this)
   }
@@ -72,14 +72,17 @@ class App extends React.Component {
     }
   }
 
-  handleQAUpdate(updateList) {
+  // handleQAUpdate(updateList) {
 
-    this.setState({ quesAns: [{ updateList }] })
-    // console.log('UpdateLIST--->', updateList);
-  }
+  //   this.setState({ quesAns: [{ updateList }] })
+  //   console.log('UpdateLIST--->', updateList);
+  // }
 
   fetchQuestionAnswer() {
+
     const { productId } = this.state;
+
+    console.log('Fetching-->', productId)
     axios.get(`/api/qa/id=${productId}`, {
       params: {
         product_id: productId
@@ -104,20 +107,20 @@ class App extends React.Component {
     return (
       <div>
         <header><span id="logo"></span><span id="searchBar"></span><FaSearch className={'searchBarIcon'} /></header>
-        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />}
+        {/* <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />
         <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData}
           outfit={this.state.outfit}
-          rating={this.getRatingAverage} />
+          rating={this.getRatingAverage} /> */}
 
 
         {quesAns.length > 0 && <QuesAnsMain
-          handleQAUpdate={this.handleQAUpdate}
-          productUpdate={this.handleProductUpdate}
+          fetchQuestionAnswer={this.fetchQuestionAnswer}
           quesAns={this.state.quesAns}
-          id={this.state.productId}
+          productId={this.state.productId}
           productName={this.state.productName}
         />}
-        <Reviews id={this.state.productId} productName={this.state.productName} />
+
+        {/* <Reviews id={this.state.productId} productName={this.state.productName} /> */}
       </div >
     );
   }

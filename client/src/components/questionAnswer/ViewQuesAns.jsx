@@ -49,12 +49,13 @@ class ViewQuesAns extends React.Component {
   render() {
 
     const {moreQA, twoQuestions, restOfQuestions} = this.state;
-    // console.log('QuestionAns View Question props--->', moreQA, twoQuestions, restOfQuestions )
+    const {productId} = this.props;
+    // console.log('QuestionAns View Question props--->', productId)
 
     return (
 
       <div className="questions">
-        <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA} productName={this.props.productName} queryString={this.props.queryString}/>
+        <QuesAns quesAnsLists={twoQuestions} moreQA={moreQA} productName={this.props.productName} productId={productId} queryString={this.props.queryString} fetchQuestionAnswer={this.props.fetchQuestionAnswer}/>
         <div className="twoButton">
           {
             restOfQuestions.length > 0 && moreQA ?
@@ -71,6 +72,7 @@ class ViewQuesAns extends React.Component {
             {
               this.state.isOpen ?
               <AddQuestion
+              fetchQuestionAnswer={this.props.fetchQuestionAnswer}
               productId = {this.props.productId}
               productName = {this.props.productName}
               open ={this.state.isOpen}

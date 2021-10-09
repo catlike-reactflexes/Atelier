@@ -39,6 +39,8 @@ class QuesAns extends React.Component{
                         oneQues = {quesAns}
                         allAns = {moreAnsList}
                         productName={this.props.productName}
+                        productId = {this.props.productId}
+                        fetchQuestionAnswer={this.props.fetchQuestionAnswer}
 
                 />
               )

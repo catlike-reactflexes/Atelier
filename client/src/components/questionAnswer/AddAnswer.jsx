@@ -7,6 +7,7 @@ class AddAnswer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      formSubmit: false,
       isOpen: false,
       answer: '',
       answerEmpty:true,
@@ -63,7 +64,6 @@ class AddAnswer extends React.Component {
       this.setState({emailValid: false})
     }
 
-
   }
   submitAnswer = ()=> {
     // this.props.postTrackInteractions('Submit answer', 'Questions and Answers');
@@ -79,21 +79,27 @@ class AddAnswer extends React.Component {
           formData.append('images', this.state.photos[i],this.state.photos[i].name)
         }
       }
+      formData.append('product_id', this.props.productId)
       formData.append('question_id', this.props.oneQues.question_id)
       formData.append('body', this.state.answer)
       formData.append('name', this.state.nickname)
       formData.append('email', this.state.email)
+
       // console.log('submitAnswer***************')
 
       axios.post('/api/addAnswer', formData, config)
-        .then(function(reponse){
+        .then(response => {
           console.log('Success Creating the Answer-->',response);
-        })
-        .catch(function (error) {
-          console.log('??????????->', error)
-        })
+          this.props.fetchQuestionAnswer();
+        }
 
-      this.props.onClose();
+          // handleQAUpdate={this.props.handleQAUpdate}
+        )
+        .catch(error=>{
+          console.log('why ??????????->', error)
+        })
+      this.setState({formSubmit: true})
+      // this.props.onClose();
     }
 
   }
@@ -123,17 +129,22 @@ class AddAnswer extends React.Component {
     //product name, product body
     const {question_body} = this.props.oneQues;
     const {productName} = this.props;
-
+    // console.log('Add Answer->', this.props)
     //The modal should be titled “Submit your Answer”.  The modal should be subtitled:   “[Product Name]: [Question Body]”
     return (
       <div className="modal-addAnswer">
       <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_Q_STYLES}>
-      <div className="modal-header">
+        <div className="modal-header">
           <h3>Submit your Answer</h3>
           <span onClick={()=>this.props.onClose()}>X</span>
-      </div>
-      <div className="modal-content">
+        </div>
+        {
+          this.state.formSubmit ? <div className="modal-thanks"> Thank you. We received your answer.</div>
+          :
+          <div>
+
+            <div className="modal-content">
           <p className="modal-product">{productName}  :  {question_body} </p>
           <p style={{color:"#727A74",fontStyle: "italic"}}>* (mandatory)</p>
           <div className="modal-body">
@@ -198,14 +209,20 @@ class AddAnswer extends React.Component {
         <div className="modal-footer">
           <button onClick={this.submitAnswer}>Submit Answer</button>
         </div>
+          </div>
+
+        }
+
+
 
       </div>
       </div>
-    );
+    )
   }
 }
 const MODAL_Q_STYLES = {
   position: 'fixed',
+  width:'700px',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
