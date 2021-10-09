@@ -1,20 +1,31 @@
 import React from 'react'
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 import Chars from './Chars.jsx'
+import axios from 'axios'
 
 class NewReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chars: 0,
+      product_id: this.props.product_id,
+      chars: 50,
+      rating: 0,
       doesRecommend: '',
       reviewSummary: '',
       reviewBody: '',
       reviewerName: '',
       reviewerEmail: '',
+      reviewPhotos: [],
+      characteristics: {}
     }
     this.countBodyChars = this.countBodyChars.bind(this)
     this.handleRec = this.handleRec.bind(this)
+    this.handleBody = this.handleBody.bind(this)
+    this.handleRating = this.handleRating.bind(this)
+    this.handleSummary = this.handleSummary.bind(this)
+    this.handleName = this.handleName.bind(this)
+    this.handleEmail = this.handleEmail.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleRec(e) {
@@ -22,17 +33,46 @@ class NewReviewModal extends React.Component {
     this.setState({ doesRecommend: e.target.value });
   }
 
+  handleRating(e) {
+    // console.log('rating value:', e.target.value)
+    this.setState({rating: e.target.value})
+  }
+
+  handleSummary(e) {
+    // console.log('summary value:', e.target.value)
+    this.setState({reviewSummary: e.target.value})
+  }
+
+  handleBody(e) {
+    // console.log('body value: ', e.target.value)
+    this.countBodyChars()
+    this.setState({reviewBody: e.target.value})
+  }
+
+  handleName(e) {
+    // console.log('name value: ', e.target.value)
+    this.setState({reviewerName: e.target.value})
+  }
+
+  handleEmail(e) {
+    // console.log('email value: ', e.target.value)
+    this.setState({reviewerEmail: e.target.value})
+  }
+
   countBodyChars(e) {
-    // console.log('body: ' e.target.value)
+    this.setState({chars: this.state.chars - 1})
+  }
 
-    var key = e.keyCode;
-    console.log('backspace detected: ', key)
-
-    if (key === 8 || key === 46) {
-      console.log('backspace detected: ', key)
-      return;
-    }
-    this.setState({chars: this.state.chars + 1})
+  handleSubmit(e) {
+    e.preventDefault()
+    let options = this.state
+    axios.post('/reviews', options)
+      .then((res) => {
+        console.log('post response:', res)
+      })
+      .catch((error) => {
+        console.log('post error: ', error)
+      })
   }
 
   render() {
@@ -43,13 +83,26 @@ class NewReviewModal extends React.Component {
       return (
         <React.Fragment>
           <div style={OVERLAY_STYLES}/>
-          <form className= 'reviewForm' style={MODAL_STYLES}>
+          <form onSubmit = {this.handleSubmit} className= 'reviewForm' style={MODAL_STYLES}>
           <h4>Write your Review about the {productName}</h4>
 
+          {/* <p className = ></p> */}
+          <p>(required) Overall Rating</p>
+          <span className = 'ratingNums'>1</span><span className = 'ratingNums'>2</span><span className = 'ratingNums'>3</span><span className = 'ratingNums'>4</span><span className = 'ratingNums'>5</span>
+          <br></br>
+          <input type = 'radio' name='rating' onChange = {this.handleRating} value={1}></input>
+          <input type = 'radio' name='rating' onChange = {this.handleRating} value={2}></input>
+          <input type = 'radio' name='rating' onChange = {this.handleRating} value={3}></input>
+          <input type = 'radio' name='rating' onChange = {this.handleRating} value={4}></input>
+          <input type = 'radio' name='rating' onChange = {this.handleRating} value={5}></input>
+
+
+
+
           <p className = 'recRadioBtns'>(required) Do you recommend this product?</p>
-          <input type = 'radio' value='yes' onChange = {this.handleRec} id = 'recBtnYes'></input>
+          <input type = 'radio' name = 'recommended' value='yes' onChange = {this.handleRec} id = 'recBtnYes'></input>
           <label for ='recBtnYes'>Yes</label>
-          <input type = 'radio' value = 'no' onChange = {this.handleRec} id = 'recBtnNo'></input>
+          <input type = 'radio' name = 'recommended' value = 'no' onChange = {this.handleRec} id = 'recBtnNo'></input>
           <label for ='recBtnNo'>No</label>
 
           <div className={'review-modal-input'}>
@@ -65,26 +118,26 @@ class NewReviewModal extends React.Component {
           <br></br>
           <br></br>
           <label for = 'reviewSummary'>type a summary here: </label>
-          <input placeholder='Example: Best purchase ever!'type = 'text' id = 'reviewSummary'></input>
+          <input placeholder='Example: Best purchase ever!' type = 'text' onChange = {this.handleSummary}id = 'reviewSummary'></input>
 
           <br></br>
           <br></br>
           <label for = 'reviewBody'>(required) type review here: </label>
-          <textarea placeholder='Why did you like the product or not?' id="reviewBody" cols="40" rows="5" onChange={this.countBodyChars}></textarea>
+          <textarea placeholder='Why did you like the product or not?' id="reviewBody" cols="40" rows="5" onChange={this.handleBody}></textarea>
           <br></br>
-          <i>{}</i>
+          <i>{this.state.chars > 0 ? `Minimum required characters left: ${this.state.chars}` : 'Minimum Reached'}</i>
 
           <br></br>
           <br></br>
           <label for = 'reviewerName'>(required) type your username here: </label>
-          <input placeholder='Example: jackson11!' type = 'text' id = 'reviewerName'></input>
+          <input placeholder='Example: jackson11!' onChange = {this.handleName} type = 'text' id = 'reviewerName'></input>
           <br></br>
           <i>For privacy reasons, do not use your full name or email address</i>
 
           <br></br>
           <br></br>
           <label for = 'reviewerEmail'>(required) type your email: </label>
-          <input placeholder='Example: jackson11@email.com'type = 'text' id = 'reviewerEmail'></input>
+          <input placeholder='Example: jackson11@email.com' onChange = {this.handleEmail} type = 'text' id = 'reviewerEmail'></input>
           <br></br>
           <i>For authentication reasons, you will not be emailed</i>
 

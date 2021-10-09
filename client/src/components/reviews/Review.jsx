@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 import Moment from 'react-moment';
+import { FaCheck } from 'react-icons/fa'
 
 class Review extends React.Component {
   constructor(props) {
@@ -91,6 +92,15 @@ render() {
       <br></br>
       <b className='review_summary'>{this.props.review.summary}</b>
       <div className='review_body' onClick={() => {this.props.postTrackInteractions('review body', 'Reviews')}}>{this.props.review.body}</div>
+      {this.props.review.recommend
+          && <div className = 'reccomended'>
+              <FaCheck /> I recommend this product!
+          </div>}
+      <div className='review_photos'>
+          {this.props.review.photos.map(
+            (photo) => <img src={photo.url} alt='review-photo' key={photo.id} className='review_photo' width='160' height='90'/>,
+          )}
+        </div>
       <button className='helpfulBtn' onClick = {() => {this.markReviewAsHelpful();}}>helpful? {this.state.helpfulness}</button>
       <button className='reportBtn' onClick = {() => {this.reportReview();this.props.refreshReviews(this.props.count)}}>report</button>
     </div>
