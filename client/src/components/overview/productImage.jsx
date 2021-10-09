@@ -30,6 +30,7 @@ class ProductImage extends React.Component {
 
   mainImageClick(event) {
     this.props.postTrackInteractions('Main Image', 'Product Image');
+    console.log('main image expand click');
     this.props.clickHandler(event);
   }
 
@@ -69,10 +70,12 @@ class ProductImage extends React.Component {
   }
 
   makeExpand(flag) {
-    let imgUrl = this.state.selectedUrl;
+    console.log('makeExpand: ', flag);
+    let imgUrl = this.props.mainImg;
     let imgSource = new Image();
     imgSource.src = imgUrl;
     imgSource.onload = function() {
+      console.log('imgSource loaded');
       let zoomer = document.getElementById('expandImage')
         || document.querySelector('.mainImg');
       let imgWidth = zoomer.naturalWidth;
@@ -108,6 +111,7 @@ class ProductImage extends React.Component {
         });
       }
       if (flag) {
+        console.log('adding mouse events');
         zoomer.onmousemove = mouseMove;
         zoomer.onmouseleave = mouseLeave;
       } else {
@@ -115,6 +119,7 @@ class ProductImage extends React.Component {
         zoomer.onmouseleave = () => {};
       }
     }
+
   }
 
 
@@ -126,7 +131,7 @@ class ProductImage extends React.Component {
           <img className="blurredImage" src={this.props.mainImg} />
           <img className="mainImg" id={this.props.expand ? 'expandImage' : ''} src={this.props.mainImg} />
           <FaArrowRight className={'mainImgRight'} onClick={this.clickRight}/>
-          <FaExpand className={'expandIcon'} onclick={this.mainImageClick}/>
+          <FaExpand className={'expandIcon'} onClick={this.mainImageClick}/>
           <StyleThumbnails click={this.props.updateMain} handleUpdate={this.updateSelected} index={this.props.index} photos={this.props.photos} numPhotos={this.updateNumPhotos}/>
           {this.makeExpand(this.props.expand)}
         </div>
