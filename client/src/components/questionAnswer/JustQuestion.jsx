@@ -21,7 +21,7 @@ class JustQuestion extends React.Component{
     this.postAnswer = this.postAnswer.bind(this);
   }
   setOpen = (option) => {
-    this.props.postTrackInteractions('Add answer', 'Questions and Answers')
+    // this.props.postTrackInteractions('Add answer', 'Questions and Answers')
     this.setState({
       isOpen: option
     })
@@ -62,7 +62,7 @@ class JustQuestion extends React.Component{
 
   }
   questionUpdateHelpfulness = (questionId) => {
-    this.props.postTrackInteractions('Question helpfulness','Question And Answer')
+    // this.props.postTrackInteractions('Question helpfulness','Question And Answer')
     //user only allowed to click one time
     const helpfulCount = this.props.oneQues.question_helpfulness + 1;
 
@@ -82,7 +82,7 @@ class JustQuestion extends React.Component{
 
   questionReport = (questionId) => {
     //user only allowed to click one time
-    this.props.postTrackInteractions('Report a question','Question And Answer')
+    // this.props.postTrackInteractions('Report a question','Question And Answer')
     if(!this.state.questionReport) {
       // console.log('Hello-->', questionId)
       axios.put('/api/report', {
