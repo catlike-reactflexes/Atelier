@@ -21,7 +21,7 @@ class ReviewBreakdown extends React.Component {
   }
 
   render () {
-    console.log('num of reccomended: ', this.props.reviewRecommended)
+    // console.log('num of reccomended: ', this.props.reviewRecommended)
     let total = Number(this.props.reviewRatings['1']) + Number(this.props.reviewRatings['2']) + Number(this.props.reviewRatings['3']) + Number(this.props.reviewRatings['4']) + Number(this.props.reviewRatings['5'])
     return (
       <React.Fragment>

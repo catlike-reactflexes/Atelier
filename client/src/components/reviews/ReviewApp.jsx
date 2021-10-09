@@ -147,7 +147,7 @@ class ReviewApp extends React.Component {
       }
     })
       .then(reviewMetaData => {
-        console.log('this is review metaData:', reviewMetaData.data)
+        // console.log('this is review metaData:', reviewMetaData.data)
         this.setState({
           reviewCharacteristics: reviewMetaData.data.characteristics,
           reviewRatings: reviewMetaData.data.ratings,

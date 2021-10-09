@@ -11,7 +11,7 @@ class CharBar extends React.Component {
 
   render() {
     const options = this.state.options
-    console.log('options at 2', options[2])
+    // console.log('options at 2', options[2])
     return(
       <React.Fragment>
         <div className='charBarCharacteristic'>{this.props.characteristic}:</div>
