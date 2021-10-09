@@ -9,8 +9,8 @@ const DIST_DIR = path.join(__dirname, "/client/dist");
 // let devMode = process.env.devMode || true;
 
 module.exports = {
-  mode:"development",
-  entry: SRC_DIR ,
+  mode: "production",
+  entry: SRC_DIR,
   output: {
     filename: "bundle.js",
     path: DIST_DIR,

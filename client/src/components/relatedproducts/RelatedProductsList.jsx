@@ -1,5 +1,6 @@
 import React from 'react';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
+import axios from 'axios';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ClickTracker from '../trackInteractions/ClickTracker.jsx';
 
@@ -11,13 +12,12 @@ class RelatedProductsList extends React.Component {
     }
     this.transformLeft = this.transformLeft.bind(this);
     this.transformRight = this.transformRight.bind(this);
-
   }
 
+
+
   transformLeft() {
-    // transform: "translateX-(25%)"
     this.props.postTrackInteractions('Left carousel arrow', 'Related Products');
-    console.log('left chevron clicked')
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex - 1 }
     })
@@ -25,7 +25,6 @@ class RelatedProductsList extends React.Component {
 
 
   transformRight() {
-    console.log('right chevron clicked')
     this.props.postTrackInteractions('Right chevron arrow', 'Related Products');
     this.setState((prevState) => {
       return { currentIndex: prevState.currentIndex + 1 }
@@ -36,12 +35,15 @@ class RelatedProductsList extends React.Component {
     for (var i = 0; i < this.props.productData.length; i++) {
       this.props.productData[i].image = this.props.imageData[i];
     }
+    // if (this.props.productData.length > 0 && this.props.imageData.length > 0) {
     let productItems = this.props.productData.map((item, index) => {
       return <RelatedProductsCard key={index} name={item.name} price={item.default_price} category={item.category} description={item.description}
         overviewProduct={this.props.overviewProduct}
         image={item.image}
-        productFeatures={item.features} />
+        productFeatures={item.features}
+        id={item.id} />
     })
+    // }
     let transformStyle = { transform: `translateX(-${this.state.currentIndex * 200}px)` }
     return (
       <>

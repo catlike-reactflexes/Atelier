@@ -6,7 +6,7 @@ class NewReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chars: 50,
+      chars: 0,
       doesRecommend: '',
       reviewSummary: '',
       reviewBody: '',
@@ -32,7 +32,7 @@ class NewReviewModal extends React.Component {
       console.log('backspace detected: ', key)
       return;
     }
-    this.setState({chars: 50 - this.state.chars})
+    this.setState({chars: this.state.chars + 1})
   }
 
   render() {
@@ -72,7 +72,7 @@ class NewReviewModal extends React.Component {
           <label for = 'reviewBody'>(required) type review here: </label>
           <textarea placeholder='Why did you like the product or not?' id="reviewBody" cols="40" rows="5" onChange={this.countBodyChars}></textarea>
           <br></br>
-          <i>You need need {this.state.chars} more chararacters</i>
+          <i>{}</i>
 
           <br></br>
           <br></br>
@@ -91,16 +91,17 @@ class NewReviewModal extends React.Component {
           <br></br>
           <br></br>
 
-          {/* <label for ='photos'> Upload photos (5 max) </label>
-          <input type ='file' id='photos'></input> */}
+          {/* <button onClick={this.props.openModal(false)}></button> */}
 
           <div>
-                <b>Upload photo (Max: 5)</b>
-                <input type='file'id='photos'></input>
-              </div>
+            <b>Upload photo (Max: 5)</b>
+            <input type='file' id='photos'></input>
+          </div>
+
+          <button type='submit'>Submit</button>
+          <button onClick = {() => {this.props.openModal(false)}}>Close</button>
         </form>
         </React.Fragment>
-
         )
     }
   }

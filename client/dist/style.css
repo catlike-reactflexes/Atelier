@@ -746,6 +746,12 @@ object-fit: cover;
   | Reviews Styling  |
   ----------------------------
 */
+
+.chars {
+  display:flex;
+  width:100%
+}
+
 .reviewForm {
   height:800px;
   overflow-y:auto
@@ -754,16 +760,15 @@ object-fit: cover;
 .reviews {
   /* display: flex; */
   margin: 20px;
-  border: solid
 }
 
 .reviewer_name {
-  padding-right:80%
+  padding-right:60%
 }
 .review {
   /* display: flex; */
   margin: 20px;
-  border: solid
+  border-bottom: solid
 }
 
 .RnR {
@@ -773,13 +778,34 @@ object-fit: cover;
 
 .productBreakdown {
   display: flex;
-  flex-basis:33%
+  flex-basis:33%;
+  flex-direction:column
 }
 
 .reviewList {
   display: flex;
   flex-basis:66%;
   flex-direction: column
+}
+
+.starBarContainerTwo {
+  display: flex;
+}
+
+.starBarsContainer {
+  width: 100%
+}
+
+.starBarContainer {
+  background-color: #dcdcdc;
+  width: 50%;
+  height: 10px;
+  z-index: 100;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
 }
 
 .helpfulBtn {
@@ -808,6 +834,69 @@ object-fit: cover;
   border-radius: 15px;
 }
 
+.charBarsContainer {
+  margin-top: 10px;
+  width: '50%';
+}
+
+.charBarContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(2, 15px);
+  row-gap: 5px;
+  margin-bottom: 10px;
+}
+
+.charBar0 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+
+/* .charBar1 {
+
+} */
+
+
+
+.charBar2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+
+/* .charBar3 {
+
+} */
+
+.charBar1 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+
+.char0 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: small;
+}
+
+.char4 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: small;
+}
+
 .bar {
   flex-direction: column;
 }
@@ -818,6 +907,7 @@ object-fit: cover;
   grid-template-rows: repeat(2, 1fr);
   row-gap: 5px;
   margin-bottom: 10px;
+  border-bottom: solid;
 }
 
 .char-rating-title {
@@ -876,7 +966,6 @@ object-fit: cover;
 
 .char-option-chosen {
   font-style: italic;
-  color: #92a4b3;
   font-size: small;
-  margin-left: 90px;
+  margin-left: 180px;
 }

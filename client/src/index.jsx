@@ -27,7 +27,6 @@ class App extends React.Component {
   }
 
   updateOutfitData(data) {
-    console.log(`we got the outfit`);
     this.setState({
       outfit: data
     })
@@ -96,14 +95,17 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('what does the id look like:', this.state.productId);
     const { quesAns } = this.state;
 
     return (
       <div>
-        <header><span id="logo"></span><span id="searchBar"></span><FaSearch className={'searchBarIcon'}/></header>
-        <Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />
-        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData} outfit={this.state.outfit} />
+        <header><span id="logo"></span><span id="searchBar"></span><FaSearch className={'searchBarIcon'} /></header>
+        {<Overview productUpdate={this.handleProductUpdate} id={this.state.productId} rating={this.state.totalRating} updateOutfitData={this.updateOutfitData} />}
+        <RelatedProducts id={this.state.productId} productUpdate={this.handleProductUpdate} updateOutfitData={this.updateOutfitData}
+          outfit={this.state.outfit}
+          rating={this.getRatingAverage} />
+
+
         {quesAns.length > 0 && <QuesAnsMain
           handleQAUpdate={this.handleQAUpdate}
           productUpdate={this.handleProductUpdate}
@@ -111,7 +113,7 @@ class App extends React.Component {
           id={this.state.productId}
           productName={this.state.productName}
         />}
-         <Reviews id={this.state.productId} productName = {this.state.productName} numOfReviews = {this.state.numOfReviews}/>
+         <Reviews totalRating = {this.state.totalRating} id={this.state.productId} productName = {this.state.productName} numOfReviews = {this.state.numOfReviews}/>
       </div >
     );
   }

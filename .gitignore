@@ -117,3 +117,5 @@ client/dist/test.html
 
 #misc
 .DS_Store
+#bundle
+./client/dist/bundle.js

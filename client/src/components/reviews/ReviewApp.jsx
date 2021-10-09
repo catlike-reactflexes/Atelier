@@ -65,16 +65,17 @@ class ReviewApp extends React.Component {
         }
         // ...
       },
-      reviewRating: {},
+      reviewRatings: {},
       reviewRecommended: {},
       totalRating: 0,
       modalIsOpen: false,
       count: 2,
-
+      numOfReviews: props.numOfReviews
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
     this.openModal = this.openModal.bind(this)
+    this.displayRating = this.displayRating.bind(this)
   }
 
   openModal(bool) {
@@ -93,6 +94,7 @@ class ReviewApp extends React.Component {
       .then(arrayOfReviews => {
         // console.log('this is reviews from api call:', arrayOfReviews.data.results)
         this.setState({count: this.state.count + 2})
+        console.log
         this.setState({reviews:arrayOfReviews.data.results})
       })
       .catch(error => {
@@ -105,6 +107,39 @@ class ReviewApp extends React.Component {
     this.getReviews()
   }
 
+  displayRating(stars) {
+    let result = [];
+    let counter = 0;
+    const classes = {
+      '0.00': 'emptyStar',
+      '0.25': 'quarterStar',
+      '0.50': 'halfStar',
+      '0.75': 'threeQuarterStar',
+      '1.00': 'fullStar'
+    };
+    let wholeNum = Math.floor(stars);
+    let remainder = stars - wholeNum;
+    for (let i = 0; i < wholeNum; i++) {
+      result.push(classes['1.00']);
+      counter++;
+    }
+    if (remainder > 0) {
+      let quarter = (Math.round(remainder * 4) / 4).toFixed(2);
+      result.push(classes[quarter]);
+      counter++;
+    }
+    if (counter < 5) {
+      for (let i = counter; i < 5; i++) {
+        result.push(classes['0.00']);
+      }
+    }
+    // console.log('classes: ', result);
+    let starList = result.map((star) => {
+      return <span className={star}></span>
+    })
+    return <span>{starList}</span>
+  }
+
   getReviewMeta() {
     axios.get('/reviewmeta', {
       params: {
@@ -115,7 +150,7 @@ class ReviewApp extends React.Component {
         console.log('this is review metaData:', reviewMetaData.data)
         this.setState({
           reviewCharacteristics: reviewMetaData.data.characteristics,
-          reviewRating: reviewMetaData.data.ratings,
+          reviewRatings: reviewMetaData.data.ratings,
           reviewRecommended: reviewMetaData.data.recommended
         })
       })
@@ -133,9 +168,15 @@ class ReviewApp extends React.Component {
 
 
   render() {
+    // console.log('what does this look like: ', this.props.totalRating)
     return (
       <div className='reviews'>
-        <label for="options">Sort by:</label>
+        <h2>Ratings and Reviews</h2>
+        <br></br>
+        <span style = {{'padding-right': '20px', 'font-size': '80px'}}>{this.props.totalRating.toString().slice(0,3)}</span>
+        {this.displayRating(this.props.totalRating)}
+        <br></br>
+        <label style = {{'padding-bottom' : '20px'}} for="options">{this.props.numOfReviews} reviews, sorted by:</label>
 
         <select name="options" id="options">
           <option value="helpful">helpful</option>
@@ -144,7 +185,7 @@ class ReviewApp extends React.Component {
         </select>
         {/* <Search /> */}
         <div className='RnR'>
-          <ReviewBreakdown product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRating = {this.state.reviewRating} reviewRecommended = {this.state.reviewRecommended}/>
+          <ReviewBreakdown totalRating = {this.props.totalRating} product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRatings = {this.state.reviewRatings} reviewRecommended = {this.state.reviewRecommended}/>
           <ReviewList refreshReviews = {this.getReviews.bind(this)} reviews = {this.state.reviews} count = {this.state.count}/>
         </div>
         <NewReview moreReviews = {this.getReviews} openModal = {this.openModal} count = {this.state.count}/>
