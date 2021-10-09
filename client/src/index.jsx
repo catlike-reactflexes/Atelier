@@ -56,15 +56,19 @@ class App extends React.Component {
 
   handleProductUpdate(data) {
     let update = {}
-    if (data.id && data.name) {
-      if (data.features) {
-        this.setState({ productId: data.id, productName: data.name, productFeatures: data.features });
-      } else {
-        this.setState({ productId: data.id, productName: data.name });
-      }
-      // window.history.replaceState(null, '', `/product?id=${data.id}`);
-    } else {
+    if (data.id) {
+      update.productId = data.id;
+    }
+    if (data.name) {
+      update.productName = data.name;
+    }
+    if (data.features) {
+      update.productFeatures = data.features;
+    }
+    if (Object.keys(update).length === 0) {
       console.error('Unhandled data in update: ', data);
+    } else {
+      this.setState(update);
     }
   }
 
