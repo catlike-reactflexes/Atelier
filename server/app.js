@@ -66,6 +66,35 @@ app.post('/api/interactions', (req, res) => {
   ----------------------------
 */
 
+app.post('/reviews', (req, res) => {
+  let newReview = {
+    product_id: Number(req.body.product_id),
+    rating: Number(req.body.rating),
+    summary: req.body.summary,
+    body: req.body.reviewBody,
+    recommend: true,
+    characteristics: {'159186': 5,'159187': 5, '159184': 5, '159185': 5},
+    name: req.body.reviewerName,
+    email: req.body.reviewerEmail,
+    photos: []
+  }
+  // let config = {
+  //   headers: {'Authorization': process.env.API_TOKEN},
+  //   params:
+  // }
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', newReview, {
+    headers: {Authorization: process.env.API_TOKEN}
+  })
+  .then((response) => {
+    console.log('successful post')
+    res.send(response.status)
+  })
+  .catch((error) => {
+    console.log('post error in server: ', error)
+    res.send(error.response.status)
+  })
+})
+
 app.get('/reviews', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
@@ -73,7 +102,8 @@ app.get('/reviews', (req, res) => {
     headers: {'Authorization': process.env.API_TOKEN},
     params: {
       'product_id': product_id,
-      'count': req.query.count
+      'count': req.query.count,
+      'sort': req.query.sort
   }
   }
 

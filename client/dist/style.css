@@ -827,6 +827,28 @@ object-fit: cover;
   width: 400px
 }
 
+.ratingNums {
+  margin-right: 20px
+}
+
+.reccomended {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  /* background-color:lightgray; */
+}
+
+.review_photo {
+  width: auto;
+  height: 100px;
+  margin-right: 20px;
+  margin-left:20px;
+}
+
+.review_photos {
+  margin-bottom: 20px;
+  margin-top:20px;
+}
+
 .barContainer {
   display: flex;
   background-color: gray;

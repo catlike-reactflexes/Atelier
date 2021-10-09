@@ -70,12 +70,15 @@ class ReviewApp extends React.Component {
       totalRating: 0,
       modalIsOpen: false,
       count: 2,
-      numOfReviews: props.numOfReviews
+      numOfReviews: props.numOfReviews,
+      numsOfYes: 0
     };
     this.getReviews = this.getReviews.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
     this.openModal = this.openModal.bind(this)
     this.displayRating = this.displayRating.bind(this)
+    this.onSelect = this.onSelect.bind(this)
+    // this.getReviewsButItDoesntIncreaseCount = this.getReviewsButItDoesntIncreaseCount.bind(this)
   }
 
   openModal(bool) {
@@ -83,17 +86,21 @@ class ReviewApp extends React.Component {
     this.setState({modalIsOpen:bool})
   }
 
-  getReviews(count = 2) {
+  getReviewsButItDoesntIncreaseCount(sort, count = 2) {
     console.log('more reviews click')
+    if (sort === undefined) {
+      sort = 'helpful'
+    }
     axios.get('/reviews', {
       params: {
         productID: this.state.defaultProductID,
-        count: count
+        count: count,
+        sort: sort
       }
     })
       .then(arrayOfReviews => {
         // console.log('this is reviews from api call:', arrayOfReviews.data.results)
-        this.setState({count: this.state.count + 2})
+        // this.setState({count: this.state.count + 2})
         console.log
         this.setState({reviews:arrayOfReviews.data.results})
       })
@@ -103,8 +110,40 @@ class ReviewApp extends React.Component {
       })
   }
 
+  getReviews(count=2) {
+    console.log('more reviews click')
+    console.log('count in reviewApp: ', this.state.count)
+    // if (sort === undefined) {
+    //   sort = 'helpful'
+    // }
+    if (count === undefined) {
+      count = 2
+    }
+    axios.get('/reviews', {
+      params: {
+        productID: this.state.defaultProductID,
+        count: count,
+        // sort: sort
+      }
+    })
+      .then(arrayOfReviews => {
+        console.log('this is reviews from api call:', arrayOfReviews.data.results)
+        this.setState({count: this.state.count + 2,reviews:arrayOfReviews.data.results})
+      })
+      .catch(error => {
+        console.log('get error', error)
+        throw error
+      })
+  }
+
   click() {
     this.getReviews()
+  }
+
+  onSelect(e) {
+    console.log('select testing', e.target.value)
+    // console.log('this is count, how the fuck is it increasing', this.state.count)
+    this.getReviewsButItDoesntIncreaseCount(e.target.value, this.state.count)
   }
 
   displayRating(stars) {
@@ -147,11 +186,11 @@ class ReviewApp extends React.Component {
       }
     })
       .then(reviewMetaData => {
-        // console.log('this is review metaData:', reviewMetaData.data)
         this.setState({
           reviewCharacteristics: reviewMetaData.data.characteristics,
           reviewRatings: reviewMetaData.data.ratings,
-          reviewRecommended: reviewMetaData.data.recommended
+          reviewRecommended: reviewMetaData.data.recommended,
+          numsOfYes: reviewMetaData.data.recommended.true
         })
       })
       .catch(error => {
@@ -176,9 +215,12 @@ class ReviewApp extends React.Component {
         <span style = {{'padding-right': '20px', 'font-size': '80px'}}>{this.props.totalRating.toString().slice(0,3)}</span>
         {this.displayRating(this.props.totalRating)}
         <br></br>
+
+        <div>{(Number(this.state.numsOfYes) / this.props.numOfReviews * 100).toString().slice(0,4)}% of reviews recommend {this.props.productName}</div>
+
         <label style = {{'padding-bottom' : '20px'}} for="options">{this.props.numOfReviews} reviews, sorted by:</label>
 
-        <select name="options" id="options">
+        <select onChange = {this.onSelect}name="options" id="options">
           <option value="helpful">helpful</option>
           <option value="relevant">relevant</option>
           <option value="newest">newest</option>
@@ -188,8 +230,8 @@ class ReviewApp extends React.Component {
           <ReviewBreakdown totalRating = {this.props.totalRating} product_id = {this.state.defaultProductID} reviewChars = {this.state.reviewCharacteristics} reviewRatings = {this.state.reviewRatings} reviewRecommended = {this.state.reviewRecommended}/>
           <ReviewList refreshReviews = {this.getReviews.bind(this)} reviews = {this.state.reviews} count = {this.state.count}/>
         </div>
-        <NewReview moreReviews = {this.getReviews} openModal = {this.openModal} count = {this.state.count}/>
-        <NewReviewModal isOpen = {this.state.modalIsOpen} openModal = {this.openModal} productName = {this.props.productName}/>
+        <NewReview numOfReviews = {this.props.numOfReviews} moreReviews = {this.getReviews} openModal = {this.openModal} count = {this.state.count}/>
+        <NewReviewModal product_id = {this.state.defaultProductID} isOpen = {this.state.modalIsOpen} openModal = {this.openModal} productName = {this.props.productName}/>
       </div>
     );
   }
