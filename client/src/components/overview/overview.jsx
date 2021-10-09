@@ -23,13 +23,14 @@ class Overview extends React.Component {
       detailsLoaded: false,
       loaded: false,
       expandImage: false,
-      mainUrl: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+      mainUrl: ''
     };
     this.getProductStyles = this.getProductStyles.bind(this);
     this.updateStyle = this.updateStyle.bind(this);
     this.saveToOutfit = this.saveToOutfit.bind(this);
     this.expandMainImage = this.expandMainImage.bind(this);
     this.updateMainImg = this.updateMainImg.bind(this);
+    this.updateMainIndex = this.updateMainIndex.bind(this);
   }
 
   componentDidMount() {
@@ -86,6 +87,11 @@ class Overview extends React.Component {
     this.setState({ mainUrl: url, mainIndex: selection });
   }
 
+  updateMainIndex(num) {
+    let url = this.state.stylePhotos[num].url;
+    this.setState({ mainUrl: url, mainIndex: num });
+  }
+
   updateStyle(event) {
     this.props.postTrackInteractions('Style Option', 'Product Styles');
     event.preventDefault();
@@ -134,7 +140,7 @@ class Overview extends React.Component {
   render() {
     return (
       <div id="overview" data-testid="overview-element">
-        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} mainImg={this.state.mainUrl} updateMain={this.updateMainImg} />
+        <ProductImage photos={this.state.stylePhotos} loaded={this.state.stylesLoaded} clickHandler={this.expandMainImage} expand={this.state.expandImage} mainImg={this.state.mainUrl} updateMain={this.updateMainImg} updateIndex={this.updateMainIndex} index={this.state.mainIndex} />
         {this.state.expandImage ?
           <div style={{ display: 'none' }}></div>
           : <div className="sidebar column-flex">

@@ -36,8 +36,8 @@ class ProductDetails extends React.Component {
       }
     }
     // console.log('classes: ', result);
-    let starList = result.map((star) => {
-      return <span className={star}></span>
+    let starList = result.map((star, index) => {
+      return <span key={index} className={star}></span>
     })
     return <div>{starList}</div>
   }
@@ -50,9 +50,11 @@ class ProductDetails extends React.Component {
             {this.displayRating(this.props.rating)}
             <a onClick={() => { this.props.postTrackInteractions('Read Review Link', 'Product Details') }} href={'#reviewSection'}>Read all reviews</a>
           </div>
+          <span id="po-category">{this.props.category.toUpperCase()}</span>
+          <span id="po-name">{this.props.name}</span>
+          <span onClick={() => { this.props.postTrackInteractions('Price', 'Product Details') }}>${this.props.price}</span>
         </div>
         :
-
         <span>product loading</span>
 
     )
