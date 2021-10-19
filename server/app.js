@@ -29,7 +29,8 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html');
+
+  // res.sendFile('index.html');
 });
 /*
   ---------------------------
@@ -438,7 +439,7 @@ app.get('/api/qa/id=*', (req, res) => {
       count: 10
     }
   }).then(function (response) {
-    // console.log('api response: ', response.data.results);
+    // console.log('api response: ', response.data.results[1].answers['4811951']);
 
     res.status(200).send(response.data.results);
   }).catch(function (err) {
