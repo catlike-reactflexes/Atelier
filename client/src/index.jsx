@@ -86,6 +86,7 @@ class App extends React.Component {
       }
     })
       .then(data => {
+        console.log('qa data', data.data)
         this.setState({ quesAns: data.data })
       })
       .catch(error => {

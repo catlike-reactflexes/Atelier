@@ -15,6 +15,7 @@ const fs = require('fs');
 
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const QnA_URL = 'http://127.0.0.1:4000';
 
 //app.use(express.static(path.resolve(__dirname, '../client/dist')));
 //this is a regex expression that will allow the app to serve the static files
@@ -430,17 +431,16 @@ app.get('/api/qa/id=*', (req, res) => {
 
   axios({
     method: 'get',
-    url: `${API_URL}/qa/questions`,
+    url: `${QnA_URL}/qa/questions`,
     headers: {
       Authorization: process.env.API_TOKEN
     },
     params: {
       product_id: req.query.product_id,
-      count: 10
+      // count: 10
     }
   }).then(function (response) {
-    // console.log('api response: ', response.data.results[1].answers['4811951']);
-
+    // console.log('api response: ', response.data);
     res.status(200).send(response.data.results);
   }).catch(function (err) {
     console.log('api request error: ', err);
@@ -476,7 +476,7 @@ app.post('/api/addAnswer', upload.array('images'), (req, res) => {
     console.log('ready to post---', photoUrl)
     axios({
       method: 'POST',
-      url: `${API_URL}/qa/questions/${question_id}/answers`,
+      url: `${QnA_URL}/qa/questions/${question_id}/answers`,
       headers: {
         Authorization: process.env.API_TOKEN
       },
@@ -530,7 +530,7 @@ app.post('/api/addQuestion', (req, res) => {
 
   axios({
     method: 'POST',
-    url: `${API_URL}/qa/questions/`,
+    url: `${QnA_URL}/qa/questions/`,
     headers: {
       Authorization: process.env.API_TOKEN
     },
@@ -556,10 +556,10 @@ app.put('/api/update', (req, res) => {
   const { answerid } = req.body.data;
   let urlPut, idHelpfulness;
   if (questionid) {
-    urlPut = `${API_URL}/qa/questions/${questionid}/helpful`;
+    urlPut = `${QnA_URL}/qa/questions/${questionid}/helpful`;
     idHelpfulness = { question_id: questionid };
   } else {
-    urlPut = `${API_URL}/qa/answers/${answerid}/helpful`;
+    urlPut = `${QnA_URL}/qa/answers/${answerid}/helpful`;
     idHelpfulness = { answer_id: answerid }
   }
   // console.log('request-->',question_id)
@@ -590,10 +590,10 @@ app.put('/api/report', (req, res) => {
   const { answerid } = req.body.data;
   let urlPut, report_id;
   if (questionid) {
-    urlPut = `${API_URL}/qa/questions/${questionid}/report`;
+    urlPut = `${QnA_URL}/qa/questions/${questionid}/report`;
     report_id = { question_id: questionid };
   } else {
-    urlPut = `${API_URL}/qa/answers/${answerid}/report`;
+    urlPut = `${QnA_URL}/qa/answers/${answerid}/report`;
     report_id = { answer_id: answerid }
   }
   // console.log('request-->',question_id)
