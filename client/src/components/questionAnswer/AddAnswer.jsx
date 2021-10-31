@@ -86,7 +86,7 @@ class AddAnswer extends React.Component {
       // console.log('submitAnswer***************')
 
       axios.post('/api/addAnswer', formData, config)
-        .then(function(reponse){
+        .then(function(response){
           console.log('Success Creating the Answer-->',response);
         })
         .catch(function (error) {

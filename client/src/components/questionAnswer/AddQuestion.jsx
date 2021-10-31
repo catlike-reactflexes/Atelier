@@ -64,7 +64,6 @@ class AddQuestion extends React.Component {
     this.validation ();
     if(this.state.validateInfo){
       // console.log('SubmitQuestion-->',this.props.productId, this.state);
-      if(this.validation ()){
         axios.post('/api/addQuestion', {
           product_id: this.props.productId,
           body: this.state.question,
@@ -72,13 +71,12 @@ class AddQuestion extends React.Component {
           email: this.state.email
 
         })
-          .then(function(reponse){
+          .then(function(response){
             console.log('Success Creating the Question-->',response);
           })
           .catch(function (error) {
             console.log('Error sending to server with your Question->', error)
           })
-      }
 
       this.props.onClose();
     }
