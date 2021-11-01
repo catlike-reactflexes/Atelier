@@ -428,15 +428,16 @@ app.get('/yourOutfitStyles', (req, res) => {
 app.get('/api/qa/id=*', (req, res) => {
   // console.log('QA**request-->', req.query.product_id) ;
   // console.log('request-->', req.path) ;
+  const { product_id } = req.query;
 
   axios({
     method: 'get',
-    url: `${QnA_URL}/qa/questions`,
+    url: `${QnA_URL}/qa/questions/${product_id}`,
     headers: {
       Authorization: process.env.API_TOKEN
     },
     params: {
-      product_id: req.query.product_id,
+      // product_id: req.query.product_id,
       // count: 10
     }
   }).then(function (response) {
