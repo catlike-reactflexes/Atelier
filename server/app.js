@@ -13,10 +13,10 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 
 
-const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
-const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const reviewURL = 'http:localhost:5000';
+const API_URL = 'http:localhost:5000';
 
-//app.use(express.static(path.resolve(__dirname, '../client/dist')));
+app.use(express.static(path.resolve(__dirname, '../client/dist')));
 //this is a regex expression that will allow the app to serve the static files
 //dynamically with our default product id and a real url
 app.use(compression());
@@ -38,6 +38,7 @@ app.get('/', (req, res) => {
   //make a post to API
 */
 
+/*
 app.post('/api/interactions', (req, res) => {
   // console.log('Interaction API-->', req.body);
   axios({
@@ -82,8 +83,8 @@ app.post('/reviews', (req, res) => {
   //   headers: {'Authorization': process.env.API_TOKEN},
   //   params:
   // }
-  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', newReview, {
-    headers: {Authorization: process.env.API_TOKEN}
+  axios.post('http://localhost:5000/reviews', newReview, {
+    // headers: {Authorization: process.env.API_TOKEN}
   })
   .then((response) => {
     console.log('successful post')
@@ -99,43 +100,48 @@ app.get('/reviews', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
   let config = {
-    headers: {'Authorization': process.env.API_TOKEN},
+    // headers: {'Authorization': process.env.API_TOKEN},
     params: {
       'product_id': product_id,
       'count': req.query.count,
       'sort': req.query.sort
-  }
+    }
   }
 
   // console.log(typeof product_id)
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
+  console.log('getting reviews')
+  axios.get('http://127.0.0.1:4000/reviews', config)
     .then(data => {
-      // console.log('api response: ', data.data.results);
+      console.log('api response: ', data.data);
       return res.json(data.data)
     })
     .catch(err => {
-      console.log('review get error: ', err.response.status)
+      console.log('review get error: ', err)
       res.send(err.response.status)
       // throw err
     })
+
+  axios.get('http://127.0.0.1:4000/test')
+    .then(data => console.log(data.data))
+    .catch(err => console.log(err))
 })
 
 app.get('/reviewratings', (req, res) => {
   // console.log('reviews api token: ', process.env.API_TOKEN)
   let product_id = Number(req.query.productID)
   let config = {
-    headers: { 'Authorization': process.env.API_TOKEN },
+    // headers: { 'Authorization': process.env.API_TOKEN },
     params: { 'product_id': product_id, 'count': Number(req.query.count) }
   }
 
   // console.log(typeof product_id)
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', config)
+  axios.get('http://localhost:5000/reviews/', config)
     .then(data => {
       // console.log('api response: ', data.data.results);
       return res.json(data.data)
     })
     .catch(err => {
-      console.log('reviewratings get error: ', err.response.status)
+      // console.log('reviewratings get error: ', err.response.status)
       res.send(err.response.status)
     })
 })
@@ -143,35 +149,35 @@ app.get('/reviewratings', (req, res) => {
 app.get('/reviewmeta', (req, res) => {
   let product_id = Number(req.query.productID)
   let config = {
-    headers: { 'Authorization': process.env.API_TOKEN },
+    // headers: { 'Authorization': process.env.API_TOKEN },
     params: { 'product_id': product_id }
   }
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', config)
+  axios.get('http://localhost:5000/reviews/meta', config)
   .then(metadata => {
     // console.log('meta api response: ', metadata.data);
     res.json(metadata.data)
   })
   .catch(err => {
-    console.log('reviewmeta get error: ', err.response.status)
+    // console.log('reviewmeta get error: ', err.response.status)
     res.send(err.response.status)
   })
 })
 
 app.get('/reviewhelpful', (req, res) => {
   let config = {
-    headers: { 'Authorization': process.env.API_TOKEN }
+    // headers: { 'Authorization': process.env.API_TOKEN }
   }
   axios({
     method: 'put',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.query.review_id}/helpful`,
+    url: `http://localhost:5000/reviews/${req.query.review_id}/helpful`,
     data: { review_id: req.query.review_id },
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     }
 
   })
     .then(response => {
-      console.log('helpful api response ', response.status)
+      // console.log('helpful api response ', response.status)
       res.send(response.status)
     })
     .catch(err => {
@@ -181,21 +187,21 @@ app.get('/reviewhelpful', (req, res) => {
 })
 
 app.get('/reviewreport', (req, res) => {
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.query.review_id}/report`
-  console.log('report url, ', url)
+  let url = `http://localhost:5000/reviews/${req.query.review_id}/report`
+  // console.log('report url, ', url)
 
   axios({
     method: 'put',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.query.review_id}/report`,
+    url: `http://localhost:5000/reviews/${req.query.review_id}/report`,
     data: { review_id: req.query.review_id },
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     }
 
   })
     .then(function (response) {
       //looking for 204 to get update
-      console.log('report api response--> ', response.status);
+      // console.log('report api response--> ', response.status);
       res.send(response.status);
     })
     .catch(function (err) {
@@ -214,6 +220,7 @@ app.get('/reviewreport', (req, res) => {
  *  ---------------------------
 */
 
+/*
 app.get('/product', (req, res) => {
   // console.log('/product route req.query: ', req.query)
   let id = req.query.id;
@@ -221,7 +228,7 @@ app.get('/product', (req, res) => {
     method: 'get',
     url: `${API_URL}/products/${id}`,
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     }
   }).then(function (response) {
     dataStr = JSON.stringify(response.data);
@@ -238,7 +245,7 @@ app.get('/styles', (req, res) => {
     method: 'get',
     url: `${API_URL}/products/${id}/styles`,
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     }
   }).then(function (response) {
     dataStr = JSON.stringify(response.data);
@@ -283,13 +290,15 @@ app.get('/product-list', (req, res) => {
   | RelatedProducts Routes |
   ----------------------------
 */
+
+/*
 let retrieveRelatedProductStyles = (relatedProductIds) => {
   let stylesPromises = [];
   for (var i = 0; i < relatedProductIds.length; i++) {
     let currentProduct = relatedProductIds[i];
-    let APIStylesRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}/styles`, {
+    let APIStylesRequest = axios.get(`https://localhost:5000/${currentProduct}/styles`, {
       headers: {
-        'Authorization': process.env.API_TOKEN,
+        // 'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
@@ -304,9 +313,9 @@ let retrieveRelatedProducts = (relatedProductIds) => {
   let promisesArray = [];
   for (var i = 0; i < relatedProductIds.length; i++) {
     let currentProduct = relatedProductIds[i];
-    let APIRequest = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${currentProduct}`, {
+    let APIRequest = axios.get(`https://localhost:5000/${currentProduct}`, {
       headers: {
-        'Authorization': process.env.API_TOKEN,
+        // 'Authorization': process.env.API_TOKEN,
         'product_id': currentProduct
       }
     });
@@ -319,9 +328,9 @@ let retrieveRelatedProducts = (relatedProductIds) => {
 
 app.get('/relatedProducts', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
+  axios.get(`https://localhost:5000/${parentProductId}/related`, {
     headers: {
-      'Authorization': process.env.API_TOKEN,
+      // 'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
@@ -342,9 +351,9 @@ app.get('/relatedProducts', (req, res) => {
 
 app.get('/relatedProductStyles', (req, res) => {
   let parentProductId = Number(req.query.defaultProductId);
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${parentProductId}/related`, {
+  axios.get(`https://localhost:5000/${parentProductId}/related`, {
     headers: {
-      'Authorization': process.env.API_TOKEN,
+      // 'Authorization': process.env.API_TOKEN,
       'product_id': parentProductId
     }
   })
@@ -370,9 +379,9 @@ app.get('/yourOutfitProductData', (req, res) => {
   let arrayOfOutfitPromises = [];
   for (var i = 0; i < yourOutfitIds.length; i++) {
     let id = yourOutfitIds[i];
-    arrayOfOutfitPromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
+    arrayOfOutfitPromises.push(axios.get(`https://localhost:5000/${id}`, {
       headers: {
-        'Authorization': process.env.API_TOKEN,
+        // 'Authorization': process.env.API_TOKEN,
         'product_id': id
       }
     }))
@@ -396,9 +405,9 @@ app.get('/yourOutfitStyles', (req, res) => {
   let arrayOfStylePromises = [];
   for (var i = 0; i < yourOutfitIds.length; i++) {
     let id = yourOutfitIds[i];
-    arrayOfStylePromises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
+    arrayOfStylePromises.push(axios.get(`https://localhost:5000/${id}/styles`, {
       headers: {
-        'Authorization': process.env.API_TOKEN,
+        // 'Authorization': process.env.API_TOKEN,
         'product_id': id
       }
     }))
@@ -431,7 +440,7 @@ app.get('/api/qa/id=*', (req, res) => {
     method: 'get',
     url: `${API_URL}/qa/questions`,
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     },
     params: {
       product_id: req.query.product_id,
@@ -463,7 +472,7 @@ const storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 app.post('/api/addAnswer', upload.array('images'), (req, res) => {
-  console.log('QA**request AddAnswer-->', req.body);
+  // console.log('QA**request AddAnswer-->', req.body);
 
 
   let photoUrl = [];
@@ -477,7 +486,7 @@ app.post('/api/addAnswer', upload.array('images'), (req, res) => {
       method: 'POST',
       url: `${API_URL}/qa/questions/${question_id}/answers`,
       headers: {
-        Authorization: process.env.API_TOKEN
+        // Authorization: process.env.API_TOKEN
       },
       data: {
         body: body,
@@ -486,7 +495,7 @@ app.post('/api/addAnswer', upload.array('images'), (req, res) => {
         photos: photoUrl
       }
     }).then(function (response) {
-      console.log('SUCCESS___>>>api response: ', response.data, 'Status:', response.status);
+      // console.log('SUCCESS___>>>api response: ', response.data, 'Status:', response.status);
       // res.status(response.status).send(response.data);
       res.status(204).send('Success');
     }).catch(function (err) {
@@ -531,7 +540,7 @@ app.post('/api/addQuestion', (req, res) => {
     method: 'POST',
     url: `${API_URL}/qa/questions/`,
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     },
     data: {
       body: req.body.body,
@@ -567,7 +576,7 @@ app.put('/api/update', (req, res) => {
     url: urlPut,
     data: idHelpfulness,
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     }
 
   })
@@ -601,7 +610,7 @@ app.put('/api/report', (req, res) => {
     url: urlPut,
     data: report_id,
     headers: {
-      Authorization: process.env.API_TOKEN
+      // Authorization: process.env.API_TOKEN
     }
 
   })
@@ -618,7 +627,7 @@ app.put('/api/report', (req, res) => {
 })
 
 //CS- Question & Answer END----------------------------------------------------------------------
-
+*/
 
 
 app.listen(port, () => {
