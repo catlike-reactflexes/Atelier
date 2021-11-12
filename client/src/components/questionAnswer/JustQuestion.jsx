@@ -9,6 +9,7 @@ class JustQuestion extends React.Component{
     super(props);
     // console.log('JUST QUESTION---->', props)
     this.state ={
+      productId: Number((window.location.pathname.split('/')[1])),
       isOpen:false,
       questionHelpful:this.props.oneQues.question_helpfulness || 0,
       questionReport: false
@@ -35,7 +36,8 @@ class JustQuestion extends React.Component{
       // console.log('Hello-->', questionId)
       axios.put('/api/update', {
         data: {
-          questionid: questionId
+          productId: this.state.productId,
+          questionId
         }
       })
         .then(response => {
@@ -52,7 +54,8 @@ class JustQuestion extends React.Component{
       // console.log('Hello-->', questionId)
       axios.put('/api/report', {
         data: {
-          questionid: questionId
+          productId: this.state.productId,
+          questionId
         }
       })
         .then(response => {

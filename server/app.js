@@ -438,7 +438,7 @@ app.get('/api/qa/id=*', (req, res) => {
     },
     params: {
       // product_id: req.query.product_id,
-      // count: 10
+      count: 10
     }
   }).then(function (response) {
     // console.log('api response: ', response.data);
@@ -553,12 +553,12 @@ app.post('/api/addQuestion', (req, res) => {
 })
 app.put('/api/update', (req, res) => {
   // console.log('request-->', req.body.data)
-  const { questionid } = req.body.data;
+  const { productId, questionId } = req.body.data;
   const { answerid } = req.body.data;
   let urlPut, idHelpfulness;
-  if (questionid) {
-    urlPut = `${QnA_URL}/qa/questions/${questionid}/helpful`;
-    idHelpfulness = { question_id: questionid };
+  if (questionId) {
+    urlPut = `${QnA_URL}/qa/questions/${questionId}/helpful`;
+    idHelpfulness = { product_id: productId, question_id: questionId };
   } else {
     urlPut = `${QnA_URL}/qa/answers/${answerid}/helpful`;
     idHelpfulness = { answer_id: answerid }
@@ -587,12 +587,12 @@ app.put('/api/update', (req, res) => {
 
 app.put('/api/report', (req, res) => {
   console.log('request-->', req.body.data)
-  const { questionid } = req.body.data;
+  const { productId, questionId } = req.body.data;
   const { answerid } = req.body.data;
   let urlPut, report_id;
-  if (questionid) {
-    urlPut = `${QnA_URL}/qa/questions/${questionid}/report`;
-    report_id = { question_id: questionid };
+  if (questionId) {
+    urlPut = `${QnA_URL}/qa/questions/${questionId}/report`;
+    report_id = { product_id: productId, question_id: questionId };
   } else {
     urlPut = `${QnA_URL}/qa/answers/${answerid}/report`;
     report_id = { answer_id: answerid }
