@@ -15,7 +15,7 @@ const fs = require('fs');
 
 const reviewURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
-const QnA_URL = 'http://127.0.0.1:4000';
+const QnA_URL = 'http://ec2-34-224-213-170.compute-1.amazonaws.com';
 
 //app.use(express.static(path.resolve(__dirname, '../client/dist')));
 //this is a regex expression that will allow the app to serve the static files
@@ -30,8 +30,7 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-
-  // res.sendFile('index.html');
+  res.sendFile('index.html');
 });
 /*
   ---------------------------
